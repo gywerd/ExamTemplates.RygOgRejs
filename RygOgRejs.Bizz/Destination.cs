@@ -8,5 +8,8 @@ namespace RygOgRejs.Bizz
 {
     public enum Destination
     {
+        Billlund,
+        Copehangen,
+        PalmaDeMallorca
     }
 }
