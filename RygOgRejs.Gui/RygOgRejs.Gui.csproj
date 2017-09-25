@@ -128,5 +128,11 @@
   <ItemGroup>
     <Content Include="Properties\Cascade Insert Stored Procedure.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RygOgRejs.IO.WeatherService\RygOgRejs.IO.WeatherService.csproj">
+      <Project>{abc80435-04f9-4344-9af3-f3474a54229e}</Project>
+      <Name>RygOgRejs.IO.WeatherService</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

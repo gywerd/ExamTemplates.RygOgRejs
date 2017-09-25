@@ -28,7 +28,8 @@
             <StatusBar x:Name="statusBar"
                        Background="RoyalBlue"
                        DockPanel.Dock="Bottom"
-                       Height="30">
+                       Height="30"
+                       >
                 <Label x:Name="labelStatusBar"
                        Content="Venter på vejr data..."
                        Foreground="White"

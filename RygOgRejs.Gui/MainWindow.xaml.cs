@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using RygOgRejs.IO.WeatherService;
 namespace RygOgRejs.Gui
 {
     /// <summary>
@@ -21,6 +21,7 @@ namespace RygOgRejs.Gui
     public partial class MainWindow: Window
     {
         private UserControl currentUserControlCentre, currentUserControlRight;
+        private WeatherAPI weatherAPI;
         public MainWindow()
         {
             InitializeComponent();
@@ -31,6 +32,10 @@ namespace RygOgRejs.Gui
             List<TestEntity> testEntities = new List<TestEntity>() { t1, t2 };
             currentUserControlCentre = new DataViewJourneys(testEntities);
             userControlCentre.Content = currentUserControlCentre;
+
+            //maybe change this
+            weatherAPI = new WeatherAPI(labelStatusBar);
+            weatherAPI.GetCityNameAsync();
         }
 
         private void OnMenuFilesClose_Click(object sender, RoutedEventArgs e)
