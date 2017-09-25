@@ -8,7 +8,6 @@ namespace RygOgRejs.Bizz
 {
     public class Journey
     {
-        // string macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault(); 
     }
 }
 

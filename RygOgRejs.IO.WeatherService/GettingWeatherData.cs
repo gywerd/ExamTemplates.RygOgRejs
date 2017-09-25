@@ -11,65 +11,65 @@ namespace RygOgRejs.IO.WeatherService
         //thanks to dude from StackOverFlow for this
         public class Coord
         {
-            public double lon { get; set; }
-            public double lat { get; set; }
+            public double Lon { get; set; }
+            public double Lat { get; set; }
         }
 
         public class Sys
         {
-            public int type { get; set; }
-            public int id { get; set; }
-            public double message { get; set; }
-            public string country { get; set; }
-            public int sunrise { get; set; }
-            public int sunset { get; set; }
+            public int Type { get; set; }
+            public int Id { get; set; }
+            public double Message { get; set; }
+            public string Country { get; set; }
+            public int Sunrise { get; set; }
+            public int Sunset { get; set; }
         }
 
         public class Weather
         {
-            public int id { get; set; }
-            public string main { get; set; }
-            public string description { get; set; }
-            public string icon { get; set; }
+            public int Id { get; set; }
+            public string Main { get; set; }
+            public string Description { get; set; }
+            public string Icon { get; set; }
         }
 
         public class Main
         {
-            public double temp { get; set; }
-            public double humidity { get; set; }
-            public double pressure { get; set; }
-            public double temp_min { get; set; }
-            public double temp_max { get; set; }
+            public double Temp { get; set; }
+            public double Humidity { get; set; }
+            public double Pressure { get; set; }
+            public double Temp_min { get; set; }
+            public double Temp_max { get; set; }
         }
 
         public class Wind
         {
-            public double speed { get; set; }
-            public double gust { get; set; }
-            public int deg { get; set; }
+            public double Speed { get; set; }
+            public double Gust { get; set; }
+            public int Deg { get; set; }
         }
 
 
 
         public class Clouds
         {
-            public int all { get; set; }
+            public int All { get; set; }
         }
 
         public class Root
         {
-            public Coord coord { get; set; }
-            public Sys sys { get; set; }
-            public List<Weather> weather { get; set; }
-            public string @base { get; set; }
-            public Main main { get; set; }
-            public Wind wind { get; set; }
-            public Dictionary<string, double> rain { get; set; }
-            public Clouds clouds { get; set; }
-            public int dt { get; set; }
-            public int id { get; set; }
-            public string name { get; set; }
-            public int cod { get; set; }
+            public Coord Coord { get; set; }
+            public Sys Sys { get; set; }
+            public List<Weather> Weather { get; set; }
+            public string Base { get; set; }
+            public Main Main { get; set; }
+            public Wind Wind { get; set; }
+            public Dictionary<string, double> Rain { get; set; }
+            public Clouds Clouds { get; set; }
+            public int Dt { get; set; }
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public int Cod { get; set; }
         }
     }
 }

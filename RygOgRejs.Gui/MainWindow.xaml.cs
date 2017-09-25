@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RygOgRejs.IO.WeatherService;
+using System.Net.NetworkInformation;
+
 namespace RygOgRejs.Gui
 {
     /// <summary>
@@ -22,6 +24,7 @@ namespace RygOgRejs.Gui
     {
         private UserControl currentUserControlCentre, currentUserControlRight;
         private WeatherAPI weatherAPI;
+        private string macAddress;
         public MainWindow()
         {
             InitializeComponent();
@@ -33,7 +36,9 @@ namespace RygOgRejs.Gui
             currentUserControlCentre = new DataViewJourneys(testEntities);
             userControlCentre.Content = currentUserControlCentre;
 
-            //maybe change this
+            macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
+
+            //maybe change this 
             weatherAPI = new WeatherAPI(labelStatusBar);
             weatherAPI.GetCityNameAsync();
         }

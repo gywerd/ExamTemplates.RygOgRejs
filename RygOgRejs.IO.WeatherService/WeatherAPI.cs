@@ -43,8 +43,8 @@ namespace RygOgRejs.IO.WeatherService
 
                         string s = await test.Content.ReadAsStringAsync();
 
-                        GettingWeatherData.Root du = JsonConvert.DeserializeObject<GettingWeatherData.Root>(s);
-                        double temp = du.main.temp - 273;
+                        GettingWeatherData.Root weatherRoot = JsonConvert.DeserializeObject<GettingWeatherData.Root>(s);
+                        double temp = weatherRoot.Main.Temp - 273;
                         weather.Content = $"{location} Temperatur er lige nu {temp} °C";
                         await Task.Delay(15000);
                     }
