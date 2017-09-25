@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="RygOgRejs.Gui.DataViewJourneys"
+﻿<UserControl x:Class="RygOgRejs.Gui.DataViewTransactions"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -15,12 +15,12 @@
         <StackPanel Grid.Row="0"
                     Orientation="Horizontal">
             <Label Content="Filtrer på betaler:" />
-            <TextBox x:Name="textBoxFilterJourneys"
+            <TextBox x:Name="textBoxFilterTransactions"
                      Height="20"
                      Width="200"
-                     TextChanged="TextBoxFilterJourneys_TextChanged" />
+                     TextChanged="TextBoxFilterTransactions_TextChanged" />
         </StackPanel>
-        <DataGrid x:Name="dataGridJourneys"
+        <DataGrid x:Name="dataGridTransaction"
                   Grid.Row="1"
                   IsReadOnly="True"
                   Margin="5" />

@@ -16,17 +16,16 @@ using System.Windows.Shapes;
 namespace RygOgRejs.Gui
 {
     /// <summary>
-    /// Interaction logic for DataViewJourneys.xaml
+    /// Interaction logic for DataViewTransactions.xaml
     /// </summary>
-    public partial class DataViewJourneys: UserControl
+    public partial class DataViewTransactions : UserControl
     {
-        public DataViewJourneys(List<TestEntity> testEntities)
+        public DataViewTransactions()
         {
             InitializeComponent();
-            dataGridJourneys.ItemsSource = testEntities;
         }
 
-        private void TextBoxFilterJourneys_TextChanged(object sender, TextChangedEventArgs e)
+        private void TextBoxFilterTransactions_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
