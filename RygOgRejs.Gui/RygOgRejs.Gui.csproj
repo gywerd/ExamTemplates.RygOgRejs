@@ -61,8 +61,8 @@
       <DependentUpon>DataViewTransactions.xaml</DependentUpon>
     </Compile>
     <Compile Include="TestEntity.cs" />
-    <Compile Include="UICreateEdit.xaml.cs">
-      <DependentUpon>UICreateEdit.xaml</DependentUpon>
+    <Compile Include="UIInsertUpdate.xaml.cs">
+      <DependentUpon>UIInsertUpdate.xaml</DependentUpon>
     </Compile>
     <Compile Include="UIPayments.xaml.cs">
       <DependentUpon>UIPayments.xaml</DependentUpon>
@@ -90,7 +90,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UICreateEdit.xaml">
+    <Page Include="UIInsertUpdate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

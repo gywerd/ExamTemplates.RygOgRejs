@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace RygOgRejs.Gui
 {
     /// <summary>
-    /// Interaction logic for UICreateEdit.xaml
+    /// Interaction logic for UIInsertUpdate.xaml
     /// </summary>
-    public partial class UICreateEdit : UserControl
+    public partial class UIInsertUpdate : UserControl
     {
-        public UICreateEdit()
+        public UIInsertUpdate()
         {
             InitializeComponent();
         }
