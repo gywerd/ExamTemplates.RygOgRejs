@@ -7,7 +7,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Journeys](
 	[JourneyId] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	[Destination] [nvarchar](20) NOT NULL,
+	[Destination] [nvarchar](35) NOT NULL,
 	[DepartureTime] [datetime] NOT NULL,
 	[Adults] [int] NOT NULL,
 	[Children] [int] NOT NULL,
@@ -15,11 +15,11 @@ CREATE TABLE [dbo].[Journeys](
 	[LuggageAmount] [int] NOT NULL );
 GO
 SET IDENTITY_INSERT [dbo].[Journeys] ON
-INSERT [dbo].[Journeys] ([JourneyId], [Destination], [DepartureTime], [Adults], [Children], [IsFirstClass], [LuggageAmount]) VALUES (1, N'PalmaDeMallorca', '2017-10-14 00:00:00', 57, 5, 1, 145)
-INSERT [dbo].[Journeys] ([JourneyId], [Destination], [DepartureTime], [Adults], [Children], [IsFirstClass], [LuggageAmount]) VALUES (2, N'Billund', '2017-10-14 00:00:00', 2, 2, 0, 90)
-INSERT [dbo].[Journeys] ([JourneyId], [Destination], [DepartureTime], [Adults], [Children], [IsFirstClass], [LuggageAmount]) VALUES (3, N'København', '2017-10-14 00:00:00', 3, 1, 0, 94)
-INSERT [dbo].[Journeys] ([JourneyId], [Destination], [DepartureTime], [Adults], [Children], [IsFirstClass], [LuggageAmount]) VALUES (4, N'PalmaDeMallorca', '2017-10-14 00:00:00', 2, 1, 1, 70)
-INSERT [dbo].[Journeys] ([JourneyId], [Destination], [DepartureTime], [Adults], [Children], [IsFirstClass], [LuggageAmount]) VALUES (5, N'København', '2017-10-14 00:00:00', 4, 2, 1, 140)
+INSERT [dbo].[Journeys] ([JourneyId], [Destination], [DepartureTime], [Adults], [Children], [IsFirstClass], [LuggageAmount]) VALUES (1, N'LEPA - PALMA DE MALLORCA, Spain', '2017-10-14 00:00:00', 57, 5, 1, 145)
+INSERT [dbo].[Journeys] ([JourneyId], [Destination], [DepartureTime], [Adults], [Children], [IsFirstClass], [LuggageAmount]) VALUES (2, N'EKBI - BILLUND, Denmark', '2017-10-14 00:00:00', 2, 2, 0, 90)
+INSERT [dbo].[Journeys] ([JourneyId], [Destination], [DepartureTime], [Adults], [Children], [IsFirstClass], [LuggageAmount]) VALUES (3, N'EKCH - COPENHAGEN, Denmark', '2017-10-14 00:00:00', 3, 1, 0, 94)
+INSERT [dbo].[Journeys] ([JourneyId], [Destination], [DepartureTime], [Adults], [Children], [IsFirstClass], [LuggageAmount]) VALUES (4, N'LEPA - PALMA DE MALLORCA, Spain', '2017-10-14 00:00:00', 2, 1, 1, 70)
+INSERT [dbo].[Journeys] ([JourneyId], [Destination], [DepartureTime], [Adults], [Children], [IsFirstClass], [LuggageAmount]) VALUES (5, N'EKCH - COPENHAGEN, Denmark', '2017-10-14 00:00:00', 4, 2, 1, 140)
 SET IDENTITY_INSERT [dbo].[Journeys] OFF
 GO
 /****** Object:  Table [dbo].[Payers]    09/14/2017 09:55:03 ******/
@@ -66,16 +66,16 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Price](
 	[DestinationId] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	[DestinationName] [nvarchar](20) NOT NULL,
+	[DestinationName] [nvarchar](50) NOT NULL,
 	[AdultPrice] [float] NOT NULL,
 	[ChildenPrice] [float] NOT NULL,
 	[FirstClassPrice] [float] NOT NULL,
 	[LuggagePrice] [float] NOT NULL	)
 GO
 SET IDENTITY_INSERT [dbo].[Price] ON
-INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (1, 'Billund', 390, 295, 1699, 290)
-INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (2, N'København', '1595.00', '1395.00', '1699.00', '290.00')
-INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (3, N'PalmaDeMallorca', '4995.00', '3099.00', '1699.00', '290.00')
+INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (1, N'EKBI - BILLUND, Denmark', 390, 295, 1699, 290)
+INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (2, N'EKCH - COPENHAGEN, Denmark', '1595.00', '1395.00', '1699.00', '290.00')
+INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (3, N'LEPA - PALMA DE MALLORCA, Spain', '4995.00', '3099.00', '1699.00', '290.00')
 SET IDENTITY_INSERT [dbo].[Price] OFF
 GO
 --Created by Daniel Giversen
