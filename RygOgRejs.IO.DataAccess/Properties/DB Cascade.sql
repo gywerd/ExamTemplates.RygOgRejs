@@ -11,7 +11,7 @@ CREATE TABLE [dbo].[Journeys](
 	[DepartureDate] [datetime](24) NOT NULL,
 	[Adults] [int] NOT NULL,
 	[Children] [int] NOT NULL,
-	[IsFirstClass] [bit] NOT NULL
+	[IsFirstClass] [bit] NOT NULL,
 	[LuggageAmount] [int] NOT NULL );
 GO
 SET IDENTITY_INSERT [dbo].[Journeys] ON
@@ -47,8 +47,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Transactions](
 	[TransactionId] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	[Amount] [float](60) NOT NULL,
-	[PayerId] [int] NOT NULL FOREIGN KEY REFERENCES Payers(PayerId)
+	[Amount] [float] NOT NULL,
+	[PayerId] [int] NOT NULL FOREIGN KEY REFERENCES Payers(PayerId),
 	[JourneyId] [int] NOT NULL FOREIGN KEY REFERENCES Journeys(JourneyId));
 GO
 SET IDENTITY_INSERT [dbo].[Transactions] ON
@@ -66,15 +66,16 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Price](
 	[DestinationId] [nvarchar] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	[DestinationName] [nvarchar] NOT NULL,
 	[AdultPrice] [float] NOT NULL,
-	[ChildenPrice] [float] NOT NULL
+	[ChildenPrice] [float] NOT NULL,
 	[FirstClassPrice] [float] NOT NULL,
 	[LuggagePrice] [float] NOT NULL	);
 GO
 SET IDENTITY_INSERT [dbo].[Price] ON
-INSERT [dbo].[Price]([DestinationId], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (1, 390.00, 295.00, 1699.00, 290.00)
-INSERT [dbo].[Price]([DestinationId], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (2, 1595.00, 1395.00, 1699.00, 290.00)
-INSERT [dbo].[Price]([DestinationId], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (3, 4995.00, 3099.00, 1699.00, 290.00)
+INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (1, 390.00, 295.00, 1699.00, 290.00)
+INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (2, 1595.00, 1395.00, 1699.00, 290.00)
+INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (3, 4995.00, 3099.00, 1699.00, 290.00)
 SET IDENTITY_INSERT [dbo].[Price] OFF
 GO
 
