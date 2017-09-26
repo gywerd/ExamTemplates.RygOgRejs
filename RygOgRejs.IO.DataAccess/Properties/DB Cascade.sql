@@ -15,10 +15,10 @@ CREATE TABLE [dbo].[Journeys](
 	[LuggageAmount] [int] NOT NULL );
 GO
 SET IDENTITY_INSERT [dbo].[Journeys] ON
-INSERT [dbo].[Journeys] ([JourneyId], [Destination], [Adults], [Children], [IsFirstClass], [LuggageAmount]) VALUES (1, N'Palma de Mallorca', '2017-10-14 00:00:00', 57, 5, 1, 145)
+INSERT [dbo].[Journeys] ([JourneyId], [Destination], [Adults], [Children], [IsFirstClass], [LuggageAmount]) VALUES (1, N'PalmaDeMallorca', '2017-10-14 00:00:00', 57, 5, 1, 145)
 INSERT [dbo].[Journeys] ([JourneyId], [Destination], [Adults], [Children], [IsFirstClass], [LuggageAmount]) VALUES (2, N'Billund', '2017-10-14 00:00:00', 2, 2, 0, 90)
 INSERT [dbo].[Journeys] ([JourneyId], [Destination], [Adults], [Children], [IsFirstClass], [LuggageAmount]) VALUES (3, N'København', '2017-10-14 00:00:00', 3, 1, 0, 24)
-INSERT [dbo].[Journeys] ([JourneyId], [Destination], [Adults], [Children], [IsFirstClass], [LuggageAmount]) VALUES (4, N'Palma de Mallorca', '2017-10-14 00:00:00', 2, 1, 1, 70)
+INSERT [dbo].[Journeys] ([JourneyId], [Destination], [Adults], [Children], [IsFirstClass], [LuggageAmount]) VALUES (4, N'PalmaDeMallorca', '2017-10-14 00:00:00', 2, 1, 1, 70)
 INSERT [dbo].[Journeys] ([JourneyId], [Destination], [Adults], [Children], [IsFirstClass], [LuggageAmount]) VALUES (5, N'København', '2017-10-14 00:00:00', 4, 2, 1, 140)
 SET IDENTITY_INSERT [dbo].[Journeys] OFF
 GO
@@ -73,9 +73,9 @@ CREATE TABLE [dbo].[Price](
 	[LuggagePrice] [float] NOT NULL	);
 GO
 SET IDENTITY_INSERT [dbo].[Price] ON
-INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (1, 390.00, 295.00, 1699.00, 290.00)
-INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (2, 1595.00, 1395.00, 1699.00, 290.00)
-INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (3, 4995.00, 3099.00, 1699.00, 290.00)
+INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (1, N'Billund', 390.00, 295.00, 1699.00, 290.00)
+INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (2, N'København', 1595.00, 1395.00, 1699.00, 290.00)
+INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (3, N'PalmaDeMallorca', 4995.00, 3099.00, 1699.00, 290.00)
 SET IDENTITY_INSERT [dbo].[Price] OFF
 GO
 
