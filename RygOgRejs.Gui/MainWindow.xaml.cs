@@ -13,7 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RygOgRejs.IO.WeatherService;
-using System.Net.NetworkInformation;
+using System.Net.NetworkInformation; //mac xDDDD
+using RygOgRejs.IO.DataAccess.App; //for testing if the connection string worked
 
 namespace RygOgRejs.Gui
 {
@@ -41,6 +42,7 @@ namespace RygOgRejs.Gui
             //maybe change this 
             weatherAPI = new WeatherAPI(labelStatusBar);
             weatherAPI.GetCityNameAsync();
+
         }
 
         private void OnMenuFilesClose_Click(object sender, RoutedEventArgs e)
@@ -58,11 +60,13 @@ namespace RygOgRejs.Gui
             List<TestEntity> testEntities = new List<TestEntity>() { t1, t2 };
             currentUserControlCentre = new DataViewJourneys(testEntities);
             userControlCentre.Content = currentUserControlCentre;
+            JourneyEnquiries kage = new JourneyEnquiries();//for testing if the connection string worked
+            var lzsy = kage.GetAll(); //for testing if the connection string worked
         }
 
         private void MenuHelpAbout_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Dette er et eksempel på løsning af S2 eksamensopgaven Ryg & Rejs", "Om Ryg & Rejs", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            MessageBox.Show("Dette er et eksempel på løsning af S2 eksamensopgaven Ryg & Rejs, Bygget af Emil, Daniel Og Jack", "Om Ryg & Rejs", MessageBoxButton.OK, MessageBoxImage.Asterisk);
         }
     }
 }

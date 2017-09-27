@@ -8,6 +8,96 @@ namespace RygOgRejs.Bizz
 {
     public class Journey
     {
+        private string destination;
+        private DateTime departureTime;
+        private int adults;
+        private int children;
+        private bool isFristClass;
+        private int luggaAmount;
+
+        public Journey(string destination, DateTime depatureTime, int adults, int children, bool isFristClass, int luggaAmount)
+        {
+            Destionation = destination; //not using the enum :thinking:
+            DepaturTime = depatureTime;
+            Adults = adults;
+            Children = children;
+            IsFirstClass = isFristClass; //lel fristClass emil plz
+            LuggaAmount = luggaAmount;
+        }
+
+        public string Destionation
+        {
+            get
+            {
+                return destination;
+            }
+            set
+            {
+                //ingen error checking FeelsBadMan
+                destination = value;
+            }
+        }
+
+        public DateTime DepaturTime
+        {
+            get
+            {
+                return departureTime;
+            }
+            set
+            {
+                if (DateTime.TryParse(value.ToString(), out DateTime checkTime))
+                    departureTime = value;
+            }
+        }
+
+        public int Adults
+        {
+            get
+            {
+                return adults;
+            }
+            set
+            {
+                adults = value;
+            }
+        }
+
+        public int Children
+        {
+            get
+            {
+                return children;
+            }
+            set
+            {
+                children = value;
+            }
+        }
+
+        public bool IsFirstClass
+        {
+            get
+            {
+                return isFristClass;
+            }
+            set
+            {
+                isFristClass = value;
+            }
+        }
+
+        public int LuggaAmount
+        {
+            get
+            {
+                return luggaAmount;
+            }
+            set
+            {
+                luggaAmount = value;
+            }
+        }
     }
 }
 
