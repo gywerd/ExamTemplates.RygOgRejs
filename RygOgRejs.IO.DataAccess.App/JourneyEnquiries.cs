@@ -19,23 +19,26 @@ namespace RygOgRejs.IO.DataAccess.App
             DataTableReader reader = data.CreateDataReader(); //best
             while(reader.Read())
             {
+                int id = Convert.ToInt32(reader["JourneyId"]);
                 string destination = reader["Destination"].ToString();
                 DateTime depatureTime = Convert.ToDateTime(reader["DepartureTime"]);
                 int adults = Convert.ToInt32(reader["Adults"]);
                 int children = Convert.ToInt32(reader["Children"]);
                 bool isFirstClass = Convert.ToBoolean(reader["IsFirstClass"]);
                 int luggaAmount = Convert.ToInt32(reader["LuggageAmount"]);
-                Journey journey = new Journey(destination, depatureTime, adults, children, isFirstClass, luggaAmount);
+                Journey journey = new Journey(id,destination, depatureTime, adults, children, isFirstClass, luggaAmount);
                 journeyList.Add(journey);
             }
             return journeyList;
         }
 
 
-        //reload list?
-        public void UpdateJourney(int id)
+        //reload list? also this should update the database 
+        public void UpdateJourney(int id, string destination, DateTime depatureTime, int adults, int children, bool isFirstClass, int luggaAmount) //find better way?
         {
-            string query = $"UPDATE Journeys SET Destination =  WHERE JourneyId = {id}";
+            //depature time might break it all xD
+            string query = $"UPDATE Journeys SET Destination = '{destination}', DepartureTime = {depatureTime}, Adults = {adults}, Children = {children}, IsFirstClass = {isFirstClass}, LuggageAmount = {luggaAmount}  WHERE JourneyId = {id}";
+            executor.Execute(query);
         }
 
         //load new list ?

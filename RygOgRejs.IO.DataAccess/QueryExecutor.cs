@@ -26,6 +26,8 @@ namespace RygOgRejs.IO.DataAccess.General
 
         }
 
+       
+
         //something will be added useless for now
         public DataSet Execute(SqlCommand command)
         {
