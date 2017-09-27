@@ -60,7 +60,7 @@
     <Compile Include="DataViewTransactions.xaml.cs">
       <DependentUpon>DataViewTransactions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TestEntity.cs" />
+    <Compile Include="JourneyProperties.cs" />
     <Compile Include="UIInsertUpdate.xaml.cs">
       <DependentUpon>UIInsertUpdate.xaml</DependentUpon>
     </Compile>
