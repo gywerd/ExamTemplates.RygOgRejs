@@ -28,11 +28,7 @@ namespace RygOgRejs.Gui
         private string macAddress;
         public MainWindow()
         {
-
             InitializeComponent();
-            // TEST:
-            //currentUserControlCentre = new DataViewJourneys(testEntities);
-            //userControlCentre.Content = currentUserControlCentre;
 
             macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
 
@@ -51,14 +47,7 @@ namespace RygOgRejs.Gui
 
         private void ButtonJourneys_Click(object sender, RoutedEventArgs e)
         {
-            // TEST:
-            TestEntity t1 = new TestEntity { Prop1 = 1, Prop2 = "data her" };
-            TestEntity t2 = new TestEntity { Prop1 = 4, Prop2 = "data her og der og alle vegne" };
-            List<TestEntity> testEntities = new List<TestEntity>() { t1, t2 };
-            currentUserControlCentre = new DataViewJourneys(testEntities);
-            userControlCentre.Content = currentUserControlCentre;
-            JourneyEnquiries kage = new JourneyEnquiries();//for testing if the connection string worked
-            var lzsy = kage.GetAll(); //for testing if the connection string worked
+            
         }
 
         private void MenuHelpAbout_Click(object sender, RoutedEventArgs e)
