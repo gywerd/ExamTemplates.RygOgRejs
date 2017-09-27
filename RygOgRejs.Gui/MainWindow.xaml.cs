@@ -28,8 +28,8 @@ namespace RygOgRejs.Gui
         private WeatherAPI weatherAPI;
         private string macAddress;
         DataViewJourneys ucJourneys;
-        JourneyEnquiries DataJourney;
-        List<string> Distanition;
+        JourneyEnquiries DataJourney = new JourneyEnquiries();
+        List<string> Distanition = new List<string>();
         public MainWindow()
         {
             InitializeComponent();
@@ -38,7 +38,7 @@ namespace RygOgRejs.Gui
             {
                  Distanition.Add(Data.Destionation);
             }
-            //ucJourneys = new DataViewJourneys(Distanition);
+            userControlCentre.Content = ucJourneys = new DataViewJourneys(Distanition);
             macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
 
             //maybe change this 
