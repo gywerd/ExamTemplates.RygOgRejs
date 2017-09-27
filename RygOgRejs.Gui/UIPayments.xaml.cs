@@ -21,15 +21,14 @@ namespace RygOgRejs.Gui
     /// </summary>
     public partial class UIPayments : UserControl
     {
-        private Journey journey = new Journey();
-        private Payer payer = new Payer();
         RygOgRejsBizz CRB = new RygOgRejsBizz();
 
         #region Window
-        public UIPayments(string payref, Journey jour, Payer pay)
+        public UIPayments(RygOgRejsBizz b)
         {
             InitializeComponent();
-            InitializeContent(payref);
+            CRB = (RygOgRejsBizz)b;
+            InitializeContent();
         }
         #endregion
 
@@ -41,24 +40,25 @@ namespace RygOgRejs.Gui
 
         private void ButtonExecuteRefusion_Click(object sender, RoutedEventArgs e)
         {
-
+            CRB.ExecuteRefusion();
         }
         #endregion
 
         #region Methods
-        private void InitializeContent(string payref)
+        private void InitializeContent()
         {
-            if (payref == "trans")
+            if (CRB.JourneyOrTransaction == "transaction")
             {
-                textReceivedAmountContent.IsEnabled = false;
-                buttonExecutePayment.IsEnabled = false;
-                buttonExecuteRefusion.IsEnabled = true;
+                labelReceivedAmount.Visibility = Visibility.Hidden;
+                textReceivedAmountContent.Visibility = Visibility.Hidden;
+                buttonExecutePayment.Visibility = Visibility.Visible;
+                buttonExecuteRefusion.Visibility = Visibility.Visible;
             }
             else
             {
-                textReceivedAmountContent.IsEnabled = false;
-                buttonExecutePayment.IsEnabled = false;
-                buttonExecuteRefusion.IsEnabled = true;
+                textReceivedAmountContent.Visibility = Visibility.Visible;
+                buttonExecutePayment.Visibility = Visibility.Hidden;
+                buttonExecuteRefusion.Visibility = Visibility.Hidden;
             }
         }
         #endregion

@@ -8,5 +8,6 @@ namespace RygOgRejs.Bizz
 {
     public interface IPersistable
     {
+        int Id { get; set; }
     }
 }

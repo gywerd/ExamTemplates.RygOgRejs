@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RygOgRejs.Bizz;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,20 +21,29 @@ namespace RygOgRejs.Gui
     /// </summary>
     public partial class DataViewJourneys: UserControl
     {
-        public DataViewJourneys(List<string> Entities)
+        private string destination;
+        RygOgRejsBizz CRB = new RygOgRejsBizz();
+
+        public DataViewJourneys(List<string> Entities, object b)
         {
             InitializeComponent();
-
-            foreach(var item in Entities)
-            {
-                dataGridJourneys.Items.Add(item.ToString());
-            }
-           // dataGridJourneys.ItemsSource = Entities.GetRange(0,0);
+            CRB = (RygOgRejsBizz)b;
+            //foreach(string dest in Entities)
+            //{
+            //    dataGridJourneys.Items.Add(dest.ToString());
+            //}
+            dataGridJourneys.ItemsSource = Entities;
         }
 
         private void TextBoxFilterJourneys_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void dataGridJourneys_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid dg = (DataGrid)sender;
+            CRB.Destination = (string)dg.SelectedItem;
         }
     }
 }

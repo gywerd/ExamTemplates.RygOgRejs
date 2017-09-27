@@ -10,13 +10,13 @@ namespace RygOgRejs.Bizz
     public class Journey : PriceDetails
     {
         #region Fields
+        private int journeyId;
         private string destination;
         private DateTime departureTime;
         private int adults;
         private int children;
         private bool isFirstClass;
         private float luggageAmount;
-        private int id;
         ObservableCollection<PriceDetails> priceDetails = new ObservableCollection<PriceDetails>();
         #endregion
 
@@ -57,7 +57,7 @@ namespace RygOgRejs.Bizz
         /// <param name="luggageAmount">float</param>
         public Journey(int id, string destination, DateTime departureTime, int adults, int children, bool isFirstClass, int luggageAmount)
         {
-            this.id = id;
+            this.journeyId = id;
             this.destination = destination; //not using the enum :thinking:
             this.departureTime = departureTime;
             this.adults = adults;
@@ -68,10 +68,6 @@ namespace RygOgRejs.Bizz
         #endregion
 
         #region Methods
-        public void CreateJourney(Journey journey, Payer payer)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
 
         #region Properties
@@ -90,6 +86,7 @@ namespace RygOgRejs.Bizz
         public bool IsFirstClass { get => isFirstClass; set => isFirstClass = value; }
         public float LuggageAmount { get => luggageAmount; set => luggageAmount = value; }
         public ObservableCollection<PriceDetails> PriceDetails { get => PriceDetails; set => PriceDetails = value; }
+        public int JourneyId { get => journeyId; set => journeyId = value; }
         #endregion
     }
 }

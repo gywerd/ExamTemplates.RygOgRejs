@@ -73,9 +73,9 @@ CREATE TABLE [dbo].[Price](
 	[LuggagePrice] [float] NOT NULL	)
 GO
 SET IDENTITY_INSERT [dbo].[Price] ON
-INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (1, N'EKBI - BILLUND, Denmark', 390, 295, 1699, 290)
-INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (2, N'EKCH - COPENHAGEN, Denmark', '1595.00', '1395.00', '1699.00', '290.00')
-INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (3, N'LEPA - PALMA DE MALLORCA, Spain', '4995.00', '3099.00', '1699.00', '290.00')
+INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildrenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (1, N'EKBI - BILLUND, Denmark', 390, 295, 1699, 290)
+INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildrenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (2, N'EKCH - COPENHAGEN, Denmark', '1595.00', '1395.00', '1699.00', '290.00')
+INSERT [dbo].[Price]([DestinationId], [DestinationName], [AdultPrice], [ChildrenPrice], [FirstClassPrice], [LuggagePrice]) VALUES (3, N'LEPA - PALMA DE MALLORCA, Spain', '4995.00', '3099.00', '1699.00', '290.00')
 SET IDENTITY_INSERT [dbo].[Price] OFF
 GO
 --Created by Daniel Giversen

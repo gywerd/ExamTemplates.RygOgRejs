@@ -1,26 +1,71 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace RygOgRejs.Bizz
 {
-    public class RygOgRejsBizz
+    public class RygOgRejsBizz : INotifyPropertyChanged
     {
         #region Fields
+        private string destination;
+        private Journey journey = new Journey();
+        private Payer payer = new Payer();
+        private string macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
         Journey CJR = new Journey();
         Payer CPR = new Payer();
         Transactions CTA = new Transactions();
         PriceDetails CPD = new PriceDetails();
+        MasterId CMI = new MasterId();
+        private string journeyOrTransaction;
         ObservableCollection<Journey> journeys = new ObservableCollection<Journey>();
         ObservableCollection<Payer> payers = new ObservableCollection<Payer>();
         ObservableCollection<Transactions> transactions = new ObservableCollection<Transactions>();
         List<string> destinations = new List<string>();
         #endregion
 
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
         #region Methods
+        public void ClearJourneys()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Code behind CreateJourney-button
+        /// </summary>
+        /// <param name="u"></param>
+        public void CreateJourney()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Code behind DeleteJourney-button
+        /// </summary>
+        /// <param name="u"></param>
+        public void DeleteJourney()
+        {
+        }
+
+        /// <summary>
+        /// Code behind EditJourney-button
+        /// </summary>
+        /// <param name="u"></param>
+        public void EditJourney()
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Method, that execute payments
         /// </summary>
@@ -131,6 +176,24 @@ namespace RygOgRejs.Bizz
                 return transactions;
             }
             set => transactions = value;
+        }
+
+        public Journey Journey { get => journey; set => journey = value; }
+        public Payer Payer { get => payer; set => payer = value; }
+        public string JourneyOrTransaction { get => journeyOrTransaction; set => journeyOrTransaction = value; }
+        public string Destination { get => destination; set => destination = value; }
+        #endregion
+
+        #region Internal Classes
+        internal class MasterId : IPersistable
+        {
+            private int id;
+            public MasterId() { }
+            public MasterId(int id)
+            {
+                this.id = id;
+            }
+            public int Id { get => id; set => id = value; }
         }
         #endregion
     }
