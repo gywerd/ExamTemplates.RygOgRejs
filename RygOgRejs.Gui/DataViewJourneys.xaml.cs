@@ -20,7 +20,7 @@ namespace RygOgRejs.Gui
     /// </summary>
     public partial class DataViewJourneys: UserControl
     {
-        public DataViewJourneys(List<TestEntity> Entities)
+        public DataViewJourneys(List<JourneyProperties> Entities)
         {
             InitializeComponent();
             dataGridJourneys.ItemsSource = Entities;
