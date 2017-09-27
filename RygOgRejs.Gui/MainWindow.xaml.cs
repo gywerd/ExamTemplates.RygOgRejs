@@ -33,11 +33,11 @@ namespace RygOgRejs.Gui
         public MainWindow()
         {
             InitializeComponent();
-            var DJ = DataJourney.GetAll();
-            foreach (var Data in DJ)
-            {
-                 Distanition.Add(Data.Destionation);
-            }
+//            var DJ = DataJourney.GetAll();
+ //           foreach (var Data in DJ)
+ //           {
+ //                Distanition.Add(Data.Destionation);
+ //           }
             //ucJourneys = new DataViewJourneys(Distanition);
             macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
 
@@ -56,7 +56,8 @@ namespace RygOgRejs.Gui
 
         private void ButtonJourneys_Click(object sender, RoutedEventArgs e)
         {
-            
+            JourneyEnquiries ek = new JourneyEnquiries();
+            ek.DeleteJounry(2);
         }
 
         private void MenuHelpAbout_Click(object sender, RoutedEventArgs e)
