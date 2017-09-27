@@ -30,5 +30,19 @@ namespace RygOgRejs.IO.DataAccess.App
             }
             return journeyList;
         }
+
+
+        //reload list?
+        public void UpdateJourney(int id)
+        {
+            string query = $"UPDATE Journeys SET Destination =  WHERE JourneyId = {id}";
+        }
+
+        //load new list ?
+        public void DeleteJounry(int id)
+        {
+            string query = $"DELETE FROM Journeys WHERE JourneyId = {id}";
+            executor.Execute(query);
+        }
     }
 }
