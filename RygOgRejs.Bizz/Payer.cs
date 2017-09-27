@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RygOgRejs.Bizz
 {
-    class Payer
+    public class Payer
     {
         //this is how we wanted it right?
         private int id;
