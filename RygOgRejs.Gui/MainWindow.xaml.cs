@@ -13,7 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RygOgRejs.IO.WeatherService;
-using System.Net.NetworkInformation;
+using System.Net.NetworkInformation; //mac xDDDD
+using RygOgRejs.IO.DataAccess.App; //for testing if the connection string worked
 
 namespace RygOgRejs.Gui
 {
@@ -38,6 +39,7 @@ namespace RygOgRejs.Gui
             //maybe change this 
             weatherAPI = new WeatherAPI(labelStatusBar);
             weatherAPI.GetCityNameAsync();
+
         }
 
         private void OnMenuFilesClose_Click(object sender, RoutedEventArgs e)
@@ -50,8 +52,13 @@ namespace RygOgRejs.Gui
         private void ButtonJourneys_Click(object sender, RoutedEventArgs e)
         {
             // TEST:
-            //currentUserControlCentre = new DataViewJourneys();
-            //userControlCentre.Content = currentUserControlCentre;
+            TestEntity t1 = new TestEntity { Prop1 = 1, Prop2 = "data her" };
+            TestEntity t2 = new TestEntity { Prop1 = 4, Prop2 = "data her og der og alle vegne" };
+            List<TestEntity> testEntities = new List<TestEntity>() { t1, t2 };
+            currentUserControlCentre = new DataViewJourneys(testEntities);
+            userControlCentre.Content = currentUserControlCentre;
+            JourneyEnquiries kage = new JourneyEnquiries();//for testing if the connection string worked
+            var lzsy = kage.GetAll(); //for testing if the connection string worked
         }
 
         private void MenuHelpAbout_Click(object sender, RoutedEventArgs e)

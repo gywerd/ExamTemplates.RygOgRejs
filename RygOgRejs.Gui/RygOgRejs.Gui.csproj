@@ -129,6 +129,18 @@
     <Content Include="Properties\Cascade Insert Stored Procedure.sql" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RygOgRejs.Bizz\RygOgRejs.Bizz.csproj">
+      <Project>{478fc305-ab52-47e4-bdfc-d274fcdb30f0}</Project>
+      <Name>RygOgRejs.Bizz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RygOgRejs.IO.DataAccess.App\RygOgRejs.IO.DataAccess.App.csproj">
+      <Project>{88281b47-e5ec-4930-8efb-1b7876450722}</Project>
+      <Name>RygOgRejs.IO.DataAccess.App</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RygOgRejs.IO.DataAccess\RygOgRejs.IO.DataAccess.General.csproj">
+      <Project>{f27c9acd-f577-4ae4-9e47-f98b3ece5e4e}</Project>
+      <Name>RygOgRejs.IO.DataAccess.General</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RygOgRejs.IO.WeatherService\RygOgRejs.IO.WeatherService.csproj">
       <Project>{abc80435-04f9-4344-9af3-f3474a54229e}</Project>
       <Name>RygOgRejs.IO.WeatherService</Name>

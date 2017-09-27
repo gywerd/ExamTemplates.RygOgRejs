@@ -8,5 +8,11 @@ namespace RygOgRejs.IO.DataAccess.General
 {
     public class DataEnquiries
     {
+        protected QueryExecutor executor;
+
+        public DataEnquiries()
+        {
+            executor = new QueryExecutor();
+        }
     }
 }
