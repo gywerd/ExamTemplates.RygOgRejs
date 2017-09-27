@@ -23,7 +23,12 @@ namespace RygOgRejs.Gui
         public DataViewJourneys(List<string> Entities)
         {
             InitializeComponent();
-            dataGridJourneys.ItemsSource = Entities;
+
+            foreach(var item in Entities)
+            {
+                dataGridJourneys.Items.Add(item.ToString());
+            }
+           // dataGridJourneys.ItemsSource = Entities.GetRange(0,0);
         }
 
         private void TextBoxFilterJourneys_TextChanged(object sender, TextChangedEventArgs e)
