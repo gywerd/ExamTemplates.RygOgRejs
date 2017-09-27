@@ -24,7 +24,8 @@ namespace RygOgRejs.Gui
     /// </summary>
     public partial class MainWindow: Window
     {
-        private UserControl currentUserControlCentre, currentUserControlRight;
+        private UserControl currentUserControlCentre;
+        private UserControl  currentUserControlRight;
         private WeatherAPI weatherAPI;
         private string macAddress;
         DataViewJourneys ucJourneys;
@@ -36,7 +37,7 @@ namespace RygOgRejs.Gui
             var DJ = DataJourney.GetAll();
             foreach (var Data in DJ)
             {
-                 Distanition.Add(Data.Destionation);
+                 Distanition.Add(Data.Destionation.ToString());
             }
             userControlCentre.Content = ucJourneys = new DataViewJourneys(Distanition);
             macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();

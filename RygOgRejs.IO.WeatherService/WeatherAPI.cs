@@ -32,8 +32,8 @@ namespace RygOgRejs.IO.WeatherService
                  "Copehangen",
                  "PalmaDeMallorca"
             };
-            while(true)
-            {
+            //while(true)
+            //{
                 try
                 {
                     foreach(string location in locations)
@@ -55,7 +55,7 @@ namespace RygOgRejs.IO.WeatherService
                 {
                     MessageBox.Show(ex.Message);
                 }
-            }
+            //}
 
 
         }
