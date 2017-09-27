@@ -20,10 +20,10 @@ namespace RygOgRejs.Gui
     /// </summary>
     public partial class DataViewJourneys: UserControl
     {
-        public DataViewJourneys(List<TestEntity> testEntities)
+        public DataViewJourneys(List<TestEntity> Entities)
         {
             InitializeComponent();
-            dataGridJourneys.ItemsSource = testEntities;
+            dataGridJourneys.ItemsSource = Entities;
         }
 
         private void TextBoxFilterJourneys_TextChanged(object sender, TextChangedEventArgs e)
