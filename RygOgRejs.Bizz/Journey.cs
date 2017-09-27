@@ -78,6 +78,11 @@ namespace RygOgRejs.Bizz
             }
         }
 
+        public void CreateJourney(Journey journey, Payer payer)
+        {
+            throw new NotImplementedException();
+        }
+
         public int Children
         {
             get
