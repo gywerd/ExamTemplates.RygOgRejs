@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RygOgRejs.Bizz;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,27 @@ namespace RygOgRejs.Gui
     /// </summary>
     public partial class UIInsertUpdate : UserControl
     {
-        public UIInsertUpdate()
+        private Payer payer;
+        private Journey journey;
+        Journey CJR = new Journey();
+
+        public UIInsertUpdate(string dest)
         {
             InitializeComponent();
+            journey.Destionation = dest;
+            labelChosenDestination.Content = dest;
+        }
+
+        private void ButtonCreateJourney_Click(object sender, RoutedEventArgs e)
+        {
+            journey.IsFirstClass = Convert.ToBoolean(checkBoxFirstClass.IsChecked);
+            journey.Adults = Convert.ToInt32(textBoxAdults.Text);
+            journey.Children = Convert.ToInt32(textBoxChildren.Text);
+            journey.LuggaAmount = Convert.ToInt32(textBoxLuggage.Text);
+            journey.DepaturTime = DateTime.Now;
+            payer.FirstName = textBoxFirstName.Text;
+            payer.LastName = textBoxLastName.Text;
+            CJR.CreateJourney(journey, payer);
         }
     }
 }
