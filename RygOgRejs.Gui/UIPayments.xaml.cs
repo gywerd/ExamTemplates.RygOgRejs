@@ -24,5 +24,10 @@ namespace RygOgRejs.Gui
         {
             InitializeComponent();
         }
+
+        private void ButtonExecutePayment_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
