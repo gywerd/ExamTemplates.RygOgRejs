@@ -28,7 +28,7 @@ namespace RygOgRejs.Gui
         public UIInsertUpdate(string dest)
         {
             InitializeComponent();
-            journey.Destionation = dest;
+            journey.Destination = dest;
             labelChosenDestination.Content = dest;
         }
 
@@ -37,8 +37,8 @@ namespace RygOgRejs.Gui
             journey.IsFirstClass = Convert.ToBoolean(checkBoxFirstClass.IsChecked);
             journey.Adults = Convert.ToInt32(textBoxAdults.Text);
             journey.Children = Convert.ToInt32(textBoxChildren.Text);
-            journey.LuggaAmount = Convert.ToInt32(textBoxLuggage.Text);
-            journey.DepaturTime = DateTime.Now;
+            journey.LuggageAmount = Convert.ToInt32(textBoxLuggage.Text);
+            journey.DepatureTime = DateTime.Now;
             payer.FirstName = textBoxFirstName.Text;
             payer.LastName = textBoxLastName.Text;
             CJR.CreateJourney(journey, payer);

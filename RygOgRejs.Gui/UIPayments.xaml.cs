@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RygOgRejs.Bizz;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,14 +21,47 @@ namespace RygOgRejs.Gui
     /// </summary>
     public partial class UIPayments : UserControl
     {
-        public UIPayments()
+        private Journey journey = new Journey();
+        private Payer payer = new Payer();
+        RygOgRejsBizz CRB = new RygOgRejsBizz();
+
+        #region Window
+        public UIPayments(string payref, Journey jour, Payer pay)
         {
             InitializeComponent();
+            InitializeContent(payref);
+        }
+        #endregion
+
+        #region Buttons
+        private void ButtonExecutePayment_Click(object sender, RoutedEventArgs e)
+        {
+            CRB.ExecutePayment();
         }
 
-        private void ButtonExecutePayment_Click(object sender, RoutedEventArgs e)
+        private void ButtonExecuteRefusion_Click(object sender, RoutedEventArgs e)
         {
 
         }
+        #endregion
+
+        #region Methods
+        private void InitializeContent(string payref)
+        {
+            if (payref == "trans")
+            {
+                textReceivedAmountContent.IsEnabled = false;
+                buttonExecutePayment.IsEnabled = false;
+                buttonExecuteRefusion.IsEnabled = true;
+            }
+            else
+            {
+                textReceivedAmountContent.IsEnabled = false;
+                buttonExecutePayment.IsEnabled = false;
+                buttonExecuteRefusion.IsEnabled = true;
+            }
+        }
+        #endregion
+
     }
 }
