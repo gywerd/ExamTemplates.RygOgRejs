@@ -16,6 +16,7 @@ using RygOgRejs.IO.WeatherService;
 using System.Net.NetworkInformation; //mac xDDDD
 using RygOgRejs.IO.DataAccess.App; //for testing if the connection string worked
 
+
 namespace RygOgRejs.Gui
 {
     /// <summary>
@@ -26,10 +27,18 @@ namespace RygOgRejs.Gui
         private UserControl currentUserControlCentre, currentUserControlRight;
         private WeatherAPI weatherAPI;
         private string macAddress;
+        DataViewJourneys ucJourneys;
+        JourneyEnquiries DataJourney;
+        List<string> Distanition;
         public MainWindow()
         {
             InitializeComponent();
-
+            var DJ = DataJourney.GetAll();
+            foreach (var Data in DJ)
+            {
+                 Distanition.Add(Data.Destionation);
+            }
+            //ucJourneys = new DataViewJourneys(Distanition);
             macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
 
             //maybe change this 

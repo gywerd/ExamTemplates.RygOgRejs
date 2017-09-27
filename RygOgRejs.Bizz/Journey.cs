@@ -14,9 +14,24 @@ namespace RygOgRejs.Bizz
         private int children;
         private bool isFristClass;
         private int luggaAmount;
-
+        private int id;
         public Journey(string destination, DateTime depatureTime, int adults, int children, bool isFristClass, int luggaAmount)
         {
+            Destionation = destination; //not using the enum :thinking:
+            DepaturTime = depatureTime;
+            Adults = adults;
+            Children = children;
+            IsFirstClass = isFristClass; //lel fristClass emil plz
+            LuggaAmount = luggaAmount;
+        }
+        public Journey()
+        {
+
+        }
+
+        public Journey(int id, string destination, DateTime depatureTime, int adults, int children, bool isFristClass, int luggaAmount)
+        {
+            this.id = id;
             Destionation = destination; //not using the enum :thinking:
             DepaturTime = depatureTime;
             Adults = adults;
