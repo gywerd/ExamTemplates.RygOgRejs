@@ -16,7 +16,7 @@ namespace RygOgRejs.IO.DataAccess.App
         {
             string query = "SELECT * FROM Journeys";
             ObservableCollection<Journey> journeyCol = new ObservableCollection<Journey>();
-            DataSet data = executor.Execute(query); //ayy lmao
+            DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader(); //best
             while(reader.Read())
             {
@@ -37,7 +37,7 @@ namespace RygOgRejs.IO.DataAccess.App
         {
             string query = $"SELECT * FROM Journeys WHERE JourneyId = {id}";
             Journey journey = new Journey();
-            DataSet data = executor.Execute(query); //ayy lmao
+            DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader(); //best
             while (reader.Read())
             {
@@ -60,15 +60,6 @@ namespace RygOgRejs.IO.DataAccess.App
             executor.ExecuteNonQuery(query);
         }
 
-        //reload list? also this should update the database 
-        /*
-         public void UpdateJourney(int id, string destination, DateTime depatureTime, int adults, int children, bool isFirstClass, int luggageAmount) //find better way?
-        {
-            //depature time might break it all xD
-            string query = $"UPDATE Journeys SET Destination = '{destination}', DepartureTime = {depatureTime.ToString("yyyy-MM-dd")}, Adults = {adults}, Children = {children}, IsFirstClass = {isFirstClass}, LuggageAmount = {luggageAmount}  WHERE JourneyId = {id}";
-            executor.Execute(query);
-        }
-        */
         public void UpdateJourney(Journey j)
         {
             //depature time might break it all xD
