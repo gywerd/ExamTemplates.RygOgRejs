@@ -15,13 +15,13 @@ namespace RygOgRejs.IO.DataAccess.App
         public void AddTransaction(float amount, int jid, int pid) //find better way?
         {
             //depature time might break it all xD
-            string query = $"INSERT INTO Transaction(Amount, JourneyId, PayerID) VALUES({amount}, {jid}, {pid}";
+            string query = $"INSERT INTO Transaction (Amount, JourneyId, PayerID) VALUES({amount}, {jid}, {pid}";
             executor.Execute(query);
         }
         public void AddTransaction(Transactions t) //find better way?
         {
             //depature time might break it all xD
-            string query = $"INSERT INTOTransaction(Amount, JourneyId, PayerID) VALUES({t.Amount}, {t.JourneyId}, {t.PayerId})";
+            string query = $"INSERT INTOTransaction (Amount, JourneyId, PayerID) VALUES({t.Amount}, {t.JourneyId}, {t.PayerId})";
             executor.Execute(query);
         }
         public ObservableCollection<Transactions> GetAll()

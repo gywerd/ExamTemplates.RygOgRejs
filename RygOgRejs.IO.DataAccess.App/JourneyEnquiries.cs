@@ -56,7 +56,7 @@ namespace RygOgRejs.IO.DataAccess.App
         public void AddJourney(Journey journ) //find better way?
         {
             //depature time might break it all xD
-            string query = $"INSERT INTO Journeys(Destination, DepartureTime, Adults,Children,IsFirstClass,LuggageAmount) VALUES({journ.Destination}, {journ.DepatureTime}, {journ.Adults}, {journ.Children}, {journ.IsFirstClass}, {journ.LuggageAmount})";
+            string query = $"INSERT INTO Journeys (Destination, DepartureTime, Adults,Children,IsFirstClass,LuggageAmount) VALUES({journ.Destination}, {journ.DepatureTime}, {journ.Adults}, {journ.Children}, {journ.IsFirstClass}, {journ.LuggageAmount})";
             executor.Execute(query);
         }
 

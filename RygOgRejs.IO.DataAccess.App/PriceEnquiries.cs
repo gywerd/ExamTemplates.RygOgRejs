@@ -35,7 +35,7 @@ namespace RygOgRejs.IO.DataAccess.App
         public void AddPrice(PriceDetails price) //find better way?
         {
             //depature time might break it all xD
-            string query = $"INSERT INTO Transaction(DestinationName, AdultPrice, ChildrenPrice,FirstClassPrice,LuggagePrice) VALUES({price.DestinationName}, {price.AdultPrice}, {price.ChildPrice}, {price.FirstClassPrice}, {price.LuggagePrice}";
+            string query = $"INSERT INTO Price (DestinationName, AdultPrice, ChildrenPrice,FirstClassPrice,LuggagePrice) VALUES({price.DestinationName}, {price.AdultPrice}, {price.ChildPrice}, {price.FirstClassPrice}, {price.LuggagePrice}";
             executor.Execute(query);
         }
         //reload list? also this should update the database 

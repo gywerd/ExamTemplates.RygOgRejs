@@ -32,7 +32,7 @@ namespace RygOgRejs.IO.DataAccess.App
 
         public void AddPayer(Payer payer) //find better way?
         {
-            string query = $"INSERT INTO Payers(FirstName, LastName) VALUES({payer.FirstName}, {payer.LastName})";
+            string query = $"INSERT INTO Payers (FirstName, LastName) VALUES({payer.FirstName}, {payer.LastName})";
             executor.Execute(query);
         }
 
