@@ -33,7 +33,7 @@ namespace RygOgRejs.IO.DataAccess.App
         public void AddPayer(Payer payer) //find better way?
         {
             string query = $"INSERT INTO Payers (FirstName, LastName) VALUES({payer.FirstName}, {payer.LastName})";
-            executor.Execute(query);
+            executor.ExecuteNonQuery(query);
         }
 
         public Payer GetPayerWithId(int id)
@@ -56,13 +56,13 @@ namespace RygOgRejs.IO.DataAccess.App
         {
             //depature time might break it all xD
             string query = $"UPDATE Payers SET FirstName = {payer.FirstName}, LastName = {payer.LastName} WHERE PayerId = {payer.PayerId}";
-            executor.Execute(query);
+            executor.ExecuteNonQuery(query);
         }
 
         public void DeletePayer(int id)
         {
             string query = $"DELETE FROM Payers WHERE PayerId = {id}";
-            executor.Execute(query);
+            executor.ExecuteNonQuery(query);
         }
     }
 }

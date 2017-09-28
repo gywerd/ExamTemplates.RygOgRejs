@@ -67,7 +67,7 @@ namespace RygOgRejs.Gui
 
         private void ButtonTransactions_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+           throw new NotImplementedException();
         }
 
         private void MenuHelpAbout_Click(object sender, RoutedEventArgs e)

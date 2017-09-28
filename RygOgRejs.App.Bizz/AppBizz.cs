@@ -61,7 +61,9 @@ namespace RygOgRejs.App.Bizz
         /// <param name="u"></param>
         public void CreateJourney()
         {
-            throw new NotImplementedException();
+            Journey kage = new Journey("LEPA - PALMA DE MALLORCA, Spain", DateTime.Now, 2, 3, true, 23);
+            CJI.AddJourney(kage);
+//            throw new NotImplementedException();
         }
 
         /// <summary>
