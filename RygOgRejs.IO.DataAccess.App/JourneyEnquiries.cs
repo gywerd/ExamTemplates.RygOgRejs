@@ -60,10 +60,10 @@ namespace RygOgRejs.IO.DataAccess.App
             string query = $"UPDATE Journeys SET Destination = '{destination}', DepartureTime = {depatureTime.ToString("yyyy-MM-dd")}, Adults = {adults}, Children = {children}, IsFirstClass = {isFirstClass}, LuggageAmount = {luggageAmount}  WHERE JourneyId = {id}";
             executor.Execute(query);
         }
-        public void UpdateJourney(Journey j) //
+        public void UpdateJourney(Journey j)
         {
             //depature time might break it all xD
-            string query = $"UPDATE Journeys SET Destination = '{j.Destination}', DepartureTime = {j.DepatureTime.ToString("yyyy-MM-dd")}, Adults = {j.Adults}, Children = {j.Children}, IsFirstClass = {j.IsFirstClass}, LuggageAmount = {j}  WHERE JourneyId = {j.JourneyId}";
+            string query = $"UPDATE Journeys SET Destination = '{j.Destination}', DepartureTime = {j.DepatureTime.ToString("yyyy-MM-dd")}, Adults = {j.Adults}, Children = {j.Children}, IsFirstClass = {j.IsFirstClass}, LuggageAmount = {j.LuggageAmount}  WHERE JourneyId = {j.JourneyId}";
             executor.Execute(query);
         }
 

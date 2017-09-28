@@ -54,7 +54,7 @@ namespace RygOgRejs.Bizz
         /// <param name="adults">int</param>
         /// <param name="children">int</param>
         /// <param name="isFirstClass">bool</param>
-        /// <param name="luggageAmount">float</param>
+        /// <param name="luggageAmount">float</param> why is this a int here but a float everywhere els?
         public Journey(int id, string destination, DateTime departureTime, int adults, int children, bool isFirstClass, int luggageAmount)
         {
             this.journeyId = id;
@@ -93,4 +93,3 @@ namespace RygOgRejs.Bizz
 
 //server stuff will delete later
 //adgang til database 10.205.44.39,49172 Aspit, Sever2012
-//Data Source=10.205.44.39,49172;Initial Catalog=RygOgRejs;Integrated Security=False;User ID=Aspit;Password=********;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
