@@ -22,7 +22,7 @@ namespace RygOgRejs.Gui
     public partial class DataViewJourneys: UserControl
     {
         private string destination;
-        RygOgRejsBizz CRB = new RygOgRejsBizz();
+        RygOgRejsBizz CRB;
 
         public DataViewJourneys(List<string> Entities, object b)
         {
@@ -32,7 +32,7 @@ namespace RygOgRejs.Gui
             //{
             //    dataGridJourneys.Items.Add(dest.ToString());
             //}
-            dataGridJourneys.ItemsSource = Entities;
+            dataGridJourneys.ItemsSource = CRB.Destinations;
         }
 
         private void TextBoxFilterJourneys_TextChanged(object sender, TextChangedEventArgs e)

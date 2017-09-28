@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RygOgRejs.Bizz;
+using RygOgRejs.IO.DataAccess.App;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -6,28 +8,31 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 
-namespace RygOgRejs.Bizz
+namespace RygOgRejs.App.Bizz
 {
-    public class RygOgRejsBizz : INotifyPropertyChanged
+    public class AppBizz : INotifyPropertyChanged
     {
         #region Fields
         private string destination;
+        private string journeyOrTransaction;
         private Journey journey = new Journey();
         private Payer payer = new Payer();
         private string macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
-        Journey CJR = new Journey();
-        Payer CPR = new Payer();
-        Transactions CTA = new Transactions();
-        PriceDetails CPD = new PriceDetails();
+        Journey CJE = new Journey();
+        JourneyEnquiries CJI = new JourneyEnquiries();
+        Payer CPaE = new Payer();
+        PayerEnquiries CPaI = new PayerEnquiries();
+        PriceDetails CPrE = new PriceDetails();
+        PriceEnquiries CPrI = new PriceEnquiries();
+        Transactions CTE = new Transactions();
+        TransactionEnquiries CTI = new TransactionEnquiries();
         MasterId CMI = new MasterId();
-        private string journeyOrTransaction;
         ObservableCollection<Journey> journeys = new ObservableCollection<Journey>();
         ObservableCollection<Payer> payers = new ObservableCollection<Payer>();
         ObservableCollection<Transactions> transactions = new ObservableCollection<Transactions>();
         List<string> destinations = new List<string>();
+        ObservableCollection<PriceDetails> priceDetails;
         #endregion
 
         #region Events
@@ -35,9 +40,19 @@ namespace RygOgRejs.Bizz
         #endregion
 
         #region Methods
-        public void ClearJourneys()
+        /// <summary>
+        /// Code behind that clears and reloads content of ObservAbleCollections
+        /// </summary>
+        public void RefreshObservableCollections()
         {
-            throw new NotImplementedException();
+            journeys.Clear();
+            payers.Clear();
+            priceDetails.Clear();
+            transactions.Clear();
+            GetJourneys();
+            GetPayers();
+            GetPricetails();
+            GetTransactions();
         }
 
         /// <summary>
@@ -55,6 +70,7 @@ namespace RygOgRejs.Bizz
         /// <param name="u"></param>
         public void DeleteJourney()
         {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -83,23 +99,22 @@ namespace RygOgRejs.Bizz
         }
 
         /// <summary>
-        /// Method, that invokes reading journeys from database
-        /// </summary>
-        private void GetJourneys()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// Method, that generates a list of destinations
         /// </summary>
         private void GetDestinations()
         {
-            ObservableCollection<PriceDetails> prices = GetPricetails();
-            foreach (PriceDetails price in prices)
+            foreach (PriceDetails price in priceDetails)
             {
                 destinations.Add(price.DestinationName);
             }
+        }
+
+        /// <summary>
+        /// Method, that invokes reading journeys from database
+        /// </summary>
+        private void GetJourneys()
+        {
+            journeys = CJI.GetAll();
         }
 
         /// <summary>
@@ -107,16 +122,16 @@ namespace RygOgRejs.Bizz
         /// </summary>
         private void GetPayers()
         {
-            throw new NotImplementedException();
+            payers = CPaI.GetAll(); ;
         }
 
         /// <summary>
         /// Method, that invokes reading pricedetails from database
         /// </summary>
         /// <returns></returns>
-        private ObservableCollection<PriceDetails> GetPricetails()
+        private void GetPricetails()
         {
-            throw new NotImplementedException();
+            priceDetails = CPrI.GetAll();
         }
 
         /// <summary>
@@ -124,7 +139,7 @@ namespace RygOgRejs.Bizz
         /// </summary>
         private void GetTransactions()
         {
-            throw new NotImplementedException();
+            transactions = CTI.GetAll();
         }
         #endregion
 
@@ -182,6 +197,7 @@ namespace RygOgRejs.Bizz
         public Payer Payer { get => payer; set => payer = value; }
         public string JourneyOrTransaction { get => journeyOrTransaction; set => journeyOrTransaction = value; }
         public string Destination { get => destination; set => destination = value; }
+        public ObservableCollection<PriceDetails> PriceDetails { get => priceDetails; set => priceDetails = value; }
         #endregion
 
         #region Internal Classes
@@ -191,10 +207,11 @@ namespace RygOgRejs.Bizz
             public MasterId() { }
             public MasterId(int id)
             {
-                this.id = id;
+                Id = id;
             }
             public int Id { get => id; set => id = value; }
         }
         #endregion
+
     }
 }

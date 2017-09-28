@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using RygOgRejs.IO.WeatherService;
 using System.Net.NetworkInformation; //mac xDDDD
 using RygOgRejs.IO.DataAccess.App; //for testing if the connection string worked
-
+using RygOgRejs.App.Bizz;
 
 namespace RygOgRejs.Gui
 {
@@ -28,9 +28,13 @@ namespace RygOgRejs.Gui
         private UserControl  currentUserControlRight;
         private WeatherAPI weatherAPI;
         private string macAddress;
+        AppBizz CAB = new AppBizz();
         DataViewJourneys ucJourneys;
         JourneyEnquiries DataJourney = new JourneyEnquiries();
         List<string> Distanition = new List<string>();
+        RygOgRejsBizz CRB = new RygOgRejsBizz();
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -39,9 +43,9 @@ namespace RygOgRejs.Gui
             {
                  Distanition.Add(Data.Destination);
             }
-            userControlCentre.Content = ucJourneys = new DataViewJourneys(Distanition);
+            userControlCentre.Content = ucJourneys = new DataViewJourneys(Distanition, CAB);
             macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
-
+            
             //maybe change this 
             weatherAPI = new WeatherAPI(labelStatusBar);
             weatherAPI.GetCityNameAsync();
@@ -58,12 +62,22 @@ namespace RygOgRejs.Gui
         private void ButtonJourneys_Click(object sender, RoutedEventArgs e)
         {
             JourneyEnquiries ek = new JourneyEnquiries();
-            ek.DeleteJounry(2);
+            ek.DeleteJourney(2);
+        }
+
+        private void ButtonTransactions_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void MenuHelpAbout_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Dette er et eksempel på løsning af S2 eksamensopgaven Ryg & Rejs, Bygget af Emil, Daniel Og Jack", "Om Ryg & Rejs", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+        }
+
+        private void ButtonTransactions_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
