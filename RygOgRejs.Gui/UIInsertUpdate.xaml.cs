@@ -1,4 +1,4 @@
-﻿using RygOgRejs.Bizz;
+﻿using RygOgRejs.App.Bizz;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,9 +22,9 @@ namespace RygOgRejs.Gui
     /// </summary>
     public partial class UIInsertUpdate : UserControl
     {
-        RygOgRejsBizz CRB;
+        AppBizz CAB;
 
-        public UIInsertUpdate(RygOgRejsBizz bizz)
+        public UIInsertUpdate(AppBizz bizz)
         {
             InitializeComponent();
             InitializeContent(bizz);
@@ -33,17 +33,17 @@ namespace RygOgRejs.Gui
         #region Buttons
         private void ButtonCreateJourney_Click(object sender, RoutedEventArgs e)
         {
-            CRB.CreateJourney();
+            CAB.CreateJourney();
         }
 
         private void ButtonDeleteJourney_Click(object sender, RoutedEventArgs e)
         {
-            CRB.DeleteJourney();
+            CAB.DeleteJourney();
         }
 
         private void ButtonEditJourney_Click(object sender, RoutedEventArgs e)
         {
-            CRB.EditJourney();
+            CAB.EditJourney();
         }
         #endregion
 
@@ -60,10 +60,10 @@ namespace RygOgRejs.Gui
         #endregion
 
         #region Methods
-        private void InitializeContent(RygOgRejsBizz bizz)
+        private void InitializeContent(AppBizz bizz)
         {
-            CRB = bizz;
-            if (CRB.JourneyOrTransaction == "transaction")
+            CAB = bizz;
+            if (CAB.JourneyOrTransaction == "transaction")
             {
                 buttonCreateJourney.Visibility = Visibility.Hidden;
                 buttonEditJourney.Visibility = Visibility.Visible;
@@ -74,7 +74,7 @@ namespace RygOgRejs.Gui
                 buttonCreateJourney.Visibility = Visibility.Visible;
                 buttonEditJourney.Visibility = Visibility.Hidden;
                 buttonDeleteJourney.Visibility = Visibility.Hidden;
-                labelChosenDestination.Content = CRB.Journey.Destination;
+                labelChosenDestination.Content = CAB.Journey.Destination;
             }
         }
 

@@ -2,6 +2,7 @@
 using RygOgRejs.IO.DataAccess.General;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -11,10 +12,10 @@ namespace RygOgRejs.IO.DataAccess.App
 {
     public class PriceEnquiries : DataEnquiries
     {
-        public List<PriceDetails> GetAll()
+        public ObservableCollection<PriceDetails> GetAll()
         {
             string query = "SELECT * FROM Price";
-            List<PriceDetails> priceList = new List<PriceDetails>();
+            ObservableCollection<PriceDetails> priceList = new ObservableCollection<PriceDetails>();
             DataSet data = executor.Execute(query); //ayy lmao
             DataTableReader reader = data.CreateDataReader(); //best
             while (reader.Read())
