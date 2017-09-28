@@ -57,29 +57,6 @@ namespace RygOgRejs.Gui
         {
 
         }
-        #endregion
-
-        #region Methods
-        private void InitializeContent(AppBizz bizz)
-        {
-            CAB = bizz;
-            if (CAB.JourneyOrTransaction == "transaction")
-            {
-                buttonCreateJourney.Visibility = Visibility.Hidden;
-                buttonEditJourney.Visibility = Visibility.Visible;
-                buttonDeleteJourney.Visibility = Visibility.Visible;
-            }
-            else
-        	{
-                buttonCreateJourney.Visibility = Visibility.Visible;
-                buttonEditJourney.Visibility = Visibility.Hidden;
-                buttonDeleteJourney.Visibility = Visibility.Hidden;
-                labelChosenDestination.Content = CAB.Journey.Destination;
-            }
-        }
-
-        #endregion
-
         private void TextBoxAdults_TextChanged(object sender, TextChangedEventArgs e)
         {
 
@@ -104,5 +81,28 @@ namespace RygOgRejs.Gui
         {
 
         }
+        #endregion
+
+        #region Methods
+        private void InitializeContent(AppBizz bizz)
+        {
+            CAB = bizz;
+            if (CAB.JourneyOrTransaction == "transaction")
+            {
+                buttonCreateJourney.Visibility = Visibility.Hidden;
+                buttonEditJourney.Visibility = Visibility.Visible;
+                buttonDeleteJourney.Visibility = Visibility.Visible;
+            }
+            else
+        	{
+                buttonCreateJourney.Visibility = Visibility.Visible;
+                buttonEditJourney.Visibility = Visibility.Hidden;
+                buttonDeleteJourney.Visibility = Visibility.Hidden;
+                labelChosenDestination.Content = CAB.Journey.Destination;
+            }
+        }
+
+        #endregion
+
     }
 }
