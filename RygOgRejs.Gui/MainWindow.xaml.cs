@@ -27,7 +27,6 @@ namespace RygOgRejs.Gui
         private UserControl currentUserControlCentre;
         private UserControl  currentUserControlRight;
         private WeatherAPI weatherAPI;
-        private string macAddress;
         AppBizz CAB = new AppBizz();
         DataViewJourneys ucJourneys;
         DataViewTransactions ucTransaction;
