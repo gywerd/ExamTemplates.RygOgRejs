@@ -32,6 +32,9 @@ namespace RygOgRejs.Gui
         DataViewJourneys ucJourneys;
         JourneyEnquiries DataJourney = new JourneyEnquiries();
         List<string> Distanition = new List<string>();
+        RygOgRejsBizz CRB = new RygOgRejsBizz();
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -42,7 +45,7 @@ namespace RygOgRejs.Gui
             }
             userControlCentre.Content = ucJourneys = new DataViewJourneys(Distanition, CAB);
             macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
-
+            
             //maybe change this 
             weatherAPI = new WeatherAPI(labelStatusBar);
             weatherAPI.GetCityNameAsync();
@@ -70,6 +73,11 @@ namespace RygOgRejs.Gui
         private void MenuHelpAbout_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Dette er et eksempel på løsning af S2 eksamensopgaven Ryg & Rejs, Bygget af Emil, Daniel Og Jack", "Om Ryg & Rejs", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+        }
+
+        private void ButtonTransactions_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

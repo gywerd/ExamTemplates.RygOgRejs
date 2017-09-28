@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RygOgRejs.Bizz
 {
-    public class Journey : PriceDetails
+    public class Journey : PriceDetails //hvorfor bliver den nedarvet ?
     {
         #region Fields
         private int journeyId;
