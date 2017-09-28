@@ -33,10 +33,8 @@ namespace RygOgRejs.IO.DataAccess.General
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             SqlCommand command = new SqlCommand(sqlQuery, connection);
-            command.ExecuteNonQuery();
-            command.Dispose();//not sure if needed but im doing it anyway
-            connection.Close();
-            connection.Dispose(); //not sure if needed but im doing it anyway
+            command.ExecuteNonQuery();//not sure if needed but im doing it anyway
+            connection.Close(); //not sure if needed but im doing it anyway
         }
 
         //something will be added useless for now

@@ -32,8 +32,8 @@ namespace RygOgRejs.IO.WeatherService
                  "Copehangen",
                  "PalmaDeMallorca"
             };
-            //while(true)
-            //{
+            while(true)
+            {
                 try
                 {
                     foreach(string location in locations)
@@ -46,7 +46,7 @@ namespace RygOgRejs.IO.WeatherService
                         GettingWeatherData.Root weatherRoot = JsonConvert.DeserializeObject<GettingWeatherData.Root>(s);
                         double temp = weatherRoot.Main.Temp - 273;
                         weather.Content = $"{location} Temperatur er lige nu {temp} °C";
-                        await Task.Delay(15000);
+                        await Task.Delay(11000);
                     }
 
 
@@ -55,7 +55,7 @@ namespace RygOgRejs.IO.WeatherService
                 {
                     MessageBox.Show(ex.Message);
                 }
-            //}
+            }
 
 
         }

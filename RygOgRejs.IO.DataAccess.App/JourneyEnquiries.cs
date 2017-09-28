@@ -16,7 +16,7 @@ namespace RygOgRejs.IO.DataAccess.App
         {
             string query = "SELECT * FROM Journeys";
             ObservableCollection<Journey> journeyCol = new ObservableCollection<Journey>();
-            DataSet data = executor.Execute(query); //ayy lmao
+            DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader(); //best
             while(reader.Read())
             {
@@ -37,7 +37,7 @@ namespace RygOgRejs.IO.DataAccess.App
         {
             string query = $"SELECT * FROM Journeys WHERE JourneyId = {id}";
             Journey journey = new Journey();
-            DataSet data = executor.Execute(query); //ayy lmao
+            DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader(); //best
             while (reader.Read())
             {
@@ -53,18 +53,18 @@ namespace RygOgRejs.IO.DataAccess.App
             return journey;
         }
 
-        //reload list? also this should update the database 
-        public void UpdateJourney(int id, string destination, DateTime depatureTime, int adults, int children, bool isFirstClass, int luggageAmount) //find better way?
+        public void AddJourney(Journey journ) //find better way?
         {
             //depature time might break it all xD
-            string query = $"UPDATE Journeys SET Destination = '{destination}', DepartureTime = {depatureTime.ToString("yyyy-MM-dd")}, Adults = {adults}, Children = {children}, IsFirstClass = {isFirstClass}, LuggageAmount = {luggageAmount}  WHERE JourneyId = {id}";
-            executor.Execute(query);
+            string query = $"INSERT INTO Journeys (Destination, DepartureTime, Adults,Children,IsFirstClass,LuggageAmount) VALUES ('{journ.Destination}', {journ.DepatureTime.ToString("yyyy-MM-dd")}, {journ.Adults}, {journ.Children},' {journ.IsFirstClass}', {journ.LuggageAmount})";
+            executor.ExecuteNonQuery(query);
         }
+
         public void UpdateJourney(Journey j)
         {
             //depature time might break it all xD
             string query = $"UPDATE Journeys SET Destination = '{j.Destination}', DepartureTime = {j.DepatureTime.ToString("yyyy-MM-dd")}, Adults = {j.Adults}, Children = {j.Children}, IsFirstClass = {j.IsFirstClass}, LuggageAmount = {j.LuggageAmount}  WHERE JourneyId = {j.JourneyId}";
-            executor.Execute(query);
+            executor.ExecuteNonQuery(query);
         }
 
         //load new list ?

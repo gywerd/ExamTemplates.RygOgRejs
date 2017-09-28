@@ -92,4 +92,4 @@ namespace RygOgRejs.Bizz
 }
 
 //server stuff will delete later
-//adgang til database 10.205.44.39,49172 Aspit, Sever2012
+//adgang til database 10.205.44.39,49172 Aspit, Server2012 
