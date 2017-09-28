@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using RygOgRejs.App.Bizz;
 namespace RygOgRejs.Gui
 {
     /// <summary>
@@ -22,17 +22,17 @@ namespace RygOgRejs.Gui
     public partial class DataViewJourneys: UserControl
     {
         private string destination;
-        RygOgRejsBizz CRB;
+        AppBizz CAB;
 
         public DataViewJourneys(List<string> Entities, object b)
         {
             InitializeComponent();
-            CRB = (RygOgRejsBizz)b;
+            CAB = (AppBizz)b;
             //foreach(string dest in Entities)
             //{
             //    dataGridJourneys.Items.Add(dest.ToString());
             //}
-            dataGridJourneys.ItemsSource = CRB.Destinations;
+            dataGridJourneys.ItemsSource = CAB.Destinations;
         }
 
         private void TextBoxFilterJourneys_TextChanged(object sender, TextChangedEventArgs e)
@@ -43,7 +43,7 @@ namespace RygOgRejs.Gui
         private void dataGridJourneys_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataGrid dg = (DataGrid)sender;
-            CRB.Destination = (string)dg.SelectedItem;
+            CAB.Destination = (string)dg.SelectedItem;
         }
     }
 }
