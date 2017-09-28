@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RygOgRejs.Bizz
 {
-    public class Journey : PriceDetails //hvorfor bliver den nedarvet ?
+    public class Journey
     {
         #region Fields
         private int journeyId;
@@ -55,7 +55,7 @@ namespace RygOgRejs.Bizz
         /// <param name="children">int</param>
         /// <param name="isFirstClass">bool</param>
         /// <param name="luggageAmount">float</param> why is this a int here but a float everywhere els?
-        public Journey(int id, string destination, DateTime departureTime, int adults, int children, bool isFirstClass, int luggageAmount)
+        public Journey(int id, string destination, DateTime departureTime, int adults, int children, bool isFirstClass, float luggageAmount)
         {
             this.journeyId = id;
             this.destination = destination; //not using the enum :thinking:
