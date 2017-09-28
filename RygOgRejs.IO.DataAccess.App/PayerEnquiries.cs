@@ -21,7 +21,7 @@ namespace RygOgRejs.IO.DataAccess.App
             DataTableReader reader = data.CreateDataReader(); //best
             while (reader.Read())
             {
-                int id = Convert.ToInt32(reader["TransactionId"]);
+                int id = Convert.ToInt32(reader["PayerId"]);
                 string firstName = reader["FirstName"].ToString();
                 string lastName = reader["LastName"].ToString();
                 Payer payer = new Payer(id, firstName, lastName);
@@ -32,7 +32,7 @@ namespace RygOgRejs.IO.DataAccess.App
 
         public void AddPayer(Payer payer) //find better way?
         {
-            string query = $"INSERT INTO Payers (FirstName, LastName) VALUES({payer.FirstName}, {payer.LastName})";
+            string query = $"INSERT INTO Payers (FirstName, LastName) VALUES( '{payer.FirstName}', '{payer.LastName}')";
             executor.ExecuteNonQuery(query);
         }
 
@@ -55,7 +55,7 @@ namespace RygOgRejs.IO.DataAccess.App
         public void UpdatePayer(Payer payer) //find better way?
         {
             //depature time might break it all xD
-            string query = $"UPDATE Payers SET FirstName = {payer.FirstName}, LastName = {payer.LastName} WHERE PayerId = {payer.PayerId}";
+            string query = $"UPDATE Payers SET FirstName = '{payer.FirstName}', LastName = '{payer.LastName}' WHERE PayerId = {payer.PayerId}";
             executor.ExecuteNonQuery(query);
         }
 

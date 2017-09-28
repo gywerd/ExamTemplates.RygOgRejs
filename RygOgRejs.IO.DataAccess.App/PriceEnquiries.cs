@@ -32,6 +32,7 @@ namespace RygOgRejs.IO.DataAccess.App
             return priceList;
         }
 
+        //kun vis vi ændre priser
         public void AddPrice(PriceDetails price) //find better way?
         {
             //depature time might break it all xD

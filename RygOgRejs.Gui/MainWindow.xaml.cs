@@ -27,7 +27,6 @@ namespace RygOgRejs.Gui
         private UserControl currentUserControlCentre;
         private UserControl  currentUserControlRight;
         private WeatherAPI weatherAPI;
-        private string macAddress;
         AppBizz CAB = new AppBizz();
         DataViewJourneys ucJourneys;
         JourneyEnquiries DataJourney = new JourneyEnquiries();
@@ -44,7 +43,6 @@ namespace RygOgRejs.Gui
                 Distanition.Add(Data.Destination);
             }
             userControlCentre.Content = ucJourneys = new DataViewJourneys(Distanition, CRB);
-            macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
             
             //maybe change this 
             weatherAPI = new WeatherAPI(labelStatusBar);
@@ -62,12 +60,12 @@ namespace RygOgRejs.Gui
         private void ButtonJourneys_Click(object sender, RoutedEventArgs e)
         {
             JourneyEnquiries ek = new JourneyEnquiries();
-            ek.DeleteJourney(2);
+            ek.DeleteJourney(7);
         }
 
         private void ButtonTransactions_Click(object sender, RoutedEventArgs e)
         {
-           throw new NotImplementedException();
+             throw new NotImplementedException();
         }
 
         private void MenuHelpAbout_Click(object sender, RoutedEventArgs e)
