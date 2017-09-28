@@ -129,6 +129,10 @@
     <Content Include="Properties\Cascade Insert Stored Procedure.sql" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RygOgRejs.App.Bizz\RygOgRejs.App.Bizz.csproj">
+      <Project>{867fb5e2-efd9-45a0-9dd3-07b6861ccdff}</Project>
+      <Name>RygOgRejs.App.Bizz</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RygOgRejs.Bizz\RygOgRejs.Bizz.csproj">
       <Project>{478fc305-ab52-47e4-bdfc-d274fcdb30f0}</Project>
       <Name>RygOgRejs.Bizz</Name>

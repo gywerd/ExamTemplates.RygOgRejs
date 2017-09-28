@@ -1,4 +1,5 @@
-﻿using RygOgRejs.Bizz;
+﻿using RygOgRejs.App.Bizz;
+using RygOgRejs.Bizz;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,13 +22,13 @@ namespace RygOgRejs.Gui
     /// </summary>
     public partial class UIPayments : UserControl
     {
-        RygOgRejsBizz CRB = new RygOgRejsBizz();
+        AppBizz CAB = new AppBizz();
 
         #region Window
-        public UIPayments(RygOgRejsBizz b)
+        public UIPayments(AppBizz b)
         {
             InitializeComponent();
-            CRB = (RygOgRejsBizz)b;
+            CAB = (AppBizz)b;
             InitializeContent();
         }
         #endregion
@@ -35,19 +36,19 @@ namespace RygOgRejs.Gui
         #region Buttons
         private void ButtonExecutePayment_Click(object sender, RoutedEventArgs e)
         {
-            CRB.ExecutePayment();
+            CAB.ExecutePayment();
         }
 
         private void ButtonExecuteRefusion_Click(object sender, RoutedEventArgs e)
         {
-            CRB.ExecuteRefusion();
+            CAB.ExecuteRefusion();
         }
         #endregion
 
         #region Methods
         private void InitializeContent()
         {
-            if (CRB.JourneyOrTransaction == "transaction")
+            if (CAB.JourneyOrTransaction == "transaction")
             {
                 labelReceivedAmount.Visibility = Visibility.Hidden;
                 textReceivedAmountContent.Visibility = Visibility.Hidden;
