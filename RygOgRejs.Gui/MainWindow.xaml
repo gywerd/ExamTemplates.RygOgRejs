@@ -58,7 +58,8 @@
                                     Click="ButtonJourneys_Click" />
                             <Button x:Name="buttonTransactions"
                                     Content="Transaktioner"
-                                    Height="35" />
+                                    Height="35" 
+                                    Click="ButtonTransactions_Click" />
                         </StackPanel>
                     </GroupBox>
                     <GroupBox Grid.Row="1"

@@ -31,7 +31,7 @@
                   Height="40" Width="110"
                   HorizontalAlignment="Left" 
                   Margin="25,75,0,0" 
-                  VerticalAlignment="Top" IsChecked="True"/>
+                  VerticalAlignment="Top" IsChecked="True" Checked="CheckBoxFirstClass_Checked" Unchecked="CheckBoxFirstClass_Unchecked"/>
         <Label x:Name="labelAdults" 
                Content="Voksne:"
                FontWeight="DemiBold"
@@ -48,7 +48,7 @@
                  HorizontalAlignment="Left" 
                  Margin="100,125,0,0" 
                  TextWrapping="Wrap" 
-                 VerticalAlignment="Top" />
+                 VerticalAlignment="Top" TextChanged="TextBoxAdults_TextChanged" />
         <Label x:Name="labelChildren" 
                Content="Børn:"
                FontSize="16"
@@ -65,7 +65,7 @@
                  HorizontalAlignment="Center" 
                  Margin="50,125,25,0" 
                  TextWrapping="Wrap" 
-                 VerticalAlignment="Top" />
+                 VerticalAlignment="Top" TextChanged="TextBoxChildren_TextChanged" />
         <Label x:Name="labelLuggage" 
                Content="Bagagevægt:"
                FontSize="16"
@@ -82,13 +82,13 @@
                  HorizontalAlignment="Right" 
                  Margin="0,125,25,0" 
                  TextWrapping="Wrap" 
-                 VerticalAlignment="Top" />
+                 VerticalAlignment="Top" TextChanged="TextBoxLuggage_TextChanged" />
         <Label x:Name="labelPayer" 
                Content="Betaler"
                FontSize="18"
                FontWeight="ExtraBold"
                HorizontalAlignment="Left" 
-               Margin="25,175,0,0"
+               Margin="25,200,0,0"
                Height="40" Width="80"
                VerticalAlignment="Top"/>
         <Label x:Name="labelFirstName" 
@@ -96,7 +96,7 @@
                FontSize="16"
                FontWeight="DemiBold"
                HorizontalAlignment="Left" 
-               Margin="25,225,0,0"
+               Margin="25,250,0,0"
                Height="40" Width="85"
                VerticalAlignment="Top"/>
         <TextBox x:Name="textBoxFirstName"
@@ -105,15 +105,15 @@
                  FontWeight="DemiBold"
                  Height="40" Width="250"
                  HorizontalAlignment="Right" 
-                 Margin="0,225,25,0" 
+                 Margin="0,250,25,0" 
                  TextWrapping="Wrap" 
-                 VerticalAlignment="Top" />
+                 VerticalAlignment="Top" TextChanged="TextBoxFirstName_TextChanged" />
         <Label x:Name="labelLastName" 
                Content="Efternavn:"
                FontSize="16"
                FontWeight="DemiBold"
                HorizontalAlignment="Left" 
-               Margin="25,275,0,0"
+               Margin="25,300,0,0"
                Height="40" Width="85"
                VerticalAlignment="Top"/>
         <TextBox x:Name="textBoxLastName"
@@ -122,32 +122,32 @@
                  FontWeight="DemiBold"
                  Height="40" Width="250"
                  HorizontalAlignment="Right" 
-                 Margin="0,275,25,0" 
+                 Margin="0,300,25,0" 
                  TextWrapping="Wrap" 
-                 VerticalAlignment="Top" />
-        <Label x:Name="labelEMail" 
-               Content="E-mail:"
-               FontSize="16"
-               FontWeight="DemiBold"
-               HorizontalAlignment="Left" 
-               Margin="25,325,0,0"
-               Height="40" Width="85"
-               VerticalAlignment="Top"/>
-        <TextBox x:Name="textBoxEMail"
-                 Text="" 
-                 FontSize="16"
-                 FontWeight="DemiBold"
-                 Height="40" Width="250"
-                 HorizontalAlignment="Right" 
-                 Margin="0,325,25,0" 
-                 TextWrapping="Wrap" 
-                 VerticalAlignment="Top" />
+                 VerticalAlignment="Top" TextChanged="TextBoxLastName_TextChanged" />
         <Button x:Name="buttonCreateJourney" 
                 Content="Opret Rejse" 
+                Click="ButtonCreateJourney_Click"
                 FontSize="16"
                 Height="40" Width="100"
                 HorizontalAlignment="Right" 
-                Margin="0,390,25,0" VerticalAlignment="Top" Click="ButtonCreateJourney_Click" />
-
+                Margin="0,375,25,0" 
+                VerticalAlignment="Top" />
+        <Button x:Name="buttonEditJourney" 
+                Content="Ret Rejse" 
+                Click="ButtonEditJourney_Click"
+                FontSize="16"
+                Height="40" Width="100"
+                HorizontalAlignment="Right" 
+                Margin="0,375,25,0" 
+                VerticalAlignment="Top" />
+        <Button x:Name="buttonDeleteJourney" 
+                Content="Slet rejse" 
+                Click="ButtonDeleteJourney_Click"
+                FontSize="16"
+                Height="40" Width="100"
+                HorizontalAlignment="Center" 
+                Margin="0,375,0,0" 
+                VerticalAlignment="Top" />
     </Grid>
 </UserControl>

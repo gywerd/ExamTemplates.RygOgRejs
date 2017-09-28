@@ -24,7 +24,8 @@ namespace RygOgRejs.Gui
     /// </summary>
     public partial class MainWindow: Window
     {
-        private UserControl currentUserControlCentre, currentUserControlRight;
+        private UserControl currentUserControlCentre;
+        private UserControl  currentUserControlRight;
         private WeatherAPI weatherAPI;
         private string macAddress;
         DataViewJourneys ucJourneys;

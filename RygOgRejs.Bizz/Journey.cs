@@ -1,123 +1,93 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace RygOgRejs.Bizz
 {
-    public class Journey
+    public class Journey : PriceDetails
     {
+        #region Fields
+        private int journeyId;
         private string destination;
         private DateTime departureTime;
         private int adults;
         private int children;
-        private bool isFristClass;
-        private int luggaAmount;
-        private int id;
-        public Journey(string destination, DateTime depatureTime, int adults, int children, bool isFristClass, int luggaAmount)
-        {
-            Destionation = destination; //not using the enum :thinking:
-            DepaturTime = depatureTime;
-            Adults = adults;
-            Children = children;
-            IsFirstClass = isFristClass; //lel fristClass emil plz
-            LuggaAmount = luggaAmount;
-        }
-        public Journey()
-        {
+        private bool isFirstClass;
+        private float luggageAmount;
+        ObservableCollection<PriceDetails> priceDetails = new ObservableCollection<PriceDetails>();
+        #endregion
 
-        }
+        #region constructors
+        /// <summary>
+        /// Empty constructor
+        /// </summary>
+        public Journey() { }
 
-        public Journey(int id, string destination, DateTime depatureTime, int adults, int children, bool isFristClass, int luggaAmount)
+        /// <summary>
+        /// Constructor used, when creating the journey
+        /// </summary>
+        /// <param name="destination">string</param>
+        /// <param name="departureTime">DateTime</param>
+        /// <param name="adults">int</param>
+        /// <param name="children">int</param>
+        /// <param name="isFirstClass">bool</param>
+        /// <param name="luggageAmount">float</param>
+        public Journey(string destination, DateTime departureTime, int adults, int children, bool isFirstClass, float luggageAmount)
         {
-            this.id = id;
-            Destionation = destination; //not using the enum :thinking:
-            DepaturTime = depatureTime;
-            Adults = adults;
-            Children = children;
-            IsFirstClass = isFristClass; //lel fristClass emil plz
-            LuggaAmount = luggaAmount;
-        }
-
-        public string Destionation
-        {
-            get
-            {
-                return destination;
-            }
-            set
-            {
-                //ingen error checking FeelsBadMan
-                destination = value;
-            }
+            this.destination = destination; //not using the enum :thinking:
+            this.departureTime = departureTime;
+            this.adults = adults;
+            this.children = children;
+            this.isFirstClass = isFirstClass; //lel fristClass emil plz
+            this.luggageAmount = luggageAmount;
         }
 
-        public DateTime DepaturTime
+        /// <summary>
+        /// Constructor used, when reading journeys from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <param name="destination">string</param>
+        /// <param name="departureTime">DateTime</param>
+        /// <param name="adults">int</param>
+        /// <param name="children">int</param>
+        /// <param name="isFirstClass">bool</param>
+        /// <param name="luggageAmount">float</param>
+        public Journey(int id, string destination, DateTime departureTime, int adults, int children, bool isFirstClass, int luggageAmount)
         {
-            get
-            {
-                return departureTime;
-            }
+            this.journeyId = id;
+            this.destination = destination; //not using the enum :thinking:
+            this.departureTime = departureTime;
+            this.adults = adults;
+            this.children = children;
+            this.isFirstClass = isFirstClass; //lel fristClass emil plz
+            this.luggageAmount = luggageAmount;
+        }
+        #endregion
+
+        #region Methods
+        #endregion
+
+        #region Properties
+        public string Destination { get => destination; set => destination = value; } //ingen error checking FeelsBadMan
+        public DateTime DepatureTime
+        {
+            get => departureTime;
             set
             {
                 if (DateTime.TryParse(value.ToString(), out DateTime checkTime))
                     departureTime = value;
             }
         }
-
-        public int Adults
-        {
-            get
-            {
-                return adults;
-            }
-            set
-            {
-                adults = value;
-            }
-        }
-
-        public void CreateJourney(Journey journey, Payer payer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int Children
-        {
-            get
-            {
-                return children;
-            }
-            set
-            {
-                children = value;
-            }
-        }
-
-        public bool IsFirstClass
-        {
-            get
-            {
-                return isFristClass;
-            }
-            set
-            {
-                isFristClass = value;
-            }
-        }
-
-        public int LuggaAmount
-        {
-            get
-            {
-                return luggaAmount;
-            }
-            set
-            {
-                luggaAmount = value;
-            }
-        }
+        public int Adults { get => adults; set => adults = value; }
+        public int Children { get => children; set => children = value; }
+        public bool IsFirstClass { get => isFirstClass; set => isFirstClass = value; }
+        public float LuggageAmount { get => luggageAmount; set => luggageAmount = value; }
+        public ObservableCollection<PriceDetails> PriceDetails { get => PriceDetails; set => PriceDetails = value; }
+        public int JourneyId { get => journeyId; set => journeyId = value; }
+        #endregion
     }
 }
 

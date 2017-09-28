@@ -29,5 +29,10 @@ namespace RygOgRejs.Gui
         {
 
         }
+
+        private void DataGridTransaction_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

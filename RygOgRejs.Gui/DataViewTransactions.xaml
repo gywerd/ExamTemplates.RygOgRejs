@@ -23,6 +23,6 @@
         <DataGrid x:Name="dataGridTransaction"
                   Grid.Row="1"
                   IsReadOnly="True"
-                  Margin="5" />
+                  Margin="5" SelectionChanged="DataGridTransaction_SelectionChanged" />
     </Grid>
 </UserControl>

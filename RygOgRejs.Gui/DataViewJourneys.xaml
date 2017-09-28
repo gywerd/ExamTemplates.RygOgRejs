@@ -23,6 +23,6 @@
         <DataGrid x:Name="dataGridJourneys"
                   Grid.Row="1"
                   IsReadOnly="True"
-                  Margin="5" />
+                  Margin="5" SelectionChanged="dataGridJourneys_SelectionChanged" />
     </Grid>
 </UserControl>
