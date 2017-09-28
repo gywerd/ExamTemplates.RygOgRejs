@@ -74,5 +74,6 @@ namespace RygOgRejs.Gui
         {
             MessageBox.Show("Dette er et eksempel på løsning af S2 eksamensopgaven Ryg & Rejs, Bygget af Emil, Daniel Og Jack", "Om Ryg & Rejs", MessageBoxButton.OK, MessageBoxImage.Asterisk);
         }
+
     }
 }
