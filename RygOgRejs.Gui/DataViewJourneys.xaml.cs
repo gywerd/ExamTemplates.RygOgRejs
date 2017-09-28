@@ -23,7 +23,6 @@ namespace RygOgRejs.Gui
         public DataViewJourneys(List<string> Entities)
         {
             InitializeComponent();
-            dataGridJourneys.ItemsSource = Entities;
         }
 
         private void TextBoxFilterJourneys_TextChanged(object sender, TextChangedEventArgs e)

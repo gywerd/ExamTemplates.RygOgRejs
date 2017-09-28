@@ -38,14 +38,14 @@ namespace RygOgRejs.IO.DataAccess.App
         {
             //depature time might break it all xD
             string query = $"UPDATE Journeys SET Destination = '{destination}', DepartureTime = {depatureTime}, Adults = {adults}, Children = {children}, IsFirstClass = {isFirstClass}, LuggageAmount = {luggaAmount}  WHERE JourneyId = {id}";
-            executor.Execute(query);
+            executor.ExecuteNonQuery(query);
         }
 
-        //load new list ?
+        //load new list ? alas dis works
         public void DeleteJounry(int id)
         {
             string query = $"DELETE FROM Journeys WHERE JourneyId = {id}";
-            executor.Execute(query);
+            executor.ExecuteNonQuery(query);
         }
     }
 }

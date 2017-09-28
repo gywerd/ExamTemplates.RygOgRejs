@@ -21,12 +21,23 @@ namespace RygOgRejs.IO.DataAccess.General
                 DataSet set = new DataSet();
                 adapter.Fill(set);
                 connection.Close();
+                command.Dispose(); //not sure if needed but im doing it anyway
+                connection.Dispose(); //not sure if needed but im doing it anyway
                 return set;
             }
 
         }
 
-       
+        public void ExecuteNonQuery(string sqlQuery)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+            command.ExecuteNonQuery();
+            command.Dispose();//not sure if needed but im doing it anyway
+            connection.Close();
+            connection.Dispose(); //not sure if needed but im doing it anyway
+        }
 
         //something will be added useless for now
         public DataSet Execute(SqlCommand command)

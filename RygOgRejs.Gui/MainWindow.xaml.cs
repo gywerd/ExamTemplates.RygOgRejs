@@ -56,8 +56,6 @@ namespace RygOgRejs.Gui
 
         private void ButtonJourneys_Click(object sender, RoutedEventArgs e)
         {
-            JourneyEnquiries ek = new JourneyEnquiries();
-            ek.DeleteJounry(2);
         }
 
         private void MenuHelpAbout_Click(object sender, RoutedEventArgs e)
