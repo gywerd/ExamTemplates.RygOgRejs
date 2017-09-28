@@ -103,7 +103,8 @@ namespace RygOgRejs.App.Bizz
         /// </summary>
         private void GetDestinations()
         {
-            foreach (PriceDetails price in priceDetails)
+            var PriceDetailEnq = CPrI.GetAll();
+            foreach (PriceDetails price in PriceDetailEnq)
             {
                 destinations.Add(price.DestinationName);
             }

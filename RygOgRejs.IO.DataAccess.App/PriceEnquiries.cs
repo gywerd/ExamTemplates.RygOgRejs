@@ -20,7 +20,7 @@ namespace RygOgRejs.IO.DataAccess.App
             DataTableReader reader = data.CreateDataReader(); //best
             while (reader.Read())
             {
-                int id = Convert.ToInt32(reader["DestinatonId"]);
+                int id = Convert.ToInt32(reader["DestinationId"]);
                 string destination = reader["DestinationName"].ToString();
                 float adult = Convert.ToSingle(reader["AdultPrice"]);
                 float child = Convert.ToSingle(reader["ChildrenPrice"]);
