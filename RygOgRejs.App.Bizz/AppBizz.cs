@@ -16,14 +16,16 @@ namespace RygOgRejs.App.Bizz
         #region Fields
         private string destination;
         private string journeyOrTransaction;
-        private Journey journey = new Journey();
-        private Payer payer = new Payer();
+        private Journey tempJourney = new Journey();
+        private Payer tempPayer = new Payer();
+        private Transactions tempTransaction = new Transactions();
+        private PriceDetails tempPriceDetails = new PriceDetails();
         private string macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
         Journey CJE = new Journey();
         JourneyEnquiries CJI = new JourneyEnquiries();
         Payer CPaE = new Payer();
         PayerEnquiries CPaI = new PayerEnquiries();
-        PriceDetails CPrE = new PriceDetails();
+        Price CPrE = new Price();
         PriceEnquiries CPrI = new PriceEnquiries();
         Transactions CTE = new Transactions();
         TransactionEnquiries CTI = new TransactionEnquiries();
@@ -31,8 +33,8 @@ namespace RygOgRejs.App.Bizz
         ObservableCollection<Journey> journeys = new ObservableCollection<Journey>();
         ObservableCollection<Payer> payers = new ObservableCollection<Payer>();
         ObservableCollection<Transactions> transactions = new ObservableCollection<Transactions>();
+        ObservableCollection<Price> prices = new ObservableCollection<Price>();
         List<string> destinations = new List<string>();
-        ObservableCollection<PriceDetails> priceDetails;
         #endregion
 
         #region Events
@@ -41,18 +43,14 @@ namespace RygOgRejs.App.Bizz
 
         #region Methods
         /// <summary>
-        /// Code behind that clears and reloads content of ObservAbleCollections
+        /// Code that clears journey, payer & transaction fields after completed sale
         /// </summary>
-        public void RefreshObservableCollections()
+        public void ClearTemporaryFields()
         {
-            journeys.Clear();
-            payers.Clear();
-            priceDetails.Clear();
-            transactions.Clear();
-            GetJourneys();
-            GetPayers();
-            GetPricetails();
-            GetTransactions();
+            tempJourney = new Journey();
+            tempPayer = new Payer();
+            tempTransaction = new Transactions();
+            tempPriceDetails = new PriceDetails();
         }
 
         /// <summary>
@@ -83,7 +81,7 @@ namespace RygOgRejs.App.Bizz
         }
 
         /// <summary>
-        /// Method, that execute payments
+        /// Code behind ExecutePayments-button
         /// </summary>
         public void ExecutePayment()
         {
@@ -91,7 +89,7 @@ namespace RygOgRejs.App.Bizz
         }
 
         /// <summary>
-        /// Method, that execute refusion
+        /// Code behind ExecuteRefusion-button
         /// </summary>
         public void ExecuteRefusion()
         {
@@ -103,8 +101,8 @@ namespace RygOgRejs.App.Bizz
         /// </summary>
         private void GetDestinations()
         {
-            var PriceDetailEnq = CPrI.GetAll();
-            foreach (PriceDetails price in PriceDetailEnq)
+            ObservableCollection<Price> PriceDetailEnq = CPrI.GetAll();
+            foreach (Price price in PriceDetailEnq)
             {
                 destinations.Add(price.DestinationName);
             }
@@ -130,9 +128,9 @@ namespace RygOgRejs.App.Bizz
         /// Method, that invokes reading pricedetails from database
         /// </summary>
         /// <returns></returns>
-        private void GetPricetails()
+        private void GetPrices()
         {
-            priceDetails = CPrI.GetAll();
+            prices = CPrI.GetAll();
         }
 
         /// <summary>
@@ -142,9 +140,26 @@ namespace RygOgRejs.App.Bizz
         {
             transactions = CTI.GetAll();
         }
+
+        /// <summary>
+        /// Code that clears and reloads content of ObservAbleCollections
+        /// </summary>
+        public void RefreshObservableCollections()
+        {
+            journeys.Clear();
+            payers.Clear();
+            prices.Clear();
+            transactions.Clear();
+            GetJourneys();
+            GetPayers();
+            GetPrices();
+            GetTransactions();
+        }
+
         #endregion
 
         #region Properties
+        public string Destination { get => destination; set => destination = value; }
         public List<string> Destinations
         {
             get
@@ -157,6 +172,7 @@ namespace RygOgRejs.App.Bizz
             }
             set => destinations = value;
         }
+        public Journey Journey { get => tempJourney; set => tempJourney = value; }
         public ObservableCollection<Journey> Journeys
         {
             get
@@ -169,6 +185,8 @@ namespace RygOgRejs.App.Bizz
             }
             set => journeys = value;
         }
+        public string JourneyOrTransaction { get => journeyOrTransaction; set => journeyOrTransaction = value; }
+        public Payer Payer { get => tempPayer; set => tempPayer = value; }
         public ObservableCollection<Payer> Payers
         {
             get
@@ -181,11 +199,24 @@ namespace RygOgRejs.App.Bizz
             }
             set => payers = value;
         }
+        public PriceDetails PriceDetails { get => tempPriceDetails; set => tempPriceDetails = value; }
+        public ObservableCollection<Price> Prices
+        {
+            get
+            {
+                if (prices.Count <= 0)
+                {
+                    GetPrices();
+                }
+                return prices;
+            }
+            set => prices = value;
+        }
         public ObservableCollection<Transactions> Transactions
         {
             get
             {
-                if (transactions.Count == 0)
+                if (transactions.Count <= 0)
                 {
                     GetTransactions();
                 }
@@ -193,12 +224,6 @@ namespace RygOgRejs.App.Bizz
             }
             set => transactions = value;
         }
-
-        public Journey Journey { get => journey; set => journey = value; }
-        public Payer Payer { get => payer; set => payer = value; }
-        public string JourneyOrTransaction { get => journeyOrTransaction; set => journeyOrTransaction = value; }
-        public string Destination { get => destination; set => destination = value; }
-        public ObservableCollection<PriceDetails> PriceDetails { get => priceDetails; set => priceDetails = value; }
         #endregion
 
         #region Internal Classes

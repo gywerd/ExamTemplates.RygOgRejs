@@ -12,10 +12,10 @@ namespace RygOgRejs.IO.DataAccess.App
 {
     public class PriceEnquiries : DataEnquiries
     {
-        public ObservableCollection<PriceDetails> GetAll()
+        public ObservableCollection<Price> GetAll()
         {
             string query = "SELECT * FROM Price";
-            ObservableCollection<PriceDetails> priceList = new ObservableCollection<PriceDetails>();
+            ObservableCollection<Price> priceList = new ObservableCollection<Price>();
             DataSet data = executor.Execute(query); //ayy lmao
             DataTableReader reader = data.CreateDataReader(); //best
             while (reader.Read())
@@ -26,22 +26,21 @@ namespace RygOgRejs.IO.DataAccess.App
                 float child = Convert.ToSingle(reader["ChildrenPrice"]);
                 float first = Convert.ToSingle(reader["FirstClassPrice"]);
                 float lug = Convert.ToSingle(reader["LuggagePrice"]);
-                PriceDetails p = new PriceDetails(id, destination, adult, child, first, lug);
+                Price p = new Price(id, destination, adult, child, first, lug);
                 priceList.Add(p);
             }
             return priceList;
         }
 
-
         //reload list? also this should update the database 
-        public void UpdatePriceDetails(PriceDetails p) //find better way?
+        public void UpdatePrices(Price p) //find better way?
         {
             //depature time might break it all xD
             string query = $"UPDATE Price SET Destination = '{p.DestinationName}', AdultPrice = {p.AdultPrice}, ChildrenPrice = {p.ChildPrice.ToString()}, FirstClassPrice = {p.FirstClassPrice.ToString()}, LuggagePrice = {p.LuggagePrice.ToString()}  WHERE DestinationId = {p.DestinationId.ToString()}";
             executor.Execute(query);
         }
         //reload list? also this should update the database 
-        public void UpdatePriceDetails(int id, string destination, float adults, float child, float first, float lug) //find better way?
+        public void UpdatePrices(int id, string destination, float adults, float child, float first, float lug) //find better way?
         {
             //depature time might break it all xD
             string query = $"UPDATE Price SET Destination = '{destination}', AdultPrice = {adults}, ChildrenPrice = {child}, FirstClassPrice = {first}, LuggagePrice = {lug}  WHERE DestinationId = {id}";
@@ -49,7 +48,7 @@ namespace RygOgRejs.IO.DataAccess.App
         }
 
         //load new list ?
-        public void DeletePriceDetails(int id)
+        public void DeletePrices(int id)
         {
             string query = $"DELETE FROM Price WHERE DestintionId = {id}";
             executor.Execute(query);

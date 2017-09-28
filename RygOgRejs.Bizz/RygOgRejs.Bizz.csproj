@@ -45,6 +45,7 @@
     <Compile Include="IPersistable.cs" />
     <Compile Include="Journey.cs" />
     <Compile Include="Payer.cs" />
+    <Compile Include="Price.cs" />
     <Compile Include="PriceDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transactions.cs" />
