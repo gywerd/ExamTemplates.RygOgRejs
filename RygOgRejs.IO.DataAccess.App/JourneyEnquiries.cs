@@ -12,16 +12,6 @@ namespace RygOgRejs.IO.DataAccess.App
 {
     public class JourneyEnquiries : DataEnquiries
     {
-        private int BoolToBit(bool b)
-        {
-            int bit = 0;
-            if (b == true)
-            {
-                bit = 1;
-            }
-            return bit;
-        }
-
         public ObservableCollection<Journey> GetAll()
         {
             string query = "SELECT * FROM Journeys";
@@ -45,7 +35,7 @@ namespace RygOgRejs.IO.DataAccess.App
 
         public Journey GetJourney(int id)
         {
-            string query = $"SELECT * FROM Journeys WHERE JourneyId = {id.ToString()}";
+            string query = $"SELECT * FROM Journeys WHERE JourneyId = {id}";
             Journey journey = new Journey();
             DataSet data = executor.Execute(query); //ayy lmao
             DataTableReader reader = data.CreateDataReader(); //best
@@ -58,7 +48,7 @@ namespace RygOgRejs.IO.DataAccess.App
                 int children = Convert.ToInt32(reader["Children"]);
                 bool isFirstClass = Convert.ToBoolean(reader["IsFirstClass"]);
                 int luggageAmount = Convert.ToInt32(reader["LuggageAmount"]);
-                journey = new Journey(jid, destination, depatureTime, adults, children, isFirstClass, luggageAmount);
+                journey = new Journey(jid, destination, depatureTime, adults, children, isFirstClass, luggageAmount); 
             }
             return journey;
         }
@@ -67,13 +57,13 @@ namespace RygOgRejs.IO.DataAccess.App
         public void UpdateJourney(int id, string destination, DateTime depatureTime, int adults, int children, bool isFirstClass, int luggageAmount) //find better way?
         {
             //depature time might break it all xD
-            string query = $"UPDATE Journeys SET Destination = '{destination}', DepartureTime = {depatureTime.ToString("yyyy-MM-dd")}, Adults = {adults.ToString()}, Children = {children.ToString()}, IsFirstClass = {BoolToBit(isFirstClass).ToString()}, LuggageAmount = {luggageAmount.ToString()}  WHERE JourneyId = {id.ToString()}";
+            string query = $"UPDATE Journeys SET Destination = '{destination}', DepartureTime = {depatureTime.ToString("yyyy-MM-dd")}, Adults = {adults}, Children = {children}, IsFirstClass = {isFirstClass}, LuggageAmount = {luggageAmount}  WHERE JourneyId = {id}";
             executor.Execute(query);
         }
-        public void UpdateJourney(Journey j) //find better way?
+        public void UpdateJourney(Journey j) //
         {
             //depature time might break it all xD
-            string query = $"UPDATE Journeys SET Destination = '{j.Destination}', DepartureTime = {j.DepatureTime.ToString("yyyy-MM-dd")}, Adults = {j.Adults}, Children = {j.Children}, IsFirstClass = {BoolToBit(j.IsFirstClass).ToString()}, LuggageAmount = {j.LuggageAmount}  WHERE JourneyId = {j.JourneyId.ToString()}";
+            string query = $"UPDATE Journeys SET Destination = '{j.Destination}', DepartureTime = {j.DepatureTime.ToString("yyyy-MM-dd")}, Adults = {j.Adults}, Children = {j.Children}, IsFirstClass = {j.IsFirstClass}, LuggageAmount = {j}  WHERE JourneyId = {j.JourneyId}";
             executor.Execute(query);
         }
 

@@ -22,7 +22,8 @@ namespace RygOgRejs.Bizz
         public Payer() { }
 
         /// <summary>
-        /// Constructor used, when getting MasterId = PayerId 
+        /// Constructor used, when getting MasterId = PayerId
+        /// The hell is this even doing?
         /// </summary>
         /// <param name="mac">int</param>
         public Payer(string mac)

@@ -191,7 +191,7 @@ namespace RygOgRejs.Bizz
             public MasterId() { }
             public MasterId(int id)
             {
-                this.id = id;
+                Id = id;
             }
             public int Id { get => id; set => id = value; }
         }
