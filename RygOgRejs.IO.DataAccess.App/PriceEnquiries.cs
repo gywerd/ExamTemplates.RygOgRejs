@@ -32,12 +32,17 @@ namespace RygOgRejs.IO.DataAccess.App
             return priceList;
         }
 
-
+        public void AddPrice(PriceDetails price) //find better way?
+        {
+            //depature time might break it all xD
+            string query = $"INSERT INTO Transaction(DestinationName, AdultPrice, ChildrenPrice,FirstClassPrice,LuggagePrice) VALUES({price.DestinationName}, {price.AdultPrice}, {price.ChildPrice}, {price.FirstClassPrice}, {price.LuggagePrice}";
+            executor.Execute(query);
+        }
         //reload list? also this should update the database 
         public void UpdatePriceDetails(PriceDetails p) //find better way?
         {
             //depature time might break it all xD
-            string query = $"UPDATE Price SET Destination = '{p.DestinationName}', AdultPrice = {p.AdultPrice}, ChildrenPrice = {p.ChildPrice.ToString()}, FirstClassPrice = {p.FirstClassPrice.ToString()}, LuggagePrice = {p.LuggagePrice.ToString()}  WHERE DestinationId = {p.DestinationId.ToString()}";
+            string query = $"UPDATE Price SET Destination = '{p.DestinationName}', AdultPrice = {p.AdultPrice}, ChildrenPrice = {p.ChildPrice}, FirstClassPrice = {p.FirstClassPrice}, LuggagePrice = {p.LuggagePrice}  WHERE DestinationId = {p.DestinationId}";
             executor.Execute(query);
         }
         //reload list? also this should update the database 

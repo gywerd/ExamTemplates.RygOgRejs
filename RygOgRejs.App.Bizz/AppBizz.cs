@@ -123,7 +123,7 @@ namespace RygOgRejs.App.Bizz
         /// </summary>
         private void GetPayers()
         {
-            payers = CPaI.GetAll(); ;
+            payers = CPaI.GetAllPayers();
         }
 
         /// <summary>

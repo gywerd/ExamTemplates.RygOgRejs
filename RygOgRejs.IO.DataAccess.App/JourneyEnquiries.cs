@@ -53,13 +53,22 @@ namespace RygOgRejs.IO.DataAccess.App
             return journey;
         }
 
+        public void AddJourney(Journey journ) //find better way?
+        {
+            //depature time might break it all xD
+            string query = $"INSERT INTO Journeys(Destination, DepartureTime, Adults,Children,IsFirstClass,LuggageAmount) VALUES({journ.Destination}, {journ.DepatureTime}, {journ.Adults}, {journ.Children}, {journ.IsFirstClass}, {journ.LuggageAmount})";
+            executor.Execute(query);
+        }
+
         //reload list? also this should update the database 
-        public void UpdateJourney(int id, string destination, DateTime depatureTime, int adults, int children, bool isFirstClass, int luggageAmount) //find better way?
+        /*
+         public void UpdateJourney(int id, string destination, DateTime depatureTime, int adults, int children, bool isFirstClass, int luggageAmount) //find better way?
         {
             //depature time might break it all xD
             string query = $"UPDATE Journeys SET Destination = '{destination}', DepartureTime = {depatureTime.ToString("yyyy-MM-dd")}, Adults = {adults}, Children = {children}, IsFirstClass = {isFirstClass}, LuggageAmount = {luggageAmount}  WHERE JourneyId = {id}";
             executor.Execute(query);
         }
+        */
         public void UpdateJourney(Journey j)
         {
             //depature time might break it all xD
