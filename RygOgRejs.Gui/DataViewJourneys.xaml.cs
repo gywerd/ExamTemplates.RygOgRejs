@@ -32,7 +32,8 @@ namespace RygOgRejs.Gui
             //{
             //    dataGridJourneys.Items.Add(dest.ToString());
             //}
-            dataGridJourneys.ItemsSource = CAB.Destinations;
+            dataGridJourneys.ItemsSource = CAB.Destinations.ToList().Select(Destinations => new { Destinations });
+            //dataGridJourneys.ItemsSource = CAB.Destinations;
         }
 
         private void TextBoxFilterJourneys_TextChanged(object sender, TextChangedEventArgs e)

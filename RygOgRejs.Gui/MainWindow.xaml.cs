@@ -41,7 +41,7 @@ namespace RygOgRejs.Gui
             var DJ = DataJourney.GetAll();
             foreach (var Data in DJ)
             {
-                 Distanition.Add(Data.Destination);
+                Distanition.Add(Data.Destination);
             }
             userControlCentre.Content = ucJourneys = new DataViewJourneys(Distanition, CRB);
             macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
