@@ -17,7 +17,7 @@ namespace RygOgRejs.IO.DataAccess.App
         {
             string query = "SELECT * FROM Payers";
             ObservableCollection<Payer> priceCol = new ObservableCollection<Payer>();
-            DataSet data = executor.Execute(query); //ayy lmao
+            DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader(); //best
             while (reader.Read())
             {
@@ -30,7 +30,7 @@ namespace RygOgRejs.IO.DataAccess.App
             return priceCol;
         }
 
-        public void AddPayer(Payer payer) //find better way?
+        public void AddPayer(Payer payer)
         {
             string query = $"INSERT INTO Payers (FirstName, LastName) VALUES( '{payer.FirstName}', '{payer.LastName}')";
             executor.ExecuteNonQuery(query);
@@ -40,7 +40,7 @@ namespace RygOgRejs.IO.DataAccess.App
         {
             Payer payer = new Payer();
             string query = $"SELECT * FROM Payers Where PayerId = {id}";
-            DataSet data = executor.Execute(query); //ayy lmao
+            DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader(); //best
             while (reader.Read())
             {
@@ -52,9 +52,9 @@ namespace RygOgRejs.IO.DataAccess.App
             return payer;
         }
 
-        public void UpdatePayer(Payer payer) //find better way?
+        public void UpdatePayer(Payer payer)
         {
-            //depature time might break it all xD
+
             string query = $"UPDATE Payers SET FirstName = '{payer.FirstName}', LastName = '{payer.LastName}' WHERE PayerId = {payer.PayerId}";
             executor.ExecuteNonQuery(query);
         }
