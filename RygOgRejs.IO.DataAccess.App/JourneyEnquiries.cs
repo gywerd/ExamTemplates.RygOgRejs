@@ -12,6 +12,22 @@ namespace RygOgRejs.IO.DataAccess.App
 {
     public class JourneyEnquiries : DataEnquiries
     {
+        #region Methods
+        /// <summary>
+        /// Method, that inserts a row into the database
+        /// </summary>
+        /// <param name="jour">Journey</param>
+        public void AddJourney(Journey jour)
+        {
+
+            string query = $"INSERT INTO Journeys (Destination, DepartureTime, Adults,Children,IsFirstClass,LuggageAmount) VALUES ('{jour.Destination}', {jour.DepatureTime.ToString("yyyy-MM-dd")}, {jour.Adults}, {jour.Children},' {jour.IsFirstClass}', {jour.LuggageAmount})";
+            executor.ExecuteNonQuery(query);
+        }
+
+        /// <summary>
+        /// Method, that loads all Journeys from database
+        /// </summary>
+        /// <returns>ObservableCollection<Journey></returns>
         public ObservableCollection<Journey> GetAll()
         {
             string query = "SELECT * FROM Journeys";
@@ -33,6 +49,11 @@ namespace RygOgRejs.IO.DataAccess.App
             return journeyCol;
         }
 
+        /// <summary>
+        /// Method that loads a specific row in the database 
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>Journey</returns>
         public Journey GetJourney(int id)
         {
             string query = $"SELECT * FROM Journeys WHERE JourneyId = {id}";
@@ -53,13 +74,10 @@ namespace RygOgRejs.IO.DataAccess.App
             return journey;
         }
 
-        public void AddJourney(Journey journ)
-        {
-
-            string query = $"INSERT INTO Journeys (Destination, DepartureTime, Adults,Children,IsFirstClass,LuggageAmount) VALUES ('{journ.Destination}', {journ.DepatureTime.ToString("yyyy-MM-dd")}, {journ.Adults}, {journ.Children},' {journ.IsFirstClass}', {journ.LuggageAmount})";
-            executor.ExecuteNonQuery(query);
-        }
-
+        /// <summary>
+        /// Method, that updates a row in the database
+        /// </summary>
+        /// <param name="j">Journey</param>
         public void UpdateJourney(Journey j)
         {
 
@@ -67,11 +85,15 @@ namespace RygOgRejs.IO.DataAccess.App
             executor.ExecuteNonQuery(query);
         }
 
-
+        /// <summary>
+        /// Method, that demoves a row from the database
+        /// </summary>
+        /// <param name="id"></param>
         public void DeleteJourney(int id)
         {
             string query = $"DELETE FROM Journeys WHERE JourneyId = {id}";
             executor.ExecuteNonQuery(query);
         }
+        #endregion
     }
 }
