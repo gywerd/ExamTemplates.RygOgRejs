@@ -24,6 +24,23 @@ namespace RygOgRejs.Bizz
         public Price() { }
 
         /// <summary>
+        /// Constructor used, when adding a destination to the database - preparation for future administration interface
+        /// </summary>
+        /// <param name="destinationName">string</param>
+        /// <param name="adultPrice">float</param>
+        /// <param name="childPrice">float</param>
+        /// <param name="firstclassPrice">float</param>
+        /// <param name="luggagePrice">float</param>
+        public Price(string destName, float adultPrice, float childPrice, float firstClassPrice, float luggagePrice)
+        {
+            this.destinationName = destName;
+            this.adultPrice = adultPrice;
+            this.childPrice = childPrice;
+            this.firstClassPrice = firstClassPrice;
+            this.luggagePrice = luggagePrice;
+        }
+
+        /// <summary>
         /// Constructor used, when reading the database
         /// </summary>
         /// <param name="destinationId">int</param>
