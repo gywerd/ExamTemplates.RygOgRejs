@@ -14,27 +14,28 @@ namespace RygOgRejs.App.Bizz
     public class AppBizz : INotifyPropertyChanged
     {
         #region Fields
-        private string destination;
-        private string journeyOrTransaction;
-        private Journey tempJourney = new Journey();
-        private Payer tempPayer = new Payer();
-        private Transactions tempTransaction = new Transactions();
-        private PriceDetails tempPriceDetails = new PriceDetails();
+        private string destination; //string that holds a destination
+        private string journeyOrTransaction; //string that controls how UIInsertUpdate & UIPayment acts
+        private Journey tempJourney = new Journey(); //string to temporarily store current journey information, before writing it to the database
+        private Payer tempPayer = new Payer(); //string to temporarily store current payer information, before writing it to the database
+        private Transactions tempTransaction = new Transactions(); //string to temporarily store current transaction information, before writing it to the database
+        private PriceDetails tempPriceDetails = new PriceDetails(); //string to temporarily store current pricedetails, to show on GUI
+        //string where current macadress is stored
         private string macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
-        Journey CJE = new Journey();
-        JourneyEnquiries CJI = new JourneyEnquiries();
-        Payer CPaE = new Payer();
-        PayerEnquiries CPaI = new PayerEnquiries();
-        Price CPrE = new Price();
-        PriceEnquiries CPrI = new PriceEnquiries();
-        Transactions CTE = new Transactions();
-        TransactionEnquiries CTI = new TransactionEnquiries();
-        MasterId CMI = new MasterId();
-        ObservableCollection<Journey> journeys = new ObservableCollection<Journey>();
-        ObservableCollection<Payer> payers = new ObservableCollection<Payer>();
-        ObservableCollection<Transactions> transactions = new ObservableCollection<Transactions>();
-        ObservableCollection<Price> prices = new ObservableCollection<Price>();
-        List<string> destinations = new List<string>();
+        Journey CJE = new Journey(); //used to call methods
+        JourneyEnquiries CJI = new JourneyEnquiries(); //used to call methods
+        Payer CPaE = new Payer(); //used to call methods
+        PayerEnquiries CPaI = new PayerEnquiries(); //used to call methods
+        Price CPrE = new Price(); //used to call methods
+        PriceEnquiries CPrI = new PriceEnquiries(); //used to call methods
+        Transactions CTE = new Transactions(); //used to call methods
+        TransactionEnquiries CTI = new TransactionEnquiries(); //used to call methods
+        MasterId CMI = new MasterId(); //used to call methods
+        ObservableCollection<Journey> journeys = new ObservableCollection<Journey>(); //Collection containing journeys stored in database
+        ObservableCollection<Payer> payers = new ObservableCollection<Payer>();  //Collection containing payers stored in database
+        ObservableCollection<Transactions> transactions = new ObservableCollection<Transactions>(); //Collection containing trnsactions stored in database
+        ObservableCollection<Price> prices = new ObservableCollection<Price>(); //Collection containing prices stored in database
+        List<string> destinations = new List<string>(); //List containing available destinations to be viewed in DataViewJourneys
         #endregion
 
         #region Events
@@ -43,7 +44,7 @@ namespace RygOgRejs.App.Bizz
 
         #region Methods
         /// <summary>
-        /// Code that clears journey, payer & transaction fields after completed sale
+        /// Code that clears temporary journey, payer & transaction fields after completed sale
         /// </summary>
         public void ClearTemporaryFields()
         {
@@ -144,7 +145,7 @@ namespace RygOgRejs.App.Bizz
         }
 
         /// <summary>
-        /// Code that clears and reloads content of ObservAbleCollections
+        /// Code that clears & reloads content of ObservAbleCollections - used after saving to the database
         /// </summary>
         public void RefreshObservableCollections()
         {
@@ -157,7 +158,6 @@ namespace RygOgRejs.App.Bizz
             GetPrices();
             GetTransactions();
         }
-
         #endregion
 
         #region Properties
@@ -174,7 +174,6 @@ namespace RygOgRejs.App.Bizz
             }
             set => destinations = value;
         }
-        public Journey Journey { get => tempJourney; set => tempJourney = value; }
         public ObservableCollection<Journey> Journeys
         {
             get
@@ -188,7 +187,6 @@ namespace RygOgRejs.App.Bizz
             set => journeys = value;
         }
         public string JourneyOrTransaction { get => journeyOrTransaction; set => journeyOrTransaction = value; }
-        public Payer Payer { get => tempPayer; set => tempPayer = value; }
         public ObservableCollection<Payer> Payers
         {
             get
@@ -201,7 +199,6 @@ namespace RygOgRejs.App.Bizz
             }
             set => payers = value;
         }
-        public PriceDetails PriceDetails { get => tempPriceDetails; set => tempPriceDetails = value; }
         public ObservableCollection<Price> Prices
         {
             get
@@ -214,6 +211,10 @@ namespace RygOgRejs.App.Bizz
             }
             set => prices = value;
         }
+        public Journey TempJourney { get => tempJourney; set => tempJourney = value; }
+        public Payer TempPayer { get => tempPayer; set => tempPayer = value; } //Corrected name
+        public PriceDetails TempPriceDetails { get => tempPriceDetails; set => tempPriceDetails = value; } //Corrected name
+        public Transactions TempTransaction { get => tempTransaction; set => tempTransaction = value; }
         public ObservableCollection<Transactions> Transactions
         {
             get

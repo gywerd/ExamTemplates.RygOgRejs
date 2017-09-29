@@ -22,7 +22,10 @@ namespace RygOgRejs.Gui
     /// </summary>
     public partial class UIInsertUpdate : UserControl
     {
+        //added region
+        #region Fields
         AppBizz CAB;
+        #endregion
 
         public UIInsertUpdate(AppBizz bizz)
         {
@@ -100,7 +103,8 @@ namespace RygOgRejs.Gui
                 buttonCreateJourney.Visibility = Visibility.Visible;
                 buttonEditJourney.Visibility = Visibility.Hidden;
                 buttonDeleteJourney.Visibility = Visibility.Hidden;
-                labelChosenDestination.Content = CAB.Journey.Destination;
+                //labelChosenDestination.Content = CAB.Journey.Destination;
+	            labelChosenDestination.Content = CAB.TempJourney.Destination; //corrected reference
             }
         }
 
