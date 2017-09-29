@@ -57,7 +57,7 @@ namespace RygOgRejs.App.Bizz
         /// Code behind CreateJourney-button
         /// </summary>
         /// <param name="u"></param>
-        public void CreateJourney()
+        public void CreateJourney(int AntalAdults, int AntalChildren, int AntalLuggage, bool IsFirstclass)
         {
             Journey kage = new Journey("LEPA - PALMA DE MALLORCA, Spain", DateTime.Now, 2, 3, true, 23);
             CJI.AddJourney(kage);
