@@ -12,17 +12,26 @@ namespace RygOgRejs.IO.WeatherService
 {
     public class WeatherAPI
     {
+        #region Fields
         private const string APP_ID = "4e3fd7f40537fe7b10f305007684b7a3"; //Emil Api
         private const int MAX_FORECAST_DAYS = 5;
         private HttpClient client;
         private Label weather;
+        #endregion
+
+        #region Constructors
         public WeatherAPI(Label weatherName)
         {
             client = new HttpClient();
             client.BaseAddress = new Uri("http://api.openweathermap.org/data/2.5/");
             weather = weatherName;
         }
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// 
+        /// </summary>
         public async void GetCityNameAsync() //had int day here, but i removed it
         {
             //for now gonna fetch this from the database when its made ;P
@@ -59,5 +68,6 @@ namespace RygOgRejs.IO.WeatherService
 
 
         }
+        #endregion
     }
 }
