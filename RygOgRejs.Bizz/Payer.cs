@@ -23,7 +23,8 @@ namespace RygOgRejs.Bizz
 
         /// <summary>
         /// Constructor used, when getting MasterId = PayerId
-        /// The hell is this even doing?
+        /// The hell is this even doing? /Emil
+        /// Creates a position in database, with a PayerId, that can be used in Journey & Transactions. Possibly overkill, but part of assignment. /Daniel
         /// </summary>
         /// <param name="mac">int</param>
         public Payer(string mac)
