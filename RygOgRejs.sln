@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RygOgRejs.Gui", "RygOgRejs.Gui\RygOgRejs.Gui.csproj", "{786FD000-9752-457C-B9A2-72F3A2144F77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RygOgRejs.Bizz", "RygOgRejs.Bizz\RygOgRejs.Bizz.csproj", "{478FC305-AB52-47E4-BDFC-D274FCDB30F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RygOgRejs.Bizz.Entities", "RygOgRejs.Bizz\RygOgRejs.Bizz.Entities.csproj", "{478FC305-AB52-47E4-BDFC-D274FCDB30F0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RygOgRejs.IO.DataAccess.General", "RygOgRejs.IO.DataAccess\RygOgRejs.IO.DataAccess.General.csproj", "{F27C9ACD-F577-4AE4-9E47-F98B3ECE5E4E}"
 EndProject
@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RygOgRejs.IO.DataAccess.App
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RygOgRejs.IO.WeatherService", "RygOgRejs.IO.WeatherService\RygOgRejs.IO.WeatherService.csproj", "{ABC80435-04F9-4344-9AF3-F3474A54229E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RygOgRejs.App.Bizz", "RygOgRejs.App.Bizz\RygOgRejs.App.Bizz.csproj", "{867FB5E2-EFD9-45A0-9DD3-07B6861CCDFF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RygOgRejs.Bizz.App", "RygOgRejs.App.Bizz\RygOgRejs.Bizz.App.csproj", "{867FB5E2-EFD9-45A0-9DD3-07B6861CCDFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

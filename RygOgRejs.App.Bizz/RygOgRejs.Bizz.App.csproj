@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{478FC305-AB52-47E4-BDFC-D274FCDB30F0}</ProjectGuid>
+    <ProjectGuid>{867FB5E2-EFD9-45A0-9DD3-07B6861CCDFF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RygOgRejs.Bizz</RootNamespace>
-    <AssemblyName>RygOgRejs.Bizz</AssemblyName>
+    <RootNamespace>RygOgRejs.Bizz.App</RootNamespace>
+    <AssemblyName>RygOgRejs.Bizz.App</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,7 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,14 +40,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Destination.cs" />
-    <Compile Include="IPersistable.cs" />
-    <Compile Include="Journey.cs" />
-    <Compile Include="Payer.cs" />
-    <Compile Include="Price.cs" />
-    <Compile Include="PriceDetails.cs" />
+    <Compile Include="AppBizz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Transactions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RygOgRejs.Bizz\RygOgRejs.Bizz.Entities.csproj">
+      <Project>{478fc305-ab52-47e4-bdfc-d274fcdb30f0}</Project>
+      <Name>RygOgRejs.Bizz.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RygOgRejs.IO.DataAccess.App\RygOgRejs.IO.DataAccess.App.csproj">
+      <Project>{88281b47-e5ec-4930-8efb-1b7876450722}</Project>
+      <Name>RygOgRejs.IO.DataAccess.App</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RygOgRejs.IO.DataAccess\RygOgRejs.IO.DataAccess.General.csproj">
+      <Project>{F27C9ACD-F577-4AE4-9E47-F98B3ECE5E4E}</Project>
+      <Name>RygOgRejs.IO.DataAccess.General</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

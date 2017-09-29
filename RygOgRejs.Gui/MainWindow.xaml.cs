@@ -1,4 +1,7 @@
-﻿using System;
+﻿using RygOgRejs.Bizz.App;
+using RygOgRejs.IO.DataAccess.App; //for testing if the connection string worked
+using RygOgRejs.IO.WeatherService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using RygOgRejs.IO.WeatherService;
 using System.Net.NetworkInformation; //mac xDDDD
-using RygOgRejs.IO.DataAccess.App; //for testing if the connection string worked
-using RygOgRejs.App.Bizz;
 
 namespace RygOgRejs.Gui
 {

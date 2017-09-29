@@ -1,4 +1,5 @@
-﻿using RygOgRejs.Bizz;
+﻿using RygOgRejs.Bizz.Entities;
+using RygOgRejs.IO.DataAccess.General;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,7 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RygOgRejs.IO.DataAccess.General;
+
 namespace RygOgRejs.IO.DataAccess.App
 {
     public class PayerEnquiries : DataEnquiries

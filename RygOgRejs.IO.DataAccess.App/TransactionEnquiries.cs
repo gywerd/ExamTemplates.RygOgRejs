@@ -1,4 +1,4 @@
-﻿using RygOgRejs.Bizz;
+﻿using RygOgRejs.Bizz.Entities;
 using RygOgRejs.IO.DataAccess.General;
 using System;
 using System.Collections.Generic;

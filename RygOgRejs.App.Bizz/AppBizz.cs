@@ -1,4 +1,4 @@
-﻿using RygOgRejs.Bizz;
+﻿using RygOgRejs.Bizz.Entities;
 using RygOgRejs.IO.DataAccess.App;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RygOgRejs.App.Bizz
+namespace RygOgRejs.Bizz.App
 {
     public class AppBizz : INotifyPropertyChanged
     {

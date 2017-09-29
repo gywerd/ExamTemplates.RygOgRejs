@@ -1,11 +1,11 @@
-﻿using System;
+﻿using RygOgRejs.Bizz.Entities;
+using RygOgRejs.IO.DataAccess.General;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RygOgRejs.IO.DataAccess.General;
-using RygOgRejs.Bizz;
 using System.Collections.ObjectModel;
 
 namespace RygOgRejs.IO.DataAccess.App

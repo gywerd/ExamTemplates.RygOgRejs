@@ -1,4 +1,5 @@
-﻿using RygOgRejs.Bizz;
+﻿using RygOgRejs.Bizz.App;
+using RygOgRejs.Bizz.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using RygOgRejs.App.Bizz;
+
 namespace RygOgRejs.Gui
 {
     /// <summary>
@@ -21,17 +22,17 @@ namespace RygOgRejs.Gui
     /// </summary>
     public partial class DataViewJourneys: UserControl
     {
+        AppBizz CAB;
         UIInsertUpdate UCInsert;
         UserControl uc;
         private string destination;
-        AppBizz CAB;
 
         public DataViewJourneys(List<string> Entities, object b, UserControl UC)
         {
             InitializeComponent();
             CAB = (AppBizz)b;
             uc = UC;
-            UCInsert = new UIInsertUpdate(CAB);
+            //UCInsert = new UIInsertUpdate(CAB); //Moved to dataGridJourneys_SelectionChanged - works partially now
             //foreach(string dest in Entities)
             //{
             //    dataGridJourneys.Items.Add(dest.ToString());
@@ -47,8 +48,10 @@ namespace RygOgRejs.Gui
         // Bitch Please.....
         private void dataGridJourneys_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string selecctedItem =  Convert.ToString(dataGridJourneys.SelectedItem);
-            CAB.Destination = selecctedItem;
+            string selectedItem =  Convert.ToString(dataGridJourneys.SelectedItem);
+            //CAB.Destination = selecctedItem;
+            CAB.TempJourney.Destination = selectedItem; //corrected reference
+            UCInsert = new UIInsertUpdate(CAB);
             uc.Content = UCInsert;
         }
     }

@@ -1,5 +1,5 @@
-﻿using RygOgRejs.App.Bizz;
-using RygOgRejs.Bizz;
+﻿using RygOgRejs.Bizz.App;
+using RygOgRejs.Bizz.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

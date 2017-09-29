@@ -1,4 +1,4 @@
-﻿using RygOgRejs.App.Bizz;
+﻿using RygOgRejs.Bizz.App;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -60,7 +60,7 @@ namespace RygOgRejs.Gui
 
             if (LuggageOK == true && AdultsOK == true && ChildrensOK == true)
             {
-                CAB.CreateJourney(textBoxAdultsInt, textBoxChildrenInt, textBoxLuggageInt, CAB.Journey.IsFirstClass);
+                CAB.CreateJourney(textBoxAdultsInt, textBoxChildrenInt, textBoxLuggageInt, CAB.TempJourney.IsFirstClass);
             }
             else
             {
@@ -84,11 +84,11 @@ namespace RygOgRejs.Gui
         {
             if (checkBoxFirstClass.IsChecked == true)
             {
-                CAB.Journey.IsFirstClass = true;
+                CAB.TempJourney.IsFirstClass = true;
             }
             else
             {
-                CAB.Journey.IsFirstClass = false;
+                CAB.TempJourney.IsFirstClass = false;
             }
         }
 

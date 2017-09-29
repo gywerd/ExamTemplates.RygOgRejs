@@ -5,7 +5,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RygOgRejs.Bizz
+namespace RygOgRejs.Bizz.Entities
 {
     public class Transactions
     {

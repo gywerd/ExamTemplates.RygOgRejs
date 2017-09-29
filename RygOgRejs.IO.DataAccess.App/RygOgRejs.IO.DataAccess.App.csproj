@@ -47,9 +47,9 @@
     <Compile Include="TransactionEnquiries.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RygOgRejs.Bizz\RygOgRejs.Bizz.csproj">
+    <ProjectReference Include="..\RygOgRejs.Bizz\RygOgRejs.Bizz.Entities.csproj">
       <Project>{478FC305-AB52-47E4-BDFC-D274FCDB30F0}</Project>
-      <Name>RygOgRejs.Bizz</Name>
+      <Name>RygOgRejs.Bizz.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\RygOgRejs.IO.DataAccess\RygOgRejs.IO.DataAccess.General.csproj">
       <Project>{f27c9acd-f577-4ae4-9e47-f98b3ece5e4e}</Project>
