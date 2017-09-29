@@ -10,14 +10,14 @@ namespace RygOgRejs.Bizz
     public class Journey
     {
         #region Fields
-        private int journeyId;
-        private string destination;
-        private DateTime departureTime;
-        private int adults;
-        private int children;
-        private bool isFirstClass;
-        private float luggageAmount;
-        ObservableCollection<PriceDetails> priceDetails = new ObservableCollection<PriceDetails>();
+        private int journeyId; //Database field
+        private string destination; //Database field
+        private DateTime departureTime; //Database field
+        private int adults; //Database field
+        private int children; //Database field
+        private bool isFirstClass; //Database field
+        private float luggageAmount; //Database field
+        ObservableCollection<PriceDetails> priceDetails = new ObservableCollection<PriceDetails>(); //Unused. Deletion???
         #endregion
 
         #region constructors
