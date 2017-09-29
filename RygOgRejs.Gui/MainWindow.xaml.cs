@@ -43,7 +43,7 @@ namespace RygOgRejs.Gui
             {
                 Distanition.Add(Data.Destination);
             }
-            userControlCentre.Content = ucJourneys = new DataViewJourneys(Distanition, CRB);
+            userControlCentre.Content = ucJourneys = new DataViewJourneys(Distanition, CRB, userControlRight);
             ucTransaction = new DataViewTransactions();
             //macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
 
