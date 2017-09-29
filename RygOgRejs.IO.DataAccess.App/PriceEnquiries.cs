@@ -12,6 +12,35 @@ namespace RygOgRejs.IO.DataAccess.App
 {
     public class PriceEnquiries : DataEnquiries
     {
+        #region Constructors
+        public PriceEnquiries() { }
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Method, that inserts a row into the database
+        /// </summary>
+        /// <param name="price">Price</param>
+        public void AddPrice(Price price)
+        {
+            string query = $"INSERT INTO Price (DestinationName, AdultPrice, ChildrenPrice, FirstClassPrice, LuggagePrice) VALUES ('{price.DestinationName}', {price.AdultPrice}, {price.ChildPrice},' {price.FirstClassPrice}', {price.LuggagePrice})";
+            executor.ExecuteNonQuery(query);
+        }
+
+        /// <summary>
+        /// Method, that removes a row from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        public void DeletePrices(int id)
+        {
+            string query = $"DELETE FROM Price WHERE DestintionId = {id}";
+            executor.ExecuteNonQuery(query);
+        }
+
+        /// <summary>
+        /// Method, that loads all Prices from database
+        /// </summary>
+        /// <returns>ObservableCollection</returns>
         public ObservableCollection<Price> GetAll()
         {
             string query = "SELECT * FROM Price";
@@ -32,23 +61,54 @@ namespace RygOgRejs.IO.DataAccess.App
             return priceList;
         }
 
+        /// <summary>
+        /// Method that loads a specific row in the database 
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>Price</returns>
+        public Price GetPrice(int id)
+        {
+            Price p = new Price();
+            string query = $"SELECT * FROM Transaction WHERE DestinationId = {id}";
+            DataSet data = executor.Execute(query);
+            DataTableReader reader = data.CreateDataReader();
+            while (reader.Read())
+            {
+                int destid = Convert.ToInt32(reader["DestinationId"]);
+                string destination = reader["DestinationName"].ToString();
+                float adult = Convert.ToSingle(reader["AdultPrice"]);
+                float child = Convert.ToSingle(reader["ChildrenPrice"]);
+                float first = Convert.ToSingle(reader["FirstClassPrice"]);
+                float lug = Convert.ToSingle(reader["LuggagePrice"]);
+                p = new Price(destid, destination, adult, child, first, lug);
+            }
+            return p;
+        }
+
+        /// <summary>
+        /// Method, that updates a row in the database from object
+        /// </summary>
+        /// <param name="price">Price</param>
         public void UpdatePrices(Price price)
         {
             string query = $"INSERT INTO Price (DestinationName, AdultPrice, ChildrenPrice,FirstClassPrice,LuggagePrice) VALUES({price.DestinationName}, {price.AdultPrice}, {price.ChildPrice}, {price.FirstClassPrice}, {price.LuggagePrice}";
             executor.ExecuteNonQuery(query);
         }
 
+        /// <summary>
+        /// Method, that updates a row in the database from data
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <param name="destination">string</param>
+        /// <param name="adults">int</param>
+        /// <param name="child">int</param>
+        /// <param name="first">bool</param>
+        /// <param name="lug">float</param>
         public void UpdatePrices(int id, string destination, float adults, float child, float first, float lug) //find better way?
         {
            string query = $"UPDATE Price SET Destination = '{destination}', AdultPrice = {adults}, ChildrenPrice = {child}, FirstClassPrice = {first}, LuggagePrice = {lug}  WHERE DestinationId = {id}";
            executor.ExecuteNonQuery(query);
         }
-
-
-        public void DeletePrices(int id)
-        {
-            string query = $"DELETE FROM Price WHERE DestintionId = {id}";
-            executor.ExecuteNonQuery(query);
-        }
+        #endregion
     }
 }

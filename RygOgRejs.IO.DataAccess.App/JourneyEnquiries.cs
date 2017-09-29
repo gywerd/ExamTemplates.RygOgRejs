@@ -12,6 +12,10 @@ namespace RygOgRejs.IO.DataAccess.App
 {
     public class JourneyEnquiries : DataEnquiries
     {
+        #region Constructors
+        public JourneyEnquiries() { }
+        #endregion
+
         #region Methods
         /// <summary>
         /// Method, that inserts a row into the database
@@ -25,9 +29,19 @@ namespace RygOgRejs.IO.DataAccess.App
         }
 
         /// <summary>
+        /// Method, that removes a row from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        public void DeleteJourney(int id)
+        {
+            string query = $"DELETE FROM Journeys WHERE JourneyId = {id}";
+            executor.ExecuteNonQuery(query);
+        }
+
+        /// <summary>
         /// Method, that loads all Journeys from database
         /// </summary>
-        /// <returns>ObservableCollection<Journey></returns>
+        /// <returns>ObservableCollection</returns>
         public ObservableCollection<Journey> GetAll()
         {
             string query = "SELECT * FROM Journeys";
@@ -85,15 +99,6 @@ namespace RygOgRejs.IO.DataAccess.App
             executor.ExecuteNonQuery(query);
         }
 
-        /// <summary>
-        /// Method, that demoves a row from the database
-        /// </summary>
-        /// <param name="id"></param>
-        public void DeleteJourney(int id)
-        {
-            string query = $"DELETE FROM Journeys WHERE JourneyId = {id}";
-            executor.ExecuteNonQuery(query);
-        }
         #endregion
     }
 }

@@ -11,8 +11,35 @@ namespace RygOgRejs.IO.DataAccess.App
 {
     public class PayerEnquiries : DataEnquiries
     {
+        #region Constructors
         public PayerEnquiries() { }
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Method, that inserts a row into the database
+        /// </summary>
+        /// <param name="payer">Payer</param>
+        public void AddPayer(Payer payer)
+        {
+            string query = $"INSERT INTO Payers (FirstName, LastName) VALUES( '{payer.FirstName}', '{payer.LastName}')";
+            executor.ExecuteNonQuery(query);
+        }
+
+        /// <summary>
+        /// Method, that removes a row from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        public void DeletePayer(int id)
+        {
+            string query = $"DELETE FROM Payers WHERE PayerId = {id}";
+            executor.ExecuteNonQuery(query);
+        }
+
+        /// <summary>
+        /// Method, that loads all Payers from database
+        /// </summary>
+        /// <returns>ObservableCollection</returns>
         public ObservableCollection<Payer> GetAllPayers()
         {
             string query = "SELECT * FROM Payers";
@@ -30,12 +57,11 @@ namespace RygOgRejs.IO.DataAccess.App
             return priceCol;
         }
 
-        public void AddPayer(Payer payer)
-        {
-            string query = $"INSERT INTO Payers (FirstName, LastName) VALUES( '{payer.FirstName}', '{payer.LastName}')";
-            executor.ExecuteNonQuery(query);
-        }
-
+        /// <summary>
+        /// Method that loads a specific row in the database 
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>Payer</returns>
         public Payer GetPayerWithId(int id)
         {
             Payer payer = new Payer();
@@ -52,17 +78,16 @@ namespace RygOgRejs.IO.DataAccess.App
             return payer;
         }
 
+        /// <summary>
+        /// Method, that updates a row in the database
+        /// </summary>
+        /// <param name="payer">Payer</param>
         public void UpdatePayer(Payer payer)
         {
 
             string query = $"UPDATE Payers SET FirstName = '{payer.FirstName}', LastName = '{payer.LastName}' WHERE PayerId = {payer.PayerId}";
             executor.ExecuteNonQuery(query);
         }
-
-        public void DeletePayer(int id)
-        {
-            string query = $"DELETE FROM Payers WHERE PayerId = {id}";
-            executor.ExecuteNonQuery(query);
-        }
+        #endregion
     }
 }

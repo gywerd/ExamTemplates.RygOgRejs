@@ -12,7 +12,35 @@ namespace RygOgRejs.IO.DataAccess.App
 {
     public class TransactionEnquiries : DataEnquiries
     {
+        #region Constructors
+        public TransactionEnquiries() { }
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Method, that inserts a row into the database
+        /// </summary>
+        /// <param name="t">Transactions</param>
+        public void AddTransaction(Transactions t)
+        {
+            string query = $"INSERT INTO Transaction (Amount, JourneyId, PayerID) VALUES ({t.Amount}, {t.JourneyId}, {t.PayerId})";
+            executor.ExecuteNonQuery(query);
+        }
+
+        /// <summary>
+        /// Method, that removes a row from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        public void DeletePriceDetails(int tid)
+        {
+            string query = $"DELETE FROM Transaction WHERE TransactionId = {tid}";
+            executor.ExecuteNonQuery(query);
+        }
+
+        /// <summary>
+        /// Method, that loads all Transactions from database
+        /// </summary>
+        /// <returns>ObservableCollection</returns>
         public ObservableCollection<Transactions> GetAll()
         {
             string query = "SELECT * FROM Transaction";
@@ -31,6 +59,11 @@ namespace RygOgRejs.IO.DataAccess.App
             return transCol;
         }
 
+        /// <summary>
+        /// Method that loads a specific row in the database 
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>Transaction</returns>
         public Transactions GetTransaction(int id)
         {
             Transactions t = new Transactions();
@@ -48,24 +81,15 @@ namespace RygOgRejs.IO.DataAccess.App
             return t;
         }
 
-        public void AddTransaction(Transactions t)
-        {
-            string query = $"INSERT INTO Transaction (Amount, JourneyId, PayerID) VALUES ({t.Amount}, {t.JourneyId}, {t.PayerId})";
-            executor.ExecuteNonQuery(query);
-        }
-
-
+        /// <summary>
+        /// Method, that updates a row in the database from object
+        /// </summary>
+        /// <param name="t">Transactions</param>
         public void UpdatePriceDetail(Transactions t)
         {
             string query = $"UPDATE Transaction SET Amount = {t.Amount}, JourneyId = {t.JourneyId}, PayerId = {t.PayerId} WHERE TransactionId = {t.TransactionId}";
             executor.ExecuteNonQuery(query);
         }
-
-
-        public void DeletePriceDetails(int tid)
-        {
-            string query = $"DELETE FROM Transaction WHERE TransactionId = {tid}";
-            executor.ExecuteNonQuery(query);
-        }
+        #endregion
     }
 }
