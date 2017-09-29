@@ -28,6 +28,7 @@ namespace RygOgRejs.Gui
         {
             InitializeComponent();
             InitializeContent(bizz);
+
         }
 
         #region Buttons
@@ -86,6 +87,7 @@ namespace RygOgRejs.Gui
         #region Methods
         private void InitializeContent(AppBizz bizz)
         {
+
             CAB = bizz;
             if (CAB.JourneyOrTransaction == "transaction")
             {

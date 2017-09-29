@@ -21,13 +21,17 @@ namespace RygOgRejs.Gui
     /// </summary>
     public partial class DataViewJourneys: UserControl
     {
+        UIInsertUpdate UCInsert;
+        UserControl uc;
         private string destination;
         AppBizz CAB;
 
-        public DataViewJourneys(List<string> Entities, object b)
+        public DataViewJourneys(List<string> Entities, object b, UserControl UC)
         {
             InitializeComponent();
             CAB = (AppBizz)b;
+            uc = UC;
+            UCInsert = new UIInsertUpdate(CAB);
             //foreach(string dest in Entities)
             //{
             //    dataGridJourneys.Items.Add(dest.ToString());
@@ -40,11 +44,12 @@ namespace RygOgRejs.Gui
         {
 
         }
-
+        // Bitch Please.....
         private void dataGridJourneys_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string selecctedItem =  Convert.ToString(dataGridJourneys.SelectedItem);
-            CAB.Destination = selecctedItem; 
+            CAB.Destination = selecctedItem;
+            uc.Content = UCInsert;
         }
     }
 }
