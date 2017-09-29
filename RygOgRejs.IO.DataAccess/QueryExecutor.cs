@@ -10,7 +10,11 @@ namespace RygOgRejs.IO.DataAccess.General
 {
     public class QueryExecutor
     {
+        #region Fields
         private string connectionString;
+        #endregion
+
+        #region Methods
         public DataSet Execute(string sqlQuery)
         {
             SqlConnection connection = new SqlConnection(connectionString);
@@ -62,5 +66,6 @@ namespace RygOgRejs.IO.DataAccess.General
         {
             return @"Data Source=10.205.44.39,49172;Initial Catalog=RygOgRejs;Persist Security Info=True;User ID=Aspit;Password=Server2012";
         }
+        #endregion
     }
 }
