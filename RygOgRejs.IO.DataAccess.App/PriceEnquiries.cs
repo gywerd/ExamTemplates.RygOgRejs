@@ -33,19 +33,19 @@ namespace RygOgRejs.IO.DataAccess.App
         }
 
         //reload list? also this should update the database 
-        public void UpdatePrices(Price p) //find better way?
+        public void UpdatePrices(Price p) //wat
         {
             //depature time might break it all xD
-            string query = $"INSERT INTO Price (DestinationName, AdultPrice, ChildrenPrice,FirstClassPrice,LuggagePrice) VALUES({price.DestinationName}, {price.AdultPrice}, {price.ChildPrice}, {price.FirstClassPrice}, {price.LuggagePrice}";
-            executor.ExecuteNonQuery(query);
+         //   string query = $"INSERT INTO Price (DestinationName, AdultPrice, ChildrenPrice,FirstClassPrice,LuggagePrice) VALUES({price.DestinationName}, {price.AdultPrice}, {price.ChildPrice}, {price.FirstClassPrice}, {price.LuggagePrice}";
+           // executor.ExecuteNonQuery(query);
         }
 
         //reload list? also this should update the database 
         public void UpdatePrices(int id, string destination, float adults, float child, float first, float lug) //find better way?
         {
             //depature time might break it all xD
-            string query = $"UPDATE Price SET Destination = '{p.DestinationName}', AdultPrice = {p.AdultPrice}, ChildrenPrice = {p.ChildPrice}, FirstClassPrice = {p.FirstClassPrice}, LuggagePrice = {p.LuggagePrice}  WHERE DestinationId = {p.DestinationId}";
-            executor.ExecuteNonQuery(query);
+           // string query = $"UPDATE Price SET Destination = '{p.DestinationName}', AdultPrice = {p.AdultPrice}, ChildrenPrice = {p.ChildPrice}, FirstClassPrice = {p.FirstClassPrice}, LuggagePrice = {p.LuggagePrice}  WHERE DestinationId = {p.DestinationId}";
+           // executor.ExecuteNonQuery(query);
         }
 
         //load new list ?

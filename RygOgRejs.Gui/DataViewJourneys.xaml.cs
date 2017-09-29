@@ -43,8 +43,8 @@ namespace RygOgRejs.Gui
 
         private void dataGridJourneys_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataGrid dg = (DataGrid)sender;
-            CAB.Destination = (string)dg.SelectedItem; 
+            string selecctedItem =  Convert.ToString(dataGridJourneys.SelectedItem);
+            CAB.Destination = selecctedItem; 
         }
     }
 }
