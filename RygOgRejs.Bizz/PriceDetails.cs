@@ -13,7 +13,7 @@ namespace RygOgRejs.Bizz
         private float destinationPrice;
         private float firstClassPrice;
         private float luggagePrice;
-        private float taxRate;
+        private float taxRate = 0.25F;
         #endregion
 
         #region Constructors
@@ -23,7 +23,7 @@ namespace RygOgRejs.Bizz
         public PriceDetails() { }
 
         /// <summary>
-        /// Constructor used, when reading the database
+        /// Ordinary constructor
         /// </summary>
         /// <param name="destinationId">int</param>
         /// <param name="destinationName">string</param>
