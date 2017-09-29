@@ -16,7 +16,7 @@ namespace RygOgRejs.IO.DataAccess.App
         {
             string query = "SELECT * FROM Price";
             ObservableCollection<Price> priceList = new ObservableCollection<Price>();
-            DataSet data = executor.Execute(query); //ayy lmao
+            DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader(); //best
             while (reader.Read())
             {
@@ -32,23 +32,19 @@ namespace RygOgRejs.IO.DataAccess.App
             return priceList;
         }
 
-        //reload list? also this should update the database 
-        public void UpdatePrices(Price p) //wat
+        public void UpdatePrices(Price price)
         {
-            //depature time might break it all xD
-         //   string query = $"INSERT INTO Price (DestinationName, AdultPrice, ChildrenPrice,FirstClassPrice,LuggagePrice) VALUES({price.DestinationName}, {price.AdultPrice}, {price.ChildPrice}, {price.FirstClassPrice}, {price.LuggagePrice}";
-           // executor.ExecuteNonQuery(query);
+            string query = $"INSERT INTO Price (DestinationName, AdultPrice, ChildrenPrice,FirstClassPrice,LuggagePrice) VALUES({price.DestinationName}, {price.AdultPrice}, {price.ChildPrice}, {price.FirstClassPrice}, {price.LuggagePrice}";
+            executor.ExecuteNonQuery(query);
         }
 
-        //reload list? also this should update the database 
         public void UpdatePrices(int id, string destination, float adults, float child, float first, float lug) //find better way?
         {
-            //depature time might break it all xD
-           // string query = $"UPDATE Price SET Destination = '{p.DestinationName}', AdultPrice = {p.AdultPrice}, ChildrenPrice = {p.ChildPrice}, FirstClassPrice = {p.FirstClassPrice}, LuggagePrice = {p.LuggagePrice}  WHERE DestinationId = {p.DestinationId}";
-           // executor.ExecuteNonQuery(query);
+           string query = $"UPDATE Price SET Destination = '{destination}', AdultPrice = {adults}, ChildrenPrice = {child}, FirstClassPrice = {first}, LuggagePrice = {lug}  WHERE DestinationId = {id}";
+           executor.ExecuteNonQuery(query);
         }
 
-        //load new list ?
+
         public void DeletePrices(int id)
         {
             string query = $"DELETE FROM Price WHERE DestintionId = {id}";

@@ -30,14 +30,42 @@ namespace RygOgRejs.Gui
         public UIInsertUpdate(AppBizz bizz)
         {
             InitializeComponent();
-            InitializeContent(bizz);
+            CAB = bizz;
+            InitializeContent();
 
         }
 
         #region Buttons
         private void ButtonCreateJourney_Click(object sender, RoutedEventArgs e)
         {
-            CAB.CreateJourney();
+            bool AdultsOK = false;
+            bool ChildrensOK = false;
+            bool LuggageOK = false;
+            if (int.TryParse(textBoxAdults.Text, out int textBoxAdultsInt))
+            {
+                AdultsOK = true;
+            }
+            if (int.TryParse(textBoxChildren.Text, out int textBoxChildrenInt))
+            {
+                ChildrensOK = true;
+            }
+            if (int.TryParse(textBoxLuggage.Text, out int textBoxLuggageInt))
+            {
+                LuggageOK = true;
+            }
+            else
+            {
+
+            }
+
+            if (LuggageOK == true && AdultsOK == true && ChildrensOK == true)
+            {
+                CAB.CreateJourney(textBoxAdultsInt, textBoxChildrenInt, textBoxLuggageInt, CAB.Journey.IsFirstClass);
+            }
+            else
+            {
+                MessageBox.Show("Indeholder ugyldige tegn");
+            }
         }
 
         private void ButtonDeleteJourney_Click(object sender, RoutedEventArgs e)
@@ -52,46 +80,91 @@ namespace RygOgRejs.Gui
         #endregion
 
         #region Events
-        private void CheckBoxFirstClass_Checked(object sender, RoutedEventArgs e)
+        private void CheckBoxFirstClass_isChecked(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void CheckBoxFirstClass_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void TextBoxAdults_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void TextBoxChildren_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void TextBoxLuggage_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
+            if (checkBoxFirstClass.IsChecked == true)
+            {
+                CAB.Journey.IsFirstClass = true;
+            }
+            else
+            {
+                CAB.Journey.IsFirstClass = false;
+            }
         }
 
         private void TextBoxFirstName_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            if (!string.IsNullOrWhiteSpace(textBoxFirstName.Text))
+            {
+                bool Gyldig = false;
+                foreach  (char c in textBoxFirstName.Text)
+                {
+                    if (!char.IsLetter(c))
+                    {
+                        Gyldig = false;
+                        MessageBox.Show("Fornavn må ikke indeholde ugyldige tegn eller tal.");
+                        textBoxFirstName.BorderBrush = Brushes.Red;
+                        textBoxFirstName.BorderThickness = new Thickness(2);
+                    }
+                    else
+                    {
+                        Gyldig = true;
+                        textBoxFirstName.BorderBrush = Brushes.Transparent;
+                        textBoxFirstName.BorderThickness = new Thickness(1);
+                    }
+                }
+                if (Gyldig == true)
+                {
+                    textBoxFirstName.BorderBrush = Brushes.Green;
+                    textBoxFirstName.BorderThickness = new Thickness(2);
+                }
+            }
+            else
+            {
+                textBoxFirstName.BorderBrush = Brushes.Red;
+                textBoxFirstName.BorderThickness = new Thickness(2);
+            }
         }
 
         private void TextBoxLastName_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (!string.IsNullOrWhiteSpace(textBoxLastName.Text))
+            {
+                bool Gyldig = false;
+                foreach (char c in textBoxLastName.Text)
+                {
+                    if (!char.IsLetter(c))
+                    {
+                        Gyldig = false;
+                        MessageBox.Show("Fornavn må ikke indeholde ugyldige tegn eller tal.");
+                        textBoxLastName.BorderBrush = Brushes.Red;
+                        textBoxLastName.BorderThickness = new Thickness(2);
+                    }
+                    else
+                    {
+                        Gyldig = true;
+                        textBoxLastName.BorderBrush = Brushes.Transparent;
+                        textBoxLastName.BorderThickness = new Thickness(1);
+                    }
+                }
+                if (Gyldig == true)
+                {
+                    textBoxLastName.BorderBrush = Brushes.Green;
+                    textBoxLastName.BorderThickness = new Thickness(2);
+                }
 
+            }
+            else
+            {
+                textBoxLastName.BorderBrush = Brushes.Red;
+                textBoxLastName.BorderThickness = new Thickness(2);
+            }
         }
         #endregion
 
         #region Methods
-        private void InitializeContent(AppBizz bizz)
+        private void InitializeContent()
         {
-
-            CAB = bizz;
             if (CAB.JourneyOrTransaction == "transaction")
             {
                 buttonCreateJourney.Visibility = Visibility.Hidden;

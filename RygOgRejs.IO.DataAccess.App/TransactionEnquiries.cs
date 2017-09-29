@@ -50,20 +50,18 @@ namespace RygOgRejs.IO.DataAccess.App
 
         public void AddTransaction(Transactions t)
         {
-            //depature time might break it all xD
             string query = $"INSERT INTO Transaction (Amount, JourneyId, PayerID) VALUES ({t.Amount}, {t.JourneyId}, {t.PayerId})";
             executor.ExecuteNonQuery(query);
         }
 
-        //reload list? also this should update the database 
+
         public void UpdatePriceDetail(Transactions t)
         {
-            //depature time might break it all xD
             string query = $"UPDATE Transaction SET Amount = {t.Amount}, JourneyId = {t.JourneyId}, PayerId = {t.PayerId} WHERE TransactionId = {t.TransactionId}";
             executor.ExecuteNonQuery(query);
         }
 
-        //load new list ?
+
         public void DeletePriceDetails(int tid)
         {
             string query = $"DELETE FROM Transaction WHERE TransactionId = {tid}";
