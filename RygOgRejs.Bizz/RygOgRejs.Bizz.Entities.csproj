@@ -44,6 +44,7 @@
     <Compile Include="Destination.cs" />
     <Compile Include="IPersistable.cs" />
     <Compile Include="Journey.cs" />
+    <Compile Include="Master.cs" />
     <Compile Include="Payer.cs" />
     <Compile Include="Price.cs" />
     <Compile Include="PriceDetails.cs" />

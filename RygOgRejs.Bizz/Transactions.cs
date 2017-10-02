@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RygOgRejs.Bizz.Entities
 {
-    public class Transactions
+    public class Transactions : Master
     {
         #region Fields
         private float amount;
@@ -28,11 +28,13 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="amount">float</param>
         /// <param name="jid">int</param>
         /// <param name="pid">int</param>
-        public Transactions(float amount, int jid, int pid)
+        /// <param name="mid">int</param>
+        public Transactions(float amount, int jid, int pid, int mid)
         {
             this.amount = amount;
             this.journeyId = jid;
             this.payerId = pid;
+            base.Id = mid;
         }
 
         /// <summary>
@@ -42,12 +44,14 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="amount">float</param>
         /// <param name="jid">int</param>
         /// <param name="pid">int</param>
-        public Transactions(int tid, float amount, int jid, int pid)
+        /// <param name="mid">int</param>
+        public Transactions(int tid, float amount, int jid, int pid, int mid)
         {
             this.transactionId = tid;
             this.amount = amount;
             this.journeyId = jid;
             this.payerId = pid;
+            base.Id = mid;
         }
         #endregion
 
@@ -56,6 +60,7 @@ namespace RygOgRejs.Bizz.Entities
         public int JourneyId { get => journeyId; set => journeyId = value; }
         public int PayerId { get => payerId; set => payerId = value; }
         public int TransactionId { get => transactionId; set => transactionId = value; }
+        public int MasterId { get => base.Id; set => base.Id = value;}
         #endregion
     }
 }

@@ -52,7 +52,8 @@ namespace RygOgRejs.IO.DataAccess.App
                 int id = Convert.ToInt32(reader["PayerId"]);
                 string firstName = reader["FirstName"].ToString();
                 string lastName = reader["LastName"].ToString();
-                Payer payer = new Payer(id, firstName, lastName);
+                int masterId =  Convert.ToInt32(reader["MasterId"]);
+                Payer payer = new Payer(id, firstName, lastName, masterId);
                 priceCol.Add(payer);
             }
             return priceCol;
@@ -74,7 +75,8 @@ namespace RygOgRejs.IO.DataAccess.App
                 int tid = Convert.ToInt32(reader["TransactionId"]);
                 string firstName = reader["FirstName"].ToString();
                 string lastName = reader["LastName"].ToString();
-                payer = new Payer(tid, firstName, lastName);
+                int masterId = Convert.ToInt32(reader["MasterId"]);
+                payer = new Payer(tid, firstName, lastName, masterId);
             }
             return payer;
         }
