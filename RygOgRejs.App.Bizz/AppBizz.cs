@@ -16,6 +16,7 @@ namespace RygOgRejs.Bizz.App
         #region Fields
         private string destination; //string that holds a destination
         private string journeyOrTransaction; //string that controls how UIInsertUpdate & UIPayment acts
+        private Master master;
         private Journey tempJourney = new Journey(); //string to temporarily store current journey information, before writing it to the database
         private Payer tempPayer = new Payer(); //string to temporarily store current payer information, before writing it to the database
         private Transactions tempTransaction = new Transactions(); //string to temporarily store current transaction information, before writing it to the database
@@ -61,8 +62,8 @@ namespace RygOgRejs.Bizz.App
         /// <param name="u"></param>
         public void CreateJourney(int AntalAdults, int AntalChildren, int AntalLuggage, bool IsFirstclass)
         {
-            CJE = new Journey(TempJourney.Destination, DateTime.Now, AntalAdults, AntalChildren, IsFirstclass,AntalLuggage);
-            CJI.AddJourney(CJE);
+            Journey kage = new Journey(TempJourney.Destination, DateTime.Now, AntalAdults, AntalChildren, IsFirstclass,AntalLuggage, master.Id); //Added masterId to code /daniel
+            CJI.AddJourney(kage);
         }
 
         /// <summary>

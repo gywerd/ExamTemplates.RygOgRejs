@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RygOgRejs.Bizz.Entities
 {
-    public class Payer
+    public class Payer : Master
     {
         #region Fields
         //this is how we wanted it right?
@@ -22,15 +22,16 @@ namespace RygOgRejs.Bizz.Entities
         public Payer() { }
 
         /// <summary>
-        /// Constructor used, when getting MasterId = PayerId
-        /// The hell is this even doing? /Emil
-        /// Creates a position in database, with a PayerId, that can be used in Journey & Transactions. Possibly overkill, but part of assignment. /Daniel
+        /// Constructor used, creating database entry
         /// </summary>
-        /// <param name="mac">int</param>
-        public Payer(string mac)
+        /// <param name="firstName">string</param>
+        /// <param name="lastName">string</param>
+        /// <param name="mid">int</param>
+        public Payer(string firstName, string lastName, int mid)
         {
-            this.firstName = mac;
-            this.lastName = mac;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            base.Id = mid;
         }
 
         /// <summary>
@@ -39,12 +40,13 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="id">int</param>
         /// <param name="firstName">string</param>
         /// <param name="lastName">string</param>
-        public Payer(int id, string firstName,string lastName)
+        /// <param name="mid">int</param>
+        public Payer(int id, string firstName,string lastName, int mid)
         {
             this.payerId = id;
             FirstName = firstName;
             LastName = lastName;
-            
+            base.Id = mid;
         }
         #endregion
 

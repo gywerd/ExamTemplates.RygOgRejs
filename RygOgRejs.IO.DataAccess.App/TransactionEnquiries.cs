@@ -53,7 +53,8 @@ namespace RygOgRejs.IO.DataAccess.App
                 float amount = Convert.ToSingle(reader["Amount"]);
                 int jid = Convert.ToInt32(reader["JourneyId"]);
                 int pid = Convert.ToInt32(reader["PayerId"]);
-                Transactions t = new Transactions(tid, amount, jid, pid);
+                int mid = Convert.ToInt32(reader["MasterId"]);
+                Transactions t = new Transactions(tid, amount, jid, pid, mid);
                 transCol.Add(t);
             }
             return transCol;
@@ -76,7 +77,8 @@ namespace RygOgRejs.IO.DataAccess.App
                 float amount = Convert.ToSingle(reader["Amount"]);
                 int jid = Convert.ToInt32(reader["JourneyId"]);
                 int pid = Convert.ToInt32(reader["PayerId"]);
-                t = new Transactions(tid, amount, jid, pid);
+                int mid = Convert.ToInt32(reader["MasterId"]);
+                t = new Transactions(tid, amount, jid, pid, mid);
             }
             return t;
         }

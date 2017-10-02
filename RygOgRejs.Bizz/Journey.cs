@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RygOgRejs.Bizz.Entities
 {
-    public class Journey
+    public class Journey : Master
     {
         #region Fields
         private int journeyId; //Database field
@@ -20,7 +20,7 @@ namespace RygOgRejs.Bizz.Entities
         ObservableCollection<PriceDetails> priceDetails = new ObservableCollection<PriceDetails>(); //Unused. Deletion???
         #endregion
 
-        #region constructors
+        #region Constructors
         /// <summary>
         /// Empty constructor
         /// </summary>
@@ -35,7 +35,8 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="children">int</param>
         /// <param name="isFirstClass">bool</param>
         /// <param name="luggageAmount">float</param>
-        public Journey(string destination, DateTime departureTime, int adults, int children, bool isFirstClass, float luggageAmount)
+        /// <param name="mid">int</param>
+        public Journey(string destination, DateTime departureTime, int adults, int children, bool isFirstClass, float luggageAmount, int mid)
         {
             this.destination = destination; //not using the enum :thinking:
             this.departureTime = departureTime;
@@ -43,6 +44,7 @@ namespace RygOgRejs.Bizz.Entities
             this.children = children;
             this.isFirstClass = isFirstClass; //lel fristClass emil plz
             this.luggageAmount = luggageAmount;
+            base.Id = mid;
         }
 
         /// <summary>
@@ -55,7 +57,8 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="children">int</param>
         /// <param name="isFirstClass">bool</param>
         /// <param name="luggageAmount">float</param> why is this a int here but a float everywhere els?
-        public Journey(int id, string destination, DateTime departureTime, int adults, int children, bool isFirstClass, float luggageAmount)
+        /// <param name="mid">int</param>
+        public Journey(int id, string destination, DateTime departureTime, int adults, int children, bool isFirstClass, float luggageAmount, int mid)
         {
             this.journeyId = id;
             this.destination = destination; //not using the enum :thinking:
@@ -64,6 +67,7 @@ namespace RygOgRejs.Bizz.Entities
             this.children = children;
             this.isFirstClass = isFirstClass; //lel fristClass emil plz
             this.luggageAmount = luggageAmount;
+            base.Id = mid;
         }
         #endregion
 
@@ -87,6 +91,7 @@ namespace RygOgRejs.Bizz.Entities
         public float LuggageAmount { get => luggageAmount; set => luggageAmount = value; }
         public ObservableCollection<PriceDetails> PriceDetails { get => PriceDetails; set => PriceDetails = value; }
         public int JourneyId { get => journeyId; set => journeyId = value; }
+        public int MasterId { get => base.Id; set => base.Id = value; }
         #endregion
     }
 }
