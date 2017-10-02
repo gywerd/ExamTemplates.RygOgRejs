@@ -25,6 +25,7 @@ namespace RygOgRejs.Gui
 		//added region
 		#region Fields
 		AppBizz CAB;
+	   
 		#endregion
 
 		public UIInsertUpdate(AppBizz bizz)

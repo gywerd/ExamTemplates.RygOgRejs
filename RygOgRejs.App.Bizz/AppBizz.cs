@@ -60,9 +60,8 @@ namespace RygOgRejs.Bizz.App
         /// <param name="u"></param>
         public void CreateJourney(int AntalAdults, int AntalChildren, int AntalLuggage, bool IsFirstclass)
         {
-            Journey kage = new Journey("LEPA - PALMA DE MALLORCA, Spain", DateTime.Now, 2, 3, true, 23);
+            Journey kage = new Journey(TempJourney.Destination, DateTime.Now, AntalAdults, AntalChildren, IsFirstclass,AntalLuggage);
             CJI.AddJourney(kage);
-//            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -211,7 +210,7 @@ namespace RygOgRejs.Bizz.App
             }
             set => prices = value;
         }
-        public Journey TempJourney { get => tempJourney; set => tempJourney = value; }
+        public Journey TempJourney { get => tempJourney; set => tempJourney = value; } 
         public Payer TempPayer { get => tempPayer; set => tempPayer = value; } //Corrected name
         public PriceDetails TempPriceDetails { get => tempPriceDetails; set => tempPriceDetails = value; } //Corrected name
         public Transactions TempTransaction { get => tempTransaction; set => tempTransaction = value; }

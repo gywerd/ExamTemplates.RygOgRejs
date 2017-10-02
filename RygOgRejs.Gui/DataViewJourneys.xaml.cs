@@ -49,8 +49,9 @@ namespace RygOgRejs.Gui
         private void dataGridJourneys_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string selectedItem =  Convert.ToString(dataGridJourneys.SelectedItem);
-            //CAB.Destination = selecctedItem;
+            
             CAB.TempJourney.Destination = selectedItem; //corrected reference
+
             UCInsert = new UIInsertUpdate(CAB);
             uc.Content = UCInsert;
         }
