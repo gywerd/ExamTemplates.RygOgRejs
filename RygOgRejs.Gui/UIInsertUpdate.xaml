@@ -5,42 +5,52 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RygOgRejs.Gui"
              mc:Ignorable="d"
-             Background="LightGray" Height="360" Width="350">
-    <Grid Margin="0,0,0,0.2">
+             Background="White" 
+             Height="360" 
+             Width="350">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="364*"/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*" />
         </Grid.RowDefinitions>
         <Label x:Name="labelDestination" 
                Content="Destination: "
                FontSize="17"
                FontWeight="DemiBold" 
-               Margin="10,20,240.4,0"
+               Margin="5,1,243,0"
                Height="40"
                VerticalAlignment="Top"/>
         <Label x:Name="labelChosenDestination" 
                Content=""
-               FontSize="18"
+               FontSize="17"
                FontWeight="DemiBold"
                HorizontalAlignment="Right" 
-               Margin="0,20,10.4,0"
-               Height="40" Width="232"
+               Margin="0,30,5,0"
+               Height="30" 
+               Width="342"
                VerticalAlignment="Top"/>
         <CheckBox x:Name="checkBoxFirstClass" 
                   Content="1. klasse"
                   FontSize="16"
                   FontWeight="DemiBold" 
-                  Margin="193,116,70.4,207.8" IsChecked="False" Checked="CheckBoxFirstClass_isChecked" Unchecked="CheckBoxFirstClass_isChecked"/>
+                  Margin="193,116,70.4,207.8" 
+                  IsChecked="False" 
+                  
+                  Checked="CheckBoxFirstClass_isChecked" 
+                  Unchecked="CheckBoxFirstClass_isChecked"/>
         <Label x:Name="labelAdults" 
                Content="Voksne:"
                FontWeight="DemiBold"
                FontSize="18" 
-               Margin="25,65,0,258.8" HorizontalAlignment="Left" Width="95"/>
+               Margin="25,65,0,258.8" 
+               HorizontalAlignment="Left" 
+               Width="95"/>
         <TextBox x:Name="textBoxAdults"
                  Text="" 
                  FontSize="16"
                  FontWeight="DemiBold"
-                 Height="40" Width="30"
+                 Height="28" 
+                 Width="30"
                  HorizontalAlignment="Left" 
                  Margin="108,65,0,0" 
                  TextWrapping="Wrap" 
@@ -52,13 +62,15 @@
                FontWeight="DemiBold"
                HorizontalAlignment="Right" 
                Margin="0,65,149.4,0"
-               Height="40" Width="45"
+               Height="40" 
+               Width="45"
                VerticalAlignment="Top"/>
         <TextBox x:Name="textBoxChildren"
                  Text="" 
                  FontSize="16"
                  FontWeight="DemiBold"
-                 Height="40" Width="30"
+                 Height="28" 
+                 Width="30"
                  HorizontalAlignment="Right" 
                  Margin="0,65,109.4,0" 
                  TextWrapping="Wrap" 
@@ -74,7 +86,8 @@
                  Text="" 
                FontSize="16"
                FontWeight="DemiBold"
-                 Height="40" Width="35"
+                 Height="28" 
+                 Width="35"
                  HorizontalAlignment="Right" 
                  Margin="0,110,175.4,0" 
                  TextWrapping="Wrap" 
