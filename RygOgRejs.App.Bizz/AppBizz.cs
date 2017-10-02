@@ -24,7 +24,6 @@ namespace RygOgRejs.Bizz.App
         //string where current macadress is stored
         private string macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
         Journey CJE; //used to call methods
-
         JourneyEnquiries CJI = new JourneyEnquiries(); //used to call methods
         Payer CPaE = new Payer(); //used to call methods
         PayerEnquiries CPaI = new PayerEnquiries(); //used to call methods
@@ -33,6 +32,7 @@ namespace RygOgRejs.Bizz.App
         Transactions CTE = new Transactions(); //used to call methods
         TransactionEnquiries CTI = new TransactionEnquiries(); //used to call methods
         MasterId CMI = new MasterId(); //used to call methods
+        MasterIdEnquiries CMIE = new MasterIdEnquiries();
         ObservableCollection<Journey> journeys = new ObservableCollection<Journey>(); //Collection containing journeys stored in database
         ObservableCollection<Payer> payers = new ObservableCollection<Payer>();  //Collection containing payers stored in database
         ObservableCollection<Transactions> transactions = new ObservableCollection<Transactions>(); //Collection containing trnsactions stored in database
@@ -146,9 +146,12 @@ namespace RygOgRejs.Bizz.App
             transactions = CTI.GetAll();
         }
 
-        public void CreateMasterid(AppBizz kage)
+        public void CreateMasterid(AppBizz CAB)
         {
-
+            CMIE.SaveID(macAddress);
+            CMI.Id = CMIE.GetId();
+           
+            CMIE.DeleteId(CMI.Id);
         }
 
         /// <summary>
