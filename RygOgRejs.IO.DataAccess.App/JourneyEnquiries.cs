@@ -58,7 +58,7 @@ namespace RygOgRejs.IO.DataAccess.App
                 bool isFirstClass = Convert.ToBoolean(reader["IsFirstClass"]);
                 int luggageAmount = Convert.ToInt32(reader["LuggageAmount"]);
                 int masterId = Convert.ToInt32(reader["MasterId"]);
-                Journey journey = new Journey(id,destination, depatureTime, adults, children, isFirstClass, luggageAmount);
+                Journey journey = new Journey(id,destination, depatureTime, adults, children, isFirstClass, luggageAmount, masterId);
                 journeyCol.Add(journey);
             }
             return journeyCol;
