@@ -46,7 +46,7 @@ namespace RygOgRejs.IO.WeatherService
         {
             public double Speed { get; set; }
             public double Gust { get; set; }
-            public int Deg { get; set; }
+            public double Deg { get; set; }
         }
 
 

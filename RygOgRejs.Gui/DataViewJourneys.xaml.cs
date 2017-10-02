@@ -45,7 +45,7 @@ namespace RygOgRejs.Gui
         {
 
         }
-        // Bitch Please.....
+        // Bitch Please kage
         private void dataGridJourneys_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string selectedItem =  Convert.ToString(dataGridJourneys.SelectedItem);
