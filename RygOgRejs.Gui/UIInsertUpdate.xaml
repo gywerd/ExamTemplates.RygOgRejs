@@ -10,7 +10,7 @@
              Width="350">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="364*"/>
+            <RowDefinition Height="364"/>
             <RowDefinition Height="3*" />
         </Grid.RowDefinitions>
         <Label x:Name="labelDestination" 
