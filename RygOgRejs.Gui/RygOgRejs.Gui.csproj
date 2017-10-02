@@ -64,8 +64,14 @@
     <Compile Include="UIInsertUpdate.xaml.cs">
       <DependentUpon>UIInsertUpdate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UIOpret.xaml.cs">
+      <DependentUpon>UIOpret.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UIPayments.xaml.cs">
       <DependentUpon>UIPayments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UIUpdaterxaml.xaml.cs">
+      <DependentUpon>UIUpdaterxaml.xaml</DependentUpon>
     </Compile>
     <Page Include="DataViewTransactions.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -94,7 +100,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UIOpret.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UIPayments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UIUpdaterxaml.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
