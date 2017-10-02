@@ -44,7 +44,7 @@ namespace RygOgRejs.Gui
         {
             string selectedItem = Convert.ToString(dataGridJourneys.SelectedItem);
             //"{ Destinations = EKBI - BILLUND, Denmark }"
-            selectedItem = selectedItem.Remove(0, 18);
+            selectedItem = selectedItem.Remove(0, 17);
             if (selectedItem.Contains("}"))
             {
                 selectedItem = selectedItem.Remove(selectedItem.Length - 2);
