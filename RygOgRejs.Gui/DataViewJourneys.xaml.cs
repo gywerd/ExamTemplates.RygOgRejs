@@ -23,9 +23,11 @@ namespace RygOgRejs.Gui
     public partial class DataViewJourneys: UserControl
     {
         AppBizz CAB;
-        UIInsertUpdate UCInsert;
+        //UIInsertUpdate UCInsert;
+        UIOpret UCOpret;
         UserControl uc;
-        private string destination;
+        private string destination; 
+
 
         public DataViewJourneys(List<string> Entities, object b, UserControl UC)
         {
@@ -51,8 +53,14 @@ namespace RygOgRejs.Gui
             }
             
             CAB.TempJourney.Destination = selectedItem;
-            UCInsert = new UIInsertUpdate(CAB);
-            uc.Content = UCInsert;
+
+            UCOpret = new UIOpret();
+            uc.Content = UCOpret;
+            //UCInsert = new UIInsertUpdate(CAB);
+            //uc.Content = UCInsert;
+
+           // UCInsert = new UIInsertUpdate(CAB);
+           // uc.Content = UCInsert;
         }
     }
 }

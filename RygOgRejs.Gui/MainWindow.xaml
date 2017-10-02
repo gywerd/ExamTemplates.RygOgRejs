@@ -10,12 +10,17 @@
         xmlns:local="clr-namespace:RygOgRejs.Gui"
         mc:Ignorable="d"
         Title="Ryg Og Rejs"
-        Height="500"
-        Width="900">
+        Height="700"
+        Width="900"
+        Background="White" 
+        ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen" 
+        AutomationProperties.IsOffscreenBehavior="Onscreen">
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Top"
-                  Height="25">
+                  Height="25"
+                  Background="Transparent">
                 <MenuItem Header="Filer">
                     <MenuItem Click="OnMenuFilesClose_Click"
                               Header="Luk" />
