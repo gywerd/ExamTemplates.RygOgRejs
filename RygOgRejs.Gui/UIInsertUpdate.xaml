@@ -12,7 +12,7 @@
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         <Label x:Name="labelDestination" 
-               Content="Destination:"
+               Content="Destination: "
                FontSize="17"
                FontWeight="DemiBold" 
                Margin="10,20,240.4,0"

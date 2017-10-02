@@ -32,13 +32,7 @@ namespace RygOgRejs.Gui
             InitializeComponent();
             CAB = (AppBizz)b;
             uc = UC;
-            //UCInsert = new UIInsertUpdate(CAB); //Moved to dataGridJourneys_SelectionChanged - works partially now
-            //foreach(string dest in Entities)
-            //{
-            //    dataGridJourneys.Items.Add(dest.ToString());
-            //}
             dataGridJourneys.ItemsSource = CAB.Destinations.ToList().Select(Destinations => new { Destinations });
-            //dataGridJourneys.ItemsSource = CAB.Destinations;
         }
 
         private void TextBoxFilterJourneys_TextChanged(object sender, TextChangedEventArgs e)
@@ -48,9 +42,15 @@ namespace RygOgRejs.Gui
         // Bitch Please kage
         private void dataGridJourneys_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string selectedItem =  Convert.ToString(dataGridJourneys.SelectedItem);
+            string selectedItem = Convert.ToString(dataGridJourneys.SelectedItem);
+            //"{ Destinations = EKBI - BILLUND, Denmark }"
+            selectedItem = selectedItem.Remove(0, 18);
+            if (selectedItem.Contains("}"))
+            {
+                selectedItem = selectedItem.Remove(selectedItem.Length - 2);
+            }
             
-            CAB.TempJourney.Destination = selectedItem; //corrected reference
+            CAB.TempJourney.Destination = selectedItem;
 
             UCInsert = new UIInsertUpdate(CAB);
             uc.Content = UCInsert;
