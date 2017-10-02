@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JourneyEnquiries.cs" />
+    <Compile Include="MasterIdEnquiries.cs" />
     <Compile Include="PayerEnquiries.cs" />
     <Compile Include="PriceEnquiries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

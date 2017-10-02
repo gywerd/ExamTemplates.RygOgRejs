@@ -146,6 +146,11 @@ namespace RygOgRejs.Bizz.App
             transactions = CTI.GetAll();
         }
 
+        public void CreateMasterid(AppBizz kage)
+        {
+
+        }
+
         /// <summary>
         /// Code that clears & reloads content of ObservAbleCollections - used after saving to the database
         /// </summary>
