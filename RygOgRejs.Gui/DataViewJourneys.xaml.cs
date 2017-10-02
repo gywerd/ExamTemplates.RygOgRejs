@@ -51,7 +51,6 @@ namespace RygOgRejs.Gui
             }
             
             CAB.TempJourney.Destination = selectedItem;
-
             UCInsert = new UIInsertUpdate(CAB);
             uc.Content = UCInsert;
         }

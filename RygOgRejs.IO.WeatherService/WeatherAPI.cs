@@ -37,8 +37,8 @@ namespace RygOgRejs.IO.WeatherService
             //for now gonna fetch this from the database when its made ;P
             List<string> locations = new List<string>()
             {
-                 "Billlund",
-                 "Copehangen",
+                 "Billund",
+                 "Copenhagen",
                  "PalmaDeMallorca"
             };
             while(true)

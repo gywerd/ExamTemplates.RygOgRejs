@@ -176,7 +176,7 @@ namespace RygOgRejs.Gui
 			{
 				buttonCreateJourney.Visibility = Visibility.Visible;
 				buttonEditJourney.Visibility = Visibility.Hidden;
-				buttonDeleteJourney.Visibility = Visibility.Hidden;
+				buttonDeleteJourney.Visibility = Visibility.Visible;
 				//labelChosenDestination.Content = CAB.Journey.Destination;
 				labelChosenDestination.Content = CAB.TempJourney.Destination; //corrected reference
 			}

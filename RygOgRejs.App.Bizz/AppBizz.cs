@@ -22,7 +22,8 @@ namespace RygOgRejs.Bizz.App
         private PriceDetails tempPriceDetails = new PriceDetails(); //string to temporarily store current pricedetails, to show on GUI
         //string where current macadress is stored
         private string macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
-        Journey CJE = new Journey(); //used to call methods
+        Journey CJE; //used to call methods
+
         JourneyEnquiries CJI = new JourneyEnquiries(); //used to call methods
         Payer CPaE = new Payer(); //used to call methods
         PayerEnquiries CPaI = new PayerEnquiries(); //used to call methods
@@ -60,8 +61,8 @@ namespace RygOgRejs.Bizz.App
         /// <param name="u"></param>
         public void CreateJourney(int AntalAdults, int AntalChildren, int AntalLuggage, bool IsFirstclass)
         {
-            Journey kage = new Journey(TempJourney.Destination, DateTime.Now, AntalAdults, AntalChildren, IsFirstclass,AntalLuggage);
-            CJI.AddJourney(kage);
+            CJE = new Journey(TempJourney.Destination, DateTime.Now, AntalAdults, AntalChildren, IsFirstclass,AntalLuggage);
+            CJI.AddJourney(CJE);
         }
 
         /// <summary>
@@ -70,6 +71,7 @@ namespace RygOgRejs.Bizz.App
         /// <param name="u"></param>
         public void DeleteJourney()
         {
+            CJI.GetJourney(CJE.JourneyId); //dis aint working
             throw new NotImplementedException();
         }
 
