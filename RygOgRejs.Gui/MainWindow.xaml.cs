@@ -52,7 +52,7 @@ namespace RygOgRejs.Gui
             //macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
 
             //maybe change this 
-            weatherAPI = new WeatherAPI(labelStatusBar);
+            weatherAPI = new WeatherAPI(labelStatusBar, CRB);
             weatherAPI.GetCityNameAsync();
 
         }

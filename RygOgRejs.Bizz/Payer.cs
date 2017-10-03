@@ -44,8 +44,8 @@ namespace RygOgRejs.Bizz.Entities
         public Payer(int id, string firstName,string lastName, int mid)
         {
             this.payerId = id;
-            FirstName = firstName;
-            LastName = lastName;
+            this.firstName = firstName;
+            this.lastName = lastName;
             base.Id = mid;
         }
         #endregion

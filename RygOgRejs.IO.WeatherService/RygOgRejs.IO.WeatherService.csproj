@@ -51,5 +51,23 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RygOgRejs.App.Bizz\RygOgRejs.Bizz.App.csproj">
+      <Project>{867fb5e2-efd9-45a0-9dd3-07b6861ccdff}</Project>
+      <Name>RygOgRejs.Bizz.App</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RygOgRejs.Bizz\RygOgRejs.Bizz.Entities.csproj">
+      <Project>{478FC305-AB52-47E4-BDFC-D274FCDB30F0}</Project>
+      <Name>RygOgRejs.Bizz.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RygOgRejs.IO.DataAccess.App\RygOgRejs.IO.DataAccess.App.csproj">
+      <Project>{88281b47-e5ec-4930-8efb-1b7876450722}</Project>
+      <Name>RygOgRejs.IO.DataAccess.App</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RygOgRejs.IO.DataAccess\RygOgRejs.IO.DataAccess.General.csproj">
+      <Project>{F27C9ACD-F577-4AE4-9E47-F98B3ECE5E4E}</Project>
+      <Name>RygOgRejs.IO.DataAccess.General</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

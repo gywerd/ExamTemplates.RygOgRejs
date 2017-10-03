@@ -19,6 +19,7 @@ namespace RygOgRejs.Gui
 {
 	/// <summary>
 	/// Interaction logic for UIInsertUpdate.xaml
+    /// UserControl is redundant, and can be removed
 	/// </summary>
 	public partial class UIInsertUpdate : UserControl
 	{
@@ -61,7 +62,7 @@ namespace RygOgRejs.Gui
 
 			if (LuggageOK == true && AdultsOK == true && ChildrensOK == true)
 			{
-				CAB.CreateJourney(textBoxAdultsInt, textBoxChildrenInt, textBoxLuggageInt, CAB.TempJourney.IsFirstClass);
+				CAB.CreateJourney(); //No params needed, as all data is collected in CAB.TempJourney, CAB.TempPayer & CAB.TempTransactions while manipulating GUI
 			}
 			else
 			{
