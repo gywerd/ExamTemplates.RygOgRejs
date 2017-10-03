@@ -24,7 +24,7 @@ namespace RygOgRejs.IO.DataAccess.App
         public void AddJourney(Journey jour)
         {
 
-            string query = $"INSERT INTO Journeys (Destination, DepartureTime, Adults,Children,IsFirstClass,LuggageAmount) VALUES ('{jour.Destination}', '{jour.DepatureTime}', {jour.Adults}, {jour.Children},' {jour.IsFirstClass}', {jour.LuggageAmount})";
+            string query = $"INSERT INTO Journeys (Destination, DepartureTime, Adults,Children,IsFirstClass,LuggageAmount,MasterId) VALUES ('{jour.Destination}', '{jour.DepatureTime}', {jour.Adults}, {jour.Children},' {jour.IsFirstClass}', {jour.LuggageAmount},{jour.MasterId})";
             executor.ExecuteNonQuery(query);
         }
 

@@ -11,7 +11,7 @@ namespace RygOgRejs.IO.DataAccess.App
 {
     public class MasterIdEnquiries : DataEnquiries
     {
-        public void SaveID(string macAddresss)
+        public void CreateID(string macAddresss)
         {
             string query = $"INSERT INTO Master (MacAdress) VALUES ('{macAddresss}')";
             executor.ExecuteNonQuery(query);
@@ -27,6 +27,10 @@ namespace RygOgRejs.IO.DataAccess.App
                 id = Convert.ToInt32(reader["MasterId"]);
             }
             return id;
+        }
+        public void DeleteId(int id)
+        {
+            string query = $"DELETE FROM Master WHERE MasterId = {id}";
         }
     }
 }
