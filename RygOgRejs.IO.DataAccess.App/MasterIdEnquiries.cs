@@ -28,11 +28,5 @@ namespace RygOgRejs.IO.DataAccess.App
             }
             return id;
         }
-
-        public void DeleteId(int id)
-        {
-            string query = $"DELETE FROM Master WHERE MasterId = {id}";
-            executor.ExecuteNonQuery(query);
-        }
     }
 }
