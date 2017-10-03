@@ -23,7 +23,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <param name="payer">Payer</param>
         public void AddPayer(Payer payer)
         {
-            string query = $"INSERT INTO Payers (FirstName, LastName) VALUES( '{payer.FirstName}', '{payer.LastName}')";
+            string query = $"INSERT INTO Payers (FirstName, LastName,MasterId) VALUES( '{payer.FirstName}', '{payer.LastName}', {payer.MasterID})";
             executor.ExecuteNonQuery(query);
         }
 
@@ -87,8 +87,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <param name="payer">Payer</param>
         public void UpdatePayer(Payer payer)
         {
-
-            string query = $"UPDATE Payers SET FirstName = '{payer.FirstName}', LastName = '{payer.LastName}' WHERE PayerId = {payer.PayerId}";
+            string query = $"UPDATE Payers SET FirstName = '{payer.FirstName}', LastName = '{payer.LastName}'  WHERE PayerId = {payer.PayerId}";
             executor.ExecuteNonQuery(query);
         }
         #endregion

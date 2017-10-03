@@ -16,15 +16,15 @@ namespace RygOgRejs.Bizz.App
         #region Fields
         private string destination; //string that holds a destination
         private string journeyOrTransaction; //string that controls how UIInsertUpdate & UIPayment acts
-        private Master master;
+        private Master master = new Master();
         private Journey tempJourney = new Journey(); //string to temporarily store current journey information, before writing it to the database
         private Payer tempPayer = new Payer(); //string to temporarily store current payer information, before writing it to the database
         private Transactions tempTransaction = new Transactions(); //string to temporarily store current transaction information, before writing it to the database
         private PriceDetails tempPriceDetails = new PriceDetails(); //string to temporarily store current pricedetails, to show on GUI
         //string where current macadress is stored
         private string macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
-        Journey CJE; //used to call methods
-
+        Destination CDE = new Destination();
+        Journey CJE = new Journey(); //used to call methods
         JourneyEnquiries CJI = new JourneyEnquiries(); //used to call methods
         Payer CPaE = new Payer(); //used to call methods
         PayerEnquiries CPaI = new PayerEnquiries(); //used to call methods
@@ -33,11 +33,13 @@ namespace RygOgRejs.Bizz.App
         Transactions CTE = new Transactions(); //used to call methods
         TransactionEnquiries CTI = new TransactionEnquiries(); //used to call methods
         MasterId CMI = new MasterId(); //used to call methods
+        MasterIdEnquiries CMIE = new MasterIdEnquiries();
         ObservableCollection<Journey> journeys = new ObservableCollection<Journey>(); //Collection containing journeys stored in database
         ObservableCollection<Payer> payers = new ObservableCollection<Payer>();  //Collection containing payers stored in database
         ObservableCollection<Transactions> transactions = new ObservableCollection<Transactions>(); //Collection containing trnsactions stored in database
         ObservableCollection<Price> prices = new ObservableCollection<Price>(); //Collection containing prices stored in database
         List<string> destinations = new List<string>(); //List containing available destinations to be viewed in DataViewJourneys
+        List<Destination> newDestinations; //List containing available destinations to be viewed in DataViewJourneys
         #endregion
 
         #region Events
@@ -113,6 +115,11 @@ namespace RygOgRejs.Bizz.App
             }
         }
 
+        public void GetAllDestinations()
+        {
+            newDestinations = CPrI.GetAllDestinations();
+        }
+
         /// <summary>
         /// Method, that invokes reading journeys from database
         /// </summary>
@@ -148,7 +155,9 @@ namespace RygOgRejs.Bizz.App
 
         public void CreateMasterid(AppBizz kage)
         {
-
+            CMIE.CreateID(macAddress);
+            master.Id = CMIE.GetId();
+            CMIE.DeleteId(master.Id);
         }
 
         /// <summary>
@@ -234,6 +243,8 @@ namespace RygOgRejs.Bizz.App
             }
             set => transactions = value;
         }
+
+        public List<Destination> NewDestinations { get => newDestinations; set => newDestinations = value; }
         #endregion
 
         #region Internal Classes

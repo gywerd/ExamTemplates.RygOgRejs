@@ -76,6 +76,8 @@ namespace RygOgRejs.Bizz.Entities
             }
         }
         public int PayerId { get => payerId; set => payerId = value; }
+        public int MasterID { get => base.Id; set => base.Id = value; }
+
         #endregion
     }
 }

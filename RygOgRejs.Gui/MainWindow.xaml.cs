@@ -15,7 +15,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Net.NetworkInformation; //mac xDDDD
+using System.Net.NetworkInformation;
+using System.Xml;
+
+//mac xDDDD
 
 namespace RygOgRejs.Gui
 {
@@ -38,6 +41,7 @@ namespace RygOgRejs.Gui
         public MainWindow()
         {
             InitializeComponent();
+            CRB.GetAllDestinations(); //Reads the destinations from the database into the list newDestination - Daniel 
             var DJ = DataJourney.GetAll();
             foreach (var Data in DJ)
             {
