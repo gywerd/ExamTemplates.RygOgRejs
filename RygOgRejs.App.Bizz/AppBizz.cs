@@ -21,8 +21,7 @@ namespace RygOgRejs.Bizz.App
         private Payer tempPayer = new Payer(); //string to temporarily store current payer information, before writing it to the database
         private Transactions tempTransaction = new Transactions(); //string to temporarily store current transaction information, before writing it to the database
         private PriceDetails tempPriceDetails = new PriceDetails(); //string to temporarily store current pricedetails, to show on GUI
-        //string where current macadress is stored
-        private string macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
+        private string macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault(); //string where current macadress is stored
         Destination CDE = new Destination();
         Journey CJE; //used to call methods
         JourneyEnquiries CJI = new JourneyEnquiries(); //used to call methods
@@ -59,51 +58,74 @@ namespace RygOgRejs.Bizz.App
 
         /// <summary>
         /// Code behind CreateJourney-button
+        /// Adds row to Payers, Transactions and Journeys in DB
         /// </summary>
         /// <param name="u"></param>
-        public void CreateJourney(int AntalAdults, int AntalChildren, int AntalLuggage, bool IsFirstclass)
+        public void CreateJourney() //removed params from method
         {
-            Journey kage = new Journey(TempJourney.Destination, DateTime.Now, AntalAdults, AntalChildren, IsFirstclass,AntalLuggage, master.Id); //Added masterId to code /daniel
-            CJI.AddJourney(kage);
+            //Journey kage = new Journey(TempJourney.Destination, DateTime.Now, AntalAdults, AntalChildren, IsFirstclass,AntalLuggage, master.Id); //Added masterId to code /daniel
+            //MasterId is generated and added  to tempPayer, tempJourney & tempTransaction, when UIOpret is loaded
+            //All data is written simutaneusly to tempPayer, tempJourney & tempTransaction, and price incl. VAT is calculated while manipulating GUI
+            CJI.AddJourney(tempJourney); //Writes Journey data to DB
+            CTI.AddTransaction(tempTransaction);  //Writes Transaction data to DB
+            RefreshObservableCollections(); //Updates content of ObservableCollections from DB
+            //Afterwards, a function that update priceDetails for GUI must be executed
+            ClearTemporaryFields(); //Clears content of tempPayer, tempJourney & tempTransaction
         }
 
         /// <summary>
         /// Code behind DeleteJourney-button
+        /// Deletes row in Journeys and Transactions in DB
         /// </summary>
         /// <param name="u"></param>
         public void DeleteJourney()
         {
-            CJI.GetJourney(CJE.JourneyId); //dis aint working
+            CJI.DeleteJourney(tempJourney.JourneyId); //dis aint working - changed from GetJourney to DeleteJourney ;)
+            CTI.DeleteTransaction(tempTransaction.TransactionId);
+            //Afterwards, a function that update Pricedetails for GUI must be executed
+            RefreshObservableCollections(); //Updates content of ObservableCollections from DB
+            ClearTemporaryFields(); //Clears content of tempPayer, tempJourney & tempTransaction
             throw new NotImplementedException();
         }
 
         /// <summary>
         /// Code behind EditJourney-button
+        /// Updates row in Journeys & Transactions in DB
         /// </summary>
         /// <param name="u"></param>
         public void EditJourney()
         {
+            //MasterId is loaded into tempPayer, tempJourney & tempTransaction, when UIUpdate is loaded
+            //All data is written simutaneusly to tempPayer, tempJourney & tempTransaction, and refund price incl. VAT is calculated while manipulating GUI
+            CJI.UpdateJourney(tempJourney); //Writes content of tempJourney to Database
+            CTI.UpdateTransaction(tempTransaction); //Writes content of tempJourney to Database
+            //Afterwards, a function that update Pricedetails for GUI must be executed
+            RefreshObservableCollections(); //Updates content of ObservableCollections from DB
+            ClearTemporaryFields(); //Clears content of tempPayer, tempJourney & tempTransaction
             throw new NotImplementedException();
         }
 
         /// <summary>
         /// Code behind ExecutePayments-button
+        /// Button removed from GUI - redundant after SCRUM-decision to edit UserControls
         /// </summary>
         public void ExecutePayment()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         /// <summary>
         /// Code behind ExecuteRefusion-button
+        /// Button removed from GUI - redundant after SCRUM-decision to edit UserControls
         /// </summary>
         public void ExecuteRefusion()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         /// <summary>
         /// Method, that generates a list of destinations
+        /// Redundant - replaced by GetAllDestinations
         /// </summary>
         private void GetDestinations()
         {
@@ -114,6 +136,10 @@ namespace RygOgRejs.Bizz.App
             }
         }
 
+        /// <summary>
+        /// Method that loads list of destinations with DestinationId from DB
+        /// Thus connection between prices and destinations can be done by comparing DestinationId
+        /// </summary>
         public void GetAllDestinations()
         {
             newDestinations = CPrI.GetAllDestinations();
