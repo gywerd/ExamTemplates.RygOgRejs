@@ -26,10 +26,5 @@ namespace RygOgRejs.Gui
             InitializeComponent();
             labelDestination.Content = CAB.TempJourney.Destination;
         }
-
-        private void btnClickOpretRejse(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
