@@ -52,7 +52,7 @@ namespace RygOgRejs.IO.DataAccess.App
                 int id = Convert.ToInt32(reader["DestinationId"]);
                 string destination = reader["DestinationName"].ToString();
                 float adult = Convert.ToSingle(reader["AdultPrice"]);
-                float child = Convert.ToSingle(reader["ChildenPrice"]); //nice spelling error xD old Name: ChildrenPrice
+                float child = Convert.ToSingle(reader["ChildenPrice"]); //nice spelling error xD old Name: ChildrenPricedd
                 float first = Convert.ToSingle(reader["FirstClassPrice"]);
                 float lug = Convert.ToSingle(reader["LuggagePrice"]);
                 Price p = new Price(id, destination, adult, child, first, lug);
