@@ -14,34 +14,45 @@ namespace RygOgRejs.Bizz.App
     public class AppBizz : INotifyPropertyChanged
     {
         #region Fields
-        private string destination; //string that holds a destination
-        private string journeyOrTransaction; //string that controls how UIInsertUpdate & UIPayment acts
-        private Master master = new Master();
-        private Journey tempJourney = new Journey(); //string to temporarily store current journey information, before writing it to the database
-        private Payer tempPayer = new Payer(); //string to temporarily store current payer information, before writing it to the database
-        private Transactions tempTransaction = new Transactions(); //string to temporarily store current transaction information, before writing it to the database
-        private PriceDetails tempPriceDetails = new PriceDetails(); //string to temporarily store current pricedetails, to show on GUI
-        private string macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault(); //string where current macadress is stored
-        Destination CDE = new Destination();
-        Journey CJE = new Journey(); //used to call methods
-        JourneyEnquiries CJI = new JourneyEnquiries(); //used to call methods
-        Payer CPaE = new Payer(); //used to call methods
-        PayerEnquiries CPaI = new PayerEnquiries(); //used to call methods
-        Price CPrE = new Price(); //used to call methods
-        PriceEnquiries CPrI = new PriceEnquiries(); //used to call methods
-        Transactions CTE = new Transactions(); //used to call methods
-        TransactionEnquiries CTI = new TransactionEnquiries(); //used to call methods
-        MasterId CMI = new MasterId(); //used to call methods
-        MasterIdEnquiries CMIE = new MasterIdEnquiries();
-        ObservableCollection<Journey> journeys = new ObservableCollection<Journey>(); //Collection containing journeys stored in database
-        ObservableCollection<Payer> payers = new ObservableCollection<Payer>();  //Collection containing payers stored in database
-        ObservableCollection<Transactions> transactions = new ObservableCollection<Transactions>(); //Collection containing trnsactions stored in database
-        ObservableCollection<Price> prices = new ObservableCollection<Price>(); //Collection containing prices stored in database
-        List<string> destinations = new List<string>(); //List containing available destinations to be viewed in DataViewJourneys
-        List<Destination> newDestinations; //List containing available destinations to be viewed in DataViewJourneys
+            #region Ordinary Fields
+            private string destination; //string that holds a destination
+            private string journeyOrTransaction; //string that controls how UIInsertUpdate & UIPayment acts
+            private Master master = new Master();
+            private Journey tempJourney = new Journey(); //string to temporarily store current journey information, before writing it to the database
+            private Payer tempPayer = new Payer(); //string to temporarily store current payer information, before writing it to the database
+            private Transactions tempTransaction = new Transactions(); //string to temporarily store current transaction information, before writing it to the database
+            private PriceDetails tempPriceDetails = new PriceDetails(); //string to temporarily store current pricedetails, to show on GUI
+            private string macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault(); //string where current macadress is stored
+            #endregion
+
+            #region Method Fields
+            Destination CDE = new Destination();
+            Journey CJE = new Journey(); //used to call methods
+            JourneyEnquiries CJI = new JourneyEnquiries(); //used to call methods
+            Payer CPaE = new Payer(); //used to call methods
+            PayerEnquiries CPaI = new PayerEnquiries(); //used to call methods
+            Price CPrE = new Price(); //used to call methods
+            PriceEnquiries CPrI = new PriceEnquiries(); //used to call methods
+            Transactions CTE = new Transactions(); //used to call methods
+            TransactionEnquiries CTI = new TransactionEnquiries(); //used to call methods
+            MasterId CMI = new MasterId(); //used to call methods
+            MasterIdEnquiries CMIE = new MasterIdEnquiries(); //used to call methods
+            #endregion
+
+            #region List, Array And Collection Fields
+            ObservableCollection<Journey> journeys = new ObservableCollection<Journey>(); //Collection containing journeys stored in database
+            ObservableCollection<Payer> payers = new ObservableCollection<Payer>();  //Collection containing payers stored in database
+            ObservableCollection<Transactions> transactions = new ObservableCollection<Transactions>(); //Collection containing trnsactions stored in database
+            ObservableCollection<Price> prices = new ObservableCollection<Price>(); //Collection containing prices stored in database
+            List<string> destinations = new List<string>(); //List containing available destinations to be viewed in DataViewJourneys
+            List<Destination> newDestinations; //List containing available destinations to be viewed in DataViewJourneys
+            #endregion
         #endregion
 
         #region Events
+        /// <summary>
+        /// Event, that handles updating fields in UserControl
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
@@ -59,12 +70,12 @@ namespace RygOgRejs.Bizz.App
 
         /// <summary>
         /// Code behind CreateJourney-button
-        /// Adds row to Payers, Transactions and Journeys in DB
+        /// Adds row to Payers, Transactions and Journeys tables in DB
         /// </summary>
         /// <param name="u"></param>
         public void CreateJourney() //removed params from method
         {
-            //Journey kage = new Journey(TempJourney.Destination, DateTime.Now, AntalAdults, AntalChildren, IsFirstclass,AntalLuggage, master.Id); //Added masterId to code /daniel
+            //Journey kage = new Journey(TempJourney.Destination, DateTime.Now, AntalAdults, AntalChildren, IsFirstclass,AntalLuggage, master.Id); //Added masterId to code - daniel //Commented out as it is redundant - daniel
             //MasterId is generated and added  to tempPayer, tempJourney & tempTransaction, when UIOpret is loaded
             //All data is written simutaneusly to tempPayer, tempJourney & tempTransaction, and price incl. VAT is calculated while manipulating GUI
             CJI.AddJourney(tempJourney); //Writes Journey data to DB
@@ -76,7 +87,7 @@ namespace RygOgRejs.Bizz.App
 
         /// <summary>
         /// Code behind DeleteJourney-button
-        /// Deletes row in Journeys and Transactions in DB
+        /// Deletes row in Journeys and Transactions tables in DB
         /// </summary>
         /// <param name="u"></param>
         public void DeleteJourney()
@@ -91,7 +102,7 @@ namespace RygOgRejs.Bizz.App
 
         /// <summary>
         /// Code behind EditJourney-button
-        /// Updates row in Journeys & Transactions in DB
+        /// Updates row in Journeys & Transactions tables in DB
         /// </summary>
         /// <param name="u"></param>
         public void EditJourney()
@@ -138,8 +149,9 @@ namespace RygOgRejs.Bizz.App
         }
 
         /// <summary>
-        /// Method that loads list of destinations with DestinationId from DB
-        /// Thus connection between prices and destinations can be done by comparing DestinationId
+        /// Method that loads list of destinations with DestinationId from the PriceDetails table in DB
+        /// Destinations can be shown in DataViewJourneys
+        /// And connection in code between prices and destinations can be done by comparing DestinationId
         /// </summary>
         public void GetAllDestinations()
         {
@@ -147,7 +159,7 @@ namespace RygOgRejs.Bizz.App
         }
 
         /// <summary>
-        /// Method, that invokes reading journeys from database
+        /// Method, that invokes reading all rows in the Journeys table from database
         /// </summary>
         private void GetJourneys()
         {
@@ -155,7 +167,7 @@ namespace RygOgRejs.Bizz.App
         }
 
         /// <summary>
-        /// Method, that invokes reading payers from database
+        /// Method, that invokes reading all rows in the Payers table from database
         /// </summary>
         private void GetPayers()
         {
@@ -163,7 +175,7 @@ namespace RygOgRejs.Bizz.App
         }
 
         /// <summary>
-        /// Method, that invokes reading pricedetails from database
+        /// Method, that invokes reading all rows in the Pricedetails table from database
         /// </summary>
         /// <returns></returns>
         private void GetPrices()
@@ -172,13 +184,16 @@ namespace RygOgRejs.Bizz.App
         }
 
         /// <summary>
-        /// Method, that invokes reading transactions from database
+        /// Method, that invokes reading all rows in the Transactions table from database
         /// </summary>
         private void GetTransactions()
         {
             transactions = CTI.GetAll();
         }
 
+        /// <summary>
+        /// Method that inserts a dummy entry in the dummy table Master in DB to create a MasterID - then removes the dummy entry
+        /// </summary>
         public void CreateMasterid(AppBizz kage)
         {
             CMIE.CreateID(macAddress);
