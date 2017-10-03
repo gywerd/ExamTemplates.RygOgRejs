@@ -19,6 +19,7 @@ namespace RygOgRejs.Gui
 {
     /// <summary>
     /// Interaction logic for UIPayments.xaml
+    /// UserControl is redundant, and can be removed
     /// </summary>
     public partial class UIPayments : UserControl
     {
