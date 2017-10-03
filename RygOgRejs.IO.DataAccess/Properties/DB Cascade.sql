@@ -80,7 +80,7 @@ CREATE TABLE [dbo].[Price](
 	[DestinationId] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	[DestinationName] [nvarchar](50) NOT NULL,
 	[AdultPrice] [float] NOT NULL,
-	[ChildenPrice] [float] NOT NULL,
+	[ChildrenPrice] [float] NOT NULL,
 	[FirstClassPrice] [float] NOT NULL,
 	[LuggagePrice] [float] NOT NULL	)
 GO
