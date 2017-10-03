@@ -53,7 +53,7 @@ namespace RygOgRejs.Gui
             }
             
             CAB.TempJourney.Destination = selectedItem;
-            UCOpret = new UIOpret();
+            UCOpret = new UIOpret(CAB);
             uc.Content = UCOpret;
             //UCInsert = new UIInsertUpdate(CAB);
             //uc.Content = UCInsert;
