@@ -31,7 +31,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// Method, that removes a row from the database
         /// </summary>
         /// <param name="id">int</param>
-        public void DeletePriceDetails(int tid)
+        public void DeleteTransaction(int tid)
         {
             string query = $"DELETE FROM Transaction WHERE TransactionId = {tid}";
             executor.ExecuteNonQuery(query);
@@ -87,7 +87,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// Method, that updates a row in the database from object
         /// </summary>
         /// <param name="t">Transactions</param>
-        public void UpdatePriceDetail(Transactions t)
+        public void UpdateTransaction(Transactions t)
         {
             string query = $"UPDATE Transaction SET Amount = {t.Amount}, JourneyId = {t.JourneyId}, PayerId = {t.PayerId} WHERE TransactionId = {t.TransactionId}";
             executor.ExecuteNonQuery(query);
