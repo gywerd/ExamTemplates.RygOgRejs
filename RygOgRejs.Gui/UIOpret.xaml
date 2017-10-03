@@ -12,7 +12,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="6*" />
-            <RowDefinition Height="9*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -50,8 +52,33 @@
             <Label Content="Antal Børn" Grid.Row="2" Grid.Column="1" Margin="10" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
             <Label Content="Antal Bagagevægt" Grid.Row="3" Grid.Column="1" Margin="10" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
         </Grid>
-        <Grid Grid.Row="1" Margin="0,224.4,0.4,0" Grid.RowSpan="2">
+        <Border Grid.Row="0" BorderThickness="1" BorderBrush="Black"/>
+        <Border Grid.Row="1" BorderThickness="1" BorderBrush="Black"/>
+        <Grid Grid.Row="2">
+            <Label Grid.Column="0" Content="Kunde Informationer:" Margin="2" FontWeight="Bold" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="9*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
 
+            </Grid.RowDefinitions>
+            <Border Margin="10,12,0,12" BorderThickness="1" BorderBrush="Black" Grid.Row="0" Grid.Column="0"/>
+            <Border Margin="0,12,10,12" BorderThickness="1" BorderBrush="Black" Grid.Row="0" Grid.Column="1"/>
+            <Border Margin="10,12,0,12" BorderThickness="1" BorderBrush="Black" Grid.Row="1" Grid.Column="0"/>
+            <Border Margin="0,12,10,12" BorderThickness="1" BorderBrush="Black" Grid.Row="1" Grid.Column="1"/>
+            <Label Content="Fornavn:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label Content="Efternavn:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+            <TextBox Grid.Column="1" Grid.Row="0" Margin="15,24,25,24"/>
+            <TextBox Grid.Column="1" Grid.Row="1" Margin="15,24,25,24"/>
+        </Grid>
+        <Border Grid.Row="3" BorderThickness="1" BorderBrush="Black"/>
+        <Grid Grid.Row="4">
+            <Button Click="btnClickOpretRejse" Margin="100,10,100,10" Content="Opret Rejse"/>
         </Grid>
     </Grid>
 </UserControl>
