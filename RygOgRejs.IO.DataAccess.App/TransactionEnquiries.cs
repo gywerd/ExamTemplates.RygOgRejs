@@ -23,7 +23,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <param name="t">Transactions</param>
         public void AddTransaction(Transactions t)
         {
-            string query = $"INSERT INTO Transaction (Amount, JourneyId, PayerID) VALUES ({t.Amount}, {t.JourneyId}, {t.PayerId})";
+            string query = $"INSERT INTO Transaction (Amount, JourneyId, PayerID, MasterId) VALUES ({t.Amount}, {t.JourneyId}, {t.PayerId}, {t.MasterId})";
             executor.ExecuteNonQuery(query);
         }
 
