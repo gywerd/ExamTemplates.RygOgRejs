@@ -26,13 +26,14 @@ namespace RygOgRejs.Gui
         UIOpret UCOpret;
         UserControl uc;
 
-        public DataViewJourneys(List<string> Entities, object b, UserControl UC)
+        public DataViewJourneys(List<string> Entities, object b, UserControl UC, UIOpret uIOpret)
         {
             InitializeComponent();
             CAB = (AppBizz)b;
             uc = UC;
+            UCOpret = uIOpret;
             dataGridJourneys.ItemsSource = CAB.Destinations.ToList().Select(Destinations => new { Destinations });
-            UCOpret = new UIOpret(CAB);
+            
         }
 
         private void TextBoxFilterJourneys_TextChanged(object sender, TextChangedEventArgs e)
@@ -42,15 +43,20 @@ namespace RygOgRejs.Gui
 
         private void dataGridJourneys_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string selectedItem = Convert.ToString(dataGridJourneys.SelectedItem);
-            selectedItem = selectedItem.Remove(0, 17);
-            if (selectedItem.Contains("}"))
+            if (dataGridJourneys.SelectedItem != null) //this is weird
             {
-                selectedItem = selectedItem.Remove(selectedItem.Length - 2);
+
+                string selectedItem = Convert.ToString(dataGridJourneys.SelectedItem);
+                selectedItem = selectedItem.Remove(0, 17);
+                if (selectedItem.Contains("}"))
+                {
+                    selectedItem = selectedItem.Remove(selectedItem.Length - 2);
+                }
+
+                CAB.TempJourney.Destination = selectedItem;
+                uc.Content = UCOpret;
+                dataGridJourneys.UnselectAll();
             }
-            
-            CAB.TempJourney.Destination = selectedItem;
-            uc.Content = UCOpret;
         }
     }
 }

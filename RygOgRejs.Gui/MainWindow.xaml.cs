@@ -30,24 +30,25 @@ namespace RygOgRejs.Gui
         private UserControl currentUserControlCentre;
         private UserControl  currentUserControlRight;
         private WeatherAPI weatherAPI;
-        AppBizz CAB = new AppBizz();
+//        AppBizz CAB = new AppBizz();
         DataViewJourneys ucJourneys;
         DataViewTransactions ucTransaction;
         JourneyEnquiries DataJourney = new JourneyEnquiries();
         List<string> Distanition = new List<string>();
         AppBizz CRB = new AppBizz();
-
+        UIOpret iOpret;
 
         public MainWindow()
         {
             InitializeComponent();
             CRB.GetAllDestinations(); //Reads the destinations from the database into the list newDestination - Daniel 
             var DJ = DataJourney.GetAll();
+            iOpret = new UIOpret(CRB);
             foreach (var Data in DJ)
             {
                 Distanition.Add(Data.Destination);
             }
-            userControlCentre.Content = ucJourneys = new DataViewJourneys(Distanition, CRB, userControlRight);
+            userControlCentre.Content = ucJourneys = new DataViewJourneys(Distanition, CRB, userControlRight, iOpret);
             //ucTransaction = new DataViewTransactions(CRB, userControlRight);
             //macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
 
@@ -66,15 +67,18 @@ namespace RygOgRejs.Gui
 
         private void ButtonJourneys_Click(object sender, RoutedEventArgs e)
         {
-            CAB.JourneyOrTransaction = "journeys";
+            CRB.JourneyOrTransaction = "journeys";
             userControlCentre.Content = ucJourneys;
+            userControlRight.Content = null;
+            
         }
 
         private void ButtonTransactions_Click(object sender, RoutedEventArgs e)
         {
             ucTransaction = new DataViewTransactions(CRB, userControlRight);
-            CAB.JourneyOrTransaction = "transactions";
+            CRB.JourneyOrTransaction = "transactions";
             userControlCentre.Content = ucTransaction;
+            userControlRight.Content = null;
         }
 
         private void MenuHelpAbout_Click(object sender, RoutedEventArgs e)

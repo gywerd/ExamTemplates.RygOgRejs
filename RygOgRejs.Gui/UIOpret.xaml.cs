@@ -25,7 +25,7 @@ namespace RygOgRejs.Gui
         public UIOpret(AppBizz CAB)
         {
             InitializeComponent();
-            labelDestination.Content = CAB.TempJourney.Destination;
+            
             this.CAB = CAB;
         }
         private void btnClickOpretRejse(object sender, RoutedEventArgs e)
@@ -237,6 +237,11 @@ namespace RygOgRejs.Gui
                 textBoxBagage.BorderBrush = Brushes.Red;
                 textBoxBagage.BorderThickness = new Thickness(2);
             }
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            labelDestination.Content = CAB.TempJourney.Destination;
         }
     }
 }
