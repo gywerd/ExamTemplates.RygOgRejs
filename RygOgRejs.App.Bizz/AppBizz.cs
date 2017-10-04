@@ -75,7 +75,6 @@ namespace RygOgRejs.Bizz.App
         /// <param name="u"></param>
         public void CreateJourney() //removed params from method
         {
-            //Journey kage = new Journey(TempJourney.Destination, DateTime.Now, AntalAdults, AntalChildren, IsFirstclass,AntalLuggage, master.Id); //Added masterId to code - daniel //Commented out as it is redundant - daniel
             //MasterId is generated and added  to tempPayer, tempJourney & tempTransaction, when UIOpret is loaded
             //All data is written simutaneusly to tempPayer, tempJourney & tempTransaction, and price incl. VAT is calculated while manipulating GUI
             CJI.AddJourney(tempJourney); //Writes Journey data to DB

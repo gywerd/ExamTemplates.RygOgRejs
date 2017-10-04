@@ -28,7 +28,7 @@ namespace RygOgRejs.Gui
         }
         private void btnClickOpretRejse(object sender, RoutedEventArgs e)
         {
-
+            
         }
     }
 }
