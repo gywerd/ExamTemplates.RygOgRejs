@@ -193,7 +193,7 @@ namespace RygOgRejs.Bizz.App
         /// <summary>
         /// Loads content of selected payer and journey into tempPayer & tempJourney
         /// </summary>
-        private void LoadPayerAndJourney()
+        public void LoadPayerAndJourney()
         {
             tempJourney = CJI.GetJourney(master.Id);
             tempPayer = CPaI.GetPayerWithId(master.Id);
