@@ -26,6 +26,24 @@ namespace RygOgRejs.Gui
         {
             InitializeComponent();
             Appbizz = appbizz;
+            var Bizz = Appbizz.TempJourney;
+            labelDestination.Content = Bizz.Destination.ToString();
+            textBoxAdults.Text = Bizz.Adults.ToString();
+            textBoxChildren.Text = Bizz.Children.ToString();
+            textBoxBagage.Text = Bizz.LuggageAmount.ToString();
+            firstClassChecked.IsChecked = Bizz.IsFirstClass;
+            textBoxFirstName.Text = Appbizz.TempPayer.FirstName;
+            textBoxLastName.Text = Appbizz.TempPayer.LastName;
+        }
+
+        private void btnClickRet(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnClickSlet(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
