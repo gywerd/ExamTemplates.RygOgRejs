@@ -48,7 +48,7 @@ namespace RygOgRejs.Gui
                 Distanition.Add(Data.Destination);
             }
             userControlCentre.Content = ucJourneys = new DataViewJourneys(Distanition, CRB, userControlRight);
-            ucTransaction = new DataViewTransactions(CRB, userControlRight);
+            //ucTransaction = new DataViewTransactions(CRB, userControlRight);
             //macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
 
             //maybe change this 
@@ -74,6 +74,7 @@ namespace RygOgRejs.Gui
         private void ButtonTransactions_Click(object sender, RoutedEventArgs e)
         {
             //userControlRight.Content = null; jack stole FeelsBad
+            ucTransaction = new DataViewTransactions(CRB, userControlRight);
             CAB.JourneyOrTransaction = "transactions";
             userControlCentre.Content = ucTransaction;
         }

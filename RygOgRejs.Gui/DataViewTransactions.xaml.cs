@@ -22,11 +22,13 @@ namespace RygOgRejs.Gui
     {
         AppBizz CAB;
         UserControl uc;
+        UIOpdater UiOpdater;
         public DataViewTransactions(object b, UserControl UC)
         {
             InitializeComponent();
             CAB = (AppBizz)b;
             uc = UC;
+            dataGridTransaction.ItemsSource = CAB.Transactions;
         }
 
         private void TextBoxFilterTransactions_TextChanged(object sender, TextChangedEventArgs e)
