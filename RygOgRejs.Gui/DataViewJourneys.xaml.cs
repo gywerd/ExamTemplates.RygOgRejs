@@ -23,10 +23,8 @@ namespace RygOgRejs.Gui
     public partial class DataViewJourneys: UserControl
     {
         AppBizz CAB;
-        //UIInsertUpdate UCInsert;
         UIOpret UCOpret;
         UserControl uc;
-//        private string destination; 
 
 
         public DataViewJourneys(List<string> Entities, object b, UserControl UC)
@@ -41,11 +39,10 @@ namespace RygOgRejs.Gui
         {
 
         }
-        // Bitch Please kage
+
         private void dataGridJourneys_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string selectedItem = Convert.ToString(dataGridJourneys.SelectedItem);
-            //"{ Destinations = EKBI - BILLUND, Denmark }"
             selectedItem = selectedItem.Remove(0, 17);
             if (selectedItem.Contains("}"))
             {
@@ -55,11 +52,6 @@ namespace RygOgRejs.Gui
             CAB.TempJourney.Destination = selectedItem;
             UCOpret = new UIOpret(CAB);
             uc.Content = UCOpret;
-            //UCInsert = new UIInsertUpdate(CAB);
-            //uc.Content = UCInsert;
-
-           // UCInsert = new UIInsertUpdate(CAB);
-           // uc.Content = UCInsert;
         }
     }
 }
