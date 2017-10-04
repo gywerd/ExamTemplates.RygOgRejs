@@ -190,10 +190,13 @@ namespace RygOgRejs.Bizz.App
             transactions = CTI.GetAll();
         }
 
-        private void LoadPayerAndJourney(int id)
+        /// <summary>
+        /// Loads content of selected payer and journey into tempPayer & tempJourney
+        /// </summary>
+        private void LoadPayerAndJourney()
         {
-            tempPayer = payers[0];
-            tempJourney = journeys[0];
+            tempJourney = CJI.GetJourney(master.Id);
+            tempPayer = CPaI.GetPayerWithId(master.Id);
         }
 
         /// <summary>
