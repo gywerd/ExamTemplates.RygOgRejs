@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using RygOgRejs.Bizz.App;
 namespace RygOgRejs.Gui
 {
     /// <summary>
@@ -20,9 +20,13 @@ namespace RygOgRejs.Gui
     /// </summary>
     public partial class DataViewTransactions : UserControl
     {
-        public DataViewTransactions()
+        AppBizz CAB;
+        UserControl uc;
+        public DataViewTransactions(object b, UserControl UC)
         {
             InitializeComponent();
+            CAB = (AppBizz)b;
+            uc = UC;
         }
 
         private void TextBoxFilterTransactions_TextChanged(object sender, TextChangedEventArgs e)
