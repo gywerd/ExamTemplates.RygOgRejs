@@ -43,10 +43,16 @@
             <Border Margin="0,10,10,10" BorderThickness="1" BorderBrush="Black" Grid.Row="2" Grid.Column="1"/>
             <Border Margin="10,10,0,10" BorderThickness="1" BorderBrush="Black" Grid.Row="3" Grid.Column="0"/>
             <Border Margin="0,10,10,10" BorderThickness="1" BorderBrush="Black" Grid.Row="3" Grid.Column="1"/>
-            <CheckBox Margin="9,0,0,0" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-            <TextBox Margin="9,0,0,0" Grid.Row="1" Grid.Column="0" Height="25" Width="40" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-            <TextBox Margin="9,0,0,0" Grid.Row="2" Grid.Column="0" Height="25" Width="40" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-            <TextBox Margin="9,0,0,0" Grid.Row="3" Grid.Column="0" Height="25" Width="40" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+            <CheckBox x:Name="firstClassChecked"
+                      Margin="9,0,0,0" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                       Checked="CheckBox_Checked"
+                       Unloaded="CheckBox_Checked" />
+            <TextBox x:Name="textBoxAdults" Margin="9,0,0,0" Grid.Row="1" Grid.Column="0" Height="25" Width="40" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                     TextChanged="textBoxAdults_TextChanged" />
+            <TextBox x:Name="textBoxChildren" Margin="9,0,0,0" Grid.Row="2" Grid.Column="0" Height="25" Width="40" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                     TextChanged="textBoxChildren_TextChanged" />
+            <TextBox x:Name="textBoxBagage" Margin="9,0,0,0" Grid.Row="3" Grid.Column="0" Height="25" Width="40" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                     TextChanged="textBoxBagage_TextChanged" />
             <Label Content="1. Klasse" Grid.Row="0" Grid.Column="1" Margin="10" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
             <Label Content="Antal Voksne" Grid.Row="1" Grid.Column="1" Margin="10" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
             <Label Content="Antal Børn" Grid.Row="2" Grid.Column="1" Margin="10" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
@@ -73,8 +79,10 @@
             <Border Margin="0,12,10,12" BorderThickness="1" BorderBrush="Black" Grid.Row="1" Grid.Column="1"/>
             <Label Content="Fornavn:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
             <Label Content="Efternavn:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-            <TextBox Grid.Column="1" Grid.Row="0" Margin="15,24,25,24"/>
-            <TextBox Grid.Column="1" Grid.Row="1" Margin="15,24,25,24"/>
+            <TextBox x:Name="textBoxFirstName" Grid.Column="1" Grid.Row="0" Margin="15,24,25,24"
+                     TextChanged="textBoxFirstName_TextChanged" />
+            <TextBox x:Name="textBoxLastName" Grid.Column="1" Grid.Row="1" Margin="15,24,25,24"
+                     TextChanged="textBoxLastName_TextChanged" />
         </Grid>
         <Border Grid.Row="3" BorderThickness="1" BorderBrush="Black"/>
         <Grid Grid.Row="4">
