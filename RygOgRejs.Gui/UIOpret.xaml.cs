@@ -21,14 +21,222 @@ namespace RygOgRejs.Gui
     /// </summary>
     public partial class UIOpret : UserControl
     {
+        AppBizz CAB;
         public UIOpret(AppBizz CAB)
         {
             InitializeComponent();
             labelDestination.Content = CAB.TempJourney.Destination;
+            this.CAB = CAB;
         }
         private void btnClickOpretRejse(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            //yes Sir. jack
+            if (firstClassChecked.IsChecked == true)
+            {
+                CAB.TempJourney.IsFirstClass = true;
+            }
+            else
+            {
+                CAB.TempJourney.IsFirstClass = false;
+            }
+
+                
+        }
+        //thx to jack for his validation #LAZY
+        private void textBoxLastName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(textBoxLastName.Text))
+            {
+                bool Gyldig = false;
+                foreach (char c in textBoxLastName.Text)
+                {
+                    if (!char.IsLetter(c))
+                    {
+                        Gyldig = false;
+                        textBoxLastName.BorderBrush = Brushes.Red;
+                        textBoxLastName.BorderThickness = new Thickness(2);
+                        MessageBox.Show("Fornavn må ikke indeholde ugyldige tegn eller tal.");
+                        textBoxLastName.Text = textBoxLastName.Text.Remove(textBoxLastName.Text.Length - 1);
+                        textBoxLastName.CaretIndex = textBoxLastName.Text.Length;
+                    }
+                    else
+                    {
+                        Gyldig = true;
+                        textBoxLastName.BorderBrush = Brushes.Transparent;
+                        textBoxLastName.BorderThickness = new Thickness(1);
+                    }
+                }
+                if (Gyldig == true)
+                {
+                    textBoxLastName.BorderBrush = Brushes.Green;
+                    textBoxLastName.BorderThickness = new Thickness(2);
+                    CAB.TempPayer.LastName = textBoxLastName.Text;
+                }
+
+            }
+            else
+            {
+                textBoxLastName.BorderBrush = Brushes.Red;
+                textBoxLastName.BorderThickness = new Thickness(2);
+            }
+        }
+
+        //thx to jack for his validation #LAZY
+        private void textBoxFirstName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBoxFirstName.Text))
+            {
+                bool gyldig = false;
+                foreach (char c in textBoxFirstName.Text)
+                {
+                    if (!char.IsLetter(c))
+                    {
+                        gyldig = false;
+                        textBoxFirstName.BorderBrush = Brushes.Red;
+                        textBoxFirstName.BorderThickness = new Thickness(2);
+                        MessageBox.Show("Fornavn må ikke indeholde ugyldige tegn eller tal.");
+                        textBoxFirstName.Text = textBoxFirstName.Text.Remove(textBoxFirstName.Text.Length - 1);
+                        textBoxFirstName.CaretIndex = textBoxFirstName.Text.Length; //amazing
+                    }
+                    else
+                    {
+                        gyldig = true;
+                        textBoxFirstName.BorderBrush = Brushes.Transparent;
+                        textBoxFirstName.BorderThickness = new Thickness(1);
+                    }
+
+                }
+                if (gyldig == true)
+                {
+                    textBoxFirstName.BorderBrush = Brushes.Green;
+                    textBoxFirstName.BorderThickness = new Thickness(2);
+                    CAB.TempPayer.FirstName = textBoxFirstName.Text;
+                }
+            }
+            else
+            {
+                textBoxFirstName.BorderBrush = Brushes.Red;
+                textBoxFirstName.BorderThickness = new Thickness(2);
+            }
+        }
+
+        private void textBoxAdults_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBoxAdults.Text))
+            {
+                bool gyldig = false;
+                foreach (char c in textBoxAdults.Text)
+                {
+                    if (!char.IsDigit(c))
+                    {
+                        gyldig = false;
+                        textBoxAdults.BorderBrush = Brushes.Red;
+                        textBoxAdults.BorderThickness = new Thickness(2);
+                        MessageBox.Show("må ikke indeholde ugyldige bogstaver eller tegn");
+                        textBoxAdults.Text = textBoxAdults.Text.Remove(textBoxAdults.Text.Length - 1);
+                        textBoxAdults.CaretIndex = textBoxAdults.Text.Length; //amazing
+                    }
+                    else
+                    {
+                        gyldig = true;
+                        textBoxAdults.BorderBrush = Brushes.Transparent;
+                        textBoxAdults.BorderThickness = new Thickness(1);
+                    }
+
+                }
+                if (gyldig == true)
+                {
+                    textBoxAdults.BorderBrush = Brushes.Green;
+                    textBoxAdults.BorderThickness = new Thickness(2);
+                    CAB.TempJourney.Adults = Convert.ToInt32(textBoxAdults.Text);
+                }
+            }
+            else
+            {
+                textBoxAdults.BorderBrush = Brushes.Red;
+                textBoxAdults.BorderThickness = new Thickness(2);
+            }
+        }
+
+        private void textBoxChildren_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBoxChildren.Text))
+            {
+                bool gyldig = false;
+                foreach (char c in textBoxChildren.Text)
+                {
+                    if (!char.IsDigit(c))
+                    {
+                        gyldig = false;
+                        textBoxChildren.BorderBrush = Brushes.Red;
+                        textBoxChildren.BorderThickness = new Thickness(2);
+                        MessageBox.Show("må ikke indeholde ugyldige bogstaver eller tegn");
+                        textBoxChildren.Text = textBoxChildren.Text.Remove(textBoxChildren.Text.Length - 1);
+                        textBoxChildren.CaretIndex = textBoxChildren.Text.Length; //amazing
+                    }
+                    else
+                    {
+                        gyldig = true;
+                        textBoxChildren.BorderBrush = Brushes.Transparent;
+                        textBoxChildren.BorderThickness = new Thickness(1);
+                    }
+
+                }
+                if (gyldig == true)
+                {
+                    textBoxChildren.BorderBrush = Brushes.Green;
+                    textBoxChildren.BorderThickness = new Thickness(2);
+                    CAB.TempJourney.Children = Convert.ToInt32(textBoxChildren.Text);
+                }
+            }
+            else
+            {
+                textBoxChildren.BorderBrush = Brushes.Red;
+                textBoxChildren.BorderThickness = new Thickness(2);
+            }
+        }
+
+        private void textBoxBagage_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBoxBagage.Text))
+            {
+                bool gyldig = false;
+                foreach (char c in textBoxBagage.Text)
+                {
+                    if (!char.IsDigit(c))
+                    {
+                        gyldig = false;
+                        textBoxBagage.BorderBrush = Brushes.Red;
+                        textBoxBagage.BorderThickness = new Thickness(2);
+                        MessageBox.Show("må ikke indeholde ugyldige bogstaver eller tegn");
+                        textBoxBagage.Text = textBoxBagage.Text.Remove(textBoxBagage.Text.Length - 1);
+                        textBoxBagage.CaretIndex = textBoxBagage.Text.Length; //amazing
+                    }
+                    else
+                    {
+                        gyldig = true;
+                        textBoxBagage.BorderBrush = Brushes.Transparent;
+                        textBoxBagage.BorderThickness = new Thickness(1);
+                    }
+
+                }
+                if (gyldig == true)
+                {
+                    textBoxBagage.BorderBrush = Brushes.Green;
+                    textBoxBagage.BorderThickness = new Thickness(2);
+                    CAB.TempJourney.LuggageAmount = Convert.ToSingle(textBoxBagage.Text);
+                }
+            }
+            else
+            {
+                textBoxBagage.BorderBrush = Brushes.Red;
+                textBoxBagage.BorderThickness = new Thickness(2);
+            }
         }
     }
 }

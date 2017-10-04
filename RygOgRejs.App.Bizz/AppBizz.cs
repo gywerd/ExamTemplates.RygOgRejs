@@ -193,7 +193,7 @@ namespace RygOgRejs.Bizz.App
         /// <summary>
         /// Method that inserts a dummy entry in the dummy table Master in DB to create a MasterID - then removes the dummy entry
         /// </summary>
-        public void CreateMasterid(AppBizz kage)
+        public void CreateMasterid()
         {
             CMIE.CreateID(macAddress);
             master.Id = CMIE.GetId();

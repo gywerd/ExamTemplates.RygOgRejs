@@ -26,7 +26,7 @@ namespace RygOgRejs.Gui
         //UIInsertUpdate UCInsert;
         UIOpret UCOpret;
         UserControl uc;
-        private string destination; 
+//        private string destination; 
 
 
         public DataViewJourneys(List<string> Entities, object b, UserControl UC)
