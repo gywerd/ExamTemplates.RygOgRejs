@@ -23,7 +23,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <param name="t">Transactions</param>
         public void AddTransaction(Transactions t)
         {
-            string query = $"INSERT INTO Transaction (Amount, JourneyId, PayerID, MasterId) VALUES ({t.Amount}, {t.JourneyId}, {t.PayerId}, {t.MasterId})";
+            string query = $"INSERT INTO Transactions (Amount, JourneyId, PayerID, MasterId) VALUES ({t.Amount}, {t.JourneyId}, {t.PayerId}, {t.MasterId})";
             executor.ExecuteNonQuery(query);
         }
 
@@ -33,7 +33,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <param name="id">int</param>
         public void DeleteTransaction(int tid)
         {
-            string query = $"DELETE FROM Transaction WHERE TransactionId = {tid}";
+            string query = $"DELETE FROM Transactions WHERE TransactionId = {tid}";
             executor.ExecuteNonQuery(query);
         }
 
@@ -43,7 +43,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <returns>ObservableCollection</returns>
         public ObservableCollection<Transactions> GetAll()
         {
-            string query = "SELECT * FROM Transaction";
+            string query = "SELECT * FROM Transactions";
             ObservableCollection<Transactions> transCol = new ObservableCollection<Transactions>();
             DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader();
@@ -68,7 +68,7 @@ namespace RygOgRejs.IO.DataAccess.App
         public Transactions GetTransaction(int id)
         {
             Transactions t = new Transactions();
-            string query = $"SELECT * FROM Transaction WHERE TransactionID = {id}";
+            string query = $"SELECT * FROM Transactions WHERE TransactionID = {id}";
             DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader();
             while (reader.Read())
@@ -89,7 +89,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <param name="t">Transactions</param>
         public void UpdateTransaction(Transactions t)
         {
-            string query = $"UPDATE Transaction SET Amount = {t.Amount}, JourneyId = {t.JourneyId}, PayerId = {t.PayerId} WHERE TransactionId = {t.TransactionId}";
+            string query = $"UPDATE Transactions SET Amount = {t.Amount}, JourneyId = {t.JourneyId}, PayerId = {t.PayerId} WHERE TransactionId = {t.TransactionId}";
             executor.ExecuteNonQuery(query);
         }
         #endregion
