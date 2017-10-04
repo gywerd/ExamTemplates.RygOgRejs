@@ -190,6 +190,12 @@ namespace RygOgRejs.Bizz.App
             transactions = CTI.GetAll();
         }
 
+        private void LoadPayerAndJourney(int id)
+        {
+            tempPayer = payers[0];
+            tempJourney = journeys[0];
+        }
+
         /// <summary>
         /// Method that inserts a dummy entry in the dummy table Master in DB to create a MasterID - then removes the dummy entry
         /// </summary>
@@ -285,6 +291,7 @@ namespace RygOgRejs.Bizz.App
         }
 
         public List<Destination> NewDestinations { get => newDestinations; set => newDestinations = value; }
+        public Master Master { get => master; set => master = value; }
         #endregion
 
         #region Internal Classes
