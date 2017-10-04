@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RygOgRejs.Bizz.App;
 
 namespace RygOgRejs.Gui
 {
@@ -20,9 +21,11 @@ namespace RygOgRejs.Gui
     /// </summary>
     public partial class UIOpdater : UserControl
     {
-        public UIOpdater()
+        AppBizz Appbizz;
+        public UIOpdater(AppBizz appbizz)
         {
             InitializeComponent();
+            Appbizz = appbizz;
         }
     }
 }

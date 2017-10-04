@@ -26,13 +26,13 @@ namespace RygOgRejs.Gui
         UIOpret UCOpret;
         UserControl uc;
 
-
         public DataViewJourneys(List<string> Entities, object b, UserControl UC)
         {
             InitializeComponent();
             CAB = (AppBizz)b;
             uc = UC;
             dataGridJourneys.ItemsSource = CAB.Destinations.ToList().Select(Destinations => new { Destinations });
+            UCOpret = new UIOpret(CAB);
         }
 
         private void TextBoxFilterJourneys_TextChanged(object sender, TextChangedEventArgs e)
@@ -50,7 +50,6 @@ namespace RygOgRejs.Gui
             }
             
             CAB.TempJourney.Destination = selectedItem;
-            UCOpret = new UIOpret(CAB);
             uc.Content = UCOpret;
         }
     }

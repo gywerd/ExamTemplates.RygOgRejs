@@ -66,14 +66,12 @@ namespace RygOgRejs.Gui
 
         private void ButtonJourneys_Click(object sender, RoutedEventArgs e)
         {
-            //userControlRight.Content = null; jack stole FeelsBad
             CAB.JourneyOrTransaction = "journeys";
             userControlCentre.Content = ucJourneys;
         }
 
         private void ButtonTransactions_Click(object sender, RoutedEventArgs e)
         {
-            //userControlRight.Content = null; jack stole FeelsBad
             ucTransaction = new DataViewTransactions(CRB, userControlRight);
             CAB.JourneyOrTransaction = "transactions";
             userControlCentre.Content = ucTransaction;

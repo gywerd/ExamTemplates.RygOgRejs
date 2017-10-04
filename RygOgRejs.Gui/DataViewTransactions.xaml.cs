@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RygOgRejs.Bizz.App;
+using RygOgRejs.Bizz.Entities;
 namespace RygOgRejs.Gui
 {
     /// <summary>
@@ -22,13 +23,27 @@ namespace RygOgRejs.Gui
     {
         AppBizz CAB;
         UserControl uc;
-        UIOpdater UiOpdater;
-        public DataViewTransactions(object b, UserControl UC)
+        UIOpdater UCOpdater;
+        public DataViewTransactions(object appbizz, UserControl UC)
         {
             InitializeComponent();
-            CAB = (AppBizz)b;
+            CAB = (AppBizz)appbizz;
             uc = UC;
-            dataGridTransaction.ItemsSource = CAB.Transactions;
+            UCOpdater = new UIOpdater(CAB);
+            dataGridTransaction.ItemsSource = CAB.Payers;
+            DataGridTextColumn FirstName = new DataGridTextColumn()
+            {
+                Header = "Fornavn",
+                Binding = new Binding("FirstName"),
+            };
+            DataGridTextColumn LastName = new DataGridTextColumn()
+            {
+                Header = "Efternavn",
+                Binding = new Binding("LastName")
+            };
+            dataGridTransaction.Columns.Add(FirstName);
+            dataGridTransaction.Columns.Add(LastName);
+
         }
 
         private void TextBoxFilterTransactions_TextChanged(object sender, TextChangedEventArgs e)
@@ -38,6 +53,10 @@ namespace RygOgRejs.Gui
 
         private void DataGridTransaction_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //Payer Payerid = new Payer();
+            Payer Payerid = (Payer)dataGridTransaction.SelectedItem;
+            CAB.TempPayer.PayerId = Payerid.PayerId;
+            uc.Content = UCOpdater;
 
         }
     }
