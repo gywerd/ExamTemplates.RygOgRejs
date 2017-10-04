@@ -53,8 +53,8 @@ namespace RygOgRejs.Gui
 
         private void DataGridTransaction_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Payer Payerid = new Payer();
             CAB.TempTransaction = (Transactions)dataGridTransaction.SelectedItem;
+            CAB.Master.Id = CAB.TempTransaction.MasterId;
             uc.Content = UCOpdater;
 
         }
