@@ -26,7 +26,8 @@ namespace RygOgRejs.Gui
         {
             InitializeComponent();
             Appbizz = appbizz;
-            var Bizz = Appbizz.TempJourney;
+            Appbizz.LoadPayerAndJourney();
+            var Bizz = Appbizz.TempJourney; // Fejl her
             labelDestination.Content = Bizz.Destination.ToString();
             textBoxAdults.Text = Bizz.Adults.ToString();
             textBoxChildren.Text = Bizz.Children.ToString();
