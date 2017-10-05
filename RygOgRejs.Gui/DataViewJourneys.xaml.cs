@@ -54,6 +54,10 @@ namespace RygOgRejs.Gui
                 }
 
                 CAB.TempJourney.Destination = selectedItem;
+                CAB.CreateMasterid();
+                CAB.TempJourney.MasterId = CAB.Master.Id;
+                CAB.TempPayer.MasterID = CAB.Master.Id;
+                CAB.TempTransaction.MasterId = CAB.Master.Id;
                 uc.Content = UCOpret = new UIOpret(CAB);
                 dataGridJourneys.UnselectAll();
             }

@@ -49,7 +49,6 @@ namespace RygOgRejs.Gui
                 Distanition.Add(Data.Destination);
             }
             userControlCentre.Content = ucJourneys = new DataViewJourneys(Distanition, CRB, userControlRight, iOpret);
-            CRB.CreateMasterid();
             //ucTransaction = new DataViewTransactions(CRB, userControlRight);
             //macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
 

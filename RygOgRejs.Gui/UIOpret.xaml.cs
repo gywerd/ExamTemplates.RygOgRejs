@@ -91,6 +91,7 @@ namespace RygOgRejs.Gui
                 {
                     textBoxLastName.BorderBrush = Brushes.Green;
                     textBoxLastName.BorderThickness = new Thickness(2);
+
                     CAB.TempPayer.LastName = textBoxLastName.Text;
                 }
 

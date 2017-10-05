@@ -62,6 +62,7 @@ namespace RygOgRejs.Bizz.Entities
                 foreach(char c in value)
                     if(!char.IsLetter(c))
                         throw new ArgumentOutOfRangeException();
+                firstName = value;
             }
         }
         public string LastName
@@ -74,6 +75,7 @@ namespace RygOgRejs.Bizz.Entities
                 foreach (char c in value)
                     if (!char.IsLetter(c))
                         throw new ArgumentOutOfRangeException();
+                lastName = value;
             }
         }
         public int PayerId { get => payerId; set => payerId = value; }
