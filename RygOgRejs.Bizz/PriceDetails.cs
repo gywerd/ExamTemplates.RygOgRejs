@@ -184,6 +184,8 @@ namespace RygOgRejs.Bizz.Entities
             {
                 firstClassAccumulatedPrice = MultiplyFloat(AddPersons(j), GetFirstClassPrice(j, p));
             }
+            else
+                firstClassAccumulatedPrice = 0;
             accumulatedPrice = accumulatedPrice + firstClassAccumulatedPrice;
             float luggageAccumulatedPrice = MultiplyFloat(GetLuggageOverloadWeight(j,p), GetLuggagePrice(j, p));
             accumulatedPrice = accumulatedPrice + luggageAccumulatedPrice;
