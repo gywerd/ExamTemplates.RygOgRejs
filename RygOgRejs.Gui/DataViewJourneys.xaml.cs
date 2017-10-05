@@ -54,7 +54,7 @@ namespace RygOgRejs.Gui
                 }
 
                 CAB.TempJourney.Destination = selectedItem;
-                uc.Content = UCOpret;
+                uc.Content = UCOpret = new UIOpret(CAB);
                 dataGridJourneys.UnselectAll();
             }
         }

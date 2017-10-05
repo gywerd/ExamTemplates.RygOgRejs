@@ -25,7 +25,7 @@ namespace RygOgRejs.Gui
         public UIOpret(AppBizz CAB)
         {
             InitializeComponent();
-            
+            //labelDestination.Content = CAB.TempJourney.Destination;
             this.CAB = CAB;
         }
         private void btnClickOpretRejse(object sender, RoutedEventArgs e)
