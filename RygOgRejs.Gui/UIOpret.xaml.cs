@@ -254,12 +254,67 @@ namespace RygOgRejs.Gui
 
         private void textBoxIndbetalt_TextChanged(object sender, TextChangedEventArgs e)
         {
-            int betalt= Convert.ToInt32(textBoxIndbetalt.Text);
-            int totalPris = Convert.ToInt32(textBoxTotalPris.Text);
-            if (betalt - totalPris < 0)
-                textBoxRetur.Text = 0.ToString();
+            int betalt = 0;
+            if (!string.IsNullOrEmpty(textBoxIndbetalt.Text))
+            {
+                bool gyldig = false;
+                foreach (char c in textBoxIndbetalt.Text)
+                {
+                    if (!char.IsDigit(c))
+                    {
+                        gyldig = false;
+                        textBoxIndbetalt.BorderBrush = Brushes.Red;
+                        textBoxIndbetalt.BorderThickness = new Thickness(2);
+                        MessageBox.Show("må ikke indeholde ugyldige bogstaver eller tegn");
+                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Remove(textBoxIndbetalt.Text.Length - 1);
+                        textBoxIndbetalt.CaretIndex = textBoxIndbetalt.Text.Length; //amazing
+                    }
+                    else
+                    {
+                        if(Convert.ToInt64(textBoxIndbetalt.Text) < int.MaxValue)
+                        {   gyldig = true;
+                            textBoxIndbetalt.BorderBrush = Brushes.Transparent;
+                            textBoxIndbetalt.BorderThickness = new Thickness(1);
+                        }
+                        else
+                        {
+                            gyldig = false;
+                            textBoxIndbetalt.BorderBrush = Brushes.Red;
+                            textBoxIndbetalt.BorderThickness = new Thickness(2);
+                            MessageBox.Show("Værdien er for stor");
+                            textBoxIndbetalt.Text = textBoxIndbetalt.Text.Remove(textBoxIndbetalt.Text.Length - 1);
+                            textBoxIndbetalt.CaretIndex = textBoxIndbetalt.Text.Length;
+                        }
+                        
+
+                    }
+
+                }
+                if (gyldig == true)
+                {
+                    textBoxIndbetalt.BorderBrush = Brushes.Green;
+                    textBoxIndbetalt.BorderThickness = new Thickness(2);
+                    betalt = Convert.ToInt32(textBoxIndbetalt.Text);
+                    if (!string.IsNullOrWhiteSpace(textBoxTotalPris.Text))
+                    {
+                        int totalPris = Convert.ToInt32(textBoxTotalPris.Text);
+                        if (betalt - totalPris < 0)
+                            textBoxRetur.Text = "Ikke nok betalt";
+                        else
+                            textBoxRetur.Text = (betalt - totalPris).ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Udfyld overstående skema først");
+                    }
+                }
+            }
             else
-                textBoxRetur.Text = (betalt - totalPris).ToString();
+            {
+                textBoxIndbetalt.BorderBrush = Brushes.Red;
+                textBoxIndbetalt.BorderThickness = new Thickness(2);
+            }
+
  //           textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempJourney, CAB.Transactions, CAB.Prices).ToString();
         }
     }
