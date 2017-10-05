@@ -63,12 +63,12 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <summary>
         /// Method that loads a specific row in the database 
         /// </summary>
-        /// <param name="id">int</param>
+        /// <param name="masterId">int</param>
         /// <returns>Transaction</returns>
-        public Transactions GetTransaction(int id)
+        public Transactions GetTransaction(int masterId)
         {
             Transactions t = new Transactions();
-            string query = $"SELECT * FROM Transactions WHERE TransactionID = {id}";
+            string query = $"SELECT * FROM Transactions WHERE MasterID = {masterId}";
             DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader();
             while (reader.Read())
