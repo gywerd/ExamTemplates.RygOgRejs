@@ -48,7 +48,7 @@ namespace RygOgRejs.Bizz.Entities
             {
                 try
                 {
-                    if (value <= 0)
+                    if (value >= 0)
                     {
                         id = value;
                     }

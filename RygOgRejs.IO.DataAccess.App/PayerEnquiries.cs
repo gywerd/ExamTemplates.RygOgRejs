@@ -72,7 +72,7 @@ namespace RygOgRejs.IO.DataAccess.App
             DataTableReader reader = data.CreateDataReader(); //best
             while (reader.Read())
             {
-                int tid = Convert.ToInt32(reader["TransactionId"]);
+                int tid = Convert.ToInt32(reader["PayerId"]);
                 string firstName = reader["FirstName"].ToString();
                 string lastName = reader["LastName"].ToString();
                 int masterId = Convert.ToInt32(reader["MasterId"]);

@@ -13,6 +13,7 @@ namespace RygOgRejs.Bizz.Entities
         private int payerId;
         private string firstName;
         private string lastName;
+        private int masterID;
         #endregion
 
         #region Constructors
@@ -31,7 +32,7 @@ namespace RygOgRejs.Bizz.Entities
         {
             this.firstName = firstName;
             this.lastName = lastName;
-            base.Id = mid;
+            MasterID = mid;
         }
 
         /// <summary>
@@ -46,7 +47,7 @@ namespace RygOgRejs.Bizz.Entities
             this.payerId = id;
             this.firstName = firstName;
             this.lastName = lastName;
-            base.Id = mid;
+            MasterID = mid;
         }
         #endregion
 
@@ -76,7 +77,7 @@ namespace RygOgRejs.Bizz.Entities
             }
         }
         public int PayerId { get => payerId; set => payerId = value; }
-        public int MasterID { get => base.Id; set => base.Id = value; }
+        public int MasterID { get => masterID; set => masterID = value; }
 
         #endregion
     }

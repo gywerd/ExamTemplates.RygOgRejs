@@ -29,7 +29,7 @@ namespace RygOgRejs.Gui
             InitializeComponent();
             CAB = (AppBizz)appbizz;
             uc = UC;
-            UCOpdater = new UIOpdater(CAB);
+
             dataGridTransaction.ItemsSource = CAB.Payers;
             DataGridTextColumn FirstName = new DataGridTextColumn()
             {
@@ -53,8 +53,10 @@ namespace RygOgRejs.Gui
 
         private void DataGridTransaction_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CAB.TempTransaction = (Transactions)dataGridTransaction.SelectedItem;
-            CAB.Master.Id = CAB.TempTransaction.MasterId;
+            CAB.TempPayer = (Payer)dataGridTransaction.SelectedItem; //payer 
+            CAB.Master.Id = CAB.TempPayer.MasterID;
+            //CAB.GiveMasterID(CAB.TempPayer.MasterID); //payer
+            UCOpdater = new UIOpdater(CAB);
             uc.Content = UCOpdater;
 
         }

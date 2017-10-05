@@ -26,7 +26,7 @@
             ColumnWidth="1*"
             Grid.Row="1"
             IsReadOnly="True"
-            Margin="5" 
+            Margin="5"
             AutoGenerateColumns="False"
             SelectionChanged="DataGridTransaction_SelectionChanged" 
             />

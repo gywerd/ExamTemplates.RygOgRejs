@@ -17,7 +17,7 @@ namespace RygOgRejs.Bizz.App
             #region Ordinary Fields
             private string destination; //string that holds a destination
             private string journeyOrTransaction; //string that controls how UIInsertUpdate & UIPayment acts
-            private Master master = new Master();
+            private Master master = new Master(); //didiasmådijsaio
             private Journey tempJourney = new Journey(); //string to temporarily store current journey information, before writing it to the database
             private Payer tempPayer = new Payer(); //string to temporarily store current payer information, before writing it to the database
             private Transactions tempTransaction = new Transactions(); //string to temporarily store current transaction information, before writing it to the database
@@ -208,7 +208,10 @@ namespace RygOgRejs.Bizz.App
             master.Id = CMIE.GetId();
             CMIE.DeleteId(master.Id);
         }
-
+        public void GiveMasterID(int id)
+        {
+            CMI.Id = id;
+        }
         /// <summary>
         /// Code that clears & reloads content of ObservAbleCollections - used after saving to the database
         /// </summary>
