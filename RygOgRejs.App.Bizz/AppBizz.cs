@@ -15,11 +15,12 @@ namespace RygOgRejs.Bizz.App
     {
         #region Fields
             #region Ordinary Fields
+            private Totals dailyTotals; //object that holds data, that can be bound to left panel in MainWindow
             private string destination; //string that holds a destination
             private string journeyOrTransaction; //string that controls how UIInsertUpdate & UIPayment acts
-            private Master master = new Master(); //didiasmådijsaio
-            private Journey tempJourney = new Journey(); //string to temporarily store current journey information, before writing it to the database
-            private Payer tempPayer = new Payer(); //string to temporarily store current payer information, before writing it to the database
+            private Master master = new Master(); //object to store masterID within
+            private Journey tempJourney = new Journey(); //object to temporarily store current journey information, before writing it to the database
+            private Payer tempPayer = new Payer(); //object to temporarily store current payer information, before writing it to the database   
             private Transactions tempTransaction = new Transactions(); //string to temporarily store current transaction information, before writing it to the database
             private Transactions tempTransactionUpdate = new Transactions(); //string to temporarily store current transaction information, before writing it to the database
             private PriceDetails tempPriceDetails = new PriceDetails(); //string to temporarily store current pricedetails, to show on GUI
@@ -78,10 +79,11 @@ namespace RygOgRejs.Bizz.App
         {
             //MasterId is generated and added  to tempPayer, tempJourney & tempTransaction, when UIOpret is loaded
             //All data is written simutaneusly to tempPayer, tempJourney & tempTransaction, and price incl. VAT is calculated while manipulating GUI
+            CPaI.AddPayer(tempPayer); //Writes Journey data to DB
             CJI.AddJourney(tempJourney); //Writes Journey data to DB
             CTI.AddTransaction(tempTransaction);  //Writes Transaction data to DB
             RefreshObservableCollections(); //Updates content of ObservableCollections from DB
-            //Afterwards, a function that update priceDetails for GUI must be executed
+            UpdateDailyTotals(); //updates content of dailyTotals
             ClearTemporaryFields(); //Clears content of tempPayer, tempJourney & tempTransaction
         }
 
@@ -94,7 +96,7 @@ namespace RygOgRejs.Bizz.App
         {
             CJI.DeleteJourney(tempJourney.JourneyId); //dis aint working - changed from GetJourney to DeleteJourney ;)
             CTI.DeleteTransaction(tempTransaction.TransactionId);
-            //Afterwards, a function that update Pricedetails for GUI must be executed
+            UpdateDailyTotals(); //updates content of dailyTotals
             RefreshObservableCollections(); //Updates content of ObservableCollections from DB
             ClearTemporaryFields(); //Clears content of tempPayer, tempJourney & tempTransaction
             throw new NotImplementedException();
@@ -110,8 +112,8 @@ namespace RygOgRejs.Bizz.App
             //MasterId is loaded into tempPayer, tempJourney & tempTransaction, when UIUpdate is loaded
             //All data is written simutaneusly to tempPayer, tempJourney & tempTransaction, and refund price incl. VAT is calculated while manipulating GUI
             CJI.UpdateJourney(tempJourney); //Writes content of tempJourney to Database
-            CTI.UpdateTransaction(tempTransaction); //Writes content of tempJourney to Database
-            //Afterwards, a function that update Pricedetails for GUI must be executed
+            CTI.UpdateTransaction(tempTransactionUpdate); //Writes content of tempJourney to Database
+            UpdateDailyTotals(); //updates content of dailyTotals
             RefreshObservableCollections(); //Updates content of ObservableCollections from DB
             ClearTemporaryFields(); //Clears content of tempPayer, tempJourney & tempTransaction
             throw new NotImplementedException();
@@ -227,6 +229,46 @@ namespace RygOgRejs.Bizz.App
             GetPrices();
             GetTransactions();
         }
+
+
+        public void UpdateDailyTotals()
+        {
+            //RefreshSoldTravels();
+            dailyTotals.AmountOfSoldTravels = transactions.Count;
+            //RefreshAmountPassengers();
+            dailyTotals.AmountOfPassengers = transactions.Count * 5;
+            //RefreshAmountOfCOfAdults();
+            dailyTotals.AmountOfAdults = transactions.Count * 3;
+            //RefreshAmountOfChildren();
+            dailyTotals.AmountofChildren = transactions.Count * 2;
+            //RefresTotalSaleAmount();
+            dailyTotals.TotalSaleAmount = transactions.Count * 5432;
+        }
+
+        private void RefreshAmountOfCOfAdults()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void RefresTotalSaleAmount()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void RefreshAmountOfChildren()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void RefreshAmountPassengers()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void RefreshSoldTravels()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region Properties
@@ -296,10 +338,10 @@ namespace RygOgRejs.Bizz.App
             }
             set => transactions = value;
         }
-
         public List<Destination> NewDestinations { get => newDestinations; set => newDestinations = value; }
         public Master Master { get => master; set => master = value; }
         public Transactions TempTransactionUpdate { get => tempTransactionUpdate; set => tempTransactionUpdate = value; }
+        public Totals DailyTotals { get => dailyTotals; set => dailyTotals = value; }
         #endregion
 
         #region Internal Classes
