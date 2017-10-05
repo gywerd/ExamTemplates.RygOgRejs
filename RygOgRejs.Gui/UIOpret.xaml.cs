@@ -25,12 +25,26 @@ namespace RygOgRejs.Gui
         public UIOpret(AppBizz CAB)
         {
             InitializeComponent();
-            //labelDestination.Content = CAB.TempJourney.Destination;
             this.CAB = CAB;
         }
         private void btnClickOpretRejse(object sender, RoutedEventArgs e)
         {
-            
+            try
+            {
+                if (Convert.ToInt32(textBoxIndbetalt.Text) >= Convert.ToInt32(textBoxTotalPris.Text))
+                {
+                    CAB.CreateJourney();
+                }
+                else
+                {
+                    MessageBox.Show("Der er ikke Betalt Nok");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Du Magnler at udfylde noget.");
+            }
+
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
