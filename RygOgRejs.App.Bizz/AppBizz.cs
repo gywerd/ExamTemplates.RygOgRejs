@@ -21,6 +21,7 @@ namespace RygOgRejs.Bizz.App
             private Journey tempJourney = new Journey(); //string to temporarily store current journey information, before writing it to the database
             private Payer tempPayer = new Payer(); //string to temporarily store current payer information, before writing it to the database
             private Transactions tempTransaction = new Transactions(); //string to temporarily store current transaction information, before writing it to the database
+            private Transactions tempTransactionUpdate = new Transactions(); //string to temporarily store current transaction information, before writing it to the database
             private PriceDetails tempPriceDetails = new PriceDetails(); //string to temporarily store current pricedetails, to show on GUI
             private string macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault(); //string where current macadress is stored
             #endregion
@@ -193,10 +194,10 @@ namespace RygOgRejs.Bizz.App
         /// <summary>
         /// Loads content of selected payer and journey into tempPayer & tempJourney
         /// </summary>
-        public void LoadPayerAndJourney()
+        public void LoadTransactionAndJourney()
         {
+            tempTransaction = CTI.GetTransaction(master.Id);
             tempJourney = CJI.GetJourney(master.Id);
-            tempPayer = CPaI.GetPayerWithId(master.Id);
         }
 
         /// <summary>
