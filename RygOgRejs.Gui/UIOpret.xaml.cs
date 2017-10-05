@@ -254,6 +254,12 @@ namespace RygOgRejs.Gui
 
         private void textBoxIndbetalt_TextChanged(object sender, TextChangedEventArgs e)
         {
+            int betalt= Convert.ToInt32(textBoxIndbetalt.Text);
+            int totalPris = Convert.ToInt32(textBoxTotalPris.Text);
+            if (betalt - totalPris < 0)
+                textBoxRetur.Text = 0.ToString();
+            else
+                textBoxRetur.Text = (betalt - totalPris).ToString();
  //           textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempJourney, CAB.Transactions, CAB.Prices).ToString();
         }
     }
