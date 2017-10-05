@@ -299,6 +299,7 @@ namespace RygOgRejs.Bizz.App
 
         public List<Destination> NewDestinations { get => newDestinations; set => newDestinations = value; }
         public Master Master { get => master; set => master = value; }
+        public Transactions TempTransactionUpdate { get => tempTransactionUpdate; set => tempTransactionUpdate = value; }
         #endregion
 
         #region Internal Classes
