@@ -21,10 +21,12 @@ namespace RygOgRejs.Gui
     /// </summary>
     public partial class UIOpret : UserControl
     {
+        UserControl UC;
         AppBizz CAB;
-        public UIOpret(AppBizz CAB)
+        public UIOpret(AppBizz CAB, UserControl UC)
         {
             InitializeComponent();
+            this.UC = UC;
             this.CAB = CAB;
         }
         private void btnClickOpretRejse(object sender, RoutedEventArgs e)
@@ -37,6 +39,9 @@ namespace RygOgRejs.Gui
                     CAB.TempTransaction.Amount = Convert.ToSingle(textBoxIndbetalt.Text);
                     CAB.TempTransaction.PayerId = CAB.TempPayer.PayerId;
                     CAB.CreateJourney();
+                    MessageBox.Show("Rejsen Blevet Oprettet");
+                    UC.Content = null;
+                    
                 }
                 else
                 {

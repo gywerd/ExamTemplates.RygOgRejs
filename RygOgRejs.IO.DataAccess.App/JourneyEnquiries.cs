@@ -34,7 +34,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <param name="id">int</param>
         public void DeleteJourney(int id)
         {
-            string query = $"DELETE FROM Journeys WHERE JourneyId = {id}";
+            string query = $"DELETE FROM Journeys WHERE MasterId = {id}";
             executor.ExecuteNonQuery(query);
         }
 

@@ -99,11 +99,12 @@ namespace RygOgRejs.Bizz.App
         public void DeleteJourney()
         {
             CJI.DeleteJourney(tempJourney.JourneyId); //dis aint working - changed from GetJourney to DeleteJourney ;)
+            CPaI.DeletePayer(tempPayer.MasterID);
             CTI.DeleteTransaction(tempTransaction.TransactionId);
-            UpdateDailyTotals(); //updates content of dailyTotals
+            //UpdateDailyTotals(); //updates content of dailyTotals
             RefreshObservableCollections(); //Updates content of ObservableCollections from DB
             ClearTemporaryFields(); //Clears content of tempPayer, tempJourney & tempTransaction
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         /// <summary>
