@@ -56,7 +56,7 @@ namespace RygOgRejs.Gui
             CAB.TempPayer = (Payer)dataGridTransaction.SelectedItem; //payer 
             CAB.Master.Id = CAB.TempPayer.MasterID;
             //CAB.GiveMasterID(CAB.TempPayer.MasterID); //payer
-            UCOpdater = new UIOpdater(CAB);
+            UCOpdater = new UIOpdater(CAB, dataGridTransaction);
             uc.Content = UCOpdater;
 
         }

@@ -34,6 +34,8 @@ namespace RygOgRejs.Gui
                 if (Convert.ToInt32(textBoxIndbetalt.Text) >= Convert.ToInt32(textBoxTotalPris.Text))
                 {
                     CAB.TempJourney.DepatureTime = DateTime.Now;
+                    CAB.TempTransaction.Amount = Convert.ToSingle(textBoxIndbetalt.Text);
+                    CAB.TempTransaction.PayerId = CAB.TempPayer.PayerId;
                     CAB.CreateJourney();
                 }
                 else
