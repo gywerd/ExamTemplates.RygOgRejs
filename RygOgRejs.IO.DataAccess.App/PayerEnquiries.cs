@@ -67,7 +67,7 @@ namespace RygOgRejs.IO.DataAccess.App
         public Payer GetPayerWithId(int id)
         {
             Payer payer = new Payer();
-            string query = $"SELECT * FROM Payers Where PayerId = {id}";
+            string query = $"SELECT * FROM Payers Where MasterId = {id}";
             DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader(); //best
             while (reader.Read())

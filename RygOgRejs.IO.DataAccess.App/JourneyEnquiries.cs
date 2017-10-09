@@ -71,7 +71,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <returns>Journey</returns>
         public Journey GetJourney(int id)
         {
-            string query = $"SELECT * FROM Journeys WHERE JourneyId = {id}";
+            string query = $"SELECT * FROM Journeys WHERE MasterId = {id}";
             Journey journey = new Journey();
             DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader(); //best
