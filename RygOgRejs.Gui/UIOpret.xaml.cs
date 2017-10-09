@@ -33,6 +33,7 @@ namespace RygOgRejs.Gui
             {
                 if (Convert.ToInt32(textBoxIndbetalt.Text) >= Convert.ToInt32(textBoxTotalPris.Text))
                 {
+                    CAB.TempJourney.DepatureTime = DateTime.Now;
                     CAB.CreateJourney();
                 }
                 else
