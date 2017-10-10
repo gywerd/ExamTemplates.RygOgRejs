@@ -43,7 +43,7 @@ namespace RygOgRejs.Gui
             InitializeComponent();
             CRB.GetAllDestinations(); //Reads the destinations from the database into the list newDestination - Daniel 
             var DJ = DataJourney.GetAll();
-            iOpret = new UIOpret(CRB);
+            iOpret = new UIOpret(CRB, userControlRight);
             foreach (var Data in DJ)
             {
                 Distanition.Add(Data.Destination);

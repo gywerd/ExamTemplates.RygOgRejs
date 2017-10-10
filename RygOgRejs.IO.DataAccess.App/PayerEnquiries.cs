@@ -33,7 +33,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <param name="id">int</param>
         public void DeletePayer(int id)
         {
-            string query = $"DELETE FROM Payers WHERE PayerId = {id}";
+            string query = $"DELETE FROM Payers WHERE MasterId = {id}";
             executor.ExecuteNonQuery(query);
         }
 
@@ -67,7 +67,7 @@ namespace RygOgRejs.IO.DataAccess.App
         public Payer GetPayerWithId(int id)
         {
             Payer payer = new Payer();
-            string query = $"SELECT * FROM Payers Where PayerId = {id}";
+            string query = $"SELECT * FROM Payers Where MasterId = {id}";
             DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader(); //best
             while (reader.Read())

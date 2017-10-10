@@ -80,10 +80,14 @@ namespace RygOgRejs.Bizz.App
             //MasterId is generated and added  to tempPayer, tempJourney & tempTransaction, when UIOpret is loaded
             //All data is written simutaneusly to tempPayer, tempJourney & tempTransaction, and price incl. VAT is calculated while manipulating GUI
             CPaI.AddPayer(tempPayer); //Writes Journey data to DB
-            CJI.AddJourney(tempJourney); //Writes Journey data to DB
+            tempPayer = CPaI.GetPayerWithId(master.Id);
+            TempTransaction.PayerId = tempPayer.PayerId;
+            CJI.AddJourney(tempJourney);//Writes Journey data to DB
+            tempJourney = CJI.GetJourney(master.Id);
+            TempTransaction.JourneyId = tempJourney.JourneyId;
             CTI.AddTransaction(tempTransaction);  //Writes Transaction data to DB
             RefreshObservableCollections(); //Updates content of ObservableCollections from DB
-            UpdateDailyTotals(); //updates content of dailyTotals
+//            UpdateDailyTotals(); //updates content of dailyTotals
             ClearTemporaryFields(); //Clears content of tempPayer, tempJourney & tempTransaction
         }
 
@@ -95,11 +99,13 @@ namespace RygOgRejs.Bizz.App
         public void DeleteJourney()
         {
             CJI.DeleteJourney(tempJourney.JourneyId); //dis aint working - changed from GetJourney to DeleteJourney ;)
+            CPaI.DeletePayer(tempPayer.MasterID);
             CTI.DeleteTransaction(tempTransaction.TransactionId);
+            UpdateDailyTotals(); //updates content of dailyTotals
             RefreshObservableCollections(); //Updates content of ObservableCollections from DB
             UpdateDailyTotals(); //updates content of dailyTotals
             ClearTemporaryFields(); //Clears content of tempPayer, tempJourney & tempTransaction
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         /// <summary>

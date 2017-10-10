@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RygOgRejs.Bizz.App;
+using RygOgRejs.Bizz.Entities;
 
 namespace RygOgRejs.Gui
 {
@@ -21,20 +22,25 @@ namespace RygOgRejs.Gui
     /// </summary>
     public partial class UIOpdater : UserControl
     {
+        Payer selecteditem;
         AppBizz Appbizz;
-        public UIOpdater(AppBizz appbizz)
+        public UIOpdater(AppBizz appbizz, DataGrid datagrid)
         {
             InitializeComponent();
             Appbizz = appbizz;
+            this.selecteditem = (Payer)datagrid.SelectedItem;
             Appbizz.LoadTransactionAndJourney();
             var Bizz = Appbizz.TempJourney;
-            labelDestination.Content = Bizz.Destination;
-            textBoxAdults.Text = Bizz.Adults.ToString();
-            textBoxChildren.Text = Bizz.Children.ToString();
-            textBoxBagage.Text = Bizz.LuggageAmount.ToString();
-            firstClassChecked.IsChecked = Bizz.IsFirstClass;
-            textBoxFirstName.Text = Appbizz.TempPayer.FirstName;
-            textBoxLastName.Text = Appbizz.TempPayer.LastName;
+            if (selecteditem != null)
+            {
+                labelDestination.Content = Bizz.Destination;
+                textBoxAdults.Text = Bizz.Adults.ToString();
+                textBoxChildren.Text = Bizz.Children.ToString();
+                textBoxBagage.Text = Bizz.LuggageAmount.ToString();
+                firstClassChecked.IsChecked = Bizz.IsFirstClass;
+                textBoxFirstName.Text = Appbizz.TempPayer.FirstName;
+                textBoxLastName.Text = Appbizz.TempPayer.LastName;
+            }
         }
 
         private void btnClickRet(object sender, RoutedEventArgs e)
@@ -44,7 +50,9 @@ namespace RygOgRejs.Gui
 
         private void btnClickSlet(object sender, RoutedEventArgs e)
         {
-
+            Appbizz.TempJourney.JourneyId = selecteditem.MasterID;
+            Appbizz.TempTransaction.TransactionId = selecteditem.MasterID;
+            Appbizz.DeleteJourney();
         }
     }
 }
