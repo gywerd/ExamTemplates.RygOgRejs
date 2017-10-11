@@ -12,19 +12,21 @@ namespace RygOgRejs.IO.DataAccess.App
 {
     public class AncillarChargesEnquiries : DataEnquiries
     {
-        public void GetAll()
+        public ObservableCollection<AncillaryCharge> GetAllAncillaryCharge()
         {
             string query = "SELECT * FROM AncillarCharges";
-            ObservableCollection<Destination> priceList = new ObservableCollection<Destination>();
+            ObservableCollection<AncillaryCharge> priceList = new ObservableCollection<AncillaryCharge>();
             DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader(); //best
             while (reader.Read())
             {
                 int id = Convert.ToInt32(reader["WaitngForName"]);
-                float firstClassPrice = Convert.ToSingle(reader["WaitingForName"]);
-                float luggaPriceOverload = Convert.ToSingle(reader["WaitingForName"]); //nice spelling error xD old Name: ChildrenPricedd - spelling error in DB corrected
-                //price prices = new price(id,FirstClassPrice,LuggaPriceOverload)
+                float firstClassPrice = Convert.ToSingle(reader["FirstClassPrice"]);
+                float luggaPriceOverload = Convert.ToSingle(reader["LuggagePricePerOverloadKg"]); //spelling error in DB corrected
+                AncillaryCharge ancillaryCharge = new AncillaryCharge(id, firstClassPrice, luggaPriceOverload);
+                priceList.Add(ancillaryCharge);
             }
+            return priceList;
         }
 
     }
