@@ -31,13 +31,16 @@ namespace RygOgRejs.Gui
             this.selecteditem = (Payer)datagrid.SelectedItem;
             Appbizz.LoadTransactionAndJourney();
             var Bizz = Appbizz.TempJourney;
-            labelDestination.Content = Bizz.Destination;
-            textBoxAdults.Text = Bizz.Adults.ToString();
-            textBoxChildren.Text = Bizz.Children.ToString();
-            textBoxBagage.Text = Bizz.LuggageAmount.ToString();
-            firstClassChecked.IsChecked = Bizz.IsFirstClass;
-            textBoxFirstName.Text = Appbizz.TempPayer.FirstName;
-            textBoxLastName.Text = Appbizz.TempPayer.LastName;
+            if (selecteditem != null)
+            {
+                labelDestination.Content = Bizz.Destination;
+                textBoxAdults.Text = Bizz.Adults.ToString();
+                textBoxChildren.Text = Bizz.Children.ToString();
+                textBoxBagage.Text = Bizz.LuggageAmount.ToString();
+                firstClassChecked.IsChecked = Bizz.IsFirstClass;
+                textBoxFirstName.Text = Appbizz.TempPayer.FirstName;
+                textBoxLastName.Text = Appbizz.TempPayer.LastName;
+            }
         }
 
         private void btnClickRet(object sender, RoutedEventArgs e)

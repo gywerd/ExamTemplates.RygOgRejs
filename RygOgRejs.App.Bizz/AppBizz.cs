@@ -99,11 +99,13 @@ namespace RygOgRejs.Bizz.App
         public void DeleteJourney()
         {
             CJI.DeleteJourney(tempJourney.JourneyId); //dis aint working - changed from GetJourney to DeleteJourney ;)
+            CPaI.DeletePayer(tempPayer.MasterID);
             CTI.DeleteTransaction(tempTransaction.TransactionId);
             UpdateDailyTotals(); //updates content of dailyTotals
             RefreshObservableCollections(); //Updates content of ObservableCollections from DB
+            UpdateDailyTotals(); //updates content of dailyTotals
             ClearTemporaryFields(); //Clears content of tempPayer, tempJourney & tempTransaction
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         /// <summary>
@@ -117,8 +119,8 @@ namespace RygOgRejs.Bizz.App
             //All data is written simutaneusly to tempPayer, tempJourney & tempTransaction, and refund price incl. VAT is calculated while manipulating GUI
             CJI.UpdateJourney(tempJourney); //Writes content of tempJourney to Database
             CTI.UpdateTransaction(tempTransactionUpdate); //Writes content of tempJourney to Database
-            UpdateDailyTotals(); //updates content of dailyTotals
             RefreshObservableCollections(); //Updates content of ObservableCollections from DB
+            UpdateDailyTotals(); //updates content of dailyTotals
             ClearTemporaryFields(); //Clears content of tempPayer, tempJourney & tempTransaction
             throw new NotImplementedException();
         }
@@ -237,41 +239,7 @@ namespace RygOgRejs.Bizz.App
 
         public void UpdateDailyTotals()
         {
-            //RefreshSoldTravels();
-            dailyTotals.AmountOfSoldTravels = transactions.Count;
-            //RefreshAmountPassengers();
-            dailyTotals.AmountOfPassengers = transactions.Count * 5;
-            //RefreshAmountOfCOfAdults();
-            dailyTotals.AmountOfAdults = transactions.Count * 3;
-            //RefreshAmountOfChildren();
-            dailyTotals.AmountofChildren = transactions.Count * 2;
-            //RefresTotalSaleAmount();
-            dailyTotals.TotalSaleAmount = transactions.Count * 5432;
-        }
-
-        private void RefreshAmountOfCOfAdults()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void RefresTotalSaleAmount()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void RefreshAmountOfChildren()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void RefreshAmountPassengers()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void RefreshSoldTravels()
-        {
-            throw new NotImplementedException();
+            DailyTotals.UpdateTotals(journeys, transactions);
         }
         #endregion
 

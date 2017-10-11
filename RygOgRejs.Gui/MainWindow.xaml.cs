@@ -43,7 +43,7 @@ namespace RygOgRejs.Gui
             InitializeComponent();
             CRB.GetAllDestinations(); //Reads the destinations from the database into the list newDestination - Daniel 
             var DJ = DataJourney.GetAll();
-            iOpret = new UIOpret(CRB);
+            iOpret = new UIOpret(CRB, userControlRight);
             foreach (var Data in DJ)
             {
                 Distanition.Add(Data.Destination);
@@ -53,6 +53,7 @@ namespace RygOgRejs.Gui
             //macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
 
             //maybe change this 
+            CRB.DailyTotals.UpdateTotals(CRB.Journeys, CRB.Transactions); //Updates data for Daily Totals in lower left panel
             weatherAPI = new WeatherAPI(labelStatusBar, CRB);
             weatherAPI.GetCityNameAsync();
 

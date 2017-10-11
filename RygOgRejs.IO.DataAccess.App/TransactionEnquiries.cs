@@ -33,7 +33,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <param name="id">int</param>
         public void DeleteTransaction(int tid)
         {
-            string query = $"DELETE FROM Transactions WHERE TransactionId = {tid}";
+            string query = $"DELETE FROM Transactions WHERE MasterId = {tid}";
             executor.ExecuteNonQuery(query);
         }
 
