@@ -11,7 +11,7 @@ namespace RygOgRejs.Bizz.Entities
     {
         #region Fields
         private int id;
-        private DateTime transAction;
+        private DateTime transActionDate;
         private bool isFirstClass;
         private int adults;
         private int children;
@@ -19,7 +19,7 @@ namespace RygOgRejs.Bizz.Entities
         private string firstName;
         private string lastName;
         private string destinationName;
-        private float amountPaid;
+        private float amountExclVat;
         #endregion
 
         #region Constructors
@@ -35,9 +35,9 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="jid">int</param>
         /// <param name="pid">int</param>
         /// <param name="mid">int</param>
-        public Transactions(DateTime transAction, bool isFirstClass, int adults, int children, float luggageAmount, string firstName, string lastName, string destinationName, float amountPaid)
+        public Transactions(DateTime transActionDate, bool isFirstClass, int adults, int children, float luggageAmount, string firstName, string lastName, string destinationName, float amountExclVat)
         {
-            TransAction = transAction;
+            TransActionDate = transActionDate;
             IsFirstClass = isFirstClass;
             Adults = adults;
             Children = children;
@@ -45,7 +45,7 @@ namespace RygOgRejs.Bizz.Entities
             FirstName = firstName;
             LastName = lastName;
             DestinationName = destinationName;
-            AmountPaid = amountPaid;
+            AmountExclVat = amountExclVat;
 
         }
 
@@ -57,7 +57,7 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="jid">int</param>
         /// <param name="pid">int</param>
         /// <param name="mid">int</param>
-        public Transactions(int id, DateTime transAction, bool isFirstClass, int adults, int children, float luggageAmount, string firstName, string lastName, string destinationName, float amountPaid) : this(transAction,isFirstClass,adults,children,luggageAmount,firstName,lastName,destinationName,amountPaid)
+        public Transactions(int id, DateTime transActionDate, bool isFirstClass, int adults, int children, float luggageAmount, string firstName, string lastName, string destinationName, float amountExclVat) : this(transActionDate, isFirstClass,adults,children,luggageAmount,firstName,lastName,destinationName, amountExclVat)
         {
             Id = id;
         }
@@ -71,10 +71,10 @@ namespace RygOgRejs.Bizz.Entities
             set => id = value;
         }
 
-        public DateTime TransAction
+        public DateTime TransActionDate
         {
-            get => transAction;
-            set => transAction = value;
+            get => transActionDate;
+            set => transActionDate = value;
         }
 
         public bool IsFirstClass
@@ -143,10 +143,10 @@ namespace RygOgRejs.Bizz.Entities
             }
         }
 
-        public float AmountPaid
+        public float AmountExclVat
         {
-            get => amountPaid;
-            set => amountPaid = value;
+            get => amountExclVat;
+            set => amountExclVat = value;
         }
         #endregion
     }
