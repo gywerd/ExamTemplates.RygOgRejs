@@ -21,8 +21,8 @@ namespace RygOgRejs.Bizz.App
             private Master master = new Master(); //object to store masterID within
             private Journey tempJourney = new Journey(); //object to temporarily store current journey information, before writing it to the database
             private Payer tempPayer = new Payer(); //object to temporarily store current payer information, before writing it to the database   
-            private Transactions tempTransaction = new Transactions(); //string to temporarily store current transaction information, before writing it to the database
-            private Transactions tempTransactionUpdate = new Transactions(); //string to temporarily store current transaction information, before writing it to the database
+            private Transaction tempTransaction = new Transaction(); //string to temporarily store current transaction information, before writing it to the database
+            private Transaction tempTransactionUpdate = new Transaction(); //string to temporarily store current transaction information, before writing it to the database
             private PriceDetails tempPriceDetails = new PriceDetails(); //string to temporarily store current pricedetails, to show on GUI
             private string macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault(); //string where current macadress is stored
             #endregion
@@ -35,7 +35,7 @@ namespace RygOgRejs.Bizz.App
             PayerEnquiries CPaI = new PayerEnquiries(); //used to call methods
             Price CPrE = new Price(); //used to call methods
             DestinationsEnquiries CPrI = new DestinationsEnquiries(); //used to call methods
-            Transactions CTE = new Transactions(); //used to call methods
+            Transaction CTE = new Transaction(); //used to call methods
             TransactionEnquiries CTI = new TransactionEnquiries(); //used to call methods
             MasterId CMI = new MasterId(); //used to call methods
             MasterIdEnquiries CMIE = new MasterIdEnquiries(); //used to call methods
@@ -44,7 +44,7 @@ namespace RygOgRejs.Bizz.App
             #region List, Array And Collection Fields
             ObservableCollection<Journey> journeys = new ObservableCollection<Journey>(); //Collection containing journeys stored in database
             ObservableCollection<Payer> payers = new ObservableCollection<Payer>();  //Collection containing payers stored in database
-            ObservableCollection<Transactions> transactions = new ObservableCollection<Transactions>(); //Collection containing trnsactions stored in database
+            ObservableCollection<Transaction> transactions = new ObservableCollection<Transaction>(); //Collection containing trnsactions stored in database
             ObservableCollection<Price> prices = new ObservableCollection<Price>(); //Collection containing prices stored in database
             List<string> destinations = new List<string>(); //List containing available destinations to be viewed in DataViewJourneys
             List<Destination> newDestinations; //List containing available destinations to be viewed in DataViewJourneys
@@ -66,7 +66,7 @@ namespace RygOgRejs.Bizz.App
         {
             tempJourney = new Journey();
             tempPayer = new Payer();
-            tempTransaction = new Transactions();
+            tempTransaction = new Transaction();
             tempPriceDetails = new PriceDetails();
         }
 
@@ -297,8 +297,8 @@ namespace RygOgRejs.Bizz.App
         public Journey TempJourney { get => tempJourney; set => tempJourney = value; } 
         public Payer TempPayer { get => tempPayer; set => tempPayer = value; } //Corrected name
         public PriceDetails TempPriceDetails { get => tempPriceDetails; set => tempPriceDetails = value; } //Corrected name
-        public Transactions TempTransaction { get => tempTransaction; set => tempTransaction = value; }
-        public ObservableCollection<Transactions> Transactions
+        public Transaction TempTransaction { get => tempTransaction; set => tempTransaction = value; }
+        public ObservableCollection<Transaction> Transactions
         {
             get
             {
@@ -312,7 +312,7 @@ namespace RygOgRejs.Bizz.App
         }
         public List<Destination> NewDestinations { get => newDestinations; set => newDestinations = value; }
         public Master Master { get => master; set => master = value; }
-        public Transactions TempTransactionUpdate { get => tempTransactionUpdate; set => tempTransactionUpdate = value; }
+        public Transaction TempTransactionUpdate { get => tempTransactionUpdate; set => tempTransactionUpdate = value; }
         public Total DailyTotals { get => dailyTotals; set => dailyTotals = value; }
         #endregion
 

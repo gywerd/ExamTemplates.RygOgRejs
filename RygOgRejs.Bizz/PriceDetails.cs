@@ -172,7 +172,7 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="t">Transactions</param>
         /// <param name="p">ObservableCollection<PriceDetails></param>
         /// <returns></returns>
-        public float GetTotalWithoutTax(Journey j, ObservableCollection<Transactions> t, ObservableCollection<Price> p)
+        public float GetTotalWithoutTax(Journey j, ObservableCollection<Transaction> t, ObservableCollection<Price> p)
         {
             float accumulatedPrice = 0;
             float adultsAccumulatedPrice = MultiplyFloat(j.Adults, GetAdultPrice(j, p));
@@ -200,7 +200,7 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="t"></param>
         /// <param name="p"></param>
         /// <returns></returns>
-        public float GetTotalWithTax(Journey j, ObservableCollection<Transactions> t, ObservableCollection<Price> p)
+        public float GetTotalWithTax(Journey j, ObservableCollection<Transaction> t, ObservableCollection<Price> p)
         {
             float total = 0;
             total = total + GetTotalWithoutTax(j, t, p);

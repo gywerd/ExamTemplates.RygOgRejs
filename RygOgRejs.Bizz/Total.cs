@@ -42,7 +42,7 @@ namespace RygOgRejs.Bizz.Entities
         #endregion
 
         #region Methods
-        public void UpdateTotals(ObservableCollection<Transactions> t)
+        public void UpdateTotals(ObservableCollection<Transaction> t)
         {
             this.amountOfSoldTravels = t.Count;
             this.amountOfAdults = GetAmountOfAdults(t);
@@ -51,30 +51,30 @@ namespace RygOgRejs.Bizz.Entities
             this.totalSaleAmount = GetTotalSaleAmount(t);
         }
 
-        private int GetAmountOfAdults(ObservableCollection<Transactions> t)
+        private int GetAmountOfAdults(ObservableCollection<Transaction> t)
         {
             int adults = 0;
-            foreach (Transactions trans in t)
+            foreach (Transaction trans in t)
             {
                 adults = adults + trans.Adults;
             }
             return adults;
         }
 
-        private int GetAmountOfChildren(ObservableCollection<Transactions> t)
+        private int GetAmountOfChildren(ObservableCollection<Transaction> t)
         {
             int children = 0;
-            foreach (Transactions trans in t)
+            foreach (Transaction trans in t)
             {
                 children = children + trans.Children;
             }
             return children;
         }
 
-        private float GetTotalSaleAmount(ObservableCollection<Transactions> t)
+        private float GetTotalSaleAmount(ObservableCollection<Transaction> t)
         {
             float totalSale = 0;
-            foreach (Transactions trans in t)
+            foreach (Transaction trans in t)
             {
                 totalSale = totalSale + trans.AmountExclVat;
             }
