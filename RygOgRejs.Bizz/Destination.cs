@@ -34,10 +34,10 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="luggagePrice">float</param>
         public Destination(int destinationId, string destinationName, float adultPrice, float childPrice, float firstClassPrice, float luggagePrice)
         {
-            DestinationId = destinationId;
-            DestinationName = destinationName;
-            AdultPrice = adultPrice;
-            ChildPrice = childPrice;
+            this.destinationId = destinationId;
+            this.destinationName = destinationName;
+            this.adultPrice = adultPrice;
+            this.childPrice = childPrice;
         }
         #endregion
 
@@ -46,19 +46,17 @@ namespace RygOgRejs.Bizz.Entities
         #endregion
 
         #region Properties
-        public int DestinationId { get => destinationId; set => destinationId = value; }
-        public string DestinationName { get => destinationName; set => destinationName = value; }
+        public int DestinationId { get => destinationId; }
+        public string DestinationName { get => destinationName;}
 
         public float AdultPrice
         {
             get => adultPrice;
-            set => adultPrice = value;
         }
 
         public float ChildPrice
         {
             get => childPrice;
-            set => childPrice = value;
         }
         #endregion
     }

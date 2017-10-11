@@ -72,10 +72,10 @@ namespace RygOgRejs.Bizz.Entities
             float adultPrice = 0;
             foreach (Destination price in p)
             {
-                //if (j.Destination == price.DestinationName)
-                //{
-                //    adultPrice = price.AdultPrice;
-                //}
+                if (j.DestinationName == price.DestinationName)
+                {
+                    adultPrice = price.AdultPrice;
+                }
             }
             return adultPrice;
         }
@@ -91,10 +91,10 @@ namespace RygOgRejs.Bizz.Entities
             float childrenPrice = 0;
             foreach (Destination price in p)
             {
-               /* if (j.Destination == price.DestinationName)
+                if (j.DestinationName == price.DestinationName)
                 {
                     childrenPrice = price.ChildPrice;
-                }*/
+                }
             }
             return childrenPrice;
         }
@@ -147,9 +147,9 @@ namespace RygOgRejs.Bizz.Entities
             float luggagePrice = 0;
             foreach (Destination price in p)
             {
-                //if (j.Destination == price.DestinationName)
+                //if (j.DestinationName == price.DestinationName)
                 //{
-                //    luggagePrice = price.LuggagePrice;
+                //    luggagePrice = price.;
                 //}
             }
             return luggagePrice;
