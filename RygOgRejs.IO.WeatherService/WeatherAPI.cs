@@ -19,7 +19,7 @@ namespace RygOgRejs.IO.WeatherService
         private const int MAX_FORECAST_DAYS = 5;
         private HttpClient client;
         private Label weather;
-        private PriceEnquiries priceEnquiries = new PriceEnquiries();
+        private DestinationsEnquiries priceEnquiries = new DestinationsEnquiries();
         #endregion
 
         #region Constructors

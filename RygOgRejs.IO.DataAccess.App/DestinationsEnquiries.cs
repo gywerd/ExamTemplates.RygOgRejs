@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace RygOgRejs.IO.DataAccess.App
 {
-    public class PriceEnquiries : DataEnquiries
+    public class DestinationsEnquiries : DataEnquiries
     {
         #region Constructors
-        public PriceEnquiries() { }
+        public DestinationsEnquiries() { }
         #endregion
 
         #region Methods
@@ -53,10 +53,8 @@ namespace RygOgRejs.IO.DataAccess.App
                 string destination = reader["DestinationName"].ToString();
                 float adult = Convert.ToSingle(reader["AdultPrice"]);
                 float child = Convert.ToSingle(reader["ChildrenPrice"]); //nice spelling error xD old Name: ChildrenPricedd - spelling error in DB corrected
-                float first = Convert.ToSingle(reader["FirstClassPrice"]);
-                float lug = Convert.ToSingle(reader["LuggagePrice"]);
-                Price p = new Price(id, destination, adult, child, first, lug);
-                priceList.Add(p);
+             //   Price p = new Price(id, destination, adult, child);
+               // priceList.Add(p);
             }
             return priceList;
         }

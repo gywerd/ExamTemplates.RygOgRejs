@@ -40,10 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JourneyEnquiries.cs" />
-    <Compile Include="MasterIdEnquiries.cs" />
-    <Compile Include="PayerEnquiries.cs" />
-    <Compile Include="PriceEnquiries.cs" />
+    <Compile Include="AncillarChargesEnquiries.cs" />
+    <Compile Include="DestinationsEnquiries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransactionEnquiries.cs" />
   </ItemGroup>
