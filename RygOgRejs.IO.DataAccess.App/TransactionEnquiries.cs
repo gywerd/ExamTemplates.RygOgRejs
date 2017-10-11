@@ -59,7 +59,7 @@ namespace RygOgRejs.IO.DataAccess.App
                 string lastName = reader["ÍnsertNameHere"].ToString();
                 string destinationName = reader["ÍnsertNameHere"].ToString();
                 float ammountExclVat = Convert.ToSingle(reader["ÍnsertNameHere"]);
-                Transaction t = new Transaction(tid,depatureTime,isFirstClass,adults,children,luggaeAmount,firstName,lastName,destinationName, ammountExclVat); //use this when the class has been made for it
+                Transaction t = new Transaction(tid,depatureTime,destinationName,isFirstClass,adults,children,luggaeAmount,firstName,lastName,ammountExclVat); //use this when the class has been made for it
                 transCol.Add(t);
             }
             return transCol;
@@ -88,7 +88,7 @@ namespace RygOgRejs.IO.DataAccess.App
                 string lastName = reader["ÍnsertNameHere"].ToString();
                 string destinationName = reader["ÍnsertNameHere"].ToString();
                 float ammountExclVat = Convert.ToSingle(reader["ÍnsertNameHere"]);
-                t = new Transaction(tid, depatureTime, isFirstClass, adults, children, luggaeAmount, firstName, lastName, destinationName, ammountExclVat); //use this when the class has been made for it
+                t = new Transaction(tid, depatureTime, destinationName, isFirstClass, adults, children, luggaeAmount, firstName, lastName, ammountExclVat); //use this when the class has been made for it
             }
             return t;
         }
