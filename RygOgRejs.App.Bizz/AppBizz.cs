@@ -28,12 +28,12 @@ namespace RygOgRejs.Bizz.App
             #endregion
 
             #region Method Fields
-            Destination CDE = new Destination();
+            DestinationList CDE = new DestinationList();
             Journey CJE = new Journey(); //used to call methods
             JourneyEnquiries CJI = new JourneyEnquiries(); //used to call methods
             Payer CPaE = new Payer(); //used to call methods
             PayerEnquiries CPaI = new PayerEnquiries(); //used to call methods
-            Price CPrE = new Price(); //used to call methods
+            Destination CPrE = new Destination(); //used to call methods
             DestinationsEnquiries CPrI = new DestinationsEnquiries(); //used to call methods
             Transaction CTE = new Transaction(); //used to call methods
             TransactionEnquiries CTI = new TransactionEnquiries(); //used to call methods
@@ -45,9 +45,9 @@ namespace RygOgRejs.Bizz.App
             ObservableCollection<Journey> journeys = new ObservableCollection<Journey>(); //Collection containing journeys stored in database
             ObservableCollection<Payer> payers = new ObservableCollection<Payer>();  //Collection containing payers stored in database
             ObservableCollection<Transaction> transactions = new ObservableCollection<Transaction>(); //Collection containing trnsactions stored in database
-            ObservableCollection<Price> prices = new ObservableCollection<Price>(); //Collection containing prices stored in database
+            ObservableCollection<Destination> prices = new ObservableCollection<Destination>(); //Collection containing prices stored in database
             List<string> destinations = new List<string>(); //List containing available destinations to be viewed in DataViewJourneys
-            List<Destination> newDestinations; //List containing available destinations to be viewed in DataViewJourneys
+            List<DestinationList> newDestinations; //List containing available destinations to be viewed in DataViewJourneys
             #endregion
         #endregion
 
@@ -149,8 +149,8 @@ namespace RygOgRejs.Bizz.App
         /// </summary>
         private void GetDestinations()
         {
-            ObservableCollection<Price> PriceDetailEnq = CPrI.GetAll();
-            foreach (Price price in PriceDetailEnq)
+            ObservableCollection<Destination> PriceDetailEnq = CPrI.GetAll();
+            foreach (Destination price in PriceDetailEnq)
             {
                 destinations.Add(price.DestinationName);
             }
@@ -282,7 +282,7 @@ namespace RygOgRejs.Bizz.App
             }
             set => payers = value;
         }
-        public ObservableCollection<Price> Prices
+        public ObservableCollection<Destination> Prices
         {
             get
             {
@@ -310,7 +310,7 @@ namespace RygOgRejs.Bizz.App
             }
             set => transactions = value;
         }
-        public List<Destination> NewDestinations { get => newDestinations; set => newDestinations = value; }
+        public List<DestinationList> NewDestinations { get => newDestinations; set => newDestinations = value; }
         public Master Master { get => master; set => master = value; }
         public Transaction TempTransactionUpdate { get => tempTransactionUpdate; set => tempTransactionUpdate = value; }
         public Total DailyTotals { get => dailyTotals; set => dailyTotals = value; }
