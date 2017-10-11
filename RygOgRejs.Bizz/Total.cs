@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RygOgRejs.Bizz.Entities
 {
-    public class Totals
+    public class Total
     {
         #region Fields
         private int amountOfSoldTravels;
@@ -21,7 +21,7 @@ namespace RygOgRejs.Bizz.Entities
         /// <summary>
         /// Empty constructor 
         /// </summary>
-        public Totals() { }
+        public Total() { }
 
         /// <summary>
         /// Constructor taking five prams
@@ -31,7 +31,7 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="adults">int</param>
         /// <param name="children">int</param>
         /// <param name="saleAmount">float</param>
-        public Totals(int soldtravels, int passengers, int adults, int children, float saleAmount)
+        public Total(int soldtravels, int passengers, int adults, int children, float saleAmount)
         {
             this.amountOfSoldTravels = soldtravels;
             this.amountOfPassengers = passengers;
@@ -42,31 +42,31 @@ namespace RygOgRejs.Bizz.Entities
         #endregion
 
         #region Methods
-        public void UpdateTotals(ObservableCollection<Journey> j, ObservableCollection<Transactions> t)
+        public void UpdateTotals(ObservableCollection<Transactions> t)
         {
-            this.amountOfSoldTravels = j.Count;
-            this.amountOfAdults = GetAmountOfAdults(j);
-            this.amountOfChildren = GetAmountOfChildren(j);
+            this.amountOfSoldTravels = t.Count;
+            this.amountOfAdults = GetAmountOfAdults(t);
+            this.amountOfChildren = GetAmountOfChildren(t);
             this.amountOfPassengers = amountOfChildren + amountOfAdults;
             this.totalSaleAmount = GetTotalSaleAmount(t);
         }
 
-        private int GetAmountOfAdults(ObservableCollection<Journey> j)
+        private int GetAmountOfAdults(ObservableCollection<Transactions> t)
         {
             int adults = 0;
-            foreach (Journey jour in j)
+            foreach (Transactions trans in t)
             {
-                adults = adults + jour.Adults;
+                adults = adults + trans.Adults;
             }
             return adults;
         }
 
-        private int GetAmountOfChildren(ObservableCollection<Journey> j)
+        private int GetAmountOfChildren(ObservableCollection<Transactions> t)
         {
             int children = 0;
-            foreach (Journey jour in j)
+            foreach (Transactions trans in t)
             {
-                children = children + jour.Children;
+                children = children + trans.Children;
             }
             return children;
         }
@@ -76,7 +76,7 @@ namespace RygOgRejs.Bizz.Entities
             float totalSale = 0;
             foreach (Transactions trans in t)
             {
-                totalSale = totalSale + trans.Amount;
+                totalSale = totalSale + trans.AmountExclVat;
             }
             return totalSale;
         }

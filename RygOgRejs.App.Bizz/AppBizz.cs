@@ -15,7 +15,7 @@ namespace RygOgRejs.Bizz.App
     {
         #region Fields
             #region Ordinary Fields
-            private Totals dailyTotals; //object that holds data, that can be bound to left panel in MainWindow
+            private Total dailyTotals; //object that holds data, that can be bound to left panel in MainWindow
             private string destination; //string that holds a destination
             private string journeyOrTransaction; //string that controls how UIInsertUpdate & UIPayment acts
             private Master master = new Master(); //object to store masterID within
@@ -313,7 +313,7 @@ namespace RygOgRejs.Bizz.App
         public List<Destination> NewDestinations { get => newDestinations; set => newDestinations = value; }
         public Master Master { get => master; set => master = value; }
         public Transactions TempTransactionUpdate { get => tempTransactionUpdate; set => tempTransactionUpdate = value; }
-        public Totals DailyTotals { get => dailyTotals; set => dailyTotals = value; }
+        public Total DailyTotals { get => dailyTotals; set => dailyTotals = value; }
         #endregion
 
         #region Internal Classes
