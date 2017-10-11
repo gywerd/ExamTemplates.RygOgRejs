@@ -45,7 +45,8 @@
     <Compile Include="QueryExecutor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Properties\DB Cascade.sql" />
+    <Content Include="Properties\DB Cascade New.sql" />
+    <Content Include="Properties\DB Cascade - obsolete.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
