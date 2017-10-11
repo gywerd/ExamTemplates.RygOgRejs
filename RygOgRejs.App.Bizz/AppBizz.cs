@@ -21,7 +21,6 @@ namespace RygOgRejs.Bizz.App
             private Transaction tempTransaction = new Transaction(); //string to temporarily store current transaction information, before writing it to the database
             private Transaction tempTransactionUpdate = new Transaction(); //string to temporarily store current transaction information, before writing it to the database
             private PriceDetails tempPriceDetails = new PriceDetails(); //string to temporarily store current pricedetails, to show on GUI
-            AncillaryCharge ancillaryCharges = new AncillaryCharge();  //object containing acincillary charges stored in database
         #endregion
 
         #region Method Fields
@@ -32,13 +31,14 @@ namespace RygOgRejs.Bizz.App
             DestinationsEnquiries CDI = new DestinationsEnquiries(); //used to call methods
             Transaction CTE = new Transaction(); //used to call methods
             TransactionEnquiries CTI = new TransactionEnquiries(); //used to call methods
-            #endregion
+        #endregion
 
-            #region List, Array And Collection Fields
+        #region List, Array And Collection Fields
+            ObservableCollection<AncillaryCharge> ancillaryCharges = new ObservableCollection<AncillaryCharge>();  //Collection containing ancillary charges stored in database
+            ObservableCollection<Destination> destinations = new ObservableCollection<Destination>(); //Collection containing prices stored in database
             ObservableCollection<Transaction> transactions = new ObservableCollection<Transaction>(); //Collection containing trnsactions stored in database
-            ObservableCollection<Destination> prices = new ObservableCollection<Destination>(); //Collection containing prices stored in database
-            List<string> destinations = new List<string>(); //List containing available destinations to be viewed in DataViewJourneys
-            List<DestinationList> newDestinations; //List containing available destinations to be viewed in DataViewJourneys
+            List<string> destinationList = new List<string>(); //List containing available destinations to be viewed in DataViewJourneys
+            List<DestinationList> newDestinationList; //List containing available destinations to be viewed in DataViewJourneys
             #endregion
         #endregion
 
@@ -133,25 +133,26 @@ namespace RygOgRejs.Bizz.App
 
         /// <summary>
         /// Method, that generates a list of destinations
-        /// obsolete - replaced by GetAllDestinations
+        /// /*obsolete - replaced by GetAllDestinations*/
         /// </summary>
-        //private void GetDestinations()
-        //{
-        //    ObservableCollection<Destination> PriceDetailEnq = CDI.GetAll();
-        //    foreach (Destination price in PriceDetailEnq)
-        //    {
-        //        destinations.Add(price.DestinationName);
-        //    }
-        //}
+        private void GetDestinations()
+        {
+            //ObservableCollection<Destination> PriceDetailEnq = CDI.GetAll();
+            //foreach (Destination price in PriceDetailEnq)
+            //{
+            //    destinations.Add(price.DestinationName);
+            //}
+            ObservableCollection<Destination> destinations = CDI.GetAll();
+        }
 
         /// <summary>
         /// Method that loads list of destinations with DestinationId from the PriceDetails table in DB
         /// Destinations can be shown in DataViewJourneys
         /// And connection in code between prices and destinations can be done by comparing DestinationId
         /// </summary>
-        public void GetAllDestinations()
+        public void GetDestinationList()
         {
-            newDestinations = CDI.GetAllDestinations();
+            newDestinationList = CDI.GetDestinationList();
         }
 
         /// <summary>
@@ -167,17 +168,18 @@ namespace RygOgRejs.Bizz.App
         /// </summary>
         private void GetAncillaryCharges()
         {
-            ancillaryCharges = CACI.GetAll();
+            ancillaryCharges = CACI.GetAllAncillaryCharges();
         }
 
         /// <summary>
         /// Method, that invokes reading all rows in the Pricedetails table from database
+        /// obsolete due to SCRUM decission
         /// </summary>
         /// <returns></returns>
-        private void GetPrices()
-        {
-            prices = CDI.GetAll();
-        }
+        //private void GetPrices()
+        //{
+        //    destinations = CDI.GetAll();
+        //}
 
         /// <summary>
         /// Method, that invokes reading all rows in the Transactions table from database
@@ -188,56 +190,102 @@ namespace RygOgRejs.Bizz.App
         }
 
         /// <summary>
-        /// Loads content of selected payer and journey into tempPayer & tempJourney
+        /// Loads content of selected transaction into tempTransaction
         /// </summary>
-        public void LoadTransactionAndJourney()
+        public void LoadTransaction()
         {
-            tempTransaction = CTI.GetTransaction(master.Id);
-            tempJourney = CJI.GetJourney(master.Id);
+            //tempTransaction = CTI.GetTransaction(master.Id); //obsolete code as master is removed
+            //tempJourney = CJI.GetJourney(master.Id); //obsolete code
         }
 
         /// <summary>
         /// Method that inserts a dummy entry in the dummy table Master in DB to create a MasterID - then removes the dummy entry
+        /// obsolete after SCRUM decossion
         /// </summary>
-        public void CreateMasterid()
-        {
-            CMIE.CreateID(macAddress);
-            master.Id = CMIE.GetId();
-            CMIE.DeleteId(master.Id);
-        }
-        public void GiveMasterID(int id)
-        {
-            CMI.Id = id;
-        }
+        //public void CreateMasterid()
+        //{
+        //    CMIE.CreateID(macAddress);
+        //    master.Id = CMIE.GetId();
+        //    CMIE.DeleteId(master.Id);
+        //}
+
+        //public void GiveMasterID(int id) //obsolete code
+        //{
+        //    CMI.Id = id;
+        //}
+
         /// <summary>
         /// Code that clears & reloads content of ObservAbleCollections - used after saving to the database
         /// </summary>
         public void RefreshObservableCollections()
         {
-            journeys.Clear();
-            payers.Clear();
-            prices.Clear();
+            //journeys.Clear(); //obsolete code
+            //payers.Clear(); //obsolete code
+            //prices.Clear(); //obsolete code
+            destinations.Clear();
             transactions.Clear();
-            GetJourneys();
-            GetPayers();
-            GetPrices();
+            //GetJourneys(); //obsolete code
+            //GetPayers(); //obsolete code
+            //GetPrices(); //obsolete code
+            GetDestinations();
             GetTransactions();
         }
 
 
         public void UpdateDailyTotals()
         {
-            DailyTotals.UpdateTotals(journeys, transactions);
+            DailyTotals.UpdateTotals(transactions);
         }
         #endregion
 
         #region Properties
         public string Destination { get => destination; set => destination = value; }
-        public List<string> Destinations
+        public List<string> DestinationList
         {
             get
             {
-                if (destinations.Count == 0)
+                if (destinationList.Count == 0)
+                {
+                    GetDestinations();
+                }
+                return destinationList;
+            }
+            set => destinationList = value;
+        }
+
+        //public ObservableCollection<Journey> Journeys
+        //{
+        //    get
+        //    {
+        //        if (journeys.Count == 0)
+        //        {
+        //            GetJourneys();
+        //        }
+        //        return journeys;
+        //    }
+        //    set => journeys = value;
+        //}
+
+        public string JourneyOrTransaction { get => journeyOrTransaction; set => journeyOrTransaction = value; }
+
+        //public ObservableCollection<Payer> Payers
+        //{
+        //    get
+        //    {
+        //        if (payers.Count == 0)
+        //        {
+        //            GetPayers();
+        //        }
+        //        return payers;
+        //    }
+        //    set => payers = value;
+        //}
+
+        public ObservableCollection<Destination> Destinations
+        {
+            get
+            {
+                if (destinations.Count <= 0)
                 {
                     GetDestinations();
                 }
@@ -245,47 +293,14 @@ namespace RygOgRejs.Bizz.App
             }
             set => destinations = value;
         }
-        public ObservableCollection<Journey> Journeys
-        {
-            get
-            {
-                if (journeys.Count == 0)
-                {
-                    GetJourneys();
-                }
-                return journeys;
-            }
-            set => journeys = value;
-        }
-        public string JourneyOrTransaction { get => journeyOrTransaction; set => journeyOrTransaction = value; }
-        public ObservableCollection<Payer> Payers
-        {
-            get
-            {
-                if (payers.Count == 0)
-                {
-                    GetPayers();
-                }
-                return payers;
-            }
-            set => payers = value;
-        }
-        public ObservableCollection<Destination> Prices
-        {
-            get
-            {
-                if (prices.Count <= 0)
-                {
-                    GetPrices();
-                }
-                return prices;
-            }
-            set => prices = value;
-        }
-        public Journey TempJourney { get => tempJourney; set => tempJourney = value; } 
-        public Payer TempPayer { get => tempPayer; set => tempPayer = value; } //Corrected name
+
+        //public Journey TempJourney { get => tempJourney; set => tempJourney = value; } 
+        //public Payer TempPayer { get => tempPayer; set => tempPayer = value; } //Corrected name
+
         public PriceDetails TempPriceDetails { get => tempPriceDetails; set => tempPriceDetails = value; } //Corrected name
+
         public Transaction TempTransaction { get => tempTransaction; set => tempTransaction = value; }
+
         public ObservableCollection<Transaction> Transactions
         {
             get
@@ -298,24 +313,27 @@ namespace RygOgRejs.Bizz.App
             }
             set => transactions = value;
         }
-        public List<DestinationList> NewDestinations { get => newDestinations; set => newDestinations = value; }
-        public Master Master { get => master; set => master = value; }
+
+        public List<DestinationList> NewDestinations { get => newDestinationList; set => newDestinationList = value; }
+        //public Master Master { get => master; set => master = value; }
+
         public Transaction TempTransactionUpdate { get => tempTransactionUpdate; set => tempTransactionUpdate = value; }
+
         public Total DailyTotals { get => dailyTotals; set => dailyTotals = value; }
         #endregion
 
-        #region Internal Classes
-        internal class MasterId : IPersistable
-        {
-            private int id;
-            public MasterId() { }
-            public MasterId(int id)
-            {
-                Id = id;
-            }
-            public int Id { get => id; set => id = value; }
-        }
-        #endregion
+        //#region Internal Classes
+        //internal class MasterId : IPersistable
+        //{
+        //    private int id;
+        //    public MasterId() { }
+        //    public MasterId(int id)
+        //    {
+        //        Id = id;
+        //    }
+        //    public int Id { get => id; set => id = value; }
+        //}
+        //#endregion
 
     }
 }

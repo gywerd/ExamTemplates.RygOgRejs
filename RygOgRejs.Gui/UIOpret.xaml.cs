@@ -35,9 +35,10 @@ namespace RygOgRejs.Gui
             {
                 if (Convert.ToInt32(textBoxIndbetalt.Text) >= Convert.ToInt32(textBoxTotalPris.Text))
                 {
-                    CAB.TempJourney.DepatureTime = DateTime.Now;
-                    CAB.TempTransaction.Amount = Convert.ToSingle(textBoxIndbetalt.Text);
-                    CAB.TempTransaction.PayerId = CAB.TempPayer.PayerId;
+                    CAB.TempTransaction.TransActionDate = DateTime.Now;
+                    //CAB.TempTransaction.AmountExclVat = Convert.ToSingle(textBoxIndbetalt.Text);
+                    CAB.TempTransaction.AmountExclVat = Convert.ToSingle(textBoxIndbetalt.Text) * Convert.ToSingle("0.8"); //substracted VAT
+                    //CAB.TempTransaction.PayerId = CAB.TempPayer.PayerId; obsolete code
                     CAB.CreateJourney();
                     MessageBox.Show("Rejsen Blevet Oprettet");
                     UC.Content = null;
@@ -60,13 +61,13 @@ namespace RygOgRejs.Gui
             //yes Sir. jack
             if (firstClassChecked.IsChecked == true)
             {
-                CAB.TempJourney.IsFirstClass = true;
-                textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempJourney, CAB.Transactions, CAB.Prices).ToString();
+                CAB.TempTransaction.IsFirstClass = true;
+                textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
             }
             else
             {
-                CAB.TempJourney.IsFirstClass = false;
-                textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempJourney, CAB.Transactions, CAB.Prices).ToString();
+                CAB.TempTransaction.IsFirstClass = false;
+                textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
             }
 
                 
@@ -100,7 +101,7 @@ namespace RygOgRejs.Gui
                     textBoxLastName.BorderBrush = Brushes.Green;
                     textBoxLastName.BorderThickness = new Thickness(2);
 
-                    CAB.TempPayer.LastName = textBoxLastName.Text;
+                    CAB.TempTransaction.LastName = textBoxLastName.Text;
                 }
 
             }
@@ -141,7 +142,7 @@ namespace RygOgRejs.Gui
                 {
                     textBoxFirstName.BorderBrush = Brushes.Green;
                     textBoxFirstName.BorderThickness = new Thickness(2);
-                    CAB.TempPayer.FirstName = textBoxFirstName.Text;
+                    CAB.TempTransaction.FirstName = textBoxFirstName.Text;
                 }
             }
             else
@@ -179,8 +180,8 @@ namespace RygOgRejs.Gui
                 {
                     textBoxAdults.BorderBrush = Brushes.Green;
                     textBoxAdults.BorderThickness = new Thickness(2);
-                    CAB.TempJourney.Adults = Convert.ToInt32(textBoxAdults.Text);
-                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempJourney, CAB.Transactions, CAB.Prices).ToString();
+                    CAB.TempTransaction.Adults = Convert.ToInt32(textBoxAdults.Text);
+                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
                 }
             }
             else
@@ -219,8 +220,8 @@ namespace RygOgRejs.Gui
                 {
                     textBoxChildren.BorderBrush = Brushes.Green;
                     textBoxChildren.BorderThickness = new Thickness(2);
-                    CAB.TempJourney.Children = Convert.ToInt32(textBoxChildren.Text);
-                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempJourney, CAB.Transactions, CAB.Prices).ToString();
+                    CAB.TempTransaction.Children = Convert.ToInt32(textBoxChildren.Text);
+                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
                 }
             }
             else
@@ -259,8 +260,8 @@ namespace RygOgRejs.Gui
                 {
                     textBoxBagage.BorderBrush = Brushes.Green;
                     textBoxBagage.BorderThickness = new Thickness(2);
-                    CAB.TempJourney.LuggageAmount = Convert.ToSingle(textBoxBagage.Text);
-                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempJourney, CAB.Transactions, CAB.Prices).ToString();
+                    CAB.TempTransaction.LuggageAmount = Convert.ToSingle(textBoxBagage.Text);
+                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
                 }
             }
             else
@@ -272,7 +273,7 @@ namespace RygOgRejs.Gui
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            labelDestination.Content = CAB.TempJourney.Destination;
+            labelDestination.Content = CAB.TempTransaction.DestinationName;
         }
 
         private void textBoxIndbetalt_TextChanged(object sender, TextChangedEventArgs e)

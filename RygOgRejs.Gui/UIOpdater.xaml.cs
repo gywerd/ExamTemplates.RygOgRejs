@@ -22,24 +22,24 @@ namespace RygOgRejs.Gui
     /// </summary>
     public partial class UIOpdater : UserControl
     {
-        Payer selecteditem;
+        Transaction selecteditem; //changed from Payer to transaction
         AppBizz Appbizz;
         public UIOpdater(AppBizz appbizz, DataGrid datagrid)
         {
             InitializeComponent();
             Appbizz = appbizz;
-            this.selecteditem = (Payer)datagrid.SelectedItem;
-            Appbizz.LoadTransactionAndJourney();
-            var Bizz = Appbizz.TempJourney;
+            this.selecteditem = (Transaction)datagrid.SelectedItem;
+            Appbizz.LoadTransaction();
+            var Bizz = Appbizz.TempTransaction;
             if (selecteditem != null)
             {
-                labelDestination.Content = Bizz.Destination;
+                labelDestination.Content = Bizz.DestinationName;
                 textBoxAdults.Text = Bizz.Adults.ToString();
                 textBoxChildren.Text = Bizz.Children.ToString();
                 textBoxBagage.Text = Bizz.LuggageAmount.ToString();
                 firstClassChecked.IsChecked = Bizz.IsFirstClass;
-                textBoxFirstName.Text = Appbizz.TempPayer.FirstName;
-                textBoxLastName.Text = Appbizz.TempPayer.LastName;
+                textBoxFirstName.Text = Bizz.FirstName;
+                textBoxLastName.Text = Bizz.LastName;
             }
         }
 
@@ -50,9 +50,9 @@ namespace RygOgRejs.Gui
 
         private void btnClickSlet(object sender, RoutedEventArgs e)
         {
-            Appbizz.TempJourney.JourneyId = selecteditem.MasterID;
-            Appbizz.TempTransaction.TransactionId = selecteditem.MasterID;
-            Appbizz.DeleteJourney();
+            //Appbizz.TempJourney.JourneyId = selecteditem.MasterID; // obsolete code
+            //Appbizz.TempTransaction.TransactionId = selecteditem.MasterID; //obsolete code
+            Appbizz.DeleteJourney(); //obsolete code 
         }
     }
 }

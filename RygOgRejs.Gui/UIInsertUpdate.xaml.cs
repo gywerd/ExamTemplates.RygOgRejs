@@ -86,11 +86,11 @@ namespace RygOgRejs.Gui
 		{
 			if (checkBoxFirstClass.IsChecked == true)
 			{
-				CAB.TempJourney.IsFirstClass = true;
+				CAB.TempTransaction.IsFirstClass = true; //changed from TempJourney
 			}
 			else
 			{
-				CAB.TempJourney.IsFirstClass = false;
+				CAB.TempTransaction.IsFirstClass = false;
 			}
 		}
 
@@ -179,7 +179,7 @@ namespace RygOgRejs.Gui
 				buttonEditJourney.Visibility = Visibility.Hidden;
 				buttonDeleteJourney.Visibility = Visibility.Visible;
 				//labelChosenDestination.Content = CAB.Journey.Destination;
-				labelChosenDestination.Content = CAB.TempJourney.Destination; //corrected reference
+				//labelChosenDestination.Content = CAB.TempJourney.Destination; //corrected reference
 			}
 		}
 

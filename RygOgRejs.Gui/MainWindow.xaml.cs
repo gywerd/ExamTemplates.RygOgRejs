@@ -33,7 +33,7 @@ namespace RygOgRejs.Gui
 //        AppBizz CAB = new AppBizz();
         DataViewJourneys ucJourneys;
         DataViewTransactions ucTransaction;
-        JourneyEnquiries DataJourney = new JourneyEnquiries();
+        //JourneyEnquiries DataJourney = new JourneyEnquiries(); //JourneyEnquiries has been removed
         List<string> Distanition = new List<string>();
         AppBizz CRB = new AppBizz();
         UIOpret iOpret;
@@ -41,19 +41,19 @@ namespace RygOgRejs.Gui
         public MainWindow()
         {
             InitializeComponent();
-            CRB.GetAllDestinations(); //Reads the destinations from the database into the list newDestination - Daniel 
-            var DJ = DataJourney.GetAll();
+            CRB.GetDestinationList(); //Reads the destinations from the database into the list newDestination - Daniel 
+            //var DJ = DataJourney.GetAll();
             iOpret = new UIOpret(CRB, userControlRight);
-            foreach (var Data in DJ)
-            {
-                Distanition.Add(Data.Destination);
-            }
+            //foreach (var Data in DJ)
+            //{
+            //    Distanition.Add(Data.Destination);
+            //}
             userControlCentre.Content = ucJourneys = new DataViewJourneys(Distanition, CRB, userControlRight, iOpret);
             //ucTransaction = new DataViewTransactions(CRB, userControlRight);
             //macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
 
             //maybe change this 
-            CRB.DailyTotals.UpdateTotals(CRB.Journeys, CRB.Transactions); //Updates data for Daily Totals in lower left panel
+            CRB.DailyTotals.UpdateTotals(CRB.Transactions); //Updates data for Daily Totals in lower left panel
             weatherAPI = new WeatherAPI(labelStatusBar, CRB);
             weatherAPI.GetCityNameAsync();
 

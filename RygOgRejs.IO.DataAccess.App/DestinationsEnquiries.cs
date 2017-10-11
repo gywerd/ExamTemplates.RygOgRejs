@@ -63,7 +63,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// Method, that loads all Destinations from database
         /// </summary>
         /// <returns>ObservableCollection</returns>
-        public List<DestinationList> GetAllDestinations()
+        public List<DestinationList> GetDestinationList()
         {
             string query = "SELECT * FROM Price";
             List<DestinationList> destinationList = new List<DestinationList>();

@@ -30,7 +30,7 @@ namespace RygOgRejs.Gui
             CAB = (AppBizz)appbizz;
             uc = UC;
 
-            dataGridTransaction.ItemsSource = CAB.Payers;
+            dataGridTransaction.ItemsSource = CAB.Transactions;
             DataGridTextColumn FirstName = new DataGridTextColumn()
             {
                 Header = "Fornavn",
@@ -51,18 +51,23 @@ namespace RygOgRejs.Gui
 
         }
 
+        /// <summary>
+        /// needs total revision as Master.Id, GiveMasterID and TempPayer is obsolete
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DataGridTransaction_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CAB.TempPayer = (Payer)dataGridTransaction.SelectedItem; //payer 
+            CAB.TempPayer = (Payer)dataGridTransaction.SelectedItem;
             if (CAB.TempPayer != null)
             {
                 CAB.Master.Id = CAB.TempPayer.MasterID;
-                //CAB.GiveMasterID(CAB.TempPayer.MasterID); //payer
+                CAB.GiveMasterID(CAB.TempPayer.MasterID); //payer
 
             }
             else
             {
-                dataGridTransaction.ItemsSource = CAB.Payers;
+                dataGridTransaction.ItemsSource = CAB.Transactions; //Changed from Payers
             }
             UCOpdater = new UIOpdater(CAB, dataGridTransaction);
             uc.Content = UCOpdater;

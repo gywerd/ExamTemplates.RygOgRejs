@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace RygOgRejs.IO.DataAccess.App
 {
-    public class AncillarChargesEnquiries : DataEnquiries
+    public class AncillaryChargesEnquiries : DataEnquiries
     {
-        public ObservableCollection<AncillaryCharge> GetAllAncillaryCharge()
+        public ObservableCollection<AncillaryCharge> GetAllAncillaryCharges()
         {
-            string query = "SELECT * FROM AncillarCharges";
+            string query = "SELECT * FROM AncillaryCharges";
             ObservableCollection<AncillaryCharge> priceList = new ObservableCollection<AncillaryCharge>();
             DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader(); //best

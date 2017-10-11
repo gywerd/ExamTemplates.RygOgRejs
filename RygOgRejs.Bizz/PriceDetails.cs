@@ -168,26 +168,26 @@ namespace RygOgRejs.Bizz.Entities
         /// <summary>
         /// Calculates net price
         /// </summary>
-        /// <param name="j">Journey</param>
-        /// <param name="t">Transactions</param>
-        /// <param name="p">ObservableCollection<PriceDetails></param>
+        /// <param name="tempt">Journey</param>
+        /// <param name="tcol">Transactions</param>
+        /// <param name="d">ObservableCollection<PriceDetails></param>
         /// <returns></returns>
-        public float GetTotalWithoutTax(Transaction j, ObservableCollection<Transaction> t, ObservableCollection<Destination> p)
+        public float GetTotalWithoutTax(Transaction tempt, ObservableCollection<Transaction> tcol, ObservableCollection<Destination> d)
         {
             float accumulatedPrice = 0;
-            float adultsAccumulatedPrice = MultiplyFloat(j.Adults, GetAdultPrice(j, p));
+            float adultsAccumulatedPrice = MultiplyFloat(tempt.Adults, GetAdultPrice(tempt, d));
             accumulatedPrice = accumulatedPrice + adultsAccumulatedPrice;
-            float childAccumulatedPrice = MultiplyFloat(j.Children, GetAdultPrice(j, p));
+            float childAccumulatedPrice = MultiplyFloat(tempt.Children, GetAdultPrice(tempt, d));
             accumulatedPrice = accumulatedPrice + childAccumulatedPrice;
             float firstClassAccumulatedPrice = 0;
-            if (j.IsFirstClass)
+            if (tempt.IsFirstClass)
             {
-                firstClassAccumulatedPrice = MultiplyFloat(AddPersons(j), GetFirstClassPrice(j, p));
+                firstClassAccumulatedPrice = MultiplyFloat(AddPersons(tempt), GetFirstClassPrice(tempt, d));
             }
             else
                 firstClassAccumulatedPrice = 0;
             accumulatedPrice = accumulatedPrice + firstClassAccumulatedPrice;
-            float luggageAccumulatedPrice = MultiplyFloat(GetLuggageOverloadWeight(j,p), GetLuggagePrice(j, p));
+            float luggageAccumulatedPrice = MultiplyFloat(GetLuggageOverloadWeight(tempt,d), GetLuggagePrice(tempt, d));
             accumulatedPrice = accumulatedPrice + luggageAccumulatedPrice;
             //Not Implemented Yet
             return accumulatedPrice;

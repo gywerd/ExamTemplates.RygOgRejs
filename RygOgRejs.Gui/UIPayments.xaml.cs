@@ -37,12 +37,12 @@ namespace RygOgRejs.Gui
         #region Buttons
         private void ButtonExecutePayment_Click(object sender, RoutedEventArgs e)
         {
-            CAB.ExecutePayment();
+            //CAB.ExecutePayment();
         }
 
         private void ButtonExecuteRefusion_Click(object sender, RoutedEventArgs e)
         {
-            CAB.ExecuteRefusion();
+            //CAB.ExecuteRefusion();
         }
         #endregion
 
