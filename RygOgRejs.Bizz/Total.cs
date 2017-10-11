@@ -33,22 +33,22 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="saleAmount">float</param>
         public Total(int soldtravels, int passengers, int adults, int children, float saleAmount)
         {
-            this.amountOfSoldTravels = soldtravels;
-            this.amountOfPassengers = passengers;
-            this.amountOfAdults = adults;
-            this.amountOfChildren = children;
-            this.totalSaleAmount = saleAmount;
+            amountOfSoldTravels = soldtravels;
+            amountOfPassengers = passengers;
+            amountOfAdults = adults;
+            amountOfChildren = children;
+            totalSaleAmount = saleAmount;
         }
         #endregion
 
         #region Methods
         public void UpdateTotals(ObservableCollection<Transaction> t)
         {
-            this.amountOfSoldTravels = t.Count;
-            this.amountOfAdults = GetAmountOfAdults(t);
-            this.amountOfChildren = GetAmountOfChildren(t);
-            this.amountOfPassengers = amountOfChildren + amountOfAdults;
-            this.totalSaleAmount = GetTotalSaleAmount(t);
+            amountOfSoldTravels = t.Count;
+            amountOfAdults = GetAmountOfAdults(t);
+            amountOfChildren = GetAmountOfChildren(t);
+            amountOfPassengers = amountOfChildren + amountOfAdults;
+            totalSaleAmount = GetTotalSaleAmount(t);
         }
 
         private int GetAmountOfAdults(ObservableCollection<Transaction> t)
@@ -56,7 +56,7 @@ namespace RygOgRejs.Bizz.Entities
             int adults = 0;
             foreach (Transaction trans in t)
             {
-                adults = adults + trans.Adults;
+                adults += trans.Adults;
             }
             return adults;
         }
@@ -66,7 +66,7 @@ namespace RygOgRejs.Bizz.Entities
             int children = 0;
             foreach (Transaction trans in t)
             {
-                children = children + trans.Children;
+                children += trans.Children;
             }
             return children;
         }
@@ -76,7 +76,7 @@ namespace RygOgRejs.Bizz.Entities
             float totalSale = 0;
             foreach (Transaction trans in t)
             {
-                totalSale = totalSale + trans.AmountExclVat;
+                totalSale += trans.AmountExclVat;
             }
             return totalSale;
         }

@@ -23,7 +23,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <param name="price">Price</param>
         public void AddPrice(Destination price)
         {
-            string query = $"INSERT INTO Price (DestinationName, AdultPrice, ChildrenPrice, FirstClassPrice, LuggagePrice) VALUES ('{price.DestinationName}', {price.AdultPrice}, {price.ChildPrice},' {price.FirstClassPrice}', {price.LuggagePrice})";
+            string query = $"INSERT INTO Price (DestinationName, AdultPrice, ChildrenPrice) VALUES ('{price.DestinationName}', {price.AdultPrice}, {price.ChildPrice})";
             executor.ExecuteNonQuery(query);
         }
 
@@ -109,7 +109,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <param name="price">Price</param>
         public void UpdatePrices(Destination price)
         {
-            string query = $"INSERT INTO Price (DestinationName, AdultPrice, ChildrenPrice,FirstClassPrice,LuggagePrice) VALUES({price.DestinationName}, {price.AdultPrice}, {price.ChildPrice}, {price.FirstClassPrice}, {price.LuggagePrice}";
+            string query = $"INSERT INTO Price (DestinationName, AdultPrice, ChildrenPrice) VALUES({price.DestinationName}, {price.AdultPrice}, {price.ChildPrice}";
             executor.ExecuteNonQuery(query);
         }
 

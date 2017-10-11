@@ -45,7 +45,7 @@ namespace RygOgRejs.Bizz.Entities
         /// </summary>
         /// <param name="j">Journey</param>
         /// <returns></returns>
-        private int AddPersons(Journey j)
+        private int AddPersons(Transaction j)
         {
             return j.Adults + j.Children;
         }
@@ -67,12 +67,12 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="j">Journey</param>
         /// <param name="p">ObservableCollection<PriceDetails></param>
         /// <returns></returns>
-        private float GetAdultPrice(Journey j, ObservableCollection<Destination> p)
+        private float GetAdultPrice(Transaction j, ObservableCollection<Destination> p)
         {
             float adultPrice = 0;
             foreach (Destination price in p)
             {
-                if (j.Destination == price.DestinationName)
+                if (j.DestinationName == price.DestinationName)
                 {
                     adultPrice = price.AdultPrice;
                 }
@@ -86,12 +86,12 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="j">Journey</param>
         /// <param name="p">ObservableCollection<PriceDetails></param>
         /// <returns></returns>
-        private float GetChildrenPrice(Journey j, ObservableCollection<Destination> p)
+        private float GetChildrenPrice(Transaction j, ObservableCollection<Destination> p)
         {
             float childrenPrice = 0;
             foreach (Destination price in p)
             {
-                if (j.Destination == price.DestinationName)
+                if (j.DestinationName == price.DestinationName)
                 {
                     childrenPrice = price.ChildPrice;
                 }
@@ -105,15 +105,15 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="j">Journey</param>
         /// <param name="p">ObservableCollection<PriceDetails></param>
         /// <returns></returns>
-        private float GetFirstClassPrice(Journey j, ObservableCollection<Destination> p)
+        private float GetFirstClassPrice(Transaction j, ObservableCollection<Destination> p)
         {
             float firstClassPrice = 0;
             foreach (Destination price in p)
             {
-                if (j.Destination == price.DestinationName)
+                /*if (j.Destination == price.DestinationName)
                 {
                     firstClassPrice = price.FirstClassPrice;
-                }
+                }*/
             }
             return firstClassPrice;
         }
@@ -123,7 +123,7 @@ namespace RygOgRejs.Bizz.Entities
         /// </summary>
         /// <param name="j">Journey</param>
         /// <returns></returns>
-        private int GetLuggageOverloadWeight(Journey j, ObservableCollection<Destination> p)
+        private int GetLuggageOverloadWeight(Transaction j, ObservableCollection<Destination> p)
         {
             int lugWeight = Convert.ToInt32(j.LuggageAmount);
             int persons = AddPersons(j);
@@ -142,15 +142,15 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="j">Journey</param>
         /// <param name="p">ObservableCollection<PriceDetails></param>
         /// <returns></returns>
-        private float GetLuggagePrice(Journey j, ObservableCollection<Destination> p)
+        private float GetLuggagePrice(Transaction j, ObservableCollection<Destination> p)
         {
             float luggagePrice = 0;
             foreach (Destination price in p)
             {
-                if (j.Destination == price.DestinationName)
-                {
-                    luggagePrice = price.LuggagePrice;
-                }
+                //if (j.DestinationName == price.DestinationName)
+                //{
+                //    luggagePrice = price.;
+                //}
             }
             return luggagePrice;
         }
@@ -172,7 +172,7 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="t">Transactions</param>
         /// <param name="p">ObservableCollection<PriceDetails></param>
         /// <returns></returns>
-        public float GetTotalWithoutTax(Journey j, ObservableCollection<Transaction> t, ObservableCollection<Destination> p)
+        public float GetTotalWithoutTax(Transaction j, ObservableCollection<Transaction> t, ObservableCollection<Destination> p)
         {
             float accumulatedPrice = 0;
             float adultsAccumulatedPrice = MultiplyFloat(j.Adults, GetAdultPrice(j, p));
@@ -200,7 +200,7 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="t"></param>
         /// <param name="p"></param>
         /// <returns></returns>
-        public float GetTotalWithTax(Journey j, ObservableCollection<Transaction> t, ObservableCollection<Destination> p)
+        public float GetTotalWithTax(Transaction j, ObservableCollection<Transaction> t, ObservableCollection<Destination> p)
         {
             float total = 0;
             total = total + GetTotalWithoutTax(j, t, p);
