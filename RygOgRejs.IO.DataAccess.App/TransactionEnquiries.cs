@@ -21,7 +21,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// Method, that inserts a row into the database
         /// </summary>
         /// <param name="t">Transactions</param>
-        public void AddTransaction(Transactions t)
+        public void AddTransaction(Transaction t)
         {
     //        string query = $"INSERT INTO Transactions (Amount, JourneyId, PayerID, MasterId) VALUES ({t.Amount}, {t.JourneyId}, {t.PayerId}, {t.MasterId})";
       //      executor.ExecuteNonQuery(query);
@@ -41,10 +41,10 @@ namespace RygOgRejs.IO.DataAccess.App
         /// Method, that loads all Transactions from database
         /// </summary>
         /// <returns>ObservableCollection</returns>
-        public ObservableCollection<Transactions> GetAll()
+        public ObservableCollection<Transaction> GetAll()
         {
             string query = "SELECT * FROM Transactions";
-            ObservableCollection<Transactions> transCol = new ObservableCollection<Transactions>();
+            ObservableCollection<Transaction> transCol = new ObservableCollection<Transaction>();
             DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader();
             while (reader.Read())
@@ -59,7 +59,7 @@ namespace RygOgRejs.IO.DataAccess.App
                 string lastName = reader["ÍnsertNameHere"].ToString();
                 string destinationName = reader["ÍnsertNameHere"].ToString();
                 float ammountExclVat = Convert.ToSingle(reader["ÍnsertNameHere"]);
-                Transactions t = new Transactions(tid,depatureTime,isFirstClass,adults,children,luggaeAmount,firstName,lastName,destinationName, ammountExclVat); //use this when the class has been made for it
+                Transaction t = new Transaction(tid,depatureTime,isFirstClass,adults,children,luggaeAmount,firstName,lastName,destinationName, ammountExclVat); //use this when the class has been made for it
                 transCol.Add(t);
             }
             return transCol;
@@ -70,9 +70,9 @@ namespace RygOgRejs.IO.DataAccess.App
         /// </summary>
         /// <param name="masterId">int</param>
         /// <returns>Transaction if it worked null if it failed</returns>
-        public Transactions GetTransaction(int Id)
+        public Transaction GetTransaction(int Id)
         {
-            Transactions t = default(Transactions);
+            Transaction t = default(Transaction);
             string query = $"SELECT * FROM Transactions WHERE MasterID = {Id}";
             DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader();
@@ -88,7 +88,7 @@ namespace RygOgRejs.IO.DataAccess.App
                 string lastName = reader["ÍnsertNameHere"].ToString();
                 string destinationName = reader["ÍnsertNameHere"].ToString();
                 float ammountExclVat = Convert.ToSingle(reader["ÍnsertNameHere"]);
-                t = new Transactions(tid, depatureTime, isFirstClass, adults, children, luggaeAmount, firstName, lastName, destinationName, ammountExclVat); //use this when the class has been made for it
+                t = new Transaction(tid, depatureTime, isFirstClass, adults, children, luggaeAmount, firstName, lastName, destinationName, ammountExclVat); //use this when the class has been made for it
             }
             return t;
         }
@@ -97,7 +97,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// Method, that updates a row in the database from object
         /// </summary>
         /// <param name="t">Transactions</param>
-        public void UpdateTransaction(Transactions t)
+        public void UpdateTransaction(Transaction t)
         {
     //        string query = $"UPDATE Transactions SET Amount = {t.Amount}, JourneyId = {t.JourneyId}, PayerId = {t.PayerId} WHERE TransactionId = {t.TransactionId}";
     //        executor.ExecuteNonQuery(query);

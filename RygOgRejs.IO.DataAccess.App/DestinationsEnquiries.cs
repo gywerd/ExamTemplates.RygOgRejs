@@ -21,7 +21,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// Method, that inserts a row into the database
         /// </summary>
         /// <param name="price">Price</param>
-        public void AddPrice(Price price)
+        public void AddPrice(Destination price)
         {
             string query = $"INSERT INTO Price (DestinationName, AdultPrice, ChildrenPrice, FirstClassPrice, LuggagePrice) VALUES ('{price.DestinationName}', {price.AdultPrice}, {price.ChildPrice},' {price.FirstClassPrice}', {price.LuggagePrice})";
             executor.ExecuteNonQuery(query);
@@ -41,10 +41,10 @@ namespace RygOgRejs.IO.DataAccess.App
         /// Method, that loads all Prices from database
         /// </summary>
         /// <returns>ObservableCollection</returns>
-        public ObservableCollection<Price> GetAll()
+        public ObservableCollection<Destination> GetAll()
         {
             string query = "SELECT * FROM Price";
-            ObservableCollection<Price> priceList = new ObservableCollection<Price>();
+            ObservableCollection<Destination> priceList = new ObservableCollection<Destination>();
             DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader(); //best
             while (reader.Read())
@@ -63,17 +63,17 @@ namespace RygOgRejs.IO.DataAccess.App
         /// Method, that loads all Destinations from database
         /// </summary>
         /// <returns>ObservableCollection</returns>
-        public List<Destination> GetAllDestinations()
+        public List<DestinationList> GetAllDestinations()
         {
             string query = "SELECT * FROM Price";
-            List<Destination> destinationList = new List<Destination>();
+            List<DestinationList> destinationList = new List<DestinationList>();
             DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader(); //best
             while (reader.Read())
             {
                 int id = Convert.ToInt32(reader["DestinationId"]);
                 string destination = reader["DestinationName"].ToString();
-                Destination d = new Destination(id, destination);
+                DestinationList d = new DestinationList(id, destination);
                 destinationList.Add(d);
             }
             return destinationList;
@@ -84,9 +84,9 @@ namespace RygOgRejs.IO.DataAccess.App
         /// </summary>
         /// <param name="id">int</param>
         /// <returns>Price</returns>
-        public Price GetPrice(int id)
+        public Destination GetPrice(int id)
         {
-            Price p = new Price();
+            Destination p = new Destination();
             string query = $"SELECT * FROM Transaction WHERE DestinationId = {id}";
             DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader();
@@ -98,7 +98,7 @@ namespace RygOgRejs.IO.DataAccess.App
                 float child = Convert.ToSingle(reader["ChildrenPrice"]);
                 float first = Convert.ToSingle(reader["FirstClassPrice"]);
                 float lug = Convert.ToSingle(reader["LuggagePrice"]);
-                p = new Price(destid, destination, adult, child, first, lug);
+                p = new Destination(destid, destination, adult, child, first, lug);
             }
             return p;
         }
@@ -107,7 +107,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// Method, that updates a row in the database from object
         /// </summary>
         /// <param name="price">Price</param>
-        public void UpdatePrices(Price price)
+        public void UpdatePrices(Destination price)
         {
             string query = $"INSERT INTO Price (DestinationName, AdultPrice, ChildrenPrice,FirstClassPrice,LuggagePrice) VALUES({price.DestinationName}, {price.AdultPrice}, {price.ChildPrice}, {price.FirstClassPrice}, {price.LuggagePrice}";
             executor.ExecuteNonQuery(query);

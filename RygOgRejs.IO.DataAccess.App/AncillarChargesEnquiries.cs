@@ -15,7 +15,7 @@ namespace RygOgRejs.IO.DataAccess.App
         public void GetAll()
         {
             string query = "SELECT * FROM AncillarCharges";
-            ObservableCollection<Price> priceList = new ObservableCollection<Price>();
+            ObservableCollection<Destination> priceList = new ObservableCollection<Destination>();
             DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader(); //best
             while (reader.Read())

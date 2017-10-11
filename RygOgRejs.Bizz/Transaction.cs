@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace RygOgRejs.Bizz.Entities
 {
-    public class Transactions
+    public class Transaction
     {
         #region Fields
         private int id;
         private DateTime transActionDate;
+        private string destinationName;
         private bool isFirstClass;
         private int adults;
         private int children;
         private float luggageAmount;
         private string firstName;
         private string lastName;
-        private string destinationName;
         private float amountExclVat;
         #endregion
 
@@ -26,25 +26,30 @@ namespace RygOgRejs.Bizz.Entities
         /// <summary>
         /// Empty constructor
         /// </summary>
-        public Transactions() { }
+        public Transaction() { }
 
         /// <summary>
         /// Constructor used when generating transaction
         /// </summary>
-        /// <param name="amount">float</param>
-        /// <param name="jid">int</param>
-        /// <param name="pid">int</param>
-        /// <param name="mid">int</param>
-        public Transactions(DateTime transActionDate, bool isFirstClass, int adults, int children, float luggageAmount, string firstName, string lastName, string destinationName, float amountExclVat)
+        /// <param name="transActionDate">DateTime</param>
+        /// <param name="destinationName"></param>
+        /// <param name="isFirstClass">bool</param>
+        /// <param name="adults">int</param>
+        /// <param name="children">int</param>
+        /// <param name="luggageAmount">float</param>
+        /// <param name="firstName">string</param>
+        /// <param name="lastName">string</param>
+        /// <param name="amountExclVat">float</param>
+        public Transaction(DateTime transActionDate, string destinationName, bool isFirstClass, int adults, int children, float luggageAmount, string firstName, string lastName, float amountExclVat)
         {
             TransActionDate = transActionDate;
+            DestinationName = destinationName;
             IsFirstClass = isFirstClass;
             Adults = adults;
             Children = children;
             LuggageAmount = luggageAmount;
             FirstName = firstName;
             LastName = lastName;
-            DestinationName = destinationName;
             AmountExclVat = amountExclVat;
 
         }
@@ -52,20 +57,25 @@ namespace RygOgRejs.Bizz.Entities
         /// <summary>
         /// Constructor used, when reding from database
         /// </summary>
-        /// <param name="tid"></param>
-        /// <param name="amount">float</param>
-        /// <param name="jid">int</param>
-        /// <param name="pid">int</param>
-        /// <param name="mid">int</param>
-        public Transactions(int id, DateTime transActionDate, bool isFirstClass, int adults, int children, float luggageAmount, string firstName, string lastName, string destinationName, float amountExclVat) : this(transActionDate, isFirstClass,adults,children,luggageAmount,firstName,lastName,destinationName, amountExclVat)
+        /// <param name="id">int</param>
+        /// <param name="transActionDate">DateTime</param>
+        /// <param name="destinationName">string</param>
+        /// <param name="isFirstClass">bool</param>
+        /// <param name="adults">int</param>
+        /// <param name="children">int</param>
+        /// <param name="luggageAmount">float</param>
+        /// <param name="firstName">string</param>
+        /// <param name="lastName">string</param>
+        /// <param name="amountExclVat"></param>
+        public Transaction(int id, DateTime transActionDate, string destinationName, bool isFirstClass, int adults, int children, float luggageAmount, string firstName, string lastName, float amountExclVat) : this(transActionDate, destinationName, isFirstClass, adults, children, luggageAmount, firstName, lastName, amountExclVat)
         {
-            Id = id;
+            TransactionId = id;
         }
         #endregion
        
         #region Properties
         //Validate not needed
-        public int Id
+        public int TransactionId
         {
             get => id;
             set => id = value;
@@ -75,6 +85,20 @@ namespace RygOgRejs.Bizz.Entities
         {
             get => transActionDate;
             set => transActionDate = value;
+        }
+
+        public string DestinationName
+        {
+            get => destinationName;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentNullException();
+                foreach (char c in value)
+                    if (!char.IsLetter(c))
+                        throw new ArgumentNullException();
+                destinationName = value;
+            }
         }
 
         public bool IsFirstClass
@@ -126,20 +150,6 @@ namespace RygOgRejs.Bizz.Entities
                     if (!char.IsLetter(c))
                         throw new ArgumentNullException();
                 lastName = value;
-            }
-        }
-
-        public string DestinationName
-        {
-            get => destinationName;
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentNullException();
-                foreach (char c in value)
-                    if (!char.IsLetter(c))
-                        throw new ArgumentNullException();
-                destinationName = value;
             }
         }
 
