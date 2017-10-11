@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RygOgRejs.IO.DataAccess.App
 {
-    class AncillarChargesEnquiries : DataEnquiries
+    public class AncillarChargesEnquiries : DataEnquiries
     {
         public void GetAll()
         {

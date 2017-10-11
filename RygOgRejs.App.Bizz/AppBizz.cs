@@ -18,32 +18,23 @@ namespace RygOgRejs.Bizz.App
             private Total dailyTotals; //object that holds data, that can be bound to left panel in MainWindow
             private string destination; //string that holds a destination
             private string journeyOrTransaction; //string that controls how UIInsertUpdate & UIPayment acts
-            private Master master = new Master(); //object to store masterID within
-            private Journey tempJourney = new Journey(); //object to temporarily store current journey information, before writing it to the database
-            private Payer tempPayer = new Payer(); //object to temporarily store current payer information, before writing it to the database   
             private Transaction tempTransaction = new Transaction(); //string to temporarily store current transaction information, before writing it to the database
             private Transaction tempTransactionUpdate = new Transaction(); //string to temporarily store current transaction information, before writing it to the database
             private PriceDetails tempPriceDetails = new PriceDetails(); //string to temporarily store current pricedetails, to show on GUI
-            private string macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault(); //string where current macadress is stored
-            #endregion
+            AncillaryCharge ancillaryCharges = new AncillaryCharge();  //object containing acincillary charges stored in database
+        #endregion
 
-            #region Method Fields
-            DestinationList CDE = new DestinationList();
-            Journey CJE = new Journey(); //used to call methods
-            JourneyEnquiries CJI = new JourneyEnquiries(); //used to call methods
-            Payer CPaE = new Payer(); //used to call methods
-            PayerEnquiries CPaI = new PayerEnquiries(); //used to call methods
-            Destination CPrE = new Destination(); //used to call methods
-            DestinationsEnquiries CPrI = new DestinationsEnquiries(); //used to call methods
+        #region Method Fields
+            DestinationList CDL = new DestinationList();
+            AncillaryCharge CACE = new AncillaryCharge(); //used to call methods
+            AncillaryChargesEnquiries CACI = new AncillaryChargesEnquiries(); //used to call methods
+            Destination CDE = new Destination(); //used to call methods
+            DestinationsEnquiries CDI = new DestinationsEnquiries(); //used to call methods
             Transaction CTE = new Transaction(); //used to call methods
             TransactionEnquiries CTI = new TransactionEnquiries(); //used to call methods
-            MasterId CMI = new MasterId(); //used to call methods
-            MasterIdEnquiries CMIE = new MasterIdEnquiries(); //used to call methods
             #endregion
 
             #region List, Array And Collection Fields
-            ObservableCollection<Journey> journeys = new ObservableCollection<Journey>(); //Collection containing journeys stored in database
-            ObservableCollection<Payer> payers = new ObservableCollection<Payer>();  //Collection containing payers stored in database
             ObservableCollection<Transaction> transactions = new ObservableCollection<Transaction>(); //Collection containing trnsactions stored in database
             ObservableCollection<Destination> prices = new ObservableCollection<Destination>(); //Collection containing prices stored in database
             List<string> destinations = new List<string>(); //List containing available destinations to be viewed in DataViewJourneys
@@ -64,8 +55,6 @@ namespace RygOgRejs.Bizz.App
         /// </summary>
         public void ClearTemporaryFields()
         {
-            tempJourney = new Journey();
-            tempPayer = new Payer();
             tempTransaction = new Transaction();
             tempPriceDetails = new PriceDetails();
         }
@@ -79,15 +68,15 @@ namespace RygOgRejs.Bizz.App
         {
             //MasterId is generated and added  to tempPayer, tempJourney & tempTransaction, when UIOpret is loaded
             //All data is written simutaneusly to tempPayer, tempJourney & tempTransaction, and price incl. VAT is calculated while manipulating GUI
-            CPaI.AddPayer(tempPayer); //Writes Journey data to DB
-            tempPayer = CPaI.GetPayerWithId(master.Id);
-            TempTransaction.PayerId = tempPayer.PayerId;
-            CJI.AddJourney(tempJourney);//Writes Journey data to DB
-            tempJourney = CJI.GetJourney(master.Id);
-            TempTransaction.JourneyId = tempJourney.JourneyId;
+            //CPaI.AddPayer(tempPayer); //Writes Journey data to DB - obsolete code
+            //tempPayer = CPaI.GetPayerWithId(master.Id); //obsolete code
+            //TempTransaction.PayerId = tempPayer.PayerId; //obsolete code
+            //CJI.AddJourney(tempJourney);//Writes Journey data to DB //obsolete code
+            //tempJourney = CJI.GetJourney(master.Id); //obsolete code
+            //TempTransaction.JourneyId = tempJourney.JourneyId; //obsolete code
             CTI.AddTransaction(tempTransaction);  //Writes Transaction data to DB
             RefreshObservableCollections(); //Updates content of ObservableCollections from DB
-//            UpdateDailyTotals(); //updates content of dailyTotals
+            UpdateDailyTotals(); //updates content of dailyTotals
             ClearTemporaryFields(); //Clears content of tempPayer, tempJourney & tempTransaction
         }
 
@@ -98,10 +87,10 @@ namespace RygOgRejs.Bizz.App
         /// <param name="u"></param>
         public void DeleteJourney()
         {
-            CJI.DeleteJourney(tempJourney.JourneyId); //dis aint working - changed from GetJourney to DeleteJourney ;)
-            CPaI.DeletePayer(tempPayer.MasterID);
+            //CTI.DeleteJourney(tempJourney.JourneyId); //dis aint working - changed from GetJourney to DeleteJourney ;) - obsolete code
+            //CPaI.DeletePayer(tempPayer.MasterID); //obsolete code
             CTI.DeleteTransaction(tempTransaction.TransactionId);
-            UpdateDailyTotals(); //updates content of dailyTotals
+            //UpdateDailyTotals(); //updates content of dailyTotals - wrong place - not necessary twice
             RefreshObservableCollections(); //Updates content of ObservableCollections from DB
             UpdateDailyTotals(); //updates content of dailyTotals
             ClearTemporaryFields(); //Clears content of tempPayer, tempJourney & tempTransaction
@@ -115,46 +104,45 @@ namespace RygOgRejs.Bizz.App
         /// <param name="u"></param>
         public void EditJourney()
         {
-            //MasterId is loaded into tempPayer, tempJourney & tempTransaction, when UIUpdate is loaded
-            //All data is written simutaneusly to tempPayer, tempJourney & tempTransaction, and refund price incl. VAT is calculated while manipulating GUI
-            CJI.UpdateJourney(tempJourney); //Writes content of tempJourney to Database
+            //MasterId is loaded into tempPayer, tempJourney & tempTransaction, when UIUpdate is loaded - MasterId removed from app
+            //All data is written simutaneusly to tempTransaction, and refund price incl. VAT is calculated while manipulating GUI
             CTI.UpdateTransaction(tempTransactionUpdate); //Writes content of tempJourney to Database
             RefreshObservableCollections(); //Updates content of ObservableCollections from DB
             UpdateDailyTotals(); //updates content of dailyTotals
             ClearTemporaryFields(); //Clears content of tempPayer, tempJourney & tempTransaction
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         /// <summary>
         /// Code behind ExecutePayments-button
-        /// Button removed from GUI - redundant after SCRUM-decision to edit UserControls
+        /// Button removed from GUI - obsolete after SCRUM-decision to edit UserControls
         /// </summary>
-        public void ExecutePayment()
-        {
-            //throw new NotImplementedException();
-        }
+        //public void ExecutePayment()
+        //{
+        //    //throw new NotImplementedException();
+        //}
 
         /// <summary>
         /// Code behind ExecuteRefusion-button
-        /// Button removed from GUI - redundant after SCRUM-decision to edit UserControls
+        /// Button removed from GUI - obsolete after SCRUM-decision to edit UserControls
         /// </summary>
-        public void ExecuteRefusion()
-        {
-            //throw new NotImplementedException();
-        }
+        //public void ExecuteRefusion()
+        //{
+        //    //throw new NotImplementedException();
+        //}
 
         /// <summary>
         /// Method, that generates a list of destinations
-        /// Redundant - replaced by GetAllDestinations
+        /// obsolete - replaced by GetAllDestinations
         /// </summary>
-        private void GetDestinations()
-        {
-            ObservableCollection<Destination> PriceDetailEnq = CPrI.GetAll();
-            foreach (Destination price in PriceDetailEnq)
-            {
-                destinations.Add(price.DestinationName);
-            }
-        }
+        //private void GetDestinations()
+        //{
+        //    ObservableCollection<Destination> PriceDetailEnq = CDI.GetAll();
+        //    foreach (Destination price in PriceDetailEnq)
+        //    {
+        //        destinations.Add(price.DestinationName);
+        //    }
+        //}
 
         /// <summary>
         /// Method that loads list of destinations with DestinationId from the PriceDetails table in DB
@@ -163,23 +151,23 @@ namespace RygOgRejs.Bizz.App
         /// </summary>
         public void GetAllDestinations()
         {
-            newDestinations = CPrI.GetAllDestinations();
+            newDestinations = CDI.GetAllDestinations();
         }
 
         /// <summary>
-        /// Method, that invokes reading all rows in the Journeys table from database
+        /// Method, that invokes reading all rows in the Journeys table from database - obsolete
         /// </summary>
-        private void GetJourneys()
-        {
-            journeys = CJI.GetAll();
-        }
+        //private void GetJourneys()
+        //{
+        //    journeys = CJI.GetAll();
+        //}
 
         /// <summary>
-        /// Method, that invokes reading all rows in the Payers table from database
+        /// Method, that invokes reading all rows in the Payers table from database 
         /// </summary>
-        private void GetPayers()
+        private void GetAncillaryCharges()
         {
-            payers = CPaI.GetAllPayers();
+            ancillaryCharges = CACI.GetAll();
         }
 
         /// <summary>
@@ -188,7 +176,7 @@ namespace RygOgRejs.Bizz.App
         /// <returns></returns>
         private void GetPrices()
         {
-            prices = CPrI.GetAll();
+            prices = CDI.GetAll();
         }
 
         /// <summary>
