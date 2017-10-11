@@ -60,7 +60,7 @@ namespace RygOgRejs.IO.DataAccess.App
                 string destinationName = reader["ÍnsertNameHere"].ToString();
                 float ammountExclVat = Convert.ToSingle(reader["ÍnsertNameHere"]);
                 Transactions t = new Transactions(tid,depatureTime,isFirstClass,adults,children,luggaeAmount,firstName,lastName,destinationName, ammountExclVat); //use this when the class has been made for it
-                //transCol.Add(t);
+                transCol.Add(t);
             }
             return transCol;
         }
