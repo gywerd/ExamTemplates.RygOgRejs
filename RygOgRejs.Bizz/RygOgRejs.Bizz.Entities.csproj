@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="AncillaryCharge.cs" />
     <Compile Include="DestinationList.cs" />
-    <Compile Include="IPersistable.cs" />
     <Compile Include="Destination.cs" />
     <Compile Include="PriceDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
