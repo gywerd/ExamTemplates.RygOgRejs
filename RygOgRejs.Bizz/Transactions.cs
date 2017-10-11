@@ -7,13 +7,19 @@ using System.Threading.Tasks;
 
 namespace RygOgRejs.Bizz.Entities
 {
-    public class Transactions : Master
+    public class Transactions
     {
         #region Fields
-        private float amount;
-        private int journeyId;
-        private int payerId;
-        private int transactionId;
+        private int id;
+        private DateTime transActionDate;
+        private bool isFirstClass;
+        private int adults;
+        private int children;
+        private float luggageAmount;
+        private string firstName;
+        private string lastName;
+        private string destinationName;
+        private float amountExclVat;
         #endregion
 
         #region Constructors
@@ -29,12 +35,18 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="jid">int</param>
         /// <param name="pid">int</param>
         /// <param name="mid">int</param>
-        public Transactions(float amount, int jid, int pid, int mid)
+        public Transactions(DateTime transActionDate, bool isFirstClass, int adults, int children, float luggageAmount, string firstName, string lastName, string destinationName, float amountExclVat)
         {
-            this.amount = amount;
-            this.journeyId = jid;
-            this.payerId = pid;
-            base.Id = mid;
+            TransActionDate = transActionDate;
+            IsFirstClass = isFirstClass;
+            Adults = adults;
+            Children = children;
+            LuggageAmount = luggageAmount;
+            FirstName = firstName;
+            LastName = lastName;
+            DestinationName = destinationName;
+            AmountExclVat = amountExclVat;
+
         }
 
         /// <summary>
@@ -45,22 +57,97 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="jid">int</param>
         /// <param name="pid">int</param>
         /// <param name="mid">int</param>
-        public Transactions(int tid, float amount, int jid, int pid, int mid)
+        public Transactions(int id, DateTime transActionDate, bool isFirstClass, int adults, int children, float luggageAmount, string firstName, string lastName, string destinationName, float amountExclVat) : this(transActionDate, isFirstClass,adults,children,luggageAmount,firstName,lastName,destinationName, amountExclVat)
         {
-            this.transactionId = tid;
-            this.amount = amount;
-            this.journeyId = jid;
-            this.payerId = pid;
-            base.Id = mid;
+            Id = id;
         }
         #endregion
-
+       
         #region Properties
-        public float Amount { get => amount; set => amount = value; }
-        public int JourneyId { get => journeyId; set => journeyId = value; }
-        public int PayerId { get => payerId; set => payerId = value; }
-        public int TransactionId { get => transactionId; set => transactionId = value; }
-        public int MasterId { get => base.Id; set => base.Id = value;}
+        //Validate not needed
+        public int Id
+        {
+            get => id;
+            set => id = value;
+        }
+
+        public DateTime TransActionDate
+        {
+            get => transActionDate;
+            set => transActionDate = value;
+        }
+
+        public bool IsFirstClass
+        {
+            get => isFirstClass;
+            set => isFirstClass = value;
+        }
+
+        public int Adults
+        {
+            get => adults;
+            set => adults = value;
+        }
+
+        public int Children
+        {
+            get => children;
+            set => children = value;
+        }
+
+        public float LuggageAmount
+        {
+            get => luggageAmount;
+            set => LuggageAmount = value;
+        }
+
+        public string FirstName
+        {
+            get => firstName;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentNullException();
+                foreach (char c in value)
+                    if (!char.IsLetter(c))
+                        throw new ArgumentNullException();
+                firstName = value;
+            }
+        }
+
+        public string LastName
+        {
+            get => lastName;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentNullException();
+                foreach (char c in value)
+                    if (!char.IsLetter(c))
+                        throw new ArgumentNullException();
+                lastName = value;
+            }
+        }
+
+        public string DestinationName
+        {
+            get => destinationName;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentNullException();
+                foreach (char c in value)
+                    if (!char.IsLetter(c))
+                        throw new ArgumentNullException();
+                destinationName = value;
+            }
+        }
+
+        public float AmountExclVat
+        {
+            get => amountExclVat;
+            set => amountExclVat = value;
+        }
         #endregion
     }
 }
