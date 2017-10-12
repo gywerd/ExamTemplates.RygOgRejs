@@ -23,7 +23,7 @@ namespace RygOgRejs.IO.DataAccess.General
             using (SqlDataAdapter adapter = new SqlDataAdapter(command))
             {
                 DataSet set = new DataSet();
-                adapter.Fill(set); // Fix Emil
+                adapter.Fill(set);
                 connection.Close();
                 return set;
             }

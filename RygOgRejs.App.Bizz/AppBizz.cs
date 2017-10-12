@@ -23,7 +23,7 @@ namespace RygOgRejs.Bizz.App
             private PriceDetails tempPriceDetails = new PriceDetails(); //string to temporarily store current pricedetails, to show on GUI
         #endregion
 
-        #region Method Fields
+            #region Method Fields
             DestinationList CDL = new DestinationList();
             AncillaryCharge CACE = new AncillaryCharge(); //used to call methods
             AncillaryChargesEnquiries CACI = new AncillaryChargesEnquiries(); //used to call methods
@@ -33,12 +33,12 @@ namespace RygOgRejs.Bizz.App
             TransactionEnquiries CTI = new TransactionEnquiries(); //used to call methods
         #endregion
 
-        #region List, Array And Collection Fields
+            #region List, Array And Collection Fields
             ObservableCollection<AncillaryCharge> ancillaryCharges = new ObservableCollection<AncillaryCharge>();  //Collection containing ancillary charges stored in database
             ObservableCollection<Destination> destinations = new ObservableCollection<Destination>(); //Collection containing prices stored in database
             ObservableCollection<Transaction> transactions = new ObservableCollection<Transaction>(); //Collection containing trnsactions stored in database
-            List<string> destinationList = new List<string>(); //List containing available destinations to be viewed in DataViewJourneys
-            List<DestinationList> newDestinationList; //List containing available destinations to be viewed in DataViewJourneys
+            //List<string> destinationList = new List<string>(); //List containing available destinations to be viewed in DataViewJourneys
+            List<DestinationList> destinationList = new List<DestinationList>(); //List containing available destinations to be viewed in DataViewJourneys
             #endregion
         #endregion
 
@@ -157,7 +157,7 @@ namespace RygOgRejs.Bizz.App
         /// </summary>
         public void GetDestinationList()
         {
-            newDestinationList = CDI.GetDestinationList();
+            destinationList = CDI.GetDestinationList();
         }
 
         /// <summary>
@@ -245,13 +245,14 @@ namespace RygOgRejs.Bizz.App
 
         #region Properties
         public string Destination { get => destination; set => destination = value; }
+
         public List<string> DestinationList
         {
             get
             {
                 if (destinationList.Count == 0)
                 {
-                    GetDestinations();
+                    GetDestinationList();
                 }
                 return destinationList;
             }
@@ -319,7 +320,7 @@ namespace RygOgRejs.Bizz.App
             set => transactions = value;
         }
 
-        public List<DestinationList> NewDestinations { get => newDestinationList; set => newDestinationList = value; }
+        //public List<DestinationList> NewDestinations { get => DestinationList; set => DestinationList = value; } //obsolete code
         //public Master Master { get => master; set => master = value; }
 
         public Transaction TempTransactionUpdate { get => tempTransactionUpdate; set => tempTransactionUpdate = value; }
