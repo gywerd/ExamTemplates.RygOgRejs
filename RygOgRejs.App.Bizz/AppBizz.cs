@@ -59,6 +59,11 @@ namespace RygOgRejs.Bizz.App
             tempPriceDetails = new PriceDetails();
         }
 
+        public void UpdateTransactions(int SelectedTransactionsID)
+        {
+
+        }
+
         /// <summary>
         /// Code behind CreateJourney-button
         /// Adds row to Payers, Transactions and Journeys tables in DB

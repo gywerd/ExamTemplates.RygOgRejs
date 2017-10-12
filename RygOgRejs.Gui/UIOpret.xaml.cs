@@ -309,10 +309,7 @@ namespace RygOgRejs.Gui
                             textBoxIndbetalt.Text = textBoxIndbetalt.Text.Remove(textBoxIndbetalt.Text.Length - 1);
                             textBoxIndbetalt.CaretIndex = textBoxIndbetalt.Text.Length;
                         }
-                        
-
                     }
-
                 }
                 if (gyldig == true)
                 {
@@ -338,8 +335,6 @@ namespace RygOgRejs.Gui
                 textBoxIndbetalt.BorderBrush = Brushes.Red;
                 textBoxIndbetalt.BorderThickness = new Thickness(2);
             }
-
- //           textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempJourney, CAB.Transactions, CAB.Prices).ToString();
         }
     }
 }
