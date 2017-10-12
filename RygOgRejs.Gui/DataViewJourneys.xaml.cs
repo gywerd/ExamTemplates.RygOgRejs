@@ -32,7 +32,12 @@ namespace RygOgRejs.Gui
             CAB = (AppBizz)b;
             uc = UC;
             UCOpret = uIOpret;
-            dataGridJourneys.ItemsSource = CAB.DestinationList.ToList().Select(Destinations => new { Destinations });
+            List<string> locations = new List<string>();
+            foreach (var dist in CAB.NewDestinations)
+            {
+                locations.Add(dist.DestinationName);
+            }
+            dataGridJourneys.ItemsSource = locations.Select(Destination => new {Destination });
             
         }
 
@@ -52,12 +57,6 @@ namespace RygOgRejs.Gui
                 {
                     selectedItem = selectedItem.Remove(selectedItem.Length - 2);
                 }
-
-                //CAB.TempJourney.Destination = selectedItem;
-                //CAB.CreateMasterid();
-                //CAB.TempJourney.MasterId = CAB.Master.Id;
-                //CAB.TempPayer.MasterID = CAB.Master.Id;
-                //CAB.TempTransaction.MasterId = CAB.Master.Id;
                 uc.Content = UCOpret = new UIOpret(CAB, uc);
                 dataGridJourneys.UnselectAll();
             }
