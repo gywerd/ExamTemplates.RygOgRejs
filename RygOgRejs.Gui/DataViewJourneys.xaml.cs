@@ -33,7 +33,7 @@ namespace RygOgRejs.Gui
             uc = UC;
             UCOpret = uIOpret;
             List<string> locations = new List<string>();
-            foreach (var dist in CAB.NewDestinations)
+            foreach (var dist in CAB.DestinationList)
             {
                 locations.Add(dist.DestinationName);
             }
