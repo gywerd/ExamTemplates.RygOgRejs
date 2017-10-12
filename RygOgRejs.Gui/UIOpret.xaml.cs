@@ -166,7 +166,7 @@ namespace RygOgRejs.Gui
                         gyldig = false;
                         textBoxAdults.BorderBrush = Brushes.Red;
                         textBoxAdults.BorderThickness = new Thickness(2);
-                        MessageBox.Show("må ikke indeholde ugyldige bogstaver eller tegn");
+                        MessageBox.Show("må ikke indeholde bogstaver eller tegn");
                         textBoxAdults.Text = textBoxAdults.Text.Remove(textBoxAdults.Text.Length - 1);
                         textBoxAdults.CaretIndex = textBoxAdults.Text.Length; //amazing
                     }

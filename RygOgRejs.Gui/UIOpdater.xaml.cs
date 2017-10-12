@@ -52,5 +52,70 @@ namespace RygOgRejs.Gui
         {
             Appbizz.DeleteJourney();
         }
+
+        private void IsFirstClassChanged(object sender, RoutedEventArgs e)
+        {
+            if (firstClassChecked.IsChecked != Appbizz.TempTransaction.IsFirstClass)
+            {
+                if (firstClassChecked.IsChecked == true)
+                {
+                    Appbizz.TempTransaction.IsFirstClass = true;
+                }
+                else
+                {
+                    Appbizz.TempTransaction.IsFirstClass = false;
+                }
+            }
+        }
+
+        private void AdultsChanged(object sender, TextChangedEventArgs e)
+        {
+                if (!string.IsNullOrEmpty(textBoxAdults.Text))
+                {
+                    bool gyldig = false;
+                    foreach (char c in textBoxAdults.Text)
+                    {
+                        if (!char.IsDigit(c))
+                        {
+                            gyldig = false;
+                            textBoxAdults.BorderBrush = Brushes.Red;
+                            textBoxAdults.BorderThickness = new Thickness(2);
+                            MessageBox.Show("må ikke indeholde bogstaver eller tegn");
+                            textBoxAdults.Text = textBoxAdults.Text.Remove(textBoxAdults.Text.Length - 1);
+                            textBoxAdults.CaretIndex = textBoxAdults.Text.Length; //amazing
+                        }
+                        else
+                        {
+                            gyldig = true;
+                            textBoxAdults.BorderBrush = Brushes.Transparent;
+                            textBoxAdults.BorderThickness = new Thickness(1);
+                        }
+
+                    }
+                    if (gyldig == true)
+                    {
+                    int Adults = Convert.ToInt32(textBoxAdults.Text);
+                        if (Adults != Appbizz.TempTransaction.Adults)
+                        {
+                            textBoxAdults.BorderBrush = Brushes.Green;
+                            textBoxAdults.BorderThickness = new Thickness(2);
+                            Appbizz.TempTransaction.Adults = Adults;
+                        }
+                    }
+                }
+                else
+                {
+                    textBoxAdults.BorderBrush = Brushes.Red;
+                    textBoxAdults.BorderThickness = new Thickness(2);
+                }
+        }
+
+        private void ChildrenChanged(object sender, TextChangedEventArgs e)
+        {
+        }
+
+        private void LuggageChanged(object sender, TextChangedEventArgs e)
+        {
+        }
     }
 }
