@@ -40,7 +40,7 @@ namespace RygOgRejs.IO.WeatherService
             //I would like to optimize this if you have any idea plz tell :P
             List<string> tempLoc = new List<string>();
             List<string> locations = new List<string>();
-            foreach (var di in CRB.NewDestinations)
+            foreach (var di in CRB.DestinationList)
             {
                 tempLoc.Add(di.DestinationName);
             }
