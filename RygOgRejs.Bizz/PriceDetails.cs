@@ -14,6 +14,7 @@ namespace RygOgRejs.Bizz.Entities
         private float firstClassPrice;
         private float luggagePrice;
         private float taxRate = 0.25F;
+        AncillaryCharge AC;
         #endregion
 
         #region Constructors
@@ -22,6 +23,10 @@ namespace RygOgRejs.Bizz.Entities
         /// </summary>
         public PriceDetails() { }
 
+        public PriceDetails(AncillaryCharge AC)
+        {
+            this.AC = AC;
+        }
         /// <summary>
         /// Ordinary constructor
         /// </summary>
@@ -105,16 +110,8 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="j">Journey</param>
         /// <param name="p">ObservableCollection<PriceDetails></param>
         /// <returns></returns>
-        private float GetFirstClassPrice(Transaction j, ObservableCollection<Destination> p)
+        private float GetFirstClassPrice()
         {
-            float firstClassPrice = 0;
-            foreach (Destination price in p)
-            {
-                /*if (j.Destination == price.DestinationName)
-                {
-                    firstClassPrice = price.FirstClassPrice;
-                }*/
-            }
             return firstClassPrice;
         }
 
@@ -144,15 +141,7 @@ namespace RygOgRejs.Bizz.Entities
         /// <returns></returns>
         private float GetLuggagePrice(Transaction j, ObservableCollection<Destination> p)
         {
-            float luggagePrice = 0;
-            foreach (Destination price in p)
-            {
-                //if (j.DestinationName == price.DestinationName)
-                //{
-                //    luggagePrice = price.;
-                //}
-            }
-            return luggagePrice;
+           return luggagePrice;
         }
 
         /// <summary>
@@ -177,12 +166,12 @@ namespace RygOgRejs.Bizz.Entities
             float accumulatedPrice = 0;
             float adultsAccumulatedPrice = MultiplyFloat(tempt.Adults, GetAdultPrice(tempt, d));
             accumulatedPrice = accumulatedPrice + adultsAccumulatedPrice;
-            float childAccumulatedPrice = MultiplyFloat(tempt.Children, GetAdultPrice(tempt, d));
+            float childAccumulatedPrice = MultiplyFloat(tempt.Children, GetChildrenPrice(tempt, d));
             accumulatedPrice = accumulatedPrice + childAccumulatedPrice;
             float firstClassAccumulatedPrice = 0;
             if (tempt.IsFirstClass)
             {
-                firstClassAccumulatedPrice = MultiplyFloat(AddPersons(tempt), GetFirstClassPrice(tempt, d));
+                firstClassAccumulatedPrice = MultiplyFloat(AddPersons(tempt), GetFirstClassPrice());
             }
             else
                 firstClassAccumulatedPrice = 0;

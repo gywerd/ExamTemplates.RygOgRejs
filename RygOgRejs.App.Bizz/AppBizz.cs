@@ -15,7 +15,7 @@ namespace RygOgRejs.Bizz.App
     {
         #region Fields
             #region Ordinary Fields
-            private Total dailyTotals; //object that holds data, that can be bound to left panel in MainWindow
+            private Total dailyTotals = new Total(); //object that holds data, that can be bound to left panel in MainWindow
             private string destination; //string that holds a destination
             private string journeyOrTransaction; //string that controls how UIInsertUpdate & UIPayment acts
             private Transaction tempTransaction = new Transaction(); //string to temporarily store current transaction information, before writing it to the database
@@ -147,7 +147,7 @@ namespace RygOgRejs.Bizz.App
             //{
             //    destinations.Add(price.DestinationName);
             //}
-            ObservableCollection<Destination> destinations = CDI.GetAll();
+            destinations = CDI.GetAll();
         }
 
         /// <summary>
@@ -274,18 +274,17 @@ namespace RygOgRejs.Bizz.App
 
         public string JourneyOrTransaction { get => journeyOrTransaction; set => journeyOrTransaction = value; }
 
-        //public ObservableCollection<Payer> Payers
-        //{
-        //    get
-        //    {
-        //        if (payers.Count == 0)
-        //        {
-        //            GetPayers();
-        //        }
-        //        return payers;
-        //    }
-        //    set => payers = value;
-        //}
+        public ObservableCollection<AncillaryCharge> AnchillaryCharges
+        {
+            get
+            {
+                if (ancillaryCharges.Count == 0)
+                {
+                    GetAncillaryCharges();
+                }
+                return ancillaryCharges;
+            }
+        }
 
         public ObservableCollection<Destination> Destinations
         {

@@ -52,11 +52,12 @@ namespace RygOgRejs.Gui
             {
 
                 string selectedItem = Convert.ToString(dataGridJourneys.SelectedItem);
-                selectedItem = selectedItem.Remove(0, 17);
+                selectedItem = selectedItem.Remove(0, 16);
                 if (selectedItem.Contains("}"))
                 {
                     selectedItem = selectedItem.Remove(selectedItem.Length - 2);
                 }
+                CAB.TempTransaction.DestinationName = selectedItem;
                 uc.Content = UCOpret = new UIOpret(CAB, uc);
                 dataGridJourneys.UnselectAll();
             }

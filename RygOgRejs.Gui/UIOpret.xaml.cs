@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RygOgRejs.Bizz.App;
+using RygOgRejs.Bizz.Entities;
 
 namespace RygOgRejs.Gui
 {
@@ -28,6 +29,7 @@ namespace RygOgRejs.Gui
             InitializeComponent();
             this.UC = UC;
             this.CAB = CAB;
+            //this.CAB.TempPriceDetails.FirstClassPrice = CAB.AnchillaryCharges;
         }
         private void btnClickOpretRejse(object sender, RoutedEventArgs e)
         {
@@ -49,9 +51,9 @@ namespace RygOgRejs.Gui
                     MessageBox.Show("Der er ikke Betalt Nok");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Du Magnler at udfylde noget.");
+                MessageBox.Show("Du Magnler at udfylde noget. " + ex.Message);
             }
 
         }
@@ -274,6 +276,11 @@ namespace RygOgRejs.Gui
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
             labelDestination.Content = CAB.TempTransaction.DestinationName;
+            foreach (var ac in CAB.AnchillaryCharges)
+            {
+                CAB.TempPriceDetails.FirstClassPrice = ac.FirstClassPrice;
+                CAB.TempPriceDetails.Luggageprice = ac.LuggagePriceOverlodKg;
+            }
         }
 
         private void textBoxIndbetalt_TextChanged(object sender, TextChangedEventArgs e)
