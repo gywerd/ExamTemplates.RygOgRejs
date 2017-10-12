@@ -20,7 +20,7 @@ namespace RygOgRejs.IO.DataAccess.App
             DataTableReader reader = data.CreateDataReader(); //best
             while (reader.Read())
             {
-                int id = Convert.ToInt32(reader["WaitngForName"]);
+                int id = Convert.ToInt32(reader["Id"]);
                 float firstClassPrice = Convert.ToSingle(reader["FirstClassPrice"]);
                 float luggaPriceOverload = Convert.ToSingle(reader["LuggagePricePerOverloadKg"]); //spelling error in DB corrected
                 AncillaryCharge ancillaryCharge = new AncillaryCharge(id, firstClassPrice, luggaPriceOverload);

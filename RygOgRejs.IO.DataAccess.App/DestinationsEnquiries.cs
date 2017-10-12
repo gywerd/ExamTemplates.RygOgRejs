@@ -20,10 +20,10 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <summary>
         /// Method, that inserts a row into the database
         /// </summary>
-        /// <param name="price">Price</param>
-        public void AddPrice(Destination price)
+        /// <param name="destination">Price</param>
+        public void AddDestination(Destination destination)
         {
-            string query = $"INSERT INTO Price (DestinationName, AdultPrice, ChildrenPrice) VALUES ('{price.DestinationName}', {price.AdultPrice}, {price.ChildPrice})";
+            string query = $"INSERT INTO Destinations (DestinationName, AdultPrice, ChildrenPrice) VALUES ('{destination.DestinationName}', {destination.AdultPrice}, {destination.ChildPrice})";
             executor.ExecuteNonQuery(query);
         }
 
@@ -31,9 +31,9 @@ namespace RygOgRejs.IO.DataAccess.App
         /// Method, that removes a row from the database
         /// </summary>
         /// <param name="id">int</param>
-        public void DeletePrices(int id)
+        public void DeleteDestination(int id)
         {
-            string query = $"DELETE FROM Price WHERE DestintionId = {id}";
+            string query = $"DELETE FROM Destinations WHERE DestinationId = {id}";
             executor.ExecuteNonQuery(query);
         }
 
@@ -43,7 +43,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <returns>ObservableCollection</returns>
         public ObservableCollection<Destination> GetAll()
         {
-            string query = "SELECT * FROM Price";
+            string query = "SELECT * FROM Destinations";
             ObservableCollection<Destination> priceList = new ObservableCollection<Destination>();
             DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader(); //best
@@ -53,8 +53,8 @@ namespace RygOgRejs.IO.DataAccess.App
                 string destination = reader["DestinationName"].ToString();
                 float adult = Convert.ToSingle(reader["AdultPrice"]);
                 float child = Convert.ToSingle(reader["ChildrenPrice"]); //nice spelling error xD old Name: ChildrenPricedd - spelling error in DB corrected
-             //   Price p = new Price(id, destination, adult, child);
-               // priceList.Add(p);
+                Destination d = new Destination(id, destination, adult, child);
+                priceList.Add(d);
             }
             return priceList;
         }
@@ -65,7 +65,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <returns>ObservableCollection</returns>
         public List<DestinationList> GetDestinationList()
         {
-            string query = "SELECT * FROM Price";
+            string query = "SELECT * FROM Destinations";
             List<DestinationList> destinationList = new List<DestinationList>();
             DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader(); //best
@@ -80,41 +80,17 @@ namespace RygOgRejs.IO.DataAccess.App
         }
 
         /// <summary>
-        /// Method that loads a specific row in the database 
-        /// </summary>
-        /// <param name="id">int</param>
-        /// <returns>Price</returns>
-        public Destination GetPrice(int id)
-        {
-            Destination p = new Destination();
-            string query = $"SELECT * FROM Transaction WHERE DestinationId = {id}";
-            DataSet data = executor.Execute(query);
-            DataTableReader reader = data.CreateDataReader();
-            while (reader.Read())
-            {
-                int destid = Convert.ToInt32(reader["DestinationId"]);
-                string destination = reader["DestinationName"].ToString();
-                float adult = Convert.ToSingle(reader["AdultPrice"]);
-                float child = Convert.ToSingle(reader["ChildrenPrice"]);
-                float first = Convert.ToSingle(reader["FirstClassPrice"]);
-                float lug = Convert.ToSingle(reader["LuggagePrice"]);
-                p = new Destination(destid, destination, adult, child, first, lug);
-            }
-            return p;
-        }
-
-        /// <summary>
         /// Method, that updates a row in the database from object
         /// </summary>
-        /// <param name="price">Price</param>
-        public void UpdatePrices(Destination price)
+        /// <param name="destination">Price</param>
+        public void UpdateDestination(Destination destination)
         {
-            string query = $"INSERT INTO Price (DestinationName, AdultPrice, ChildrenPrice) VALUES({price.DestinationName}, {price.AdultPrice}, {price.ChildPrice}";
+            string query = $"INSERT INTO Destinations (DestinationName, AdultPrice, ChildrenPrice) VALUES({destination.DestinationName}, {destination.AdultPrice}, {destination.ChildPrice} WHERE DestinationId = {destination.DestinationId}";
             executor.ExecuteNonQuery(query);
         }
 
         /// <summary>
-        /// Method, that updates a row in the database from data
+        /// Method, that updates a row in the database from data, plz dont use remove at somepoint
         /// </summary>
         /// <param name="id">int</param>
         /// <param name="destination">string</param>

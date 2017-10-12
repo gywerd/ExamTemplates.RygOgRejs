@@ -23,8 +23,8 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <param name="t">Transactions</param>
         public void AddTransaction(Transaction t)
         {
-    //        string query = $"INSERT INTO Transactions (Amount, JourneyId, PayerID, MasterId) VALUES ({t.Amount}, {t.JourneyId}, {t.PayerId}, {t.MasterId})";
-      //      executor.ExecuteNonQuery(query);
+            string query = $"INSERT INTO Transactions (TransactionDate, DestinationName, IsFirstClass, Adults,Children,LuggageAmount,FirstName,LastName,AmountExclVat) VALUES ('{t.TransActionDate.ToString("yyyy-MM-dd")}', '{t.DestinationName}', '{t.IsFirstClass}', {t.Adults}, {t.Children},{t.LuggageAmount}, '{t.FirstName}', '{t.LastName}', {t.AmountExclVat}";
+            executor.ExecuteNonQuery(query);
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <param name="id">int</param>
         public void DeleteTransaction(int tid)
         {
-            string query = $"DELETE FROM Transactions WHERE MasterId = {tid}";
+            string query = $"DELETE FROM Transactions WHERE Id = {tid}";
             executor.ExecuteNonQuery(query);
         }
 
@@ -49,16 +49,16 @@ namespace RygOgRejs.IO.DataAccess.App
             DataTableReader reader = data.CreateDataReader();
             while (reader.Read())
             {
-                int tid = Convert.ToInt32(reader["TransactionId"]);
-                DateTime depatureTime = Convert.ToDateTime(reader["InserNameHere"]);
-                bool isFirstClass = Convert.ToBoolean(reader["ÍnsertNameHere"]);
-                int adults = Convert.ToInt32(reader["ÍnsertNameHere"]);
-                int children = Convert.ToInt32(reader["ÍnsertNameHere"]);
-                float luggaeAmount = Convert.ToSingle(reader["ÍnsertNameHere"]);
-                string firstName = reader["ÍnsertNameHere"].ToString();
-                string lastName = reader["ÍnsertNameHere"].ToString();
-                string destinationName = reader["ÍnsertNameHere"].ToString();
-                float ammountExclVat = Convert.ToSingle(reader["ÍnsertNameHere"]);
+                int tid = Convert.ToInt32(reader["Id"]); //transActionID
+                DateTime depatureTime = Convert.ToDateTime(reader["TransactionDate"]);
+                bool isFirstClass = Convert.ToBoolean(reader["IsFirstClass"]);
+                int adults = Convert.ToInt32(reader["Adults"]);
+                int children = Convert.ToInt32(reader["Children"]);
+                float luggaeAmount = Convert.ToSingle(reader["LuggageAmount"]);
+                string firstName = reader["FirstName"].ToString();
+                string lastName = reader["LastName"].ToString();
+                string destinationName = reader["DestinationName"].ToString();
+                float ammountExclVat = Convert.ToSingle(reader["AmountExclVat"]);
                 Transaction t = new Transaction(tid,depatureTime,destinationName,isFirstClass,adults,children,luggaeAmount,firstName,lastName,ammountExclVat); //use this when the class has been made for it
                 transCol.Add(t);
             }
@@ -73,21 +73,21 @@ namespace RygOgRejs.IO.DataAccess.App
         public Transaction GetTransaction(int Id)
         {
             Transaction t = default(Transaction);
-            string query = $"SELECT * FROM Transactions WHERE MasterID = {Id}";
+            string query = $"SELECT * FROM Transactions WHERE Id = {Id}";
             DataSet data = executor.Execute(query);
             DataTableReader reader = data.CreateDataReader();
             while (reader.Read())
             {
-                int tid = Convert.ToInt32(reader["TransactionId"]);
-                DateTime depatureTime = Convert.ToDateTime(reader["InserNameHere"]);
-                bool isFirstClass = Convert.ToBoolean(reader["ÍnsertNameHere"]);
-                int adults = Convert.ToInt32(reader["ÍnsertNameHere"]);
-                int children = Convert.ToInt32(reader["ÍnsertNameHere"]);
-                float luggaeAmount = Convert.ToSingle(reader["ÍnsertNameHere"]);
-                string firstName = reader["ÍnsertNameHere"].ToString();
-                string lastName = reader["ÍnsertNameHere"].ToString();
-                string destinationName = reader["ÍnsertNameHere"].ToString();
-                float ammountExclVat = Convert.ToSingle(reader["ÍnsertNameHere"]);
+                int tid = Convert.ToInt32(reader["Id"]); //transActionID
+                DateTime depatureTime = Convert.ToDateTime(reader["TransactionDate"]);
+                bool isFirstClass = Convert.ToBoolean(reader["IsFirstClass"]);
+                int adults = Convert.ToInt32(reader["Adults"]);
+                int children = Convert.ToInt32(reader["Children"]);
+                float luggaeAmount = Convert.ToSingle(reader["LuggageAmount"]);
+                string firstName = reader["FirstName"].ToString();
+                string lastName = reader["LastName"].ToString();
+                string destinationName = reader["DestinationName"].ToString();
+                float ammountExclVat = Convert.ToSingle(reader["AmountExclVat"]);
                 t = new Transaction(tid, depatureTime, destinationName, isFirstClass, adults, children, luggaeAmount, firstName, lastName, ammountExclVat); //use this when the class has been made for it
             }
             return t;
@@ -99,8 +99,8 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <param name="t">Transactions</param>
         public void UpdateTransaction(Transaction t)
         {
-    //        string query = $"UPDATE Transactions SET Amount = {t.Amount}, JourneyId = {t.JourneyId}, PayerId = {t.PayerId} WHERE TransactionId = {t.TransactionId}";
-    //        executor.ExecuteNonQuery(query);
+            string query = $"UPDATE Transactions SET TransactionDate = '{t.TransActionDate}', DestinationName = '{t.DestinationName}', IsFirstClass = '{t.IsFirstClass}', Adults = {t.Adults}, Children = {t.Children}, LuggageAmount = {t.LuggageAmount}, FirstName = '{t.FirstName}', LastName = {t.LastName}, AmountExclVat = {t.AmountExclVat} WHERE Id = {t.TransactionId}";
+            executor.ExecuteNonQuery(query);
         }
         #endregion
     }

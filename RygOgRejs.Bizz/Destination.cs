@@ -30,9 +30,7 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="destinationName">string</param>
         /// <param name="adultPrice">float</param>
         /// <param name="childPrice">float</param>
-        /// <param name="firstclassPrice">float</param>
-        /// <param name="luggagePrice">float</param>
-        public Destination(int destinationId, string destinationName, float adultPrice, float childPrice, float firstClassPrice, float luggagePrice)
+        public Destination(int destinationId, string destinationName, float adultPrice, float childPrice)
         {
             this.destinationId = destinationId;
             this.destinationName = destinationName;
