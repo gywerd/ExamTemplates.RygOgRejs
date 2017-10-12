@@ -58,12 +58,10 @@ namespace RygOgRejs.Gui
         /// <param name="e"></param>
         private void DataGridTransaction_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CAB.TempPayer = (Payer)dataGridTransaction.SelectedItem;
-            if (CAB.TempPayer != null)
-            {
-                CAB.Master.Id = CAB.TempPayer.MasterID;
-                CAB.GiveMasterID(CAB.TempPayer.MasterID); //payer
-
+            CAB.TempTransaction = (Transaction)dataGridTransaction.SelectedItem;
+            if (CAB.TempTransaction != null)
+            { //payer
+                CAB.UpdateTransactions(CAB.TempTransaction.TransactionId);
             }
             else
             {

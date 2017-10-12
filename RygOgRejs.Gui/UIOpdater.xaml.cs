@@ -22,7 +22,7 @@ namespace RygOgRejs.Gui
     /// </summary>
     public partial class UIOpdater : UserControl
     {
-        Transaction selecteditem; //changed from Payer to transaction
+        Transaction selecteditem;
         AppBizz Appbizz;
         public UIOpdater(AppBizz appbizz, DataGrid datagrid)
         {
@@ -50,9 +50,7 @@ namespace RygOgRejs.Gui
 
         private void btnClickSlet(object sender, RoutedEventArgs e)
         {
-            //Appbizz.TempJourney.JourneyId = selecteditem.MasterID; // obsolete code
-            //Appbizz.TempTransaction.TransactionId = selecteditem.MasterID; //obsolete code
-            Appbizz.DeleteJourney(); //obsolete code 
+            Appbizz.DeleteJourney();
         }
     }
 }
