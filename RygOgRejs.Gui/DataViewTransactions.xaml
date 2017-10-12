@@ -18,7 +18,7 @@
             <Label Content="Filtrer på betaler:" />
             <TextBox x:Name="textBoxFilterTransactions"
                      Height="20"
-                     Width="200"
+                     Width="180"
                      TextChanged="TextBoxFilterTransactions_TextChanged" />
         </StackPanel>
         <DataGrid 
