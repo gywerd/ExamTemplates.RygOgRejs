@@ -19,7 +19,6 @@ namespace RygOgRejs.IO.WeatherService
         private const int MAX_FORECAST_DAYS = 5;
         private HttpClient client;
         private Label weather;
-        private DestinationsEnquiries priceEnquiries = new DestinationsEnquiries();
         #endregion
 
         #region Constructors
@@ -41,7 +40,10 @@ namespace RygOgRejs.IO.WeatherService
             //I would like to optimize this if you have any idea plz tell :P
             List<string> tempLoc = new List<string>();
             List<string> locations = new List<string>();
-            tempLoc = CRB.DestinationList;
+            foreach (var di in CRB.NewDestinations)
+            {
+                tempLoc.Add(di.DestinationName);
+            }
             string RemoveDest = "";
             foreach(string Destination in tempLoc)
             {

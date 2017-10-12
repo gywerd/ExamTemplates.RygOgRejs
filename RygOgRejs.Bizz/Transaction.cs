@@ -95,8 +95,8 @@ namespace RygOgRejs.Bizz.Entities
                 if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentNullException();
                 foreach (char c in value)
-                    if (!char.IsLetter(c))
-                        throw new ArgumentNullException();
+                    /*if (!char.IsLetter(c))
+                        Messagebox.show("");*/
                 destinationName = value;
             }
         }
@@ -122,7 +122,7 @@ namespace RygOgRejs.Bizz.Entities
         public float LuggageAmount
         {
             get => luggageAmount;
-            set => LuggageAmount = value;
+            set => luggageAmount = value;
         }
 
         public string FirstName
