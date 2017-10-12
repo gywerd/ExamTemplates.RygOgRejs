@@ -45,7 +45,7 @@ namespace RygOgRejs.Gui
 
         private void btnClickRet(object sender, RoutedEventArgs e)
         {
-
+            Appbizz.EditJourney();
         }
 
         private void btnClickSlet(object sender, RoutedEventArgs e)

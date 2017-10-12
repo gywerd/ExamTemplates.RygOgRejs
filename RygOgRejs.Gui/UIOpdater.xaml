@@ -45,9 +45,12 @@
             <Border Margin="10,10,0,10" BorderThickness="1" BorderBrush="Black" Grid.Row="3" Grid.Column="0"/>
             <Border Margin="0,10,10,10" BorderThickness="1" BorderBrush="Black" Grid.Row="3" Grid.Column="1"/>
             <CheckBox x:Name="firstClassChecked" Margin="9,0,0,0" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="textBoxAdults" Margin="9,0,0,0" Grid.Row="1" Grid.Column="0" Height="25" Width="40" HorizontalAlignment="Center" VerticalContentAlignment="Center" />
-            <TextBox x:Name="textBoxChildren" Margin="9,0,0,0" Grid.Row="2" Grid.Column="0" Height="25" Width="40" HorizontalAlignment="Center" VerticalContentAlignment="Center" />
-            <TextBox x:Name="textBoxBagage" Margin="9,0,0,0" Grid.Row="3" Grid.Column="0" Height="25" Width="40" HorizontalAlignment="Center" VerticalContentAlignment="Center" />
+            <TextBox x:Name="textBoxAdults" Margin="9,0,0,0" Grid.Row="1" Grid.Column="0" Height="25" Width="40" HorizontalAlignment="Center" VerticalContentAlignment="Center" 
+                     text/>
+            <TextBox x:Name="textBoxChildren" Margin="9,0,0,0" Grid.Row="2" Grid.Column="0" Height="25" Width="40" HorizontalAlignment="Center" VerticalContentAlignment="Center" 
+                     />
+            <TextBox x:Name="textBoxBagage" Margin="9,0,0,0" Grid.Row="3" Grid.Column="0" Height="25" Width="40" HorizontalAlignment="Center" VerticalContentAlignment="Center" 
+                     />
             <Label Content="1. Klasse" Grid.Row="0" Grid.Column="1" Margin="10" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
             <Label Content="Antal Voksne" Grid.Row="1" Grid.Column="1" Margin="10" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
             <Label Content="Antal Børn" Grid.Row="2" Grid.Column="1" Margin="10" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
