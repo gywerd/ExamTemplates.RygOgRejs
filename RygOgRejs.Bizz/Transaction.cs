@@ -95,8 +95,8 @@ namespace RygOgRejs.Bizz.Entities
                 if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentNullException();
                 foreach (char c in value)
-                    /*if (!char.IsLetter(c))
-                        Messagebox.show("");*/
+                    if (!char.IsLetter(c) && !char.IsPunctuation(c) && c != 32)
+                        throw new ArgumentNullException();
                 destinationName = value;
             }
         }
