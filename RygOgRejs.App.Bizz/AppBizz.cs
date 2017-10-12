@@ -246,7 +246,7 @@ namespace RygOgRejs.Bizz.App
         #region Properties
         public string Destination { get => destination; set => destination = value; }
 
-        public List<string> DestinationList
+        public List<DestinationList> DestinationList
         {
             get
             {
