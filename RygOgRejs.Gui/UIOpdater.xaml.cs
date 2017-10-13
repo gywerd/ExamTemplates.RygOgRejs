@@ -24,13 +24,18 @@ namespace RygOgRejs.Gui
     {
         Transaction selecteditem;
         AppBizz Appbizz;
+        bool LugageOK = false;
+        bool AdultsOK = false;
+        bool ChildrenOK = false;
+        bool isFirstClassOK;
         public UIOpdater(AppBizz appbizz, DataGrid datagrid)
         {
             InitializeComponent();
             Appbizz = appbizz;
             this.selecteditem = (Transaction)datagrid.SelectedItem;
-            Appbizz.LoadTransaction();
+            Appbizz.();
             var Bizz = Appbizz.TempTransaction;
+            this.isFirstClassOK = Appbizz.TempTransaction.IsFirstClass;
             if (selecteditem != null)
             {
                 labelDestination.Content = Bizz.DestinationName;
@@ -45,7 +50,37 @@ namespace RygOgRejs.Gui
 
         private void btnClickRet(object sender, RoutedEventArgs e)
         {
-            Appbizz.EditJourney();
+            if (isFirstClassOK == true)
+            {
+                Appbizz.TempTransaction.IsFirstClass = true;
+            }
+            if (isFirstClassOK == false)
+            {
+                Appbizz.TempTransaction.IsFirstClass = false;
+            }
+            if (ChildrenOK == true)
+            {
+                Appbizz.TempTransaction.Children = Convert.ToInt32(textBoxChildren.Text);
+            }
+            if (AdultsOK == true)
+            {
+                Appbizz.TempTransaction.Adults = Convert.ToInt32(textBoxAdults.Text);
+            }
+            if (LugageOK == true)
+            {
+                Appbizz.TempTransaction.LuggageAmount = Convert.ToInt32(textBoxBagage.Text);
+            }
+            try
+            {
+                Appbizz.EditJourney();
+                MessageBox.Show("Rejsen blev opdateret.");
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void btnClickSlet(object sender, RoutedEventArgs e)
@@ -59,11 +94,11 @@ namespace RygOgRejs.Gui
             {
                 if (firstClassChecked.IsChecked == true)
                 {
-                    Appbizz.TempTransaction.IsFirstClass = true;
+                    isFirstClassOK = true;
                 }
                 else
                 {
-                    Appbizz.TempTransaction.IsFirstClass = false;
+                    isFirstClassOK = false;
                 }
             }
         }
@@ -87,7 +122,7 @@ namespace RygOgRejs.Gui
                     else
                     {
                         gyldig = true;
-                        textBoxAdults.BorderBrush = Brushes.Transparent;
+                        textBoxAdults.BorderBrush = Brushes.Gray;
                         textBoxAdults.BorderThickness = new Thickness(1);
                     }
 
@@ -99,7 +134,13 @@ namespace RygOgRejs.Gui
                     {
                         textBoxAdults.BorderBrush = Brushes.Green;
                         textBoxAdults.BorderThickness = new Thickness(2);
-                        Appbizz.TempTransaction.Adults = Adults;
+                        AdultsOK = true;
+                    }
+                    else
+                    {
+                        textBoxAdults.BorderBrush = Brushes.Gray;
+                        textBoxAdults.BorderThickness = new Thickness(1);
+                        AdultsOK = false;
                     }
                 }
             }
@@ -107,15 +148,106 @@ namespace RygOgRejs.Gui
             {
                 textBoxAdults.BorderBrush = Brushes.Red;
                 textBoxAdults.BorderThickness = new Thickness(2);
+                AdultsOK = false;
             }
         }
 
         private void ChildrenChanged(object sender, TextChangedEventArgs e)
         {
+            if (!string.IsNullOrEmpty(textBoxChildren.Text))
+            {
+                bool gyldig = false;
+                foreach (char c in textBoxChildren.Text)
+                {
+                    if (!char.IsDigit(c))
+                    {
+                        gyldig = false;
+                        textBoxChildren.BorderBrush = Brushes.Red;
+                        textBoxChildren.BorderThickness = new Thickness(2);
+                        MessageBox.Show("må ikke indeholde bogstaver eller tegn");
+                        textBoxChildren.Text = textBoxChildren.Text.Remove(textBoxChildren.Text.Length - 1);
+                        textBoxChildren.CaretIndex = textBoxChildren.Text.Length; //amazing
+                    }
+                    else
+                    {
+                        gyldig = true;
+                        textBoxChildren.BorderBrush = Brushes.Gray;
+                        textBoxChildren.BorderThickness = new Thickness(1);
+                    }
+
+                }
+                if (gyldig == true)
+                {
+                    int Children = Convert.ToInt32(textBoxChildren.Text);
+                    if (Children != Appbizz.TempTransaction.Children)
+                    {
+                        textBoxChildren.BorderBrush = Brushes.Green;
+                        textBoxChildren.BorderThickness = new Thickness(2);
+                        ChildrenOK = true;
+                    }
+                    else
+                    {
+                        textBoxChildren.BorderBrush = Brushes.Gray;
+                        textBoxChildren.BorderThickness = new Thickness(1);
+                        ChildrenOK = false;
+                    }
+                }
+            }
+            else
+            {
+                textBoxChildren.BorderBrush = Brushes.Red;
+                textBoxChildren.BorderThickness = new Thickness(2);
+                ChildrenOK = false;
+            }
         }
 
         private void LuggageChanged(object sender, TextChangedEventArgs e)
         {
+            if (!string.IsNullOrEmpty(textBoxBagage.Text))
+            {
+                bool gyldig = false;
+                foreach (char c in textBoxBagage.Text)
+                {
+                    if (!char.IsDigit(c))
+                    {
+                        gyldig = false;
+                        textBoxBagage.BorderBrush = Brushes.Red;
+                        textBoxBagage.BorderThickness = new Thickness(2);
+                        MessageBox.Show("må ikke indeholde bogstaver eller tegn");
+                        textBoxBagage.Text = textBoxBagage.Text.Remove(textBoxBagage.Text.Length - 1);
+                        textBoxBagage.CaretIndex = textBoxBagage.Text.Length; //amazing
+                    }
+                    else
+                    {
+                        gyldig = true;
+                        textBoxBagage.BorderBrush = Brushes.Gray;
+                        textBoxBagage.BorderThickness = new Thickness(1);
+                    }
+
+                }
+                if (gyldig == true)
+                {
+                    int Luggage = Convert.ToInt32(textBoxBagage.Text);
+                    if (Luggage != Appbizz.TempTransaction.LuggageAmount)
+                    {
+                        textBoxBagage.BorderBrush = Brushes.Green;
+                        textBoxBagage.BorderThickness = new Thickness(2);
+                        LugageOK = true;
+                    }
+                    else
+                    {
+                        textBoxBagage.BorderBrush = Brushes.Gray;
+                        textBoxBagage.BorderThickness = new Thickness(1);
+                        LugageOK = false;
+                    }
+                }
+            }
+            else
+            {
+                textBoxBagage.BorderBrush = Brushes.Red;
+                textBoxBagage.BorderThickness = new Thickness(2);
+                LugageOK = false;
+            }
         }
     }
 }

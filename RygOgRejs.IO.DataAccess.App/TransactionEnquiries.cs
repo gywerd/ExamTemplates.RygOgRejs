@@ -99,7 +99,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <param name="t">Transactions</param>
         public void UpdateTransaction(Transaction t)
         {
-            string query = $"UPDATE Transactions SET TransactionDate = '{t.TransActionDate}', DestinationName = '{t.DestinationName}', IsFirstClass = '{t.IsFirstClass}', Adults = {t.Adults}, Children = {t.Children}, LuggageAmount = {t.LuggageAmount}, FirstName = '{t.FirstName}', LastName = {t.LastName}, AmountExclVat = {t.AmountExclVat} WHERE Id = {t.TransactionId}";
+            string query = $"UPDATE Transactions SET TransactionDate = '{t.TransActionDate.ToString("yyyy-MM-dd")}', DestinationName = '{t.DestinationName}', IsFirstClass = '{t.IsFirstClass}', Adults = {t.Adults}, Children = {t.Children}, LuggageAmount = {t.LuggageAmount}, FirstName = '{t.FirstName}', LastName = '{t.LastName}', AmountExclVat = {t.AmountExclVat} WHERE Id = {t.TransactionId}";
             executor.ExecuteNonQuery(query);
         }
         #endregion

@@ -111,7 +111,7 @@ namespace RygOgRejs.Bizz.App
         {
             //MasterId is loaded into tempPayer, tempJourney & tempTransaction, when UIUpdate is loaded - MasterId removed from app
             //All data is written simutaneusly to tempTransaction, and refund price incl. VAT is calculated while manipulating GUI
-            CTI.UpdateTransaction(tempTransactionUpdate); //Writes content of tempJourney to Database
+            CTI.UpdateTransaction(tempTransaction); //Writes content of tempJourney to Database
             RefreshObservableCollections(); //Updates content of ObservableCollections from DB
             UpdateDailyTotals(); //updates content of dailyTotals
             ClearTemporaryFields(); //Clears content of tempPayer, tempJourney & tempTransaction
