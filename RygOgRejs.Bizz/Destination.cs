@@ -11,10 +11,11 @@ namespace RygOgRejs.Bizz.Entities
         #region Fields
         private int destinationId;
         private string destinationName;
+        private string iata;
+        private string icao;
+        private string countryCode;
         private float adultPrice;
         private float childPrice;
-        private float firstClassPrice;
-        private float luggagePrice;
         #endregion
 
         #region Constructors
@@ -30,10 +31,13 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="destinationName">string</param>
         /// <param name="adultPrice">float</param>
         /// <param name="childPrice">float</param>
-        public Destination(int destinationId, string destinationName, float adultPrice, float childPrice)
+        public Destination(int destinationId, string destinationName, string iata, string icao, string country, float adultPrice, float childPrice)
         {
             this.destinationId = destinationId;
             this.destinationName = destinationName;
+            this.iata = iata;
+            this.icao = iata;
+            this.countryCode = country;
             this.adultPrice = adultPrice;
             this.childPrice = childPrice;
         }
@@ -45,7 +49,12 @@ namespace RygOgRejs.Bizz.Entities
 
         #region Properties
         public int DestinationId { get => destinationId; }
+
         public string DestinationName { get => destinationName;}
+
+        public string IATA { get => iata; set => iata = value; }
+        public string ICAO { get => icao; set => icao = value; }
+        public string CountryCode { get => countryCode; set => countryCode = value; }
 
         public float AdultPrice
         {

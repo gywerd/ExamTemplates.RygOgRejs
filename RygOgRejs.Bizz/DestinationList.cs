@@ -10,6 +10,9 @@ namespace RygOgRejs.Bizz.Entities
     {
         #region Fields
         private int destinationId;
+        private string iata;
+        private string icao;
+        private string countryCode;
         private string destinationName;
         #endregion
 
@@ -24,10 +27,13 @@ namespace RygOgRejs.Bizz.Entities
         /// </summary>
         /// <param name="destId"></param>
         /// <param name="destName"></param>
-        public DestinationList(int destId, string destName)
+        public DestinationList(int destId, string destName, string iata, string icao, string country)
         {
             this.destinationId = destId;
             this.destinationName = destName;
+            this.iata = iata;
+            this.icao = icao;
+            this.countryCode = country;
         }
         #endregion
 
@@ -35,6 +41,9 @@ namespace RygOgRejs.Bizz.Entities
         #region Properties
         public int DestinationId { get => destinationId; set => destinationId = value; }
         public string DestinationName { get => destinationName; set => destinationName = value; }
+        public string IATA { get => iata; set => iata = value; }
+        public string ICAO { get => icao; set => icao = value; }
+        public string CountryCode { get => countryCode; set => countryCode = value; }
         #endregion
     }
 }

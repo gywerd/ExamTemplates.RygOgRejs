@@ -51,9 +51,12 @@ namespace RygOgRejs.IO.DataAccess.App
             {
                 int id = Convert.ToInt32(reader["DestinationId"]);
                 string destination = reader["DestinationName"].ToString();
+                string iata = reader["IATA"].ToString();
+                string icao = reader["ICAO"].ToString();
+                string country = reader["CountryCode"].ToString();
                 float adult = Convert.ToSingle(reader["AdultPrice"]);
                 float child = Convert.ToSingle(reader["ChildrenPrice"]); //nice spelling error xD old Name: ChildrenPricedd - spelling error in DB corrected
-                Destination d = new Destination(id, destination, adult, child);
+                Destination d = new Destination(id, destination, iata, icao, country, adult, child);
                 priceList.Add(d);
             }
             return priceList;
@@ -73,7 +76,10 @@ namespace RygOgRejs.IO.DataAccess.App
             {
                 int id = Convert.ToInt32(reader["DestinationId"]);
                 string destination = reader["DestinationName"].ToString();
-                DestinationList d = new DestinationList(id, destination);
+                string iata = reader["IATA"].ToString();
+                string icao = reader["ICAO"].ToString();
+                string country = reader["CountryCode"].ToString();
+                DestinationList d = new DestinationList(id, destination, iata, icao, country);
                 destinationList.Add(d);
             }
             return destinationList;
