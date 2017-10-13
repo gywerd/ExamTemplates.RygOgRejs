@@ -39,28 +39,15 @@ namespace RygOgRejs.IO.WeatherService
         {
             //I would like to optimize this if you have any idea plz tell :P
             List<string> tempLoc = new List<string>();
-            List<string> locations = new List<string>();
             foreach (var di in CRB.DestinationList)
             {
                 tempLoc.Add(di.DestinationName);
-            }
-            string RemoveDest = "";
-            foreach(string Destination in tempLoc)
-            {
-                RemoveDest = Destination.Remove(0, 7);
-                if (!Destination.Contains("Spain"))
-                    RemoveDest = RemoveDest.Remove(RemoveDest.Length - 9);
-                else
-                    RemoveDest = RemoveDest.Remove(RemoveDest.Length - 7);
-                if (RemoveDest.Contains(" "))
-                    RemoveDest = RemoveDest.Replace(" ", string.Empty);
-                locations.Add(RemoveDest);
             }
             while (true)
             {
                 try
                 {
-                    foreach(string location in locations)
+                    foreach(string location in tempLoc)
                     {
                         string query = $"weather?q={location}&mode=json&appid={APP_ID}";
                         HttpResponseMessage test = await client.GetAsync(query);
