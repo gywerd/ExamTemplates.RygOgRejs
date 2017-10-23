@@ -80,7 +80,8 @@ namespace RygOgRejs.Bizz.App
             //tempJourney = CJI.GetJourney(master.Id); //obsolete code
             //TempTransaction.JourneyId = tempJourney.JourneyId; //obsolete code
             CTI.AddTransaction(tempTransaction);  //Writes Transaction data to DB
-            RefreshObservableCollections(); //Updates content of ObservableCollections from DB
+            RefreshObservableCollections();
+            GetUpdate();//Updates content of ObservableCollections from DB
             UpdateDailyTotals(); //updates content of dailyTotals
             ClearTemporaryFields(); //Clears content of tempPayer, tempJourney & tempTransaction
         }
@@ -232,6 +233,11 @@ namespace RygOgRejs.Bizz.App
             //GetJourneys(); //obsolete code
             //GetPayers(); //obsolete code
             //GetPrices(); //obsolete code
+            //GetDestinations();
+            //GetTransactions();
+        }
+        public void GetUpdate()
+        {
             GetDestinations();
             GetTransactions();
         }

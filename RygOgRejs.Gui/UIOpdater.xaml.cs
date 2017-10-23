@@ -33,11 +33,15 @@ namespace RygOgRejs.Gui
             InitializeComponent();
             Appbizz = appbizz;
             this.selecteditem = (Transaction)datagrid.SelectedItem;
-            Appbizz.();
             var Bizz = Appbizz.TempTransaction;
-            this.isFirstClassOK = Appbizz.TempTransaction.IsFirstClass;
-            if (selecteditem != null)
+            
+            if (selecteditem == null)
             {
+                Appbizz.GetUpdate();
+            }
+            else
+            {
+                this.isFirstClassOK = Appbizz.TempTransaction.IsFirstClass;
                 labelDestination.Content = Bizz.DestinationName;
                 textBoxAdults.Text = Bizz.Adults.ToString();
                 textBoxChildren.Text = Bizz.Children.ToString();
@@ -50,25 +54,32 @@ namespace RygOgRejs.Gui
 
         private void btnClickRet(object sender, RoutedEventArgs e)
         {
-            if (isFirstClassOK == true)
+            if (Appbizz.TempTransaction != null)
             {
-                Appbizz.TempTransaction.IsFirstClass = true;
+                if (isFirstClassOK == true)
+                {
+                    Appbizz.TempTransaction.IsFirstClass = true;
+                }
+                if (isFirstClassOK == false)
+                {
+                    Appbizz.TempTransaction.IsFirstClass = false;
+                }
+                if (ChildrenOK == true)
+                {
+                    Appbizz.TempTransaction.Children = Convert.ToInt32(textBoxChildren.Text);
+                }
+                if (AdultsOK == true)
+                {
+                    Appbizz.TempTransaction.Adults = Convert.ToInt32(textBoxAdults.Text);
+                }
+                if (LugageOK == true)
+                {
+                    Appbizz.TempTransaction.LuggageAmount = Convert.ToInt32(textBoxBagage.Text);
+                }
             }
-            if (isFirstClassOK == false)
+            else
             {
-                Appbizz.TempTransaction.IsFirstClass = false;
-            }
-            if (ChildrenOK == true)
-            {
-                Appbizz.TempTransaction.Children = Convert.ToInt32(textBoxChildren.Text);
-            }
-            if (AdultsOK == true)
-            {
-                Appbizz.TempTransaction.Adults = Convert.ToInt32(textBoxAdults.Text);
-            }
-            if (LugageOK == true)
-            {
-                Appbizz.TempTransaction.LuggageAmount = Convert.ToInt32(textBoxBagage.Text);
+                MessageBox.Show("GetGud");
             }
             try
             {
@@ -86,6 +97,7 @@ namespace RygOgRejs.Gui
         private void btnClickSlet(object sender, RoutedEventArgs e)
         {
             Appbizz.DeleteJourney();
+            Appbizz.GetUpdate();
         }
 
         private void IsFirstClassChanged(object sender, RoutedEventArgs e)

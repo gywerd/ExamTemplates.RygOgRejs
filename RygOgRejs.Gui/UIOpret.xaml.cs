@@ -41,6 +41,7 @@ namespace RygOgRejs.Gui
                     //CAB.TempTransaction.AmountExclVat = Convert.ToSingle(textBoxIndbetalt.Text);
                     CAB.TempTransaction.AmountExclVat = Convert.ToSingle(textBoxIndbetalt.Text) * Convert.ToSingle("0.8"); //substracted VAT
                     //CAB.TempTransaction.PayerId = CAB.TempPayer.PayerId; obsolete code
+                    
                     CAB.CreateJourney();
                     MessageBox.Show("Rejsen Blevet Oprettet");
                     UC.Content = null;
