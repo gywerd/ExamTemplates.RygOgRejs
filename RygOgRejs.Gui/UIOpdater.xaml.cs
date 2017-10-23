@@ -28,7 +28,6 @@ namespace RygOgRejs.Gui
         bool AdultsOK = false;
         bool ChildrenOK = false;
         bool isFirstClassOK;
-        PriceDetails PD = new PriceDetails();
         public UIOpdater(AppBizz appbizz, DataGrid datagrid)
         {
             InitializeComponent();
@@ -50,7 +49,6 @@ namespace RygOgRejs.Gui
                 firstClassChecked.IsChecked = Bizz.IsFirstClass;
                 textBoxFirstName.Text = Bizz.FirstName;
                 textBoxLastName.Text = Bizz.LastName;
-                //textBoxIndbetalt.Text = PD.;
             }
         }
 

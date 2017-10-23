@@ -242,7 +242,13 @@ namespace RygOgRejs.Bizz.App
             GetTransactions();
         }
 
-
+        public decimal GetPrice(float t)
+        {
+            decimal f = Convert.ToDecimal(t);
+            decimal d = Convert.ToDecimal(tempPriceDetails.GetPaidAmount(f));
+            long test = Convert.ToInt64(d);
+            return d;
+        }
         public void UpdateDailyTotals()
         {
             DailyTotals.UpdateTotals(transactions);
