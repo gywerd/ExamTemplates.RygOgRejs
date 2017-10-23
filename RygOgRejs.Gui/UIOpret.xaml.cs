@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RygOgRejs.Bizz.App;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using RygOgRejs.Bizz.App;
-using RygOgRejs.Bizz.Entities;
 
 namespace RygOgRejs.Gui
 {
@@ -41,11 +30,9 @@ namespace RygOgRejs.Gui
                     //CAB.TempTransaction.AmountExclVat = Convert.ToSingle(textBoxIndbetalt.Text);
                     CAB.TempTransaction.AmountExclVat = Convert.ToSingle(textBoxIndbetalt.Text) * Convert.ToSingle("0.8"); //substracted VAT
                     //CAB.TempTransaction.PayerId = CAB.TempPayer.PayerId; obsolete code
-                    
-                    CAB.CreateJourney();
-                    MessageBox.Show("Rejsen Blevet Oprettet");
-                    UC.Content = null;
-                    
+                        CAB.CreateJourney();
+                        MessageBox.Show("Rejsen Blevet Oprettet");
+                        UC.Content = null;                    
                 }
                 else
                 {

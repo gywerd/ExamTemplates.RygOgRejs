@@ -23,7 +23,8 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <param name="t">Transactions</param>
         public void AddTransaction(Transaction t)
         {
-            string query = $"INSERT INTO Transactions (TransactionDate, DestinationName, IsFirstClass, Adults,Children,LuggageAmount,FirstName,LastName,AmountExclVat) VALUES ('{t.TransActionDate.ToString("yyyy-MM-dd")}', '{t.DestinationName}', '{t.IsFirstClass}', {t.Adults}, {t.Children},{t.LuggageAmount}, '{t.FirstName}', '{t.LastName}', {t.AmountExclVat})";
+            string Ammount = Convert.ToString(t.AmountExclVat).Replace(',','.');
+            string query = $"INSERT INTO Transactions (TransactionDate, DestinationName, IsFirstClass, Adults,Children,LuggageAmount,FirstName,LastName,AmountExclVat) VALUES ('{t.TransActionDate.ToString("yyyy-MM-dd")}', '{t.DestinationName}', '{t.IsFirstClass}', {t.Adults}, {t.Children},{t.LuggageAmount}, '{t.FirstName}', '{t.LastName}', {Ammount})";
             executor.ExecuteNonQuery(query);
         }
 
