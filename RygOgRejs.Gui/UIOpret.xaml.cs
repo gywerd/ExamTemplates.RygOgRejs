@@ -292,7 +292,8 @@ namespace RygOgRejs.Gui
                     {
                         if(Convert.ToInt64(textBoxIndbetalt.Text) < int.MaxValue)
                         {   gyldig = true;
-                            textBoxIndbetalt.BorderBrush = Brushes.Transparent;
+                            //CAB.TempTransaction.PricePaid = Convert.ToInt32(textBoxIndbetalt.Text);
+                            textBoxIndbetalt.BorderBrush = Brushes.Green;
                             textBoxIndbetalt.BorderThickness = new Thickness(1);
                         }
                         else
