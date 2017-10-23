@@ -19,6 +19,7 @@ namespace RygOgRejs.Bizz.Entities
         private float luggageAmount;
         private string firstName;
         private string lastName;
+        private int pricePaid;
         private float amountExclVat;
         #endregion
 
@@ -51,7 +52,7 @@ namespace RygOgRejs.Bizz.Entities
             FirstName = firstName;
             LastName = lastName;
             AmountExclVat = amountExclVat;
-
+            pricePaid = 0;
         }
 
         /// <summary>
@@ -151,6 +152,12 @@ namespace RygOgRejs.Bizz.Entities
                         throw new ArgumentNullException();
                 lastName = value;
             }
+        }
+
+        public int PricePaid
+        {
+            get => pricePaid;
+            set => pricePaid = value;
         }
 
         public float AmountExclVat
