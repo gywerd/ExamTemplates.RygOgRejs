@@ -52,12 +52,22 @@ namespace RygOgRejs.Gui
             if (firstClassChecked.IsChecked == true)
             {
                 CAB.TempTransaction.IsFirstClass = true;
-                textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                textBoxPrisForMoms.Text = CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text)).ToString();
+                textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                textBoxPrisUdenMoms.Text += " kr";
+                textBoxPrisForMoms.Text += " kr";
+                textBoxTotalPris.Text += " kr";
             }
             else
             {
                 CAB.TempTransaction.IsFirstClass = false;
-                textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                textBoxPrisForMoms.Text = CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text)).ToString();
+                textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                textBoxPrisUdenMoms.Text += " kr";
+                textBoxPrisForMoms.Text += " kr";
+                textBoxTotalPris.Text += " kr";
             }
 
                 
@@ -171,7 +181,12 @@ namespace RygOgRejs.Gui
                     textBoxAdults.BorderBrush = Brushes.Green;
                     textBoxAdults.BorderThickness = new Thickness(2);
                     CAB.TempTransaction.Adults = Convert.ToInt32(textBoxAdults.Text);
-                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisForMoms.Text = CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text)).ToString();
+                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisUdenMoms.Text += " kr";
+                    textBoxPrisForMoms.Text += " kr";
+                    textBoxTotalPris.Text += " kr";
                 }
             }
             else
@@ -211,7 +226,12 @@ namespace RygOgRejs.Gui
                     textBoxChildren.BorderBrush = Brushes.Green;
                     textBoxChildren.BorderThickness = new Thickness(2);
                     CAB.TempTransaction.Children = Convert.ToInt32(textBoxChildren.Text);
-                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisForMoms.Text = CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text)).ToString();
+                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisUdenMoms.Text += " kr";
+                    textBoxPrisForMoms.Text += " kr";
+                    textBoxTotalPris.Text += " kr";
                 }
             }
             else
@@ -251,7 +271,12 @@ namespace RygOgRejs.Gui
                     textBoxBagage.BorderBrush = Brushes.Green;
                     textBoxBagage.BorderThickness = new Thickness(2);
                     CAB.TempTransaction.LuggageAmount = Convert.ToSingle(textBoxBagage.Text);
-                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisForMoms.Text = CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text)).ToString();
+                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisUdenMoms.Text += " kr";
+                    textBoxPrisForMoms.Text += " kr";
+                    textBoxTotalPris.Text += " kr";
                 }
             }
             else
@@ -314,11 +339,21 @@ namespace RygOgRejs.Gui
                     betalt = Convert.ToInt32(textBoxIndbetalt.Text);
                     if (!string.IsNullOrWhiteSpace(textBoxTotalPris.Text))
                     {
-                        int totalPris = Convert.ToInt32(textBoxTotalPris.Text);
+                        string Totalpris = textBoxTotalPris.Text;
+                        if (Totalpris.Contains(" kr"))
+                        {
+                            Totalpris = Totalpris.Remove((Totalpris.Length - 3));
+                        }
+                        int totalPris = Convert.ToInt32(Totalpris); // Der er en fejl her da prisen er med koma, fra komaet og ud skal fjernes.
                         if (betalt - totalPris < 0)
+                        {
                             textBoxRetur.Text = "Ikke nok betalt";
+                        }
                         else
-                            textBoxRetur.Text = (betalt - totalPris).ToString();
+                        {
+                            string PrisManglende = (betalt - totalPris).ToString();
+                            textBoxRetur.Text = PrisManglende + " kr";
+                        }
                     }
                     else
                     {
