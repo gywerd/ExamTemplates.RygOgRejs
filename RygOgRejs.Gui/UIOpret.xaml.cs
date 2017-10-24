@@ -49,6 +49,8 @@ namespace RygOgRejs.Gui
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
+            textBoxIndbetalt.Text = "";
+            textBoxRetur.Text = "Der er ikke Betalt Nok";
             //yes Sir. jack
             if (firstClassChecked.IsChecked == true)
             {
@@ -169,6 +171,8 @@ namespace RygOgRejs.Gui
 
         private void textBoxAdults_TextChanged(object sender, TextChangedEventArgs e)
         {
+            textBoxIndbetalt.Text = "";
+            textBoxRetur.Text = "Der er ikke Betalt Nok";
             if (!string.IsNullOrEmpty(textBoxAdults.Text))
             {
                 bool gyldig = false;
@@ -203,9 +207,9 @@ namespace RygOgRejs.Gui
                     textBoxAdults.BorderBrush = Brushes.Green;
                     textBoxAdults.BorderThickness = new Thickness(2);
                     CAB.TempTransaction.Adults = Convert.ToInt32(textBoxAdults.Text);
-                    textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
-                    textBoxPrisForMoms.Text = CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text)).ToString();
-                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisUdenMoms.Text = (Convert.ToDecimal(CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations)).ToString());
+                    textBoxPrisForMoms.Text = (Convert.ToDecimal(CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text))).ToString());
+                    textBoxTotalPris.Text = (Convert.ToDecimal(CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations)).ToString());
                     textBoxPrisUdenMoms.Text += " kr";
                     textBoxPrisForMoms.Text += " kr";
                     textBoxTotalPris.Text += " kr";
@@ -220,6 +224,8 @@ namespace RygOgRejs.Gui
 
         private void textBoxChildren_TextChanged(object sender, TextChangedEventArgs e)
         {
+            textBoxIndbetalt.Text = "";
+            textBoxRetur.Text = "Der er ikke Betalt Nok";
             if (!string.IsNullOrEmpty(textBoxChildren.Text))
             {
                 bool gyldig = false;
@@ -255,9 +261,9 @@ namespace RygOgRejs.Gui
                     textBoxChildren.BorderBrush = Brushes.Green;
                     textBoxChildren.BorderThickness = new Thickness(2);
                     CAB.TempTransaction.Children = Convert.ToInt32(textBoxChildren.Text);
-                    textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
-                    textBoxPrisForMoms.Text = CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text)).ToString();
-                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisUdenMoms.Text = (Convert.ToDecimal(CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations)).ToString());
+                    textBoxPrisForMoms.Text = (Convert.ToDecimal(CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text))).ToString());
+                    textBoxTotalPris.Text = (Convert.ToDecimal(CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations)).ToString());
                     textBoxPrisUdenMoms.Text += " kr";
                     textBoxPrisForMoms.Text += " kr";
                     textBoxTotalPris.Text += " kr";
@@ -272,6 +278,8 @@ namespace RygOgRejs.Gui
 
         private void textBoxBagage_TextChanged(object sender, TextChangedEventArgs e)
         {
+            textBoxIndbetalt.Text = "";
+            textBoxRetur.Text = "Der er ikke Betalt Nok";
             if (!string.IsNullOrEmpty(textBoxBagage.Text))
             {
                 bool gyldig = false;
@@ -307,9 +315,9 @@ namespace RygOgRejs.Gui
                     textBoxBagage.BorderBrush = Brushes.Green;
                     textBoxBagage.BorderThickness = new Thickness(2);
                     CAB.TempTransaction.LuggageAmount = Convert.ToSingle(textBoxBagage.Text);
-                    textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
-                    textBoxPrisForMoms.Text = CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text)).ToString();
-                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisUdenMoms.Text = (Convert.ToDecimal(CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations)).ToString());
+                    textBoxPrisForMoms.Text = (Convert.ToDecimal(CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text))).ToString());
+                    textBoxTotalPris.Text = (Convert.ToDecimal(CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations)).ToString());
                     textBoxPrisUdenMoms.Text += " kr";
                     textBoxPrisForMoms.Text += " kr";
                     textBoxTotalPris.Text += " kr";
@@ -334,13 +342,22 @@ namespace RygOgRejs.Gui
 
         private void textBoxIndbetalt_TextChanged(object sender, TextChangedEventArgs e)
         {
-            int betalt = 0;
+            decimal betalt = 0;
             if (!string.IsNullOrEmpty(textBoxIndbetalt.Text))
             {
                 bool gyldig = false;
                 foreach (char c in textBoxIndbetalt.Text)
                 {
-                    if (!char.IsDigit(c))
+                    if (textBoxIndbetalt.Text.Contains("+") || textBoxIndbetalt.Text.Contains("-") || textBoxIndbetalt.Text.Contains("*") || textBoxIndbetalt.Text.Contains("/"))
+                    {
+                        gyldig = false;
+                        textBoxIndbetalt.BorderBrush = Brushes.Red;
+                        textBoxIndbetalt.BorderThickness = new Thickness(2);
+                        MessageBox.Show("Stop, Being an ass Emil >_>");
+                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Remove(textBoxIndbetalt.Text.Length - 1);
+                        textBoxIndbetalt.CaretIndex = textBoxIndbetalt.Text.Length;
+                    }
+                    if (!char.IsDigit(c) && c != '+')
                     {
                         gyldig = false;
                         textBoxIndbetalt.BorderBrush = Brushes.Red;
@@ -349,22 +366,44 @@ namespace RygOgRejs.Gui
                         textBoxIndbetalt.Text = textBoxIndbetalt.Text.Remove(textBoxIndbetalt.Text.Length - 1);
                         textBoxIndbetalt.CaretIndex = textBoxIndbetalt.Text.Length; //amazing
                     }
+                    if (textBoxIndbetalt.Text.Length > 10)
+                    {
+                        gyldig = false;
+                        textBoxIndbetalt.BorderBrush = Brushes.Red;
+                        textBoxIndbetalt.BorderThickness = new Thickness(2);
+                        MessageBox.Show("Tallet er for stort, ikke overdrive ,max 10 tal");
+                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Remove(textBoxIndbetalt.Text.Length - 1);
+                        textBoxIndbetalt.CaretIndex = textBoxIndbetalt.Text.Length;
+                    }
                     else
                     {
-                        if(Convert.ToInt64(textBoxIndbetalt.Text) < int.MaxValue)
-                        {   gyldig = true;
-                            //CAB.TempTransaction.PricePaid = Convert.ToInt32(textBoxIndbetalt.Text);
-                            textBoxIndbetalt.BorderBrush = Brushes.Green;
-                            textBoxIndbetalt.BorderThickness = new Thickness(1);
+                        decimal test;
+                        if(decimal.TryParse(textBoxIndbetalt.Text, out test))
+                        {
+                            if (test < decimal.MaxValue)
+                            {
+                                gyldig = true;
+                                //CAB.TempTransaction.PricePaid = Convert.ToInt32(textBoxIndbetalt.Text);
+                                textBoxIndbetalt.BorderBrush = Brushes.Green;
+                                textBoxIndbetalt.BorderThickness = new Thickness(1);
+                            }
+                            else
+                            {
+                                gyldig = false;
+                                textBoxIndbetalt.BorderBrush = Brushes.Red;
+                                textBoxIndbetalt.BorderThickness = new Thickness(2);
+                                MessageBox.Show("Værdien er for stor");
+                                textBoxIndbetalt.Text = textBoxIndbetalt.Text.Remove(textBoxIndbetalt.Text.Length - 1);
+                                textBoxIndbetalt.CaretIndex = textBoxIndbetalt.Text.Length;
+                            }
+
                         }
                         else
                         {
                             gyldig = false;
                             textBoxIndbetalt.BorderBrush = Brushes.Red;
                             textBoxIndbetalt.BorderThickness = new Thickness(2);
-                            MessageBox.Show("Værdien er for stor");
-                            textBoxIndbetalt.Text = textBoxIndbetalt.Text.Remove(textBoxIndbetalt.Text.Length - 1);
-                            textBoxIndbetalt.CaretIndex = textBoxIndbetalt.Text.Length;
+                            MessageBox.Show("Værdien skal være et tal");
                         }
                     }
                 }
@@ -372,17 +411,16 @@ namespace RygOgRejs.Gui
                 {
                     textBoxIndbetalt.BorderBrush = Brushes.Green;
                     textBoxIndbetalt.BorderThickness = new Thickness(2);
-                    betalt = Convert.ToInt32(textBoxIndbetalt.Text);
+                    betalt = Convert.ToDecimal(textBoxIndbetalt.Text);
                     if (!string.IsNullOrWhiteSpace(textBoxTotalPris.Text))
                     {
                         string Totalpris = textBoxTotalPris.Text;
                         if (Totalpris.Contains(" kr"))
                         {
                             Totalpris = Totalpris.Remove((Totalpris.Length - 3));
-                            Totalpris = Totalpris.Replace(',', '.');
                         }
                         float pricething = Convert.ToSingle(Totalpris);
-                        int totalPris = Convert.ToInt32(pricething);
+                        decimal totalPris = Convert.ToDecimal(pricething);
                         if (betalt - totalPris < 0)
                         {
                             textBoxRetur.Text = "Ikke nok betalt";
@@ -393,9 +431,13 @@ namespace RygOgRejs.Gui
                             textBoxRetur.Text = PrisManglende + " kr";
                         }
                     }
+                    //if (string.IsNullOrWhiteSpace(textBoxTotalPris.Text))
+                    //{ }
                     else
                     {
                         MessageBox.Show("Udfyld overstående skema først");
+                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Remove(textBoxIndbetalt.Text.Length - 1);
+                        textBoxIndbetalt.CaretIndex = textBoxIndbetalt.Text.Length;
                     }
                 }
             }
