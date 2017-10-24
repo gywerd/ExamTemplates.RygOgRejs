@@ -25,7 +25,7 @@ namespace RygOgRejs.Gui
             try
             {
                 textBoxTotalPris.Text = textBoxTotalPris.Text.Remove(textBoxTotalPris.Text.Length -3);
-                if (Convert.ToInt64(textBoxIndbetalt.Text) >= Convert.ToInt64(textBoxTotalPris.Text))
+                if (Convert.ToDecimal(textBoxIndbetalt.Text) >= Convert.ToDecimal(textBoxTotalPris.Text))
                 {
                     CAB.TempTransaction.TransActionDate = DateTime.Now;
                     //CAB.TempTransaction.AmountExclVat = Convert.ToSingle(textBoxIndbetalt.Text);
