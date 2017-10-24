@@ -343,8 +343,10 @@ namespace RygOgRejs.Gui
                         if (Totalpris.Contains(" kr"))
                         {
                             Totalpris = Totalpris.Remove((Totalpris.Length - 3));
+                            Totalpris = Totalpris.Replace(',', '.');
                         }
-                        int totalPris = Convert.ToInt32(Totalpris); // Der er en fejl her da prisen er med koma, fra komaet og ud skal fjernes.
+                        float pricething = Convert.ToSingle(Totalpris);
+                        int totalPris = Convert.ToInt32(pricething); // Der er en fejl her da prisen er med koma, fra komaet og ud skal fjernes.
                         if (betalt - totalPris < 0)
                         {
                             textBoxRetur.Text = "Ikke nok betalt";
