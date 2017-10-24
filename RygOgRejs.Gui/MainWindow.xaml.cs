@@ -54,6 +54,7 @@ namespace RygOgRejs.Gui
 
             //maybe change this 
             //CRB.DailyTotals.UpdateTotals(CRB.Transactions); //Updates data for Daily Totals in lower left panel
+            this.gridDailyTotals.DataContext = CRB.DailyTotals;
             weatherAPI = new WeatherAPI(labelStatusBar, CRB);
             weatherAPI.GetCityNameAsync();
 

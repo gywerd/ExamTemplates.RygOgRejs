@@ -330,7 +330,18 @@ namespace RygOgRejs.Bizz.App
 
         public Transaction TempTransactionUpdate { get => tempTransactionUpdate; set => tempTransactionUpdate = value; }
 
-        public Total DailyTotals { get => dailyTotals; set => dailyTotals = value; }
+        public Total DailyTotals
+        {
+            get
+            {
+                if (dailyTotals.TotalSaleAmount <= 0)
+                {
+                    dailyTotals.UpdateTotals(transactions);
+                }
+                return dailyTotals;
+            }
+            set => dailyTotals = value;
+        }
         #endregion
 
         //#region Internal Classes

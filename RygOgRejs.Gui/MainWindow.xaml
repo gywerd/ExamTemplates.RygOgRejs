@@ -70,7 +70,7 @@
                     <GroupBox Grid.Row="1"
                               Header="Dagens totaler"
                               Margin="5">
-                        <Grid>
+                        <Grid x:Name="gridDailyTotals">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="90" />
                                 <ColumnDefinition Width="*" />
@@ -87,7 +87,7 @@
                             <Label Content="Solgte Rejser:"
                                    Grid.Row="0"
                                    Grid.Column="0"
-                                   HorizontalContentAlignment="Right" />
+                                   HorizontalContentAlignment="Right"/>
                             <Label Content="- heraf 1. kl.:"
                                    Grid.Row="1"
                                    Grid.Column="0"
@@ -115,12 +115,12 @@
                             <Label x:Name="labelTotalJourneys"
                                    Grid.Column="1"
                                    Grid.Row="0"
-                                   Content="0"
-                                   HorizontalContentAlignment="Left" />
+                                   Content="{Binding AmountOfSoldTravels}"
+                                   HorizontalContentAlignment="Left"/>
                             <Label x:Name="labelTotalFirstClassJourneys"
                                    Grid.Column="1"
                                    Grid.Row="1"
-                                   Content="0"
+                                   Content="{Binding AmountOfSoldTravels}"
                                    HorizontalContentAlignment="Left" />
                             <Label x:Name="labelTotalStandardJourneys"
                                    Grid.Column="1"

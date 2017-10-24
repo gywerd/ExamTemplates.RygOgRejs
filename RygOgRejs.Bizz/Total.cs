@@ -14,7 +14,7 @@ namespace RygOgRejs.Bizz.Entities
         private int amountOfPassengers;
         private int amountOfAdults;
         private int amountOfChildren;
-        private float totalSaleAmount;
+        private double totalSaleAmount;
         #endregion
 
         #region Constructors
@@ -54,10 +54,13 @@ namespace RygOgRejs.Bizz.Entities
         private int GetAmountOfAdults(ObservableCollection<Transaction> t)
         {
             int adults = 0;
-            foreach (Transaction trans in t)
-            {
-                adults += trans.Adults;
-            }
+                foreach (Transaction trans in t)
+                {
+                    if (trans.TransActionDate.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd"))
+                    {
+                        adults += trans.Adults;
+                    }
+                }
             return adults;
         }
 
@@ -66,8 +69,12 @@ namespace RygOgRejs.Bizz.Entities
             int children = 0;
             foreach (Transaction trans in t)
             {
-                children += trans.Children;
+                if (trans.TransActionDate.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd"))
+                {
+                    children += trans.Children;
+                }
             }
+
             return children;
         }
 
@@ -76,7 +83,10 @@ namespace RygOgRejs.Bizz.Entities
             float totalSale = 0;
             foreach (Transaction trans in t)
             {
-                totalSale += trans.AmountExclVat;
+                if (trans.TransActionDate.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd"))
+                {
+                    totalSale += trans.AmountExclVat;
+                }
             }
             return totalSale;
         }
@@ -87,7 +97,7 @@ namespace RygOgRejs.Bizz.Entities
         public int AmountofChildren { get => amountOfChildren; set => amountOfChildren = value; }
         public int AmountOfPassengers { get => amountOfPassengers; set => amountOfPassengers = value; }
         public int AmountOfSoldTravels { get => amountOfSoldTravels; set => amountOfSoldTravels = value; }
-        public float TotalSaleAmount { get => totalSaleAmount; set => totalSaleAmount = value; }
+        public double TotalSaleAmount { get => totalSaleAmount; set => totalSaleAmount = value; }
         #endregion
     }
 }
