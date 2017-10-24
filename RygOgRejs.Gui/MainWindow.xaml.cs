@@ -53,8 +53,9 @@ namespace RygOgRejs.Gui
             //macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
 
             //maybe change this 
-            //CRB.DailyTotals.UpdateTotals(CRB.Transactions); //Updates data for Daily Totals in lower left panel
-            this.gridDailyTotals.DataContext = CRB.DailyTotals;
+           
+            this.gridDailyTotals.DataContext = CRB.dailyTotals;
+            CRB.DailyTotals.UpdateTotals(CRB.Transactions); //Updates data for Daily Totals in lower left panel
             weatherAPI = new WeatherAPI(labelStatusBar, CRB);
             weatherAPI.GetCityNameAsync();
 
