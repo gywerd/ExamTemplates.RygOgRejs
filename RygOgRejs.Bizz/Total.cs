@@ -10,11 +10,13 @@ namespace RygOgRejs.Bizz.Entities
     public class Total
     {
         #region Fields
-        private int amountOfSoldTravels;
+        private int amountOfSoldJourneys;
+        private int amountOfFirstClassJourneys;
+        private int amountOfStandardTravels;
         private int amountOfPassengers;
         private int amountOfAdults;
         private int amountOfChildren;
-        private float totalSaleAmount;
+        private double totalSaleAmount;
         #endregion
 
         #region Constructors
@@ -33,7 +35,7 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="saleAmount">float</param>
         public Total(int soldtravels, int passengers, int adults, int children, float saleAmount)
         {
-            amountOfSoldTravels = soldtravels;
+            amountOfSoldJourneys = soldtravels;
             amountOfPassengers = passengers;
             amountOfAdults = adults;
             amountOfChildren = children;
@@ -44,20 +46,42 @@ namespace RygOgRejs.Bizz.Entities
         #region Methods
         public void UpdateTotals(ObservableCollection<Transaction> t)
         {
-            amountOfSoldTravels = t.Count;
+            amountOfSoldJourneys = t.Count;
+            amountOfFirstClassJourneys = GetAmountOfAdultsFirstClassTravels(t);
+            amountOfStandardTravels = amountOfSoldJourneys - amountOfFirstClassJourneys;
             amountOfAdults = GetAmountOfAdults(t);
             amountOfChildren = GetAmountOfChildren(t);
             amountOfPassengers = amountOfChildren + amountOfAdults;
             totalSaleAmount = GetTotalSaleAmount(t);
         }
 
+        private int GetAmountOfAdultsFirstClassTravels(ObservableCollection<Transaction> t)
+        {
+            int firstClassTravels = 0;
+            foreach (Transaction trans in t)
+            {
+                if (trans.TransActionDate.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd"))
+                {
+                    if (trans.IsFirstClass)
+                    {
+                        firstClassTravels = firstClassTravels + 1;
+                    }
+                }
+            }
+
+            return firstClassTravels;
+        }
+
         private int GetAmountOfAdults(ObservableCollection<Transaction> t)
         {
             int adults = 0;
-            foreach (Transaction trans in t)
-            {
-                adults += trans.Adults;
-            }
+                foreach (Transaction trans in t)
+                {
+                    if (trans.TransActionDate.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd"))
+                    {
+                        adults += trans.Adults;
+                    }
+                }
             return adults;
         }
 
@@ -66,8 +90,12 @@ namespace RygOgRejs.Bizz.Entities
             int children = 0;
             foreach (Transaction trans in t)
             {
-                children += trans.Children;
+                if (trans.TransActionDate.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd"))
+                {
+                    children += trans.Children;
+                }
             }
+
             return children;
         }
 
@@ -76,7 +104,10 @@ namespace RygOgRejs.Bizz.Entities
             float totalSale = 0;
             foreach (Transaction trans in t)
             {
-                totalSale += trans.AmountExclVat;
+                if (trans.TransActionDate.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd"))
+                {
+                    totalSale += trans.AmountExclVat;
+                }
             }
             return totalSale;
         }
@@ -85,9 +116,11 @@ namespace RygOgRejs.Bizz.Entities
         #region Properties
         public int AmountOfAdults { get => amountOfAdults; set => amountOfAdults = value; }
         public int AmountofChildren { get => amountOfChildren; set => amountOfChildren = value; }
+        public int AmountOfFirstClassJourneys { get => amountOfFirstClassJourneys; set => amountOfFirstClassJourneys = value; }
         public int AmountOfPassengers { get => amountOfPassengers; set => amountOfPassengers = value; }
-        public int AmountOfSoldTravels { get => amountOfSoldTravels; set => amountOfSoldTravels = value; }
-        public float TotalSaleAmount { get => totalSaleAmount; set => totalSaleAmount = value; }
+        public int AmountOfSoldJourneys { get => amountOfSoldJourneys; set => amountOfSoldJourneys = value; }
+        public double TotalSaleAmount { get => totalSaleAmount; set => totalSaleAmount = value; }
+        public int AmountOfStandardJourneys { get => amountOfStandardTravels; set => amountOfStandardTravels = value; }
         #endregion
     }
 }
