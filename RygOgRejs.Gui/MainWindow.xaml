@@ -69,7 +69,8 @@
                     </GroupBox>
                     <GroupBox Grid.Row="1"
                               Header="Dagens totaler"
-                              Margin="5">
+                              Margin="5"
+                              DataContext="CRB.DailyTotals">
                         <Grid x:Name="gridDailyTotals">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="90" />
@@ -115,37 +116,37 @@
                             <Label x:Name="labelTotalJourneys"
                                    Grid.Column="1"
                                    Grid.Row="0"
-                                   Content="{Binding AmountOfSoldTravels}"
+                                   Content="{Binding AmountOfSoldJourneys}"
                                    HorizontalContentAlignment="Left"/>
                             <Label x:Name="labelTotalFirstClassJourneys"
                                    Grid.Column="1"
                                    Grid.Row="1"
-                                   Content="{Binding AmountOfSoldTravels}"
+                                   Content="{Binding AmountOfFirstClassJourneys}"
                                    HorizontalContentAlignment="Left" />
                             <Label x:Name="labelTotalStandardJourneys"
                                    Grid.Column="1"
                                    Grid.Row="2"
-                                   Content="0"
+                                   Content="{Binding AmountOfStandardJourneys}"
                                    HorizontalContentAlignment="Left" />
                             <Label x:Name="labelTotalPassengers"
                                    Grid.Column="1"
                                    Grid.Row="3"
-                                   Content="0"
+                                   Content="{Binding AmountOfPassengers}"
                                    HorizontalContentAlignment="Left" />
                             <Label x:Name="labelTotalAdults"
                                    Grid.Column="1"
                                    Grid.Row="4"
-                                   Content="0"
+                                   Content="{Binding AmountOfAdults}"
                                    HorizontalContentAlignment="Left" />
                             <Label x:Name="labelTotalChildren"
                                    Grid.Column="1"
                                    Grid.Row="5"
-                                   Content="0"
+                                   Content="{Binding AmountofChildren}"
                                    HorizontalContentAlignment="Left" />
                             <Label x:Name="labelTotalSales"
                                    Grid.Column="1"
                                    Grid.Row="6"
-                                   Content="kr. 0,00"
+                                   Content="{Binding TotalSaleAmount}"
                                    HorizontalContentAlignment="Left" />
                         </Grid>
                     </GroupBox>
