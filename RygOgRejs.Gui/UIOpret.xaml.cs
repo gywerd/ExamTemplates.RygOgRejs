@@ -24,6 +24,7 @@ namespace RygOgRejs.Gui
         {
             try
             {
+                textBoxTotalPris.Text = textBoxTotalPris.Text.Remove(textBoxTotalPris.Text.Length -3);
                 if (Convert.ToInt64(textBoxIndbetalt.Text) >= Convert.ToInt64(textBoxTotalPris.Text))
                 {
                     CAB.TempTransaction.TransActionDate = DateTime.Now;
