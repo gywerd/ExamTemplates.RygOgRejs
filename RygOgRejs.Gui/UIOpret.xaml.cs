@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RygOgRejs.Bizz.App;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using RygOgRejs.Bizz.App;
-using RygOgRejs.Bizz.Entities;
 
 namespace RygOgRejs.Gui
 {
@@ -41,11 +30,9 @@ namespace RygOgRejs.Gui
                     //CAB.TempTransaction.AmountExclVat = Convert.ToSingle(textBoxIndbetalt.Text);
                     CAB.TempTransaction.AmountExclVat = Convert.ToSingle(textBoxIndbetalt.Text) * Convert.ToSingle("0.8"); //substracted VAT
                     //CAB.TempTransaction.PayerId = CAB.TempPayer.PayerId; obsolete code
-                    
-                    CAB.CreateJourney();
-                    MessageBox.Show("Rejsen Blevet Oprettet");
-                    UC.Content = null;
-                    
+                        CAB.CreateJourney();
+                        MessageBox.Show("Rejsen Blevet Oprettet");
+                        UC.Content = null;                    
                 }
                 else
                 {
@@ -65,12 +52,22 @@ namespace RygOgRejs.Gui
             if (firstClassChecked.IsChecked == true)
             {
                 CAB.TempTransaction.IsFirstClass = true;
-                textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                textBoxPrisForMoms.Text = CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text)).ToString();
+                textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                textBoxPrisUdenMoms.Text += " kr";
+                textBoxPrisForMoms.Text += " kr";
+                textBoxTotalPris.Text += " kr";
             }
             else
             {
                 CAB.TempTransaction.IsFirstClass = false;
-                textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                textBoxPrisForMoms.Text = CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text)).ToString();
+                textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                textBoxPrisUdenMoms.Text += " kr";
+                textBoxPrisForMoms.Text += " kr";
+                textBoxTotalPris.Text += " kr";
             }
 
                 
@@ -184,7 +181,12 @@ namespace RygOgRejs.Gui
                     textBoxAdults.BorderBrush = Brushes.Green;
                     textBoxAdults.BorderThickness = new Thickness(2);
                     CAB.TempTransaction.Adults = Convert.ToInt32(textBoxAdults.Text);
-                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisForMoms.Text = CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text)).ToString();
+                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisUdenMoms.Text += " kr";
+                    textBoxPrisForMoms.Text += " kr";
+                    textBoxTotalPris.Text += " kr";
                 }
             }
             else
@@ -224,7 +226,12 @@ namespace RygOgRejs.Gui
                     textBoxChildren.BorderBrush = Brushes.Green;
                     textBoxChildren.BorderThickness = new Thickness(2);
                     CAB.TempTransaction.Children = Convert.ToInt32(textBoxChildren.Text);
-                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisForMoms.Text = CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text)).ToString();
+                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisUdenMoms.Text += " kr";
+                    textBoxPrisForMoms.Text += " kr";
+                    textBoxTotalPris.Text += " kr";
                 }
             }
             else
@@ -264,7 +271,12 @@ namespace RygOgRejs.Gui
                     textBoxBagage.BorderBrush = Brushes.Green;
                     textBoxBagage.BorderThickness = new Thickness(2);
                     CAB.TempTransaction.LuggageAmount = Convert.ToSingle(textBoxBagage.Text);
-                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisForMoms.Text = CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text)).ToString();
+                    textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                    textBoxPrisUdenMoms.Text += " kr";
+                    textBoxPrisForMoms.Text += " kr";
+                    textBoxTotalPris.Text += " kr";
                 }
             }
             else
@@ -305,7 +317,8 @@ namespace RygOgRejs.Gui
                     {
                         if(Convert.ToInt64(textBoxIndbetalt.Text) < int.MaxValue)
                         {   gyldig = true;
-                            textBoxIndbetalt.BorderBrush = Brushes.Transparent;
+                            //CAB.TempTransaction.PricePaid = Convert.ToInt32(textBoxIndbetalt.Text);
+                            textBoxIndbetalt.BorderBrush = Brushes.Green;
                             textBoxIndbetalt.BorderThickness = new Thickness(1);
                         }
                         else
@@ -326,11 +339,23 @@ namespace RygOgRejs.Gui
                     betalt = Convert.ToInt32(textBoxIndbetalt.Text);
                     if (!string.IsNullOrWhiteSpace(textBoxTotalPris.Text))
                     {
-                        int totalPris = Convert.ToInt32(textBoxTotalPris.Text);
+                        string Totalpris = textBoxTotalPris.Text;
+                        if (Totalpris.Contains(" kr"))
+                        {
+                            Totalpris = Totalpris.Remove((Totalpris.Length - 3));
+                            Totalpris = Totalpris.Replace(',', '.');
+                        }
+                        float pricething = Convert.ToSingle(Totalpris);
+                        int totalPris = Convert.ToInt32(pricething); // Der er en fejl her da prisen er med koma, fra komaet og ud skal fjernes.
                         if (betalt - totalPris < 0)
+                        {
                             textBoxRetur.Text = "Ikke nok betalt";
+                        }
                         else
-                            textBoxRetur.Text = (betalt - totalPris).ToString();
+                        {
+                            string PrisManglende = (betalt - totalPris).ToString();
+                            textBoxRetur.Text = PrisManglende + " kr";
+                        }
                     }
                     else
                     {

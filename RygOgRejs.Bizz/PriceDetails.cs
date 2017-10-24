@@ -151,9 +151,13 @@ namespace RygOgRejs.Bizz.Entities
         /// <returns></returns>
         public float GetTaxAmount(float amount)
         {
-            return amount * 0.25F;
+            return amount * taxRate;
         }
 
+        public decimal GetPaidAmount(decimal amount)
+        {
+            return (amount * (decimal)taxRate) + amount;
+        }
         /// <summary>
         /// Calculates net price
         /// </summary>
