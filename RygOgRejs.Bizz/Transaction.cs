@@ -131,11 +131,11 @@ namespace RygOgRejs.Bizz.Entities
             get => firstName;
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentNullException();
-                foreach (char c in value)
-                    if (!char.IsLetter(c))
-                        throw new ArgumentNullException();
+                //if (string.IsNullOrWhiteSpace(value))
+                //    throw new ArgumentNullException();
+                //foreach (char c in value)
+                //    if (!char.IsLetter(c))
+                //        throw new ArgumentNullException();
                 firstName = value;
             }
         }
@@ -145,11 +145,11 @@ namespace RygOgRejs.Bizz.Entities
             get => lastName;
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentNullException();
-                foreach (char c in value)
-                    if (!char.IsLetter(c))
-                        throw new ArgumentNullException();
+                //if (string.IsNullOrWhiteSpace(value))
+                //    throw new ArgumentNullException();
+                //foreach (char c in value)
+                //    if (!char.IsLetter(c))
+                //        throw new ArgumentNullException();
                 lastName = value;
             }
         }

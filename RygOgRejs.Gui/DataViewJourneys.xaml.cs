@@ -48,9 +48,15 @@ namespace RygOgRejs.Gui
 
         private void dataGridJourneys_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
             if (dataGridJourneys.SelectedItem != null) //this is weird
             {
-
+                CAB.TempTransaction.IsFirstClass = false;
+                CAB.TempTransaction.Adults = 0;
+                CAB.TempTransaction.Children = 0;
+                CAB.TempTransaction.LuggageAmount = 0;
+                CAB.TempTransaction.FirstName = "";
+                CAB.TempTransaction.LastName = "";
                 string selectedItem = Convert.ToString(dataGridJourneys.SelectedItem);
                 selectedItem = selectedItem.Remove(0, 16);
                 if (selectedItem.Contains("}"))

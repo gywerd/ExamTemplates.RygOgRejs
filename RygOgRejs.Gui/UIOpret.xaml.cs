@@ -24,7 +24,7 @@ namespace RygOgRejs.Gui
         {
             try
             {
-                if (Convert.ToInt32(textBoxIndbetalt.Text) >= Convert.ToInt32(textBoxTotalPris.Text))
+                if (Convert.ToInt64(textBoxIndbetalt.Text) >= Convert.ToInt64(textBoxTotalPris.Text))
                 {
                     CAB.TempTransaction.TransActionDate = DateTime.Now;
                     //CAB.TempTransaction.AmountExclVat = Convert.ToSingle(textBoxIndbetalt.Text);
@@ -77,26 +77,33 @@ namespace RygOgRejs.Gui
         {
             if (!string.IsNullOrWhiteSpace(textBoxLastName.Text))
             {
-                bool Gyldig = false;
+                bool gyldig = false;
                 foreach (char c in textBoxLastName.Text)
                 {
                     if (!char.IsLetter(c))
                     {
-                        Gyldig = false;
+                        gyldig = false;
                         textBoxLastName.BorderBrush = Brushes.Red;
                         textBoxLastName.BorderThickness = new Thickness(2);
                         MessageBox.Show("Fornavn må ikke indeholde ugyldige tegn eller tal.");
                         textBoxLastName.Text = textBoxLastName.Text.Remove(textBoxLastName.Text.Length - 1);
                         textBoxLastName.CaretIndex = textBoxLastName.Text.Length;
                     }
+                    if (textBoxLastName.Text.Length > 20)
+                    {
+                        MessageBox.Show("For mange bogstaver, Max 20 bogstaver.");
+                        textBoxLastName.Text = textBoxLastName.Text.Remove(textBoxLastName.Text.Length - 1);
+                        textBoxLastName.CaretIndex = textBoxLastName.Text.Length;
+                        gyldig = false;
+                    }
                     else
                     {
-                        Gyldig = true;
+                        gyldig = true;
                         textBoxLastName.BorderBrush = Brushes.Transparent;
                         textBoxLastName.BorderThickness = new Thickness(1);
                     }
                 }
-                if (Gyldig == true)
+                if (gyldig == true)
                 {
                     textBoxLastName.BorderBrush = Brushes.Green;
                     textBoxLastName.BorderThickness = new Thickness(2);
@@ -128,6 +135,13 @@ namespace RygOgRejs.Gui
                         MessageBox.Show("Fornavn må ikke indeholde ugyldige tegn eller tal.");
                         textBoxFirstName.Text = textBoxFirstName.Text.Remove(textBoxFirstName.Text.Length - 1);
                         textBoxFirstName.CaretIndex = textBoxFirstName.Text.Length; //amazing
+                    }
+                    if (textBoxFirstName.Text.Length > 20)
+                    {
+                        MessageBox.Show("For mange bogstaver, Max 20 bogstaver.");
+                        textBoxFirstName.Text = textBoxFirstName.Text.Remove(textBoxFirstName.Text.Length - 1);
+                        textBoxFirstName.CaretIndex = textBoxFirstName.Text.Length;
+                        gyldig = false;
                     }
                     else
                     {
@@ -164,9 +178,16 @@ namespace RygOgRejs.Gui
                         gyldig = false;
                         textBoxAdults.BorderBrush = Brushes.Red;
                         textBoxAdults.BorderThickness = new Thickness(2);
-                        MessageBox.Show("må ikke indeholde bogstaver eller tegn");
+                        MessageBox.Show("må ikke indeholde bogstaver eller tegn.");
                         textBoxAdults.Text = textBoxAdults.Text.Remove(textBoxAdults.Text.Length - 1);
                         textBoxAdults.CaretIndex = textBoxAdults.Text.Length; //amazing
+                    }
+                    if (textBoxAdults.Text.Length > 3)
+                    {
+                        MessageBox.Show("Tallet er for højt, Max 999 Voksne.");
+                        textBoxAdults.Text = textBoxAdults.Text.Remove(textBoxAdults.Text.Length - 1);
+                        textBoxAdults.CaretIndex = textBoxAdults.Text.Length;
+                        gyldig = false;
                     }
                     else
                     {
@@ -212,6 +233,13 @@ namespace RygOgRejs.Gui
                         textBoxChildren.Text = textBoxChildren.Text.Remove(textBoxChildren.Text.Length - 1);
                         textBoxChildren.CaretIndex = textBoxChildren.Text.Length; //amazing
                     }
+                    if (textBoxChildren.Text.Length > 3)
+                    {
+                        MessageBox.Show("Tallet er for højt, Max 999 Børn.");
+                        textBoxChildren.Text = textBoxChildren.Text.Remove(textBoxChildren.Text.Length - 1);
+                        textBoxChildren.CaretIndex = textBoxChildren.Text.Length;
+                        gyldig = false;
+                    }
                     else
                     {
                         gyldig = true;
@@ -256,6 +284,13 @@ namespace RygOgRejs.Gui
                         MessageBox.Show("må ikke indeholde ugyldige bogstaver eller tegn");
                         textBoxBagage.Text = textBoxBagage.Text.Remove(textBoxBagage.Text.Length - 1);
                         textBoxBagage.CaretIndex = textBoxBagage.Text.Length; //amazing
+                    }
+                    if (textBoxBagage.Text.Length > 4)
+                    {
+                        MessageBox.Show("Vægten er for stor, Flyet kan ikke lætte, Max 9,999 Ton.");
+                        textBoxBagage.Text = textBoxBagage.Text.Remove(textBoxBagage.Text.Length - 1);
+                        textBoxBagage.CaretIndex = textBoxBagage.Text.Length;
+                        gyldig = false;
                     }
                     else
                     {
@@ -346,7 +381,7 @@ namespace RygOgRejs.Gui
                             Totalpris = Totalpris.Replace(',', '.');
                         }
                         float pricething = Convert.ToSingle(Totalpris);
-                        int totalPris = Convert.ToInt32(pricething); // Der er en fejl her da prisen er med koma, fra komaet og ud skal fjernes.
+                        int totalPris = Convert.ToInt32(pricething);
                         if (betalt - totalPris < 0)
                         {
                             textBoxRetur.Text = "Ikke nok betalt";
