@@ -15,7 +15,7 @@ namespace RygOgRejs.Bizz.App
     {
         #region Fields
             #region Ordinary Fields
-            private Total dailyTotals = new Total(); //object that holds data, that can be bound to left panel in MainWindow
+            public Total dailyTotals = new Total(); //object that holds data, that can be bound to left panel in MainWindow
             private string destination; //string that holds a destination
             private string journeyOrTransaction; //string that controls how UIInsertUpdate & UIPayment acts
             private Transaction tempTransaction = new Transaction(); //string to temporarily store current transaction information, before writing it to the database
@@ -336,6 +336,8 @@ namespace RygOgRejs.Bizz.App
 
         public Transaction TempTransactionUpdate { get => tempTransactionUpdate; set => tempTransactionUpdate = value; }
 
+
+        //AmountOfStandardJourneys
         public Total DailyTotals
         {
             get
