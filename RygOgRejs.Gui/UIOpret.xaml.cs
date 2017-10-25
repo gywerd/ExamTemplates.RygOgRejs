@@ -348,16 +348,19 @@ namespace RygOgRejs.Gui
                 bool gyldig = false;
                 foreach (char c in textBoxIndbetalt.Text)
                 {
+                    
                     if (textBoxIndbetalt.Text.Contains("+") || textBoxIndbetalt.Text.Contains("-") || textBoxIndbetalt.Text.Contains("*") || textBoxIndbetalt.Text.Contains("/"))
                     {
-                        gyldig = false;
-                        textBoxIndbetalt.BorderBrush = Brushes.Red;
-                        textBoxIndbetalt.BorderThickness = new Thickness(2);
-                        MessageBox.Show("Stop, Being an ass Emil >_>");
-                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Remove(textBoxIndbetalt.Text.Length - 1);
-                        textBoxIndbetalt.CaretIndex = textBoxIndbetalt.Text.Length;
+                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Replace('+', ' ');
+                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Replace('-', ' ');
+                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Replace('*', ' ');
+                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Replace('/', ' ');
+                        if(textBoxIndbetalt.Text.Trim().Length <= 0)
+                        {
+                            textBoxIndbetalt.Text = "0";
+                        }
                     }
-                    if (!char.IsDigit(c) && c != '+')
+                    if (!char.IsDigit(c) && c != '+' && c != ',' )
                     {
                         gyldig = false;
                         textBoxIndbetalt.BorderBrush = Brushes.Red;
@@ -377,8 +380,7 @@ namespace RygOgRejs.Gui
                     }
                     else
                     {
-                        decimal test;
-                        if(decimal.TryParse(textBoxIndbetalt.Text, out test))
+                        if(decimal.TryParse(textBoxIndbetalt.Text, out decimal test))
                         {
                             if (test < decimal.MaxValue)
                             {
