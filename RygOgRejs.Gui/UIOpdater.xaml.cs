@@ -49,7 +49,7 @@ namespace RygOgRejs.Gui
                 firstClassChecked.IsChecked = Bizz.IsFirstClass;
                 textBoxFirstName.Text = Bizz.FirstName;
                 textBoxLastName.Text = Bizz.LastName;
-                textBoxIndbetalt.Text = Bizz.AmountInclVat.ToString();
+                textBoxIndbetalt.Text = Bizz.AmountInclVat.ToString("N2");
 
                 //for now change later
                 Appbizz.TempPriceDetails.CalculateAmounts(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations); //data moved to updated tempPriceDetails
@@ -156,17 +156,18 @@ namespace RygOgRejs.Gui
                         AdultsOK = true;
                         Appbizz.TempTransaction.Adults = Adults;
                         Appbizz.TempPriceDetails.CalculateAmounts(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations); //data moved to updated tempPriceDetails
-                        textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString();
+                        textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString("N2");
                         textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
                         textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
-                        if(Convert.ToDecimal(textBoxPrisForMoms.Text) < Convert.ToDecimal(textBoxIndbetalt.Text))
+                        if(Convert.ToDecimal(textBoxTotalPris.Text) < Convert.ToDecimal(textBoxIndbetalt.Text))
                         {
-                            decimal fuu = Convert.ToDecimal(textBoxIndbetalt.Text) - Convert.ToDecimal(textBoxPrisForMoms.Text);
+                            decimal fuu = Convert.ToDecimal(textBoxIndbetalt.Text) - Convert.ToDecimal(textBoxTotalPris.Text);
                             textBoxRetur.Text = fuu.ToString();
                         }
                         else
                         {
-                            decimal fuu = Convert.ToDecimal(textBoxIndbetalt.Text) - Convert.ToDecimal(textBoxPrisForMoms.Text);
+
+                            decimal fuu = Convert.ToDecimal(textBoxTotalPris.Text) - Convert.ToDecimal(textBoxIndbetalt.Text);
                             textBoxRetur.Text = fuu.ToString();
 
                         }

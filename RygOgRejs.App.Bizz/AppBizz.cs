@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace RygOgRejs.Bizz.App
 {
-    public class AppBizz : INotifyPropertyChanged
+    public class AppBizz
     {
         #region Fields
             #region Ordinary Fields
@@ -40,13 +40,6 @@ namespace RygOgRejs.Bizz.App
             //List<string> destinationList = new List<string>(); //List containing available destinations to be viewed in DataViewJourneys
             List<DestinationList> destinationList = new List<DestinationList>(); //List containing available destinations to be viewed in DataViewJourneys
             #endregion
-        #endregion
-
-        #region Events
-        /// <summary>
-        /// Event, that handles updating fields in UserControl
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region Methods

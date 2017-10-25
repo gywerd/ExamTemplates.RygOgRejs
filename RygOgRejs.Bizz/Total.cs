@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RygOgRejs.Bizz.Entities
 {
-    public class Total
+    public class Total : INotifyPropertyChanged
     {
         #region Fields
         private int amountOfSoldJourneys;
@@ -66,13 +66,13 @@ namespace RygOgRejs.Bizz.Entities
 
         public void UpdateTotals(ObservableCollection<Transaction> t)
         {
-            amountOfSoldJourneys = t.Count;
-            amountOfFirstClassJourneys = GetAmountOfAdultsFirstClassTravels(t);
-            amountOfStandardTravels = amountOfSoldJourneys - amountOfFirstClassJourneys;
-            amountOfAdults = GetAmountOfAdults(t);
-            amountOfChildren = GetAmountOfChildren(t);
-            amountOfPassengers = amountOfChildren + amountOfAdults;
-            totalSaleAmount = GetTotalSaleAmount(t);
+            AmountOfSoldJourneys = t.Count;
+            AmountOfFirstClassJourneys = GetAmountOfAdultsFirstClassTravels(t);
+            AmountOfStandardJourneys = amountOfSoldJourneys - amountOfFirstClassJourneys;
+            AmountOfAdults = GetAmountOfAdults(t);
+            AmountofChildren = GetAmountOfChildren(t);
+            AmountOfPassengers = amountOfChildren + amountOfAdults;
+            TotalSaleAmount = GetTotalSaleAmount(t);
         }
 
         private int GetAmountOfAdultsFirstClassTravels(ObservableCollection<Transaction> t)
@@ -142,7 +142,7 @@ namespace RygOgRejs.Bizz.Entities
                 if (value != amountOfAdults)
                 {
                     amountOfAdults = value;
-                    Notify("amountOfAdults");
+                    Notify("AmountOfAdults");
                 }
             }
         }
@@ -155,7 +155,7 @@ namespace RygOgRejs.Bizz.Entities
                 if (value != amountOfChildren)
                 {
                     amountOfChildren = value;
-                    Notify("amountOfChildren");
+                    Notify("AmountofChildren");
                 }
             }
         }
@@ -167,7 +167,7 @@ namespace RygOgRejs.Bizz.Entities
                 if (value != amountOfFirstClassJourneys)
                 {
                     amountOfFirstClassJourneys = value;
-                    Notify("amountOfFirstClassJourneys");
+                    Notify("AmountOfFirstClassJourneys");
                 }
             }
         }
@@ -180,7 +180,7 @@ namespace RygOgRejs.Bizz.Entities
                 if (value != amountOfPassengers)
                 {
                     amountOfPassengers = value;
-                    Notify("amountOfPassengers");
+                    Notify("AmountOfPassengers");
                 }
             }
         }
@@ -193,7 +193,7 @@ namespace RygOgRejs.Bizz.Entities
                 if (value != amountOfSoldJourneys)
                 {
                     amountOfSoldJourneys = value;
-                    Notify("amountOfSoldJourneys");
+                    Notify("AmountOfSoldJourneys");
                 }
             }
         }
@@ -206,7 +206,7 @@ namespace RygOgRejs.Bizz.Entities
                 if (value != totalSaleAmount)
                 {
                     totalSaleAmount = value;
-                    Notify("totalSaleAmount");
+                    Notify("TotalSaleAmount");
                 }
             }
         }
@@ -219,7 +219,7 @@ namespace RygOgRejs.Bizz.Entities
                 if (value != amountOfStandardTravels)
                 {
                     amountOfStandardTravels = value;
-                    Notify("amountOfStandardTravels");
+                    Notify("AmountOfStandardJourneys");
                 }
             }
         }
