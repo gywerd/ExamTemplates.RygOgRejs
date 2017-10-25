@@ -49,7 +49,12 @@ namespace RygOgRejs.Gui
                 firstClassChecked.IsChecked = Bizz.IsFirstClass;
                 textBoxFirstName.Text = Bizz.FirstName;
                 textBoxLastName.Text = Bizz.LastName;
-                textBoxIndbetalt.Text = Bizz.AmountInclVat.ToString("N2");
+                textBoxIndbetalt.Text = Bizz.AmountInclVat.ToString();
+
+                //for now change later
+                textBoxTotalPris.Text = Appbizz.TempPriceDetails.GetTotalWithTax((Transaction)datagrid.SelectedItem, Appbizz.Transactions, Appbizz.Destinations).ToString();
+                textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.GetTotalWithoutTax(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations).ToString();
+                textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.GetTaxAmount(Convert.ToDecimal(textBoxPrisUdenMoms.Text)).ToString();
             }
         }
 
@@ -148,6 +153,21 @@ namespace RygOgRejs.Gui
                         textBoxAdults.BorderBrush = Brushes.Green;
                         textBoxAdults.BorderThickness = new Thickness(2);
                         AdultsOK = true;
+                        Appbizz.TempTransaction.Adults = Adults;
+                        textBoxTotalPris.Text = Appbizz.TempPriceDetails.GetTotalWithTax(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations).ToString();
+                        textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.GetTotalWithoutTax(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations).ToString();
+                        textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.GetTaxAmount(Convert.ToDecimal(textBoxPrisUdenMoms.Text)).ToString();
+                        if(Convert.ToDecimal(textBoxPrisForMoms.Text) < Convert.ToDecimal(textBoxIndbetalt.Text))
+                        {
+                            decimal fuu = Convert.ToDecimal(textBoxIndbetalt.Text) - Convert.ToDecimal(textBoxPrisForMoms.Text);
+                            textBoxRetur.Text = fuu.ToString();
+                        }
+                        else
+                        {
+                            decimal fuu = Convert.ToDecimal(textBoxIndbetalt.Text) - Convert.ToDecimal(textBoxPrisForMoms.Text);
+                            textBoxRetur.Text = fuu.ToString();
+
+                        }
                     }
                     else
                     {
@@ -197,6 +217,10 @@ namespace RygOgRejs.Gui
                         textBoxChildren.BorderBrush = Brushes.Green;
                         textBoxChildren.BorderThickness = new Thickness(2);
                         ChildrenOK = true;
+                        Appbizz.TempTransaction.Children = Children;
+                        textBoxTotalPris.Text = Appbizz.TempPriceDetails.GetTotalWithTax(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations).ToString();
+                        textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.GetTotalWithoutTax(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations).ToString();
+                        textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.GetTaxAmount(Convert.ToDecimal(textBoxPrisUdenMoms.Text)).ToString();
                     }
                     else
                     {
@@ -246,6 +270,10 @@ namespace RygOgRejs.Gui
                         textBoxBagage.BorderBrush = Brushes.Green;
                         textBoxBagage.BorderThickness = new Thickness(2);
                         LugageOK = true;
+                        Appbizz.TempTransaction.LuggageAmount = Luggage;
+                        textBoxTotalPris.Text = Appbizz.TempPriceDetails.GetTotalWithTax(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations).ToString();
+                        textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.GetTotalWithoutTax(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations).ToString();
+                        textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.GetTaxAmount(Convert.ToDecimal(textBoxPrisUdenMoms.Text)).ToString();
                     }
                     else
                     {
@@ -261,6 +289,11 @@ namespace RygOgRejs.Gui
                 textBoxBagage.BorderThickness = new Thickness(2);
                 LugageOK = false;
             }
+        }
+
+        private void textBoxTotalPris_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

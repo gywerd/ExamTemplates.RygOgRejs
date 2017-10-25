@@ -103,8 +103,8 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <param name="adults">int</param>
         /// <param name="child">int</param>
         /// <param name="first">bool</param>
-        /// <param name="lug">decimal</param>
-        public void UpdatePrices(int id, string destination, decimal adults, decimal child, decimal first, decimal lug) //find better way?
+        /// <param name="lug">float</param>
+        public void UpdatePrices(int id, string destination, float adults, float child, float first, float lug) //find better way?
         {
            string query = $"UPDATE Price SET Destination = '{destination}', AdultPrice = {adults}, ChildrenPrice = {child}, FirstClassPrice = {first}, LuggagePrice = {lug}  WHERE DestinationId = {id}";
            executor.ExecuteNonQuery(query);

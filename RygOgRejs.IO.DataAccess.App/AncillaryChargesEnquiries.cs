@@ -21,9 +21,9 @@ namespace RygOgRejs.IO.DataAccess.App
             while (reader.Read())
             {
                 int id = Convert.ToInt32(reader["Id"]);
-                decimal firstClassPrice = Convert.ToDecimal(reader["FirstClassPrice"]);
-                decimal luggaPriceOverload = Convert.ToDecimal(reader["LuggagePricePerOverloadKg"]); //spelling error in DB corrected
-                AncillaryCharge ancillaryCharge = new AncillaryCharge(id, Convert.ToDecimal(firstClassPrice), luggaPriceOverload);
+                float firstClassPrice = Convert.ToSingle(reader["FirstClassPrice"]);
+                float luggaPriceOverload = Convert.ToSingle(reader["LuggagePricePerOverloadKg"]); //spelling error in DB corrected
+                AncillaryCharge ancillaryCharge = new AncillaryCharge(id, firstClassPrice, luggaPriceOverload);
                 priceList.Add(ancillaryCharge);
             }
             return priceList;

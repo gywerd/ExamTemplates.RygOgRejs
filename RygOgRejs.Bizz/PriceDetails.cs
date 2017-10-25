@@ -13,7 +13,7 @@ namespace RygOgRejs.Bizz.Entities
         private decimal destinationPrice;
         private decimal firstClassPrice;
         private decimal luggagePrice;
-        private decimal taxRate = Convert.ToDecimal("0.25");
+        private decimal taxRate = 0.25M;
         private decimal amountExclVat;
         private decimal amountInclVat;
         private decimal vatOfAmount;
@@ -93,6 +93,7 @@ namespace RygOgRejs.Bizz.Entities
                 if (t.DestinationName == price.DestinationName)
                 {
                     adultPrice = price.AdultPrice;
+                    break;
                 }
             }
             return adultPrice;
@@ -112,6 +113,7 @@ namespace RygOgRejs.Bizz.Entities
                 if (t.DestinationName == price.DestinationName)
                 {
                     childrenPrice = price.ChildPrice;
+                    break;
                 }
             }
             return childrenPrice;
@@ -157,12 +159,13 @@ namespace RygOgRejs.Bizz.Entities
         }
 
         /// <summary>
-        /// Method calculates VAT from net amount and places it in VatOfAmount
+        /// Method calculates VAT from net amount
         /// </summary>
+        /// <param name="amount">decimal</param>
         /// <returns></returns>
-        public void GetTaxAmount()
+        public decimal GetTaxAmount(decimal amount)
         {
-            vatOfAmount = amountExclVat * taxRate;
+            return amount * taxRate;
         }
 
         public decimal GetPaidAmount(decimal amount)
@@ -171,17 +174,18 @@ namespace RygOgRejs.Bizz.Entities
         }
 
         /// <summary>
-        /// Calculates net price and places it in AmountExclVat
+        /// Calculates net price
         /// </summary>
         /// <param name="t">Transaction</param>
         /// <param name="tcol">ObservableCollection<Transaction></param>
-        /// <param name="dcol">ObservableCollection<Destination></param>
-        public void GetTotalWithoutTax(Transaction t, ObservableCollection<Transaction> tcol, ObservableCollection<Destination> dcol)
+        /// <param name="d">ObservableCollection<Destination></param>
+        /// <returns></returns>
+        public decimal GetTotalWithoutTax(Transaction t, ObservableCollection<Transaction> tcol, ObservableCollection<Destination> d)
         {
             decimal accumulatedPrice = 0;
-            decimal adultsAccumulatedPrice = Multiplydecimal(t.Adults, GetAdultPrice(t, dcol));
+            decimal adultsAccumulatedPrice = Multiplydecimal(t.Adults, GetAdultPrice(t, d));
             accumulatedPrice = accumulatedPrice + adultsAccumulatedPrice;
-            decimal childAccumulatedPrice = Multiplydecimal(t.Children, GetChildrenPrice(t, dcol));
+            decimal childAccumulatedPrice = Multiplydecimal(t.Children, GetChildrenPrice(t, d));
             accumulatedPrice = accumulatedPrice + childAccumulatedPrice;
             decimal firstClassAccumulatedPrice = 0;
             if (t.IsFirstClass)
@@ -189,22 +193,27 @@ namespace RygOgRejs.Bizz.Entities
                 firstClassAccumulatedPrice = Multiplydecimal(AddPersons(t), GetFirstClassPrice());
             }
             else
-            {
                 firstClassAccumulatedPrice = 0;
-            }
             accumulatedPrice = accumulatedPrice + firstClassAccumulatedPrice;
-            decimal luggageAccumulatedPrice = Multiplydecimal(GetLuggageOverloadWeight(t,dcol), GetLuggagePrice(t, dcol));
+            decimal luggageAccumulatedPrice = Multiplydecimal(GetLuggageOverloadWeight(t,d), GetLuggagePrice(t, d));
             accumulatedPrice = accumulatedPrice + luggageAccumulatedPrice;
             //Not Implemented Yet
-            amountExclVat = accumulatedPrice;
+            return accumulatedPrice;
         }
 
         /// <summary>
-        /// Calculates gross price and places it in AmountInclVat
+        /// Calculates gross price
         /// </summary>
-        public void GetTotalWithTax()
+        /// <param name="t">Transaction</param>
+        /// <param name="tcol">ObservableCollection<Transaction></param>
+        /// <param name="dcol">ObservableCollection<Destination></param>
+        /// <returns></returns>
+        public decimal GetTotalWithTax(Transaction t, ObservableCollection<Transaction> tcol, ObservableCollection<Destination> dcol)
         {
-            amountInclVat = amountExclVat + vatOfAmount;
+            decimal total = 0;
+            total = total + GetTotalWithoutTax(t, tcol, dcol);
+            total = total + GetTaxAmount(GetTotalWithoutTax(t, tcol, dcol));
+            return total;
         }
 
         /// <summary>
@@ -216,19 +225,6 @@ namespace RygOgRejs.Bizz.Entities
         private decimal Multiplydecimal(decimal f1, decimal f2)
         {
             return f1 * f2;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="tempTransaction"></param>
-        /// <param name="transactions"></param>
-        /// <param name="destinations"></param>
-        public void CalculateAmount(Transaction tempTransaction, ObservableCollection<Transaction> transactions, ObservableCollection<Destination> destinations)
-        {
-            GetTotalWithoutTax(tempTransaction, transactions, destinations);
-            GetTaxAmount();
-            GetTotalWithTax();
         }
         #endregion
 
