@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,13 @@ namespace RygOgRejs.Bizz.Entities
         private int amountOfAdults;
         private int amountOfChildren;
         private decimal totalSaleAmount;
+        #endregion
+
+        #region Events
+        /// <summary>
+        /// Event, that handles updating fields in UserControl
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region Constructors
@@ -44,6 +52,18 @@ namespace RygOgRejs.Bizz.Entities
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Method that Notifies an instance of ClassPersonData, when an entry is entered in a textbox
+        /// </summary>
+        /// <param name="propertyName"></param>
+        protected void Notify(string propertyName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
         public void UpdateTotals(ObservableCollection<Transaction> t)
         {
             amountOfSoldJourneys = t.Count;
@@ -114,13 +134,95 @@ namespace RygOgRejs.Bizz.Entities
         #endregion
 
         #region Properties
-        public int AmountOfAdults { get => amountOfAdults; set => amountOfAdults = value; }
-        public int AmountofChildren { get => amountOfChildren; set => amountOfChildren = value; }
-        public int AmountOfFirstClassJourneys { get => amountOfFirstClassJourneys; set => amountOfFirstClassJourneys = value; }
-        public int AmountOfPassengers { get => amountOfPassengers; set => amountOfPassengers = value; }
-        public int AmountOfSoldJourneys { get => amountOfSoldJourneys; set => amountOfSoldJourneys = value; }
-        public decimal TotalSaleAmount { get => totalSaleAmount; set => totalSaleAmount = value; }
-        public int AmountOfStandardJourneys { get => amountOfStandardTravels; set => amountOfStandardTravels = value; }
+        public int AmountOfAdults
+        {
+            get => amountOfAdults;
+            set
+            {
+                if (value != amountOfAdults)
+                {
+                    amountOfAdults = value;
+                    Notify("amountOfAdults");
+                }
+            }
+        }
+
+        public int AmountofChildren
+        {
+            get => amountOfChildren;
+            set
+            {
+                if (value != amountOfChildren)
+                {
+                    amountOfChildren = value;
+                    Notify("amountOfChildren");
+                }
+            }
+        }
+        public int AmountOfFirstClassJourneys
+        {
+            get => amountOfFirstClassJourneys;
+            set
+            {
+                if (value != amountOfFirstClassJourneys)
+                {
+                    amountOfFirstClassJourneys = value;
+                    Notify("amountOfFirstClassJourneys");
+                }
+            }
+        }
+
+        public int AmountOfPassengers
+        {
+            get => amountOfPassengers;
+            set
+            {
+                if (value != amountOfPassengers)
+                {
+                    amountOfPassengers = value;
+                    Notify("amountOfPassengers");
+                }
+            }
+        }
+
+        public int AmountOfSoldJourneys
+        {
+            get => amountOfSoldJourneys;
+            set
+            {
+                if (value != amountOfSoldJourneys)
+                {
+                    amountOfSoldJourneys = value;
+                    Notify("amountOfSoldJourneys");
+                }
+            }
+        }
+
+        public decimal TotalSaleAmount
+        {
+            get => totalSaleAmount;
+            set
+            {
+                if (value != totalSaleAmount)
+                {
+                    totalSaleAmount = value;
+                    Notify("totalSaleAmount");
+                }
+            }
+        }
+
+        public int AmountOfStandardJourneys
+        {
+            get => amountOfStandardTravels;
+            set
+            {
+                if (value != amountOfStandardTravels)
+                {
+                    amountOfStandardTravels = value;
+                    Notify("amountOfStandardTravels");
+                }
+            }
+        }
         #endregion
     }
 }
