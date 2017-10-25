@@ -52,9 +52,10 @@ namespace RygOgRejs.Gui
                 textBoxIndbetalt.Text = Bizz.AmountInclVat.ToString();
 
                 //for now change later
-                textBoxTotalPris.Text = Appbizz.TempPriceDetails.GetTotalWithTax((Transaction)datagrid.SelectedItem, Appbizz.Transactions, Appbizz.Destinations).ToString();
-                textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.GetTotalWithoutTax(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations).ToString();
-                textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.GetTaxAmount(Convert.ToDecimal(textBoxPrisUdenMoms.Text)).ToString();
+                Appbizz.TempPriceDetails.CalculateAmounts(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations); //data moved to updated tempPriceDetails
+                textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString();
+                textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
+                textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
             }
         }
 
@@ -154,9 +155,10 @@ namespace RygOgRejs.Gui
                         textBoxAdults.BorderThickness = new Thickness(2);
                         AdultsOK = true;
                         Appbizz.TempTransaction.Adults = Adults;
-                        textBoxTotalPris.Text = Appbizz.TempPriceDetails.GetTotalWithTax(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations).ToString();
-                        textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.GetTotalWithoutTax(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations).ToString();
-                        textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.GetTaxAmount(Convert.ToDecimal(textBoxPrisUdenMoms.Text)).ToString();
+                        Appbizz.TempPriceDetails.CalculateAmounts(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations); //data moved to updated tempPriceDetails
+                        textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString();
+                        textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
+                        textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
                         if(Convert.ToDecimal(textBoxPrisForMoms.Text) < Convert.ToDecimal(textBoxIndbetalt.Text))
                         {
                             decimal fuu = Convert.ToDecimal(textBoxIndbetalt.Text) - Convert.ToDecimal(textBoxPrisForMoms.Text);
@@ -218,9 +220,10 @@ namespace RygOgRejs.Gui
                         textBoxChildren.BorderThickness = new Thickness(2);
                         ChildrenOK = true;
                         Appbizz.TempTransaction.Children = Children;
-                        textBoxTotalPris.Text = Appbizz.TempPriceDetails.GetTotalWithTax(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations).ToString();
-                        textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.GetTotalWithoutTax(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations).ToString();
-                        textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.GetTaxAmount(Convert.ToDecimal(textBoxPrisUdenMoms.Text)).ToString();
+                        Appbizz.TempPriceDetails.CalculateAmounts(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations); //data moved to updated tempPriceDetails
+                        textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString();
+                        textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
+                        textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
                     }
                     else
                     {
@@ -271,9 +274,10 @@ namespace RygOgRejs.Gui
                         textBoxBagage.BorderThickness = new Thickness(2);
                         LugageOK = true;
                         Appbizz.TempTransaction.LuggageAmount = Luggage;
-                        textBoxTotalPris.Text = Appbizz.TempPriceDetails.GetTotalWithTax(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations).ToString();
-                        textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.GetTotalWithoutTax(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations).ToString();
-                        textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.GetTaxAmount(Convert.ToDecimal(textBoxPrisUdenMoms.Text)).ToString();
+                        Appbizz.TempPriceDetails.CalculateAmounts(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations); //data moved to updated tempPriceDetails
+                        textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString();
+                        textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
+                        textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
                     }
                     else
                     {

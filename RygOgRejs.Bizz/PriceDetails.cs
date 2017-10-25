@@ -131,7 +131,7 @@ namespace RygOgRejs.Bizz.Entities
         /// <summary>
         /// Calculates luggageOverload
         /// </summary>
-        /// <param name="t">Journey</param>
+        /// <param name="t">Transaction</param>
         /// <returns></returns>
         private int GetLuggageOverloadWeight(Transaction t, ObservableCollection<Destination> dcol)
         {
@@ -159,13 +159,12 @@ namespace RygOgRejs.Bizz.Entities
         }
 
         /// <summary>
-        /// Method calculates VAT from net amount
+        /// Method calculates VAT from net amount and places it in vatOfAmount
         /// </summary>
         /// <param name="amount">decimal</param>
-        /// <returns></returns>
-        public decimal GetTaxAmount(decimal amount)
+        public void GetTaxAmount()
         {
-            return amount * taxRate;
+            vatOfAmount = amountExclVat * taxRate;
         }
 
         public decimal GetPaidAmount(decimal amount)
@@ -174,18 +173,17 @@ namespace RygOgRejs.Bizz.Entities
         }
 
         /// <summary>
-        /// Calculates net price
+        /// Calculates net price and places it in amountExclVat
         /// </summary>
         /// <param name="t">Transaction</param>
         /// <param name="tcol">ObservableCollection<Transaction></param>
-        /// <param name="d">ObservableCollection<Destination></param>
-        /// <returns></returns>
-        public decimal GetTotalWithoutTax(Transaction t, ObservableCollection<Transaction> tcol, ObservableCollection<Destination> d)
+        /// <param name="dcol">ObservableCollection<Destination></param>
+        public void GetTotalWithoutTax(Transaction t, ObservableCollection<Transaction> tcol, ObservableCollection<Destination> dcol)
         {
             decimal accumulatedPrice = 0;
-            decimal adultsAccumulatedPrice = Multiplydecimal(t.Adults, GetAdultPrice(t, d));
+            decimal adultsAccumulatedPrice = Multiplydecimal(t.Adults, GetAdultPrice(t, dcol));
             accumulatedPrice = accumulatedPrice + adultsAccumulatedPrice;
-            decimal childAccumulatedPrice = Multiplydecimal(t.Children, GetChildrenPrice(t, d));
+            decimal childAccumulatedPrice = Multiplydecimal(t.Children, GetChildrenPrice(t, dcol));
             accumulatedPrice = accumulatedPrice + childAccumulatedPrice;
             decimal firstClassAccumulatedPrice = 0;
             if (t.IsFirstClass)
@@ -195,25 +193,31 @@ namespace RygOgRejs.Bizz.Entities
             else
                 firstClassAccumulatedPrice = 0;
             accumulatedPrice = accumulatedPrice + firstClassAccumulatedPrice;
-            decimal luggageAccumulatedPrice = Multiplydecimal(GetLuggageOverloadWeight(t,d), GetLuggagePrice(t, d));
+            decimal luggageAccumulatedPrice = Multiplydecimal(GetLuggageOverloadWeight(t, dcol), GetLuggagePrice(t, dcol));
             accumulatedPrice = accumulatedPrice + luggageAccumulatedPrice;
             //Not Implemented Yet
-            return accumulatedPrice;
+            amountExclVat = accumulatedPrice;
         }
 
         /// <summary>
-        /// Calculates gross price
+        /// Calculates gross price and places it in amountInclVat
         /// </summary>
-        /// <param name="t">Transaction</param>
-        /// <param name="tcol">ObservableCollection<Transaction></param>
-        /// <param name="dcol">ObservableCollection<Destination></param>
-        /// <returns></returns>
-        public decimal GetTotalWithTax(Transaction t, ObservableCollection<Transaction> tcol, ObservableCollection<Destination> dcol)
+        public void GetTotalWithTax()
         {
-            decimal total = 0;
-            total = total + GetTotalWithoutTax(t, tcol, dcol);
-            total = total + GetTaxAmount(GetTotalWithoutTax(t, tcol, dcol));
-            return total;
+            amountInclVat = amountExclVat + vatOfAmount;
+        }
+
+        /// <summary>
+        /// runs series of methods to place data in amountExclVat, vatOfAmount & amountInclVat for GUI
+        /// </summary>
+        /// <param name="t"></param>
+        /// <param name="tcol"></param>
+        /// <param name="dcol"></param>
+        public void CalculateAmounts(Transaction t, ObservableCollection<Transaction> tcol, ObservableCollection<Destination> dcol)
+        {
+            GetTotalWithoutTax(t, tcol, dcol);
+            GetTaxAmount();
+            GetTotalWithTax();
         }
 
         /// <summary>
