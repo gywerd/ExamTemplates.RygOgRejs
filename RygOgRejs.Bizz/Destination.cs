@@ -14,8 +14,8 @@ namespace RygOgRejs.Bizz.Entities
         private string iata;
         private string icao;
         private string countryCode;
-        private float adultPrice;
-        private float childPrice;
+        private decimal adultPrice;
+        private decimal childPrice;
         #endregion
 
         #region Constructors
@@ -29,9 +29,9 @@ namespace RygOgRejs.Bizz.Entities
         /// </summary>
         /// <param name="destinationId">int</param>
         /// <param name="destinationName">string</param>
-        /// <param name="adultPrice">float</param>
-        /// <param name="childPrice">float</param>
-        public Destination(int destinationId, string destinationName, string iata, string icao, string country, float adultPrice, float childPrice)
+        /// <param name="adultPrice">decimal</param>
+        /// <param name="childPrice">decimal</param>
+        public Destination(int destinationId, string destinationName, string iata, string icao, string country, decimal adultPrice, decimal childPrice)
         {
             this.destinationId = destinationId;
             this.destinationName = destinationName;
@@ -48,23 +48,13 @@ namespace RygOgRejs.Bizz.Entities
         #endregion
 
         #region Properties
-        public int DestinationId { get => destinationId; }
-
-        public string DestinationName { get => destinationName;}
-
+        public int DestinationId { get => destinationId; set => destinationId = value; }
+        public string DestinationName { get => destinationName; set => destinationName = value; }
         public string IATA { get => iata; set => iata = value; }
         public string ICAO { get => icao; set => icao = value; }
         public string CountryCode { get => countryCode; set => countryCode = value; }
-
-        public float AdultPrice
-        {
-            get => adultPrice;
-        }
-
-        public float ChildPrice
-        {
-            get => childPrice;
-        }
+        public decimal AdultPrice { get => adultPrice; set => adultPrice = value; }
+        public decimal ChildPrice { get => childPrice; set => childPrice = value; }
         #endregion
     }
 }

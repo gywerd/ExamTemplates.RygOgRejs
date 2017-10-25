@@ -10,11 +10,14 @@ namespace RygOgRejs.Bizz.Entities
     public class PriceDetails
     {
         #region Fields
-        private float destinationPrice;
-        private float firstClassPrice;
-        private float luggagePrice;
-        private float taxRate = 0.25F;
-        AncillaryCharge AC;
+        private decimal destinationPrice;
+        private decimal firstClassPrice;
+        private decimal luggagePrice;
+        private decimal taxRate = Convert.ToDecimal("0.25");
+        private decimal amountExclVat;
+        private decimal amountInclVat;
+        private decimal vatOfAmount;
+        AncillaryCharge ancillaryCharges;
         #endregion
 
         #region Constructors
@@ -23,20 +26,22 @@ namespace RygOgRejs.Bizz.Entities
         /// </summary>
         public PriceDetails() { }
 
+        /// <summary>
+        /// Constructor adds info on additional prices
+        /// </summary>
+        /// <param name="AC">AncillaryCharge</param>
         public PriceDetails(AncillaryCharge AC)
         {
-            this.AC = AC;
+            this.ancillaryCharges = AC;
         }
+
         /// <summary>
         /// Ordinary constructor
         /// </summary>
-        /// <param name="destinationId">int</param>
-        /// <param name="destinationName">string</param>
-        /// <param name="adultPrice">float</param>
-        /// <param name="childPrice">float</param>
-        /// <param name="firstclassPrice">float</param>
-        /// <param name="luggagePrice">float</param>
-        public PriceDetails(float destPrice, float firstClPrice, float lugPrice, float taxRate = 0.25F)
+        /// <param name="destPrice">decimal</param>
+        /// <param name="firstClPrice">decimal</param>
+        /// <param name="lugPrice">decimal</param>
+        public PriceDetails(decimal destPrice, decimal firstClPrice, decimal lugPrice)
         {
             this.destinationPrice = destPrice;
             this.firstClassPrice = firstClPrice;
@@ -46,38 +51,46 @@ namespace RygOgRejs.Bizz.Entities
 
         #region Methods
         /// <summary>
-        /// Adds two integers together
+        /// Adds two integers together from inside an object
         /// </summary>
-        /// <param name="j">Journey</param>
+        /// <param name="t">Transaction</param>
         /// <returns></returns>
-        private int AddPersons(Transaction j)
+        private int AddPersons(Transaction t)
         {
-            return j.Adults + j.Children;
+            return t.Adults + t.Children;
         }
 
         /// <summary>
-        /// Differnets two integers
+        /// Difference between two integers
         /// </summary>
         /// <param name="n1">int</param>
         /// <param name="n2">int</param>
         /// <returns></returns>
         private int DifferntiateInts(int n1, int n2)
         {
-            return n1 - n2;
+            if (n1 >= n2)
+            {
+                return n1 - n2;
+
+            }
+            else
+            {
+                return n2 - n1;
+            }
         }
 
         /// <summary>
         /// Retrieves adult price to destination
         /// </summary>
-        /// <param name="j">Journey</param>
-        /// <param name="p">ObservableCollection<PriceDetails></param>
+        /// <param name="t">Transaction</param>
+        /// <param name="dcol">ObservableCollection<Destination></param>
         /// <returns></returns>
-        private float GetAdultPrice(Transaction j, ObservableCollection<Destination> p)
+        private decimal GetAdultPrice(Transaction t, ObservableCollection<Destination> dcol)
         {
-            float adultPrice = 0;
-            foreach (Destination price in p)
+            decimal adultPrice = 0;
+            foreach (Destination price in dcol)
             {
-                if (j.DestinationName == price.DestinationName)
+                if (t.DestinationName == price.DestinationName)
                 {
                     adultPrice = price.AdultPrice;
                 }
@@ -88,15 +101,15 @@ namespace RygOgRejs.Bizz.Entities
         /// <summary>
         /// Retrieves ChildrenPrice to destination
         /// </summary>
-        /// <param name="j">Journey</param>
-        /// <param name="p">ObservableCollection<PriceDetails></param>
+        /// <param name="t">Journey</param>
+        /// <param name="dcol">ObservableCollection<PriceDetails></param>
         /// <returns></returns>
-        private float GetChildrenPrice(Transaction j, ObservableCollection<Destination> p)
+        private decimal GetChildrenPrice(Transaction t, ObservableCollection<Destination> dcol)
         {
-            float childrenPrice = 0;
-            foreach (Destination price in p)
+            decimal childrenPrice = 0;
+            foreach (Destination price in dcol)
             {
-                if (j.DestinationName == price.DestinationName)
+                if (t.DestinationName == price.DestinationName)
                 {
                     childrenPrice = price.ChildPrice;
                 }
@@ -107,10 +120,8 @@ namespace RygOgRejs.Bizz.Entities
         /// <summary>
         /// Retrieves firstClassPrice to destination
         /// </summary>
-        /// <param name="j">Journey</param>
-        /// <param name="p">ObservableCollection<PriceDetails></param>
         /// <returns></returns>
-        private float GetFirstClassPrice()
+        private decimal GetFirstClassPrice()
         {
             return firstClassPrice;
         }
@@ -118,12 +129,12 @@ namespace RygOgRejs.Bizz.Entities
         /// <summary>
         /// Calculates luggageOverload
         /// </summary>
-        /// <param name="j">Journey</param>
+        /// <param name="t">Journey</param>
         /// <returns></returns>
-        private int GetLuggageOverloadWeight(Transaction j, ObservableCollection<Destination> p)
+        private int GetLuggageOverloadWeight(Transaction t, ObservableCollection<Destination> dcol)
         {
-            int lugWeight = Convert.ToInt32(j.LuggageAmount);
-            int persons = AddPersons(j);
+            int lugWeight = Convert.ToInt32(t.LuggageAmount);
+            int persons = AddPersons(t);
             int lugMaxWeight = persons * 25;
             int lugOverload = 0;
             if (lugWeight > lugMaxWeight)
@@ -135,11 +146,12 @@ namespace RygOgRejs.Bizz.Entities
 
         /// <summary>
         /// Retrieves luggagePrice per extra kg to destination
+        /// What is the params used for?!? Why are they Needed?!?
         /// </summary>
-        /// <param name="j">Journey</param>
-        /// <param name="p">ObservableCollection<PriceDetails></param>
+        /// <param name="t">Journey</param>
+        /// <param name="dcol">ObservableCollection<PriceDetails></param>
         /// <returns></returns>
-        private float GetLuggagePrice(Transaction j, ObservableCollection<Destination> p)
+        private decimal GetLuggagePrice(Transaction t, ObservableCollection<Destination> dcol)
         {
            return luggagePrice;
         }
@@ -147,9 +159,9 @@ namespace RygOgRejs.Bizz.Entities
         /// <summary>
         /// Method calculates VAT from net amount
         /// </summary>
-        /// <param name="amount">float</param>
+        /// <param name="amount">decimal</param>
         /// <returns></returns>
-        public float GetTaxAmount(float amount)
+        public decimal GetTaxAmount(decimal amount)
         {
             return amount * taxRate;
         }
@@ -158,29 +170,30 @@ namespace RygOgRejs.Bizz.Entities
         {
             return (amount * (decimal)taxRate) + amount;
         }
+
         /// <summary>
         /// Calculates net price
         /// </summary>
-        /// <param name="tempt">Journey</param>
-        /// <param name="tcol">Transactions</param>
-        /// <param name="d">ObservableCollection<PriceDetails></param>
+        /// <param name="t">Transaction</param>
+        /// <param name="tcol">ObservableCollection<Transaction></param>
+        /// <param name="d">ObservableCollection<Destination></param>
         /// <returns></returns>
-        public float GetTotalWithoutTax(Transaction tempt, ObservableCollection<Transaction> tcol, ObservableCollection<Destination> d)
+        public decimal GetTotalWithoutTax(Transaction t, ObservableCollection<Transaction> tcol, ObservableCollection<Destination> d)
         {
-            float accumulatedPrice = 0;
-            float adultsAccumulatedPrice = MultiplyFloat(tempt.Adults, GetAdultPrice(tempt, d));
+            decimal accumulatedPrice = 0;
+            decimal adultsAccumulatedPrice = Multiplydecimal(t.Adults, GetAdultPrice(t, d));
             accumulatedPrice = accumulatedPrice + adultsAccumulatedPrice;
-            float childAccumulatedPrice = MultiplyFloat(tempt.Children, GetChildrenPrice(tempt, d));
+            decimal childAccumulatedPrice = Multiplydecimal(t.Children, GetChildrenPrice(t, d));
             accumulatedPrice = accumulatedPrice + childAccumulatedPrice;
-            float firstClassAccumulatedPrice = 0;
-            if (tempt.IsFirstClass)
+            decimal firstClassAccumulatedPrice = 0;
+            if (t.IsFirstClass)
             {
-                firstClassAccumulatedPrice = MultiplyFloat(AddPersons(tempt), GetFirstClassPrice());
+                firstClassAccumulatedPrice = Multiplydecimal(AddPersons(t), GetFirstClassPrice());
             }
             else
                 firstClassAccumulatedPrice = 0;
             accumulatedPrice = accumulatedPrice + firstClassAccumulatedPrice;
-            float luggageAccumulatedPrice = MultiplyFloat(GetLuggageOverloadWeight(tempt,d), GetLuggagePrice(tempt, d));
+            decimal luggageAccumulatedPrice = Multiplydecimal(GetLuggageOverloadWeight(t,d), GetLuggagePrice(t, d));
             accumulatedPrice = accumulatedPrice + luggageAccumulatedPrice;
             //Not Implemented Yet
             return accumulatedPrice;
@@ -189,35 +202,38 @@ namespace RygOgRejs.Bizz.Entities
         /// <summary>
         /// Calculates gross price
         /// </summary>
-        /// <param name="j"></param>
-        /// <param name="t"></param>
-        /// <param name="p"></param>
+        /// <param name="t">Transaction</param>
+        /// <param name="tcol">ObservableCollection<Transaction></param>
+        /// <param name="dcol">ObservableCollection<Destination></param>
         /// <returns></returns>
-        public float GetTotalWithTax(Transaction j, ObservableCollection<Transaction> t, ObservableCollection<Destination> p)
+        public decimal GetTotalWithTax(Transaction t, ObservableCollection<Transaction> tcol, ObservableCollection<Destination> dcol)
         {
-            float total = 0;
-            total = total + GetTotalWithoutTax(j, t, p);
-            total = total + GetTaxAmount(GetTotalWithoutTax(j, t, p));
+            decimal total = 0;
+            total = total + GetTotalWithoutTax(t, tcol, dcol);
+            total = total + GetTaxAmount(GetTotalWithoutTax(t, tcol, dcol));
             return total;
         }
 
         /// <summary>
-        /// Multiplies two floats
+        /// Multiplies two decimals
         /// </summary>
-        /// <param name="f1">float</param>
-        /// <param name="f2">float</param>
+        /// <param name="f1">decimal</param>
+        /// <param name="f2">decimal</param>
         /// <returns></returns>
-        private float MultiplyFloat(float f1, float f2)
+        private decimal Multiplydecimal(decimal f1, decimal f2)
         {
             return f1 * f2;
         }
         #endregion
 
         #region Properties
-        public float DestinationPrice { get => destinationPrice; set => destinationPrice = value; }
-        public float FirstClassPrice { get => firstClassPrice; set => firstClassPrice = value; }
-        public float Luggageprice { get => luggagePrice; set => luggagePrice = value; }
-        public float TaxRate { get => taxRate; set => taxRate = value; }
+        public decimal DestinationPrice { get => destinationPrice; set => destinationPrice = value; }
+        public decimal FirstClassPrice { get => firstClassPrice; set => firstClassPrice = value; }
+        public decimal Luggageprice { get => luggagePrice; set => luggagePrice = value; }
+        public decimal TaxRate { get => taxRate; set => taxRate = value; }
+        public decimal AmountExclVat { get => amountExclVat; set => amountExclVat = value; }
+        public decimal AmountInclVat { get => amountInclVat; set => amountInclVat = value; }
+        public decimal VatOfAmount { get => vatOfAmount; set => vatOfAmount = value; }
         #endregion
     }
 }
