@@ -49,6 +49,7 @@ namespace RygOgRejs.Gui
                 firstClassChecked.IsChecked = Bizz.IsFirstClass;
                 textBoxFirstName.Text = Bizz.FirstName;
                 textBoxLastName.Text = Bizz.LastName;
+                textBoxIndbetalt.Text = Bizz.AmountInclVat.ToString("N2");
             }
         }
 

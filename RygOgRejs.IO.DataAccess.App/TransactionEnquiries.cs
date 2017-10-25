@@ -23,7 +23,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <param name="t">Transactions</param>
         public void AddTransaction(Transaction t)
         {
-            string Ammount = Convert.ToString(t.AmountExclVat).Replace(',','.');
+            string Ammount = Convert.ToString(t.AmountInclVat).Replace(',','.');
             string query = $"INSERT INTO Transactions (TransactionDate, DestinationName, IsFirstClass, Adults,Children,LuggageAmount,FirstName,LastName,AmountExclVat) VALUES ('{t.TransActionDate.ToString("yyyy-MM-dd")}', '{t.DestinationName}', '{t.IsFirstClass}', {t.Adults}, {t.Children},{t.LuggageAmount}, '{t.FirstName}', '{t.LastName}', {Ammount})";
             executor.ExecuteNonQuery(query);
         }
@@ -59,7 +59,7 @@ namespace RygOgRejs.IO.DataAccess.App
                 string firstName = reader["FirstName"].ToString();
                 string lastName = reader["LastName"].ToString();
                 string destinationName = reader["DestinationName"].ToString();
-                float ammountExclVat = Convert.ToSingle(reader["AmountExclVat"]);
+                decimal ammountExclVat = Convert.ToDecimal(reader["AmountExclVat"]);
                 Transaction t = new Transaction(tid,depatureTime,destinationName,isFirstClass,adults,children,luggaeAmount,firstName,lastName,ammountExclVat); //use this when the class has been made for it
                 transCol.Add(t);
             }
@@ -88,7 +88,7 @@ namespace RygOgRejs.IO.DataAccess.App
                 string firstName = reader["FirstName"].ToString();
                 string lastName = reader["LastName"].ToString();
                 string destinationName = reader["DestinationName"].ToString();
-                float ammountExclVat = Convert.ToSingle(reader["AmountExclVat"]);
+                decimal ammountExclVat = Convert.ToDecimal(reader["AmountExclVat"]);
                 t = new Transaction(tid, depatureTime, destinationName, isFirstClass, adults, children, luggaeAmount, firstName, lastName, ammountExclVat); //use this when the class has been made for it
             }
             return t;
@@ -100,7 +100,7 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <param name="t">Transactions</param>
         public void UpdateTransaction(Transaction t)
         {
-            string query = $"UPDATE Transactions SET TransactionDate = '{t.TransActionDate.ToString("yyyy-MM-dd")}', DestinationName = '{t.DestinationName}', IsFirstClass = '{t.IsFirstClass}', Adults = {t.Adults}, Children = {t.Children}, LuggageAmount = {t.LuggageAmount}, FirstName = '{t.FirstName}', LastName = '{t.LastName}', AmountExclVat = {t.AmountExclVat} WHERE Id = {t.TransactionId}";
+            string query = $"UPDATE Transactions SET TransactionDate = '{t.TransActionDate.ToString("yyyy-MM-dd")}', DestinationName = '{t.DestinationName}', IsFirstClass = '{t.IsFirstClass}', Adults = {t.Adults}, Children = {t.Children}, LuggageAmount = {t.LuggageAmount}, FirstName = '{t.FirstName}', LastName = '{t.LastName}', AmountExclVat = {t.AmountInclVat} WHERE Id = {t.TransactionId}";
             executor.ExecuteNonQuery(query);
         }
         #endregion

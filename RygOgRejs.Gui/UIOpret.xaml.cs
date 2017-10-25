@@ -29,9 +29,9 @@ namespace RygOgRejs.Gui
                 {
                     CAB.TempTransaction.TransActionDate = DateTime.Now;
                     //CAB.TempTransaction.AmountExclVat = Convert.ToSingle(textBoxIndbetalt.Text);
-                    CAB.TempTransaction.AmountExclVat = Convert.ToSingle(textBoxIndbetalt.Text) * Convert.ToSingle("0.8"); //substracted VAT
+                    CAB.TempTransaction.AmountInclVat = Convert.ToDecimal(textBoxIndbetalt.Text);//substracted VAT
                     //CAB.TempTransaction.PayerId = CAB.TempPayer.PayerId; obsolete code
-                        CAB.CreateJourney();
+                    CAB.CreateJourney();
                         MessageBox.Show("Rejsen Blevet Oprettet");
                         UC.Content = null;                    
                 }
@@ -348,16 +348,19 @@ namespace RygOgRejs.Gui
                 bool gyldig = false;
                 foreach (char c in textBoxIndbetalt.Text)
                 {
+                    
                     if (textBoxIndbetalt.Text.Contains("+") || textBoxIndbetalt.Text.Contains("-") || textBoxIndbetalt.Text.Contains("*") || textBoxIndbetalt.Text.Contains("/"))
                     {
-                        gyldig = false;
-                        textBoxIndbetalt.BorderBrush = Brushes.Red;
-                        textBoxIndbetalt.BorderThickness = new Thickness(2);
-                        MessageBox.Show("Stop, Being an ass Emil >_>");
-                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Remove(textBoxIndbetalt.Text.Length - 1);
-                        textBoxIndbetalt.CaretIndex = textBoxIndbetalt.Text.Length;
+                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Replace('+', ' ');
+                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Replace('-', ' ');
+                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Replace('*', ' ');
+                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Replace('/', ' ');
+                        if(textBoxIndbetalt.Text.Trim().Length <= 0)
+                        {
+                            textBoxIndbetalt.Text = "0";
+                        }
                     }
-                    if (!char.IsDigit(c) && c != '+')
+                    if (!char.IsDigit(c) && c != '+' && c != ',' && c != '.' )
                     {
                         gyldig = false;
                         textBoxIndbetalt.BorderBrush = Brushes.Red;
@@ -377,8 +380,7 @@ namespace RygOgRejs.Gui
                     }
                     else
                     {
-                        decimal test;
-                        if(decimal.TryParse(textBoxIndbetalt.Text, out test))
+                        if(decimal.TryParse(textBoxIndbetalt.Text, out decimal test))
                         {
                             if (test < decimal.MaxValue)
                             {

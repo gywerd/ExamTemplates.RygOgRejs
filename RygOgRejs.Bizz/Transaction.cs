@@ -20,7 +20,7 @@ namespace RygOgRejs.Bizz.Entities
         private string firstName;
         private string lastName;
         private int pricePaid;
-        private float amountExclVat;
+        private decimal amountInclVat;
         #endregion
 
         #region Constructors
@@ -41,7 +41,7 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="firstName">string</param>
         /// <param name="lastName">string</param>
         /// <param name="amountExclVat">float</param>
-        public Transaction(DateTime transActionDate, string destinationName, bool isFirstClass, int adults, int children, float luggageAmount, string firstName, string lastName, float amountExclVat)
+        public Transaction(DateTime transActionDate, string destinationName, bool isFirstClass, int adults, int children, float luggageAmount, string firstName, string lastName, decimal amountInclVat)
         {
             TransActionDate = transActionDate;
             DestinationName = destinationName;
@@ -51,7 +51,7 @@ namespace RygOgRejs.Bizz.Entities
             LuggageAmount = luggageAmount;
             FirstName = firstName;
             LastName = lastName;
-            AmountExclVat = amountExclVat;
+            AmountInclVat = amountInclVat;
             pricePaid = 0;
         }
 
@@ -68,7 +68,7 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="firstName">string</param>
         /// <param name="lastName">string</param>
         /// <param name="amountExclVat"></param>
-        public Transaction(int id, DateTime transActionDate, string destinationName, bool isFirstClass, int adults, int children, float luggageAmount, string firstName, string lastName, float amountExclVat) : this(transActionDate, destinationName, isFirstClass, adults, children, luggageAmount, firstName, lastName, amountExclVat)
+        public Transaction(int id, DateTime transActionDate, string destinationName, bool isFirstClass, int adults, int children, float luggageAmount, string firstName, string lastName, decimal amountInclVat) : this(transActionDate, destinationName, isFirstClass, adults, children, luggageAmount, firstName, lastName, amountInclVat)
         {
             TransactionId = id;
         }
@@ -160,10 +160,10 @@ namespace RygOgRejs.Bizz.Entities
             set => pricePaid = value;
         }
 
-        public float AmountExclVat
+        public decimal AmountInclVat
         {
-            get => amountExclVat;
-            set => amountExclVat = value;
+            get => amountInclVat;
+            set => amountInclVat = value;
         }
         #endregion
     }
