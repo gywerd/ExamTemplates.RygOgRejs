@@ -80,7 +80,7 @@ namespace RygOgRejs.Bizz.App
             //tempJourney = CJI.GetJourney(master.Id); //obsolete code
             //TempTransaction.JourneyId = tempJourney.JourneyId; //obsolete code
             CTI.AddTransaction(tempTransaction);  //Writes Transaction data to DB
-            RefreshObservableCollections();
+            ClearObservableCollections();
             GetUpdate();//Updates content of ObservableCollections from DB
             UpdateDailyTotals(); //updates content of dailyTotals
             ClearTemporaryFields(); //Clears content of tempPayer, tempJourney & tempTransaction
@@ -97,7 +97,8 @@ namespace RygOgRejs.Bizz.App
             //CPaI.DeletePayer(tempPayer.MasterID); //obsolete code
             CTI.DeleteTransaction(tempTransaction.TransactionId);
             //UpdateDailyTotals(); //updates content of dailyTotals - wrong place - not necessary twice
-            RefreshObservableCollections(); //Updates content of ObservableCollections from DB
+            ClearObservableCollections(); //Updates content of ObservableCollections from DB
+            GetUpdate();//Updates content of ObservableCollections from DB
             UpdateDailyTotals(); //updates content of dailyTotals
             ClearTemporaryFields(); //Clears content of tempPayer, tempJourney & tempTransaction
             //throw new NotImplementedException();
@@ -113,7 +114,8 @@ namespace RygOgRejs.Bizz.App
             //MasterId is loaded into tempPayer, tempJourney & tempTransaction, when UIUpdate is loaded - MasterId removed from app
             //All data is written simutaneusly to tempTransaction, and refund price incl. VAT is calculated while manipulating GUI
             CTI.UpdateTransaction(tempTransaction); //Writes content of tempJourney to Database
-            RefreshObservableCollections(); //Updates content of ObservableCollections from DB
+            ClearObservableCollections(); //Updates content of ObservableCollections from DB
+            GetUpdate();//Updates content of ObservableCollections from DB
             UpdateDailyTotals(); //updates content of dailyTotals
             ClearTemporaryFields(); //Clears content of tempPayer, tempJourney & tempTransaction
             //throw new NotImplementedException();
@@ -221,20 +223,12 @@ namespace RygOgRejs.Bizz.App
         //}
 
         /// <summary>
-        /// Code that clears & reloads content of ObservAbleCollections - used after saving to the database
+        /// Method that clears content of ObservAbleCollections - used after saving to the database
         /// </summary>
-        public void RefreshObservableCollections()
+        public void ClearObservableCollections()
         {
-            //journeys.Clear(); //obsolete code
-            //payers.Clear(); //obsolete code
-            //prices.Clear(); //obsolete code
             destinations.Clear();
             transactions.Clear();
-            //GetJourneys(); //obsolete code
-            //GetPayers(); //obsolete code
-            //GetPrices(); //obsolete code
-            //GetDestinations();
-            //GetTransactions();
         }
         public void GetUpdate()
         {
