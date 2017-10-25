@@ -16,7 +16,7 @@ namespace RygOgRejs.Bizz.Entities
         private int amountOfPassengers;
         private int amountOfAdults;
         private int amountOfChildren;
-        private double totalSaleAmount;
+        private decimal totalSaleAmount;
         #endregion
 
         #region Constructors
@@ -33,7 +33,7 @@ namespace RygOgRejs.Bizz.Entities
         /// <param name="adults">int</param>
         /// <param name="children">int</param>
         /// <param name="saleAmount">float</param>
-        public Total(int soldtravels, int passengers, int adults, int children, float saleAmount)
+        public Total(int soldtravels, int passengers, int adults, int children, decimal saleAmount)
         {
             amountOfSoldJourneys = soldtravels;
             amountOfPassengers = passengers;
@@ -99,14 +99,14 @@ namespace RygOgRejs.Bizz.Entities
             return children;
         }
 
-        private float GetTotalSaleAmount(ObservableCollection<Transaction> t)
+        private decimal GetTotalSaleAmount(ObservableCollection<Transaction> t)
         {
-            float totalSale = 0;
+            decimal totalSale = 0;
             foreach (Transaction trans in t)
             {
                 if (trans.TransActionDate.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd"))
                 {
-                    totalSale += trans.AmountExclVat;
+                    totalSale += trans.AmountInclVat;
                 }
             }
             return totalSale;
@@ -119,7 +119,7 @@ namespace RygOgRejs.Bizz.Entities
         public int AmountOfFirstClassJourneys { get => amountOfFirstClassJourneys; set => amountOfFirstClassJourneys = value; }
         public int AmountOfPassengers { get => amountOfPassengers; set => amountOfPassengers = value; }
         public int AmountOfSoldJourneys { get => amountOfSoldJourneys; set => amountOfSoldJourneys = value; }
-        public double TotalSaleAmount { get => totalSaleAmount; set => totalSaleAmount = value; }
+        public decimal TotalSaleAmount { get => totalSaleAmount; set => totalSaleAmount = value; }
         public int AmountOfStandardJourneys { get => amountOfStandardTravels; set => amountOfStandardTravels = value; }
         #endregion
     }
