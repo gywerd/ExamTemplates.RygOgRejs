@@ -54,8 +54,8 @@ namespace RygOgRejs.IO.DataAccess.App
                 string iata = reader["IATA"].ToString();
                 string icao = reader["ICAO"].ToString();
                 string country = reader["CountryCode"].ToString();
-                float adult = Convert.ToSingle(reader["AdultPrice"]);
-                float child = Convert.ToSingle(reader["ChildrenPrice"]); //nice spelling error xD old Name: ChildrenPricedd - spelling error in DB corrected
+                decimal adult = Convert.ToDecimal(reader["AdultPrice"]);
+                decimal child = Convert.ToDecimal(reader["ChildrenPrice"]); //nice spelling error xD old Name: ChildrenPricedd - spelling error in DB corrected
                 Destination d = new Destination(id, destination, iata, icao, country, adult, child);
                 priceList.Add(d);
             }
@@ -103,8 +103,8 @@ namespace RygOgRejs.IO.DataAccess.App
         /// <param name="adults">int</param>
         /// <param name="child">int</param>
         /// <param name="first">bool</param>
-        /// <param name="lug">float</param>
-        public void UpdatePrices(int id, string destination, float adults, float child, float first, float lug) //find better way?
+        /// <param name="lug">decimal</param>
+        public void UpdatePrices(int id, string destination, decimal adults, decimal child, decimal first, decimal lug) //find better way?
         {
            string query = $"UPDATE Price SET Destination = '{destination}', AdultPrice = {adults}, ChildrenPrice = {child}, FirstClassPrice = {first}, LuggagePrice = {lug}  WHERE DestinationId = {id}";
            executor.ExecuteNonQuery(query);

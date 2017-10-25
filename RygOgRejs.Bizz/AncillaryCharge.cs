@@ -9,11 +9,11 @@ namespace RygOgRejs.Bizz.Entities
     public class AncillaryCharge
     {
         private int id;
-        private float firstClassPrice;
-        private float luggagePriceOverlodKg;
+        private decimal firstClassPrice;
+        private decimal luggagePriceOverlodKg;
         public AncillaryCharge() { }
 
-        public AncillaryCharge(int id, float firstClassPrice, float luggagePriceOverlodKg)
+        public AncillaryCharge(int id, decimal firstClassPrice, decimal luggagePriceOverlodKg)
         {
             Id = id;
             this.firstClassPrice = firstClassPrice;
@@ -27,13 +27,13 @@ namespace RygOgRejs.Bizz.Entities
         }
 
         //Readonly fordi vi ikke behøver og set værdien
-        public float FirstClassPrice
+        public decimal FirstClassPrice
         {
             get => firstClassPrice;
         }
 
         //Readonly fordi vi ikke behøver og set værdien
-        public float LuggagePriceOverlodKg
+        public decimal LuggagePriceOverlodKg
         {
             get => luggagePriceOverlodKg;
         }

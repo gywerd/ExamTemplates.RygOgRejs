@@ -55,9 +55,10 @@ namespace RygOgRejs.Gui
             if (firstClassChecked.IsChecked == true)
             {
                 CAB.TempTransaction.IsFirstClass = true;
-                textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
-                textBoxPrisForMoms.Text = CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text)).ToString();
-                textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                CAB.TempPriceDetails.CalculateAmount(CAB.TempTransaction, CAB.Transactions, CAB.Destinations); //moved data to updated tempPricedetails
+                textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.AmountExclVat.ToString();
+                textBoxPrisForMoms.Text = CAB.TempPriceDetails.VatOfAmount.ToString();
+                textBoxTotalPris.Text = CAB.TempPriceDetails.AmountInclVat.ToString();
                 textBoxPrisUdenMoms.Text += " kr";
                 textBoxPrisForMoms.Text += " kr";
                 textBoxTotalPris.Text += " kr";
@@ -65,9 +66,10 @@ namespace RygOgRejs.Gui
             else
             {
                 CAB.TempTransaction.IsFirstClass = false;
-                textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
-                textBoxPrisForMoms.Text = CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text)).ToString();
-                textBoxTotalPris.Text = CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations).ToString();
+                CAB.TempPriceDetails.CalculateAmount(CAB.TempTransaction, CAB.Transactions, CAB.Destinations); //moved data to updated tempPricedetails
+                textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.AmountExclVat.ToString();
+                textBoxPrisForMoms.Text = CAB.TempPriceDetails.VatOfAmount.ToString();
+                textBoxTotalPris.Text = CAB.TempPriceDetails.AmountInclVat.ToString();
                 textBoxPrisUdenMoms.Text += " kr";
                 textBoxPrisForMoms.Text += " kr";
                 textBoxTotalPris.Text += " kr";
@@ -207,9 +209,10 @@ namespace RygOgRejs.Gui
                     textBoxAdults.BorderBrush = Brushes.Green;
                     textBoxAdults.BorderThickness = new Thickness(2);
                     CAB.TempTransaction.Adults = Convert.ToInt32(textBoxAdults.Text);
-                    textBoxPrisUdenMoms.Text = (Convert.ToDecimal(CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations)).ToString());
-                    textBoxPrisForMoms.Text = (Convert.ToDecimal(CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text))).ToString());
-                    textBoxTotalPris.Text = (Convert.ToDecimal(CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations)).ToString());
+                    CAB.TempPriceDetails.CalculateAmount(CAB.TempTransaction, CAB.Transactions, CAB.Destinations); //Data moved to updated tempPriceDetails
+                    textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.AmountExclVat.ToString();
+                    textBoxPrisForMoms.Text = CAB.TempPriceDetails.VatOfAmount.ToString();
+                    textBoxTotalPris.Text = CAB.TempPriceDetails.AmountInclVat.ToString();
                     textBoxPrisUdenMoms.Text += " kr";
                     textBoxPrisForMoms.Text += " kr";
                     textBoxTotalPris.Text += " kr";
@@ -261,9 +264,10 @@ namespace RygOgRejs.Gui
                     textBoxChildren.BorderBrush = Brushes.Green;
                     textBoxChildren.BorderThickness = new Thickness(2);
                     CAB.TempTransaction.Children = Convert.ToInt32(textBoxChildren.Text);
-                    textBoxPrisUdenMoms.Text = (Convert.ToDecimal(CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations)).ToString());
-                    textBoxPrisForMoms.Text = (Convert.ToDecimal(CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text))).ToString());
-                    textBoxTotalPris.Text = (Convert.ToDecimal(CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations)).ToString());
+                    CAB.TempPriceDetails.CalculateAmount(CAB.TempTransaction, CAB.Transactions, CAB.Destinations); //data moved to updated tempPriceDetails
+                    textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.AmountExclVat.ToString();
+                    textBoxPrisForMoms.Text = CAB.TempPriceDetails.VatOfAmount.ToString();
+                    textBoxTotalPris.Text = CAB.TempPriceDetails.AmountInclVat.ToString();
                     textBoxPrisUdenMoms.Text += " kr";
                     textBoxPrisForMoms.Text += " kr";
                     textBoxTotalPris.Text += " kr";
@@ -315,9 +319,10 @@ namespace RygOgRejs.Gui
                     textBoxBagage.BorderBrush = Brushes.Green;
                     textBoxBagage.BorderThickness = new Thickness(2);
                     CAB.TempTransaction.LuggageAmount = Convert.ToSingle(textBoxBagage.Text);
-                    textBoxPrisUdenMoms.Text = (Convert.ToDecimal(CAB.TempPriceDetails.GetTotalWithoutTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations)).ToString());
-                    textBoxPrisForMoms.Text = (Convert.ToDecimal(CAB.TempPriceDetails.GetTaxAmount(Convert.ToSingle(textBoxPrisUdenMoms.Text))).ToString());
-                    textBoxTotalPris.Text = (Convert.ToDecimal(CAB.TempPriceDetails.GetTotalWithTax(CAB.TempTransaction, CAB.Transactions, CAB.Destinations)).ToString());
+                    CAB.TempPriceDetails.CalculateAmount(CAB.TempTransaction, CAB.Transactions, CAB.Destinations); //Data moved to updated tempPriceDetails
+                    textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.AmountExclVat.ToString();
+                    textBoxPrisForMoms.Text = CAB.TempPriceDetails.VatOfAmount.ToString();
+                    textBoxTotalPris.Text = CAB.TempPriceDetails.AmountInclVat.ToString();
                     textBoxPrisUdenMoms.Text += " kr";
                     textBoxPrisForMoms.Text += " kr";
                     textBoxTotalPris.Text += " kr";
