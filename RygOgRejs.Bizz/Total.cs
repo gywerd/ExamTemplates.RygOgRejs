@@ -13,7 +13,7 @@ namespace RygOgRejs.Bizz.Entities
         #region Fields
         private int amountOfSoldJourneys;
         private int amountOfFirstClassJourneys;
-        private int amountOfStandardTravels;
+        private int amountOfStandardJourneys;
         private int amountOfPassengers;
         private int amountOfAdults;
         private int amountOfChildren;
@@ -66,30 +66,44 @@ namespace RygOgRejs.Bizz.Entities
 
         public void UpdateTotals(ObservableCollection<Transaction> t)
         {
-            AmountOfSoldJourneys = t.Count;
-            AmountOfFirstClassJourneys = GetAmountOfAdultsFirstClassTravels(t);
+            AmountOfSoldJourneys = GetAmountOfSoldjourneys(t);
+            AmountOfFirstClassJourneys = GetAmountOfFirstClassJourneys(t);
             AmountOfStandardJourneys = amountOfSoldJourneys - amountOfFirstClassJourneys;
             AmountOfAdults = GetAmountOfAdults(t);
-            AmountofChildren = GetAmountOfChildren(t);
+            AmountOfChildren = GetAmountOfChildren(t);
             AmountOfPassengers = amountOfChildren + amountOfAdults;
-            TotalSaleAmount = GetTotalSaleAmount(t);
+            totalSaleAmount = GetTotalSaleAmount(t);
         }
 
-        private int GetAmountOfAdultsFirstClassTravels(ObservableCollection<Transaction> t)
+        private int GetAmountOfSoldjourneys(ObservableCollection<Transaction> t)
         {
-            int firstClassTravels = 0;
+            int soldJourneys = 0;
+            foreach (Transaction trans in t)
+            {
+                if (trans.TransActionDate.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd"))
+                {
+                    soldJourneys = soldJourneys + 1;
+                }
+            }
+
+            return soldJourneys;
+        }
+
+        private int GetAmountOfFirstClassJourneys(ObservableCollection<Transaction> t)
+        {
+            int firstClassJourneys = 0;
             foreach (Transaction trans in t)
             {
                 if (trans.TransActionDate.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd"))
                 {
                     if (trans.IsFirstClass)
                     {
-                        firstClassTravels = firstClassTravels + 1;
+                        firstClassJourneys = firstClassJourneys + 1;
                     }
                 }
             }
 
-            return firstClassTravels;
+            return firstClassJourneys;
         }
 
         private int GetAmountOfAdults(ObservableCollection<Transaction> t)
@@ -147,7 +161,7 @@ namespace RygOgRejs.Bizz.Entities
             }
         }
 
-        public int AmountofChildren
+        public int AmountOfChildren
         {
             get => amountOfChildren;
             set
@@ -155,7 +169,7 @@ namespace RygOgRejs.Bizz.Entities
                 if (value != amountOfChildren)
                 {
                     amountOfChildren = value;
-                    Notify("AmountofChildren");
+                    Notify("AmountOfChildren");
                 }
             }
         }
@@ -213,12 +227,12 @@ namespace RygOgRejs.Bizz.Entities
 
         public int AmountOfStandardJourneys
         {
-            get => amountOfStandardTravels;
+            get => amountOfStandardJourneys;
             set
             {
-                if (value != amountOfStandardTravels)
+                if (value != amountOfStandardJourneys)
                 {
-                    amountOfStandardTravels = value;
+                    amountOfStandardJourneys = value;
                     Notify("AmountOfStandardJourneys");
                 }
             }
