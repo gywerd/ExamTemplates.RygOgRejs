@@ -57,11 +57,10 @@ namespace RygOgRejs.Gui
         {
             textBoxIndbetalt.Text = "";
             textBoxRetur.Text = "Der er ikke Betalt Nok";
-            //yes Sir. jack
             if (firstClassChecked.IsChecked == true)
             {
                 CAB.TempTransaction.IsFirstClass = true;
-                CAB.TempPriceDetails.CalculateAmounts(CAB.TempTransaction, CAB.Transactions, CAB.Destinations); //data moved to updated tempPriceDetails
+                CAB.TempPriceDetails.CalculateAmounts(CAB.TempTransaction, CAB.Transactions, CAB.Destinations); 
                 textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.AmountExclVat.ToString();
                 textBoxPrisForMoms.Text = CAB.TempPriceDetails.VatOfAmount.ToString();
                 textBoxTotalPris.Text = CAB.TempPriceDetails.AmountInclVat.ToString();
@@ -72,7 +71,7 @@ namespace RygOgRejs.Gui
             else
             {
                 CAB.TempTransaction.IsFirstClass = false;
-                CAB.TempPriceDetails.CalculateAmounts(CAB.TempTransaction, CAB.Transactions, CAB.Destinations); //data moved to updated tempPriceDetails
+                CAB.TempPriceDetails.CalculateAmounts(CAB.TempTransaction, CAB.Transactions, CAB.Destinations);
                 textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.AmountExclVat.ToString();
                 textBoxPrisForMoms.Text = CAB.TempPriceDetails.VatOfAmount.ToString();
                 textBoxTotalPris.Text = CAB.TempPriceDetails.AmountInclVat.ToString();

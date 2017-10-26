@@ -24,6 +24,9 @@ namespace RygOgRejs.Gui
     {
         Transaction selecteditem;
         AppBizz Appbizz;
+        decimal Indbetalt;
+        decimal Pris;
+        decimal KundeTilgode;
         bool LugageOK = false;
         bool AdultsOK = false;
         bool ChildrenOK = false;
@@ -59,6 +62,7 @@ namespace RygOgRejs.Gui
                 textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
                 textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
             }
+            Indbetalt = Convert.ToDecimal(textBoxIndbetalt.Text);
         }
 
         private void btnClickRet(object sender, RoutedEventArgs e)
@@ -119,6 +123,7 @@ namespace RygOgRejs.Gui
         {
             Appbizz.DeleteJourney();
             Appbizz.GetUpdate();
+            MessageBox.Show("Rejsen blev sletted");
         }
 
         private void IsFirstClassChanged(object sender, RoutedEventArgs e)
@@ -224,7 +229,7 @@ namespace RygOgRejs.Gui
                         ChildrenOK = true;
                         Appbizz.TempTransaction.Children = Children;
                         Appbizz.TempPriceDetails.CalculateAmounts(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations); //data moved to updated tempPriceDetails
-                        textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString();
+                        textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString("N2");
                         textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
                         textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
                     }
@@ -278,7 +283,7 @@ namespace RygOgRejs.Gui
                         LugageOK = true;
                         Appbizz.TempTransaction.LuggageAmount = Luggage;
                         Appbizz.TempPriceDetails.CalculateAmounts(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations); //data moved to updated tempPriceDetails
-                        textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString();
+                        textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString("N2");
                         textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
                         textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
                     }
@@ -300,7 +305,8 @@ namespace RygOgRejs.Gui
 
         private void textBoxTotalPris_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            Pris = Convert.ToDecimal(textBoxTotalPris.Text);
+            textBoxRetur.Text = (Pris - Indbetalt).ToString();
         }
     }
 }
