@@ -25,8 +25,7 @@ namespace RygOgRejs.Gui
         Transaction selecteditem;
         AppBizz Appbizz;
         decimal Indbetalt;
-        decimal Pris;
-        decimal KundeTilgode;
+        decimal TidligerBetalt;
         bool LugageOK = false;
         bool AdultsOK = false;
         bool ChildrenOK = false;
@@ -52,17 +51,13 @@ namespace RygOgRejs.Gui
                 firstClassChecked.IsChecked = Bizz.IsFirstClass;
                 textBoxFirstName.Text = Bizz.FirstName;
                 textBoxLastName.Text = Bizz.LastName;
-                textBoxIndbetalt.Text = Bizz.AmountInclVat.ToString();
-
-   
-
-                //for now change later
                 Appbizz.TempPriceDetails.CalculateAmounts(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations); //data moved to updated tempPriceDetails
                 textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString();
                 textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
                 textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
+                textBoxIndbetalt.Text = Bizz.AmountInclVat.ToString();
             }
-            Indbetalt = Convert.ToDecimal(textBoxIndbetalt.Text);
+            TidligerBetalt = Convert.ToDecimal(textBoxTotalPris.Text) - Convert.ToDecimal(appbizz.TempTransaction.AmountInclVat);
         }
 
         private void btnClickRet(object sender, RoutedEventArgs e)
@@ -89,34 +84,36 @@ namespace RygOgRejs.Gui
                 {
                     Appbizz.TempTransaction.LuggageAmount = Convert.ToInt32(textBoxBagage.Text);
                 }
+                if (isFirstClassOK == true || ChildrenOK == true || AdultsOK == true || LugageOK == true)
+                {
+                    try
+                    {
+                        Appbizz.EditJourney();
+                        MessageBox.Show("Rejsen blev opdateret.");
+                        if (Convert.ToDecimal(textBoxRetur.Text) > 0)
+                        {
+                            MessageBox.Show($"Rejsen blev opdateret.\nKunder skal have {textBoxRetur.Text} tilbage ");
+                        }
+                        if (Convert.ToDecimal(textBoxRetur.Text) < 0)
+                        {
+                            MessageBox.Show($"Rejsen blev opdateret.\nKunden Skal betale {textBoxRetur.Text} mere");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Rejsen blev opdateret.\nDet går lige op");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
 
-            }
-            else
-            {
-            }
-            try
-            {
-                Appbizz.EditJourney();
-                MessageBox.Show("Rejsen blev opdateret.");
-                if (Convert.ToDecimal(textBoxRetur.Text) > 0)
-                {
-                    MessageBox.Show($"Rejsen blev opdateret.\nKunder skal have {textBoxRetur.Text} tilbage ");
-                }
-                if (Convert.ToDecimal(textBoxRetur.Text) < 0)
-                {
-                    MessageBox.Show($"Rejsen blev opdateret.\nKunden Skal betale {textBoxRetur.Text} mere");
+                        MessageBox.Show(ex.Message);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Rejsen blev opdateret.\nDet går lige op");
+                    MessageBox.Show("Der er ingen ændringer!");
                 }
             }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message);
-            }
-            
         }
 
         private void btnClickSlet(object sender, RoutedEventArgs e)
@@ -133,10 +130,24 @@ namespace RygOgRejs.Gui
                 if (firstClassChecked.IsChecked == true)
                 {
                     isFirstClassOK = true;
+                    Appbizz.TempPriceDetails.CalculateAmounts(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations);
+                    textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
+                    textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
+                    textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString();
+                    textBoxPrisUdenMoms.Text += " kr";
+                    textBoxPrisForMoms.Text += " kr";
+                    textBoxTotalPris.Text += " kr";
                 }
                 else
                 {
                     isFirstClassOK = false;
+                    Appbizz.TempPriceDetails.CalculateAmounts(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations);
+                    textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
+                    textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
+                    textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString();
+                    textBoxPrisUdenMoms.Text += " kr";
+                    textBoxPrisForMoms.Text += " kr";
+                    textBoxTotalPris.Text += " kr";
                 }
             }
         }
@@ -156,6 +167,13 @@ namespace RygOgRejs.Gui
                         MessageBox.Show("må ikke indeholde bogstaver eller tegn");
                         textBoxAdults.Text = textBoxAdults.Text.Remove(textBoxAdults.Text.Length - 1);
                         textBoxAdults.CaretIndex = textBoxAdults.Text.Length;
+                    }
+                    if (textBoxAdults.Text.Length > 3)
+                    {
+                        MessageBox.Show("Tallet er for højt, Max 999 Voksne.");
+                        textBoxAdults.Text = textBoxAdults.Text.Remove(textBoxAdults.Text.Length - 1);
+                        textBoxAdults.CaretIndex = textBoxAdults.Text.Length;
+                        gyldig = false;
                     }
                     else
                     {
@@ -178,6 +196,9 @@ namespace RygOgRejs.Gui
                         textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString("N2");
                         textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
                         textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
+                        textBoxPrisUdenMoms.Text += " kr";
+                        textBoxPrisForMoms.Text += " kr";
+                        textBoxTotalPris.Text += " kr";
                     }
                     else
                     {
@@ -211,6 +232,13 @@ namespace RygOgRejs.Gui
                         textBoxChildren.Text = textBoxChildren.Text.Remove(textBoxChildren.Text.Length - 1);
                         textBoxChildren.CaretIndex = textBoxChildren.Text.Length;
                     }
+                    if (textBoxChildren.Text.Length > 3)
+                    {
+                        MessageBox.Show("Tallet er for højt, Max 999 Børn.");
+                        textBoxChildren.Text = textBoxChildren.Text.Remove(textBoxChildren.Text.Length - 1);
+                        textBoxChildren.CaretIndex = textBoxChildren.Text.Length;
+                        gyldig = false;
+                    }
                     else
                     {
                         gyldig = true;
@@ -230,8 +258,11 @@ namespace RygOgRejs.Gui
                         Appbizz.TempTransaction.Children = Children;
                         Appbizz.TempPriceDetails.CalculateAmounts(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations); //data moved to updated tempPriceDetails
                         textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString("N2");
-                        textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
-                        textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
+                        textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString("N2");
+                        textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString("N2");
+                        textBoxPrisUdenMoms.Text += " kr";
+                        textBoxPrisForMoms.Text += " kr";
+                        textBoxTotalPris.Text += " kr";
                     }
                     else
                     {
@@ -265,6 +296,13 @@ namespace RygOgRejs.Gui
                         textBoxBagage.Text = textBoxBagage.Text.Remove(textBoxBagage.Text.Length - 1);
                         textBoxBagage.CaretIndex = textBoxBagage.Text.Length;
                     }
+                    if (textBoxBagage.Text.Length > 4)
+                    {
+                        MessageBox.Show("Vægten er for stor, Flyet kan ikke lætte, Max 9,999 Kg.");
+                        textBoxBagage.Text = textBoxBagage.Text.Remove(textBoxBagage.Text.Length - 1);
+                        textBoxBagage.CaretIndex = textBoxBagage.Text.Length;
+                        gyldig = false;
+                    }
                     else
                     {
                         gyldig = true;
@@ -284,8 +322,11 @@ namespace RygOgRejs.Gui
                         Appbizz.TempTransaction.LuggageAmount = Luggage;
                         Appbizz.TempPriceDetails.CalculateAmounts(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations); //data moved to updated tempPriceDetails
                         textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString("N2");
-                        textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
-                        textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
+                        textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString("N2");
+                        textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString("N2");
+                        textBoxPrisUdenMoms.Text += " kr";
+                        textBoxPrisForMoms.Text += " kr";
+                        textBoxTotalPris.Text += " kr";
                     }
                     else
                     {
@@ -305,8 +346,115 @@ namespace RygOgRejs.Gui
 
         private void textBoxTotalPris_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Pris = Convert.ToDecimal(textBoxTotalPris.Text);
-            textBoxRetur.Text = (Pris - Indbetalt).ToString();
+            
+            textBoxRetur.Text = (Convert.ToDecimal(textBoxTotalPris.Text) - TidligerBetalt).ToString();
+        }
+
+        private void textBoxIndbetalt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            decimal betalt = 0;
+            if (!string.IsNullOrEmpty(textBoxIndbetalt.Text))
+            {
+                bool gyldig = false;
+                foreach (char c in textBoxIndbetalt.Text)
+                {
+
+                    if (textBoxIndbetalt.Text.Contains("+") || textBoxIndbetalt.Text.Contains("-") || textBoxIndbetalt.Text.Contains("*") || textBoxIndbetalt.Text.Contains("/"))
+                    {
+                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Replace('+', ' ');
+                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Replace('-', ' ');
+                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Replace('*', ' ');
+                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Replace('/', ' ');
+                        if (textBoxIndbetalt.Text.Trim().Length <= 0)
+                        {
+                            textBoxIndbetalt.Text = "0";
+                        }
+                    }
+                    if (!char.IsDigit(c) && c != '+' && c != ',' && c != '.')
+                    {
+                        gyldig = false;
+                        textBoxIndbetalt.BorderBrush = Brushes.Red;
+                        textBoxIndbetalt.BorderThickness = new Thickness(2);
+                        MessageBox.Show("må ikke indeholde ugyldige bogstaver eller tegn");
+                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Remove(textBoxIndbetalt.Text.Length - 1);
+                        textBoxIndbetalt.CaretIndex = textBoxIndbetalt.Text.Length;
+                    }
+                    if (textBoxIndbetalt.Text.Length > 10)
+                    {
+                        gyldig = false;
+                        textBoxIndbetalt.BorderBrush = Brushes.Red;
+                        textBoxIndbetalt.BorderThickness = new Thickness(2);
+                        MessageBox.Show("Tallet er for stort, ikke overdrive ,max 10 tal");
+                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Remove(textBoxIndbetalt.Text.Length - 1);
+                        textBoxIndbetalt.CaretIndex = textBoxIndbetalt.Text.Length;
+                    }
+                    else
+                    {
+                        if (decimal.TryParse(textBoxIndbetalt.Text, out decimal test))
+                        {
+                            if (test < decimal.MaxValue)
+                            {
+                                gyldig = true;
+                                textBoxIndbetalt.BorderBrush = Brushes.Green;
+                                textBoxIndbetalt.BorderThickness = new Thickness(1);
+                            }
+                            else
+                            {
+                                gyldig = false;
+                                textBoxIndbetalt.BorderBrush = Brushes.Red;
+                                textBoxIndbetalt.BorderThickness = new Thickness(2);
+                                MessageBox.Show("Værdien er for stor");
+                                textBoxIndbetalt.Text = textBoxIndbetalt.Text.Remove(textBoxIndbetalt.Text.Length - 1);
+                                textBoxIndbetalt.CaretIndex = textBoxIndbetalt.Text.Length;
+                            }
+
+                        }
+                        else
+                        {
+                            gyldig = false;
+                            textBoxIndbetalt.BorderBrush = Brushes.Red;
+                            textBoxIndbetalt.BorderThickness = new Thickness(2);
+                            MessageBox.Show("Værdien skal være et tal");
+                        }
+                    }
+                }
+                if (gyldig == true)
+                {
+                    textBoxIndbetalt.BorderBrush = Brushes.Green;
+                    textBoxIndbetalt.BorderThickness = new Thickness(2);
+                    betalt = Convert.ToDecimal(textBoxIndbetalt.Text);
+                    if (!string.IsNullOrWhiteSpace(textBoxTotalPris.Text))
+                    {
+                        string Totalpris = textBoxTotalPris.Text;
+                        if (Totalpris.Contains(" kr"))
+                        {
+                            Totalpris = Totalpris.Remove((Totalpris.Length - 3));
+                        }
+                        float pricething = Convert.ToSingle(Totalpris);
+                        decimal totalPris = Convert.ToDecimal(pricething);
+                        if (betalt - totalPris < 0)
+                        {
+                            textBoxRetur.Text = "Ikke nok betalt";
+                        }
+                        else
+                        {
+                            string PrisManglende = (betalt - totalPris).ToString();
+                            textBoxRetur.Text = PrisManglende + " kr";
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Udfyld overstående skema først");
+                        textBoxIndbetalt.Text = textBoxIndbetalt.Text.Remove(textBoxIndbetalt.Text.Length - 1);
+                        textBoxIndbetalt.CaretIndex = textBoxIndbetalt.Text.Length;
+                    }
+                }
+            }
+            else
+            {
+                textBoxIndbetalt.BorderBrush = Brushes.Red;
+                textBoxIndbetalt.BorderThickness = new Thickness(2);
+            }
         }
     }
 }
