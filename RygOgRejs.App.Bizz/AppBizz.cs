@@ -19,7 +19,7 @@ namespace RygOgRejs.Bizz.App
             private string destination; //string that holds a destination
             private string journeyOrTransaction; //string that controls how UIInsertUpdate & UIPayment acts
             private Transaction tempTransaction = new Transaction(); //string to temporarily store current transaction information, before writing it to the database
-            private Transaction tempTransactionUpdate = new Transaction(); //string to temporarily store current transaction information, before writing it to the database
+            private Transaction tempTransactionUpdate = new Transaction(); //string to temporarily store current updated transaction information, before writing it to the database
             public PriceDetails tempPriceDetails = new PriceDetails(); //string to temporarily store current pricedetails, to show on GUI
         #endregion
 
