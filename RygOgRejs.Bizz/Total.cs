@@ -72,7 +72,7 @@ namespace RygOgRejs.Bizz.Entities
             AmountOfAdults = GetAmountOfAdults(t);
             AmountOfChildren = GetAmountOfChildren(t);
             AmountOfPassengers = amountOfChildren + amountOfAdults;
-            totalSaleAmount = GetTotalSaleAmount(t);
+            TotalSaleAmount = GetTotalSaleAmount(t);
         }
 
         private int GetAmountOfSoldjourneys(ObservableCollection<Transaction> t)
