@@ -48,7 +48,7 @@ namespace RygOgRejs.Bizz.App
         public void ClearTemporaryFields()
         {
             tempTransaction = new Transaction();
-            tempPriceDetails = new PriceDetails();
+            //tempPriceDetails = new PriceDetails();
         }
 
         public void UpdateTransactions(int SelectedTransactionsID)

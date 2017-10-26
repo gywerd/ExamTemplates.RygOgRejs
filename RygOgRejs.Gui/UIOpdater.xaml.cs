@@ -51,14 +51,26 @@ namespace RygOgRejs.Gui
                 firstClassChecked.IsChecked = Bizz.IsFirstClass;
                 textBoxFirstName.Text = Bizz.FirstName;
                 textBoxLastName.Text = Bizz.LastName;
-                Appbizz.TempPriceDetails.CalculateAmounts(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations); //data moved to updated tempPriceDetails
-                textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString();
-                textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
-                textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
-                textBoxIndbetalt.Text = Bizz.AmountInclVat.ToString();
-                TidligerBetalt = Convert.ToDecimal(textBoxTotalPris.Text) - Convert.ToDecimal(appbizz.TempTransaction.AmountInclVat);
             }
            
+        }
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            labelDestination.Content = Appbizz.TempTransaction.DestinationName;
+            foreach (var ac in Appbizz.AnchillaryCharges)
+            {
+                Appbizz.TempPriceDetails.FirstClassPrice = (decimal)ac.FirstClassPrice;
+                Appbizz.TempPriceDetails.Luggageprice = (decimal)ac.LuggagePriceOverlodKg;
+            }
+            Appbizz.TempPriceDetails.CalculateAmounts(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations); //data moved to updated tempPriceDetails
+            textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString();
+            textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
+            textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
+            textBoxIndbetalt.Text = Appbizz.TempTransaction.AmountInclVat.ToString();
+            TidligerBetalt = Convert.ToDecimal(textBoxTotalPris.Text) - Convert.ToDecimal(Appbizz.TempTransaction.AmountInclVat);
+            textBoxPrisUdenMoms.Text += " kr";
+            textBoxPrisForMoms.Text += " kr";
+            textBoxTotalPris.Text += " kr";
         }
 
         private void btnClickRet(object sender, RoutedEventArgs e)
@@ -120,7 +132,7 @@ namespace RygOgRejs.Gui
         {
             Appbizz.DeleteJourney();
             Appbizz.GetUpdate();
-            MessageBox.Show("Rejsen blev sletted");
+            MessageBox.Show("Rejsen blev sletted.");
         }
 
         private void IsFirstClassChanged(object sender, RoutedEventArgs e)
