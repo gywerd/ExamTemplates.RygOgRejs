@@ -46,7 +46,7 @@ namespace RygOgRejs.IO.DataAccess.App
             string query = "SELECT * FROM Destinations";
             ObservableCollection<Destination> priceList = new ObservableCollection<Destination>();
             DataSet data = executor.Execute(query);
-            DataTableReader reader = data.CreateDataReader(); //best
+            DataTableReader reader = data.CreateDataReader();
             while (reader.Read())
             {
                 int id = Convert.ToInt32(reader["DestinationId"]);
@@ -55,7 +55,7 @@ namespace RygOgRejs.IO.DataAccess.App
                 string icao = reader["ICAO"].ToString();
                 string country = reader["CountryCode"].ToString();
                 decimal adult = Convert.ToDecimal(reader["AdultPrice"]);
-                decimal child = Convert.ToDecimal(reader["ChildrenPrice"]); //nice spelling error xD old Name: ChildrenPricedd - spelling error in DB corrected
+                decimal child = Convert.ToDecimal(reader["ChildrenPrice"]);
                 Destination d = new Destination(id, destination, iata, icao, country, adult, child);
                 priceList.Add(d);
             }

@@ -195,7 +195,6 @@ namespace RygOgRejs.Bizz.Entities
             accumulatedPrice = accumulatedPrice + firstClassAccumulatedPrice;
             decimal luggageAccumulatedPrice = Multiplydecimal(GetLuggageOverloadWeight(t, dcol), GetLuggagePrice(t, dcol));
             accumulatedPrice = accumulatedPrice + luggageAccumulatedPrice;
-            //Not Implemented Yet
             amountExclVat = accumulatedPrice;
         }
 

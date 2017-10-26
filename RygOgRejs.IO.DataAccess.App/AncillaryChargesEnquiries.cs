@@ -17,12 +17,12 @@ namespace RygOgRejs.IO.DataAccess.App
             string query = "SELECT * FROM AncillaryCharges";
             ObservableCollection<AncillaryCharge> priceList = new ObservableCollection<AncillaryCharge>();
             DataSet data = executor.Execute(query);
-            DataTableReader reader = data.CreateDataReader(); //best
+            DataTableReader reader = data.CreateDataReader();
             while (reader.Read())
             {
                 int id = Convert.ToInt32(reader["Id"]);
                 float firstClassPrice = Convert.ToSingle(reader["FirstClassPrice"]);
-                float luggaPriceOverload = Convert.ToSingle(reader["LuggagePricePerOverloadKg"]); //spelling error in DB corrected
+                float luggaPriceOverload = Convert.ToSingle(reader["LuggagePricePerOverloadKg"]);
                 AncillaryCharge ancillaryCharge = new AncillaryCharge(id, firstClassPrice, luggaPriceOverload);
                 priceList.Add(ancillaryCharge);
             }

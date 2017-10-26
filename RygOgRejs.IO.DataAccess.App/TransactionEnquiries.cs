@@ -60,7 +60,7 @@ namespace RygOgRejs.IO.DataAccess.App
                 string lastName = reader["LastName"].ToString();
                 string destinationName = reader["DestinationName"].ToString();
                 decimal ammountExclVat = Convert.ToDecimal(reader["AmountExclVat"]);
-                Transaction t = new Transaction(tid,depatureTime,destinationName,isFirstClass,adults,children,luggaeAmount,firstName,lastName,ammountExclVat); //use this when the class has been made for it
+                Transaction t = new Transaction(tid,depatureTime,destinationName,isFirstClass,adults,children,luggaeAmount,firstName,lastName,ammountExclVat);
                 transCol.Add(t);
             }
             return transCol;
@@ -89,7 +89,7 @@ namespace RygOgRejs.IO.DataAccess.App
                 string lastName = reader["LastName"].ToString();
                 string destinationName = reader["DestinationName"].ToString();
                 decimal ammountExclVat = Convert.ToDecimal(reader["AmountExclVat"]);
-                t = new Transaction(tid, depatureTime, destinationName, isFirstClass, adults, children, luggaeAmount, firstName, lastName, ammountExclVat); //use this when the class has been made for it
+                t = new Transaction(tid, depatureTime, destinationName, isFirstClass, adults, children, luggaeAmount, firstName, lastName, ammountExclVat);
             }
             return t;
         }
