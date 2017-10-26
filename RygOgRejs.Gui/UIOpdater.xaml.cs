@@ -77,14 +77,6 @@ namespace RygOgRejs.Gui
         {
             if (Appbizz.TempTransaction != null)
             {
-                if (isFirstClassOK == true)
-                {
-                    Appbizz.TempTransaction.IsFirstClass = true;
-                }
-                if (isFirstClassOK == false)
-                {
-                    Appbizz.TempTransaction.IsFirstClass = false;
-                }
                 if (ChildrenOK == true)
                 {
                     Appbizz.TempTransaction.Children = Convert.ToInt32(textBoxChildren.Text);
@@ -142,6 +134,7 @@ namespace RygOgRejs.Gui
                 if (firstClassChecked.IsChecked == true)
                 {
                     isFirstClassOK = true;
+                    Appbizz.TempTransaction.IsFirstClass = true;
                     Appbizz.TempPriceDetails.CalculateAmounts(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations);
                     textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
                     textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
@@ -153,6 +146,7 @@ namespace RygOgRejs.Gui
                 else
                 {
                     isFirstClassOK = false;
+                    Appbizz.TempTransaction.IsFirstClass = false;
                     Appbizz.TempPriceDetails.CalculateAmounts(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations);
                     textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
                     textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
