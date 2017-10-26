@@ -83,6 +83,7 @@ namespace RygOgRejs.Gui
                 {
                     Appbizz.TempTransaction.LuggageAmount = Convert.ToInt32(textBoxBagage.Text);
                 }
+
             }
             else
             {
@@ -92,6 +93,18 @@ namespace RygOgRejs.Gui
             {
                 Appbizz.EditJourney();
                 MessageBox.Show("Rejsen blev opdateret.");
+                if (Convert.ToDecimal(textBoxRetur.Text) > 0)
+                {
+                    MessageBox.Show($"Rejsen blev opdateret.\nKunder skal have {textBoxRetur.Text} tilbage ");
+                }
+                if (Convert.ToDecimal(textBoxRetur.Text) < 0)
+                {
+                    MessageBox.Show($"Rejsen blev opdateret.\nKunden Skal betale {textBoxRetur.Text} mere");
+                }
+                else
+                {
+                    MessageBox.Show("Rejsen blev opdateret.\nDet går lige op");
+                }
             }
             catch (Exception ex)
             {

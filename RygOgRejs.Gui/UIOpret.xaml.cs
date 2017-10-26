@@ -33,8 +33,8 @@ namespace RygOgRejs.Gui
                     CAB.TempPriceDetails.AmountInclVat = CAB.TempTransaction.AmountInclVat;
                     //CAB.TempTransaction.PayerId = CAB.TempPayer.PayerId; obsolete code
                     CAB.CreateJourney();
-                        MessageBox.Show("Rejsen Blevet Oprettet");
-                        UC.Content = null;                    
+                    MessageBox.Show("Rejsen Blevet Oprettet");
+                    UC.Content = null;                    
                 }
                 else
                 {
