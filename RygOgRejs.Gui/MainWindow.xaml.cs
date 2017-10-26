@@ -41,6 +41,7 @@ namespace RygOgRejs.Gui
         public MainWindow()
         {
             InitializeComponent();
+            CRB.GetUpdate();
             CRB.GetDestinationList(); //Reads the destinations from the database into the list newDestination - Daniel 
             //var DJ = DataJourney.GetAll();
             iOpret = new UIOpret(CRB, userControlRight);

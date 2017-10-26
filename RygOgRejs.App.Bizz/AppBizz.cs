@@ -41,7 +41,6 @@ namespace RygOgRejs.Bizz.App
             List<DestinationList> destinationList = new List<DestinationList>(); //List containing available destinations to be viewed in DataViewJourneys
             #endregion
         #endregion
-
         #region Methods
         /// <summary>
         /// Code that clears temporary journey, payer & transaction fields after completed sale
@@ -49,7 +48,7 @@ namespace RygOgRejs.Bizz.App
         public void ClearTemporaryFields()
         {
             tempTransaction = new Transaction();
-            tempPriceDetails = new PriceDetails();
+            //tempPriceDetails = new PriceDetails();
         }
 
         public void UpdateTransactions(int SelectedTransactionsID)

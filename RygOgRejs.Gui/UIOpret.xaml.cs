@@ -29,7 +29,7 @@ namespace RygOgRejs.Gui
                 {
                     CAB.TempTransaction.TransActionDate = DateTime.Now;
                     //CAB.TempTransaction.AmountExclVat = Convert.ToSingle(textBoxIndbetalt.Text);
-                    CAB.TempTransaction.AmountInclVat = Convert.ToDecimal(textBoxIndbetalt.Text);//substracted VAT
+                    CAB.TempTransaction.AmountInclVat = Convert.ToDecimal(textBoxTotalPris.Text);//substracted VAT
                     CAB.TempPriceDetails.AmountInclVat = CAB.TempTransaction.AmountInclVat;
                     //CAB.TempTransaction.PayerId = CAB.TempPayer.PayerId; obsolete code
                     CAB.CreateJourney();
@@ -205,7 +205,7 @@ namespace RygOgRejs.Gui
                     else
                     {
                         gyldig = true;
-                        textBoxAdults.BorderBrush = Brushes.Transparent;
+                        textBoxAdults.BorderBrush = Brushes.Gray;
                         textBoxAdults.BorderThickness = new Thickness(1);                       
                     }
 
@@ -216,12 +216,17 @@ namespace RygOgRejs.Gui
                     textBoxAdults.BorderThickness = new Thickness(2);
                     CAB.TempTransaction.Adults = Convert.ToInt32(textBoxAdults.Text);
                     CAB.TempPriceDetails.CalculateAmounts(CAB.TempTransaction, CAB.Transactions, CAB.Destinations); //data moved to updated tempPriceDetails
-                    textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.AmountExclVat.ToString();
-                    textBoxPrisForMoms.Text = CAB.TempPriceDetails.VatOfAmount.ToString();
-                    textBoxTotalPris.Text = CAB.TempPriceDetails.AmountInclVat.ToString();
+                    textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.AmountExclVat.ToString("N2");
+                    textBoxPrisForMoms.Text = CAB.TempPriceDetails.VatOfAmount.ToString("N2");
+                    textBoxTotalPris.Text = CAB.TempPriceDetails.AmountInclVat.ToString("N2");
                     textBoxPrisUdenMoms.Text += " kr";
                     textBoxPrisForMoms.Text += " kr";
                     textBoxTotalPris.Text += " kr";
+                }
+                else
+                {
+                    textBoxAdults.BorderBrush = Brushes.Gray;
+                    textBoxAdults.BorderThickness = new Thickness(1);
                 }
             }
             else
@@ -271,9 +276,9 @@ namespace RygOgRejs.Gui
                     textBoxChildren.BorderThickness = new Thickness(2);
                     CAB.TempTransaction.Children = Convert.ToInt32(textBoxChildren.Text);
                     CAB.TempPriceDetails.CalculateAmounts(CAB.TempTransaction, CAB.Transactions, CAB.Destinations); //data moved to updated tempPriceDetails
-                    textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.AmountExclVat.ToString();
-                    textBoxPrisForMoms.Text = CAB.TempPriceDetails.VatOfAmount.ToString();
-                    textBoxTotalPris.Text = CAB.TempPriceDetails.AmountInclVat.ToString();
+                    textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.AmountExclVat.ToString("N2");
+                    textBoxPrisForMoms.Text = CAB.TempPriceDetails.VatOfAmount.ToString("N2");
+                    textBoxTotalPris.Text = CAB.TempPriceDetails.AmountInclVat.ToString("N2");
                     textBoxPrisUdenMoms.Text += " kr";
                     textBoxPrisForMoms.Text += " kr";
                     textBoxTotalPris.Text += " kr";
@@ -306,7 +311,7 @@ namespace RygOgRejs.Gui
                     }
                     if (textBoxBagage.Text.Length > 4)
                     {
-                        MessageBox.Show("Vægten er for stor, Flyet kan ikke lætte, Max 9,999 Ton.");
+                        MessageBox.Show("Vægten er for stor, Flyet kan ikke lætte, Max 9,999 Kg.");
                         textBoxBagage.Text = textBoxBagage.Text.Remove(textBoxBagage.Text.Length - 1);
                         textBoxBagage.CaretIndex = textBoxBagage.Text.Length;
                         gyldig = false;
@@ -326,9 +331,9 @@ namespace RygOgRejs.Gui
                     textBoxBagage.BorderThickness = new Thickness(2);
                     CAB.TempTransaction.LuggageAmount = Convert.ToSingle(textBoxBagage.Text);
                     CAB.TempPriceDetails.CalculateAmounts(CAB.TempTransaction, CAB.Transactions, CAB.Destinations); //data moved to updated tempPriceDetails
-                    textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.AmountExclVat.ToString();
-                    textBoxPrisForMoms.Text = CAB.TempPriceDetails.VatOfAmount.ToString();
-                    textBoxTotalPris.Text = CAB.TempPriceDetails.AmountInclVat.ToString();
+                    textBoxPrisUdenMoms.Text = CAB.TempPriceDetails.AmountExclVat.ToString("N2");
+                    textBoxPrisForMoms.Text = CAB.TempPriceDetails.VatOfAmount.ToString("N2");
+                    textBoxTotalPris.Text = CAB.TempPriceDetails.AmountInclVat.ToString("N2");
                     textBoxPrisUdenMoms.Text += " kr";
                     textBoxPrisForMoms.Text += " kr";
                     textBoxTotalPris.Text += " kr";
@@ -396,7 +401,6 @@ namespace RygOgRejs.Gui
                             if (test < decimal.MaxValue)
                             {
                                 gyldig = true;
-                                //CAB.TempTransaction.PricePaid = Convert.ToInt32(textBoxIndbetalt.Text);
                                 textBoxIndbetalt.BorderBrush = Brushes.Green;
                                 textBoxIndbetalt.BorderThickness = new Thickness(1);
                             }

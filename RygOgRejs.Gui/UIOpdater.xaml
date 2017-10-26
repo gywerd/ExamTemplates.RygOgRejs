@@ -8,7 +8,7 @@
              d:DesignHeight="600" 
              d:DesignWidth="350" 
              Background="White">
-    <Grid>
+    <Grid Loaded="Grid_Loaded">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="5*" />
@@ -323,7 +323,7 @@
             <TextBox x:Name="textBoxIndbetalt"
                      Grid.Column="1"
                      Grid.Row="3"
-                     Margin="10,7,20,8"
+                     Margin="10,7,20,8" TextChanged="textBoxIndbetalt_TextChanged"
                       />
             <TextBox x:Name="textBoxRetur"
                      Grid.Column="1"
