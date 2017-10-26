@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RygOgRejs.Bizz.Entities
 {
-    public class Total
+    public class Total : INotifyPropertyChanged
     {
         #region Fields
         private int amountOfSoldJourneys;
@@ -220,7 +220,7 @@ namespace RygOgRejs.Bizz.Entities
                 if (value != totalSaleAmount)
                 {
                     totalSaleAmount = value;
-                    Notify("totalSaleAmount");
+                    Notify("TotalSaleAmount");
                 }
             }
         }

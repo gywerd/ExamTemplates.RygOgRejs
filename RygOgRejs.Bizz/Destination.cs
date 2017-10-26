@@ -43,10 +43,6 @@ namespace RygOgRejs.Bizz.Entities
         }
         #endregion
 
-        #region Methods
-
-        #endregion
-
         #region Properties
         public int DestinationId { get => destinationId; set => destinationId = value; }
         public string DestinationName { get => destinationName; set => destinationName = value; }

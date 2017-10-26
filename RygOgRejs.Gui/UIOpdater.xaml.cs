@@ -51,6 +51,8 @@ namespace RygOgRejs.Gui
                 textBoxLastName.Text = Bizz.LastName;
                 textBoxIndbetalt.Text = Bizz.AmountInclVat.ToString();
 
+   
+
                 //for now change later
                 Appbizz.TempPriceDetails.CalculateAmounts(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations); //data moved to updated tempPriceDetails
                 textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString();
@@ -83,15 +85,27 @@ namespace RygOgRejs.Gui
                 {
                     Appbizz.TempTransaction.LuggageAmount = Convert.ToInt32(textBoxBagage.Text);
                 }
+
             }
             else
             {
-                MessageBox.Show("GetGud");
             }
             try
             {
                 Appbizz.EditJourney();
                 MessageBox.Show("Rejsen blev opdateret.");
+                if (Convert.ToDecimal(textBoxRetur.Text) > 0)
+                {
+                    MessageBox.Show($"Rejsen blev opdateret.\nKunder skal have {textBoxRetur.Text} tilbage ");
+                }
+                if (Convert.ToDecimal(textBoxRetur.Text) < 0)
+                {
+                    MessageBox.Show($"Rejsen blev opdateret.\nKunden Skal betale {textBoxRetur.Text} mere");
+                }
+                else
+                {
+                    MessageBox.Show("Rejsen blev opdateret.\nDet går lige op");
+                }
             }
             catch (Exception ex)
             {
@@ -136,7 +150,7 @@ namespace RygOgRejs.Gui
                         textBoxAdults.BorderThickness = new Thickness(2);
                         MessageBox.Show("må ikke indeholde bogstaver eller tegn");
                         textBoxAdults.Text = textBoxAdults.Text.Remove(textBoxAdults.Text.Length - 1);
-                        textBoxAdults.CaretIndex = textBoxAdults.Text.Length; //amazing
+                        textBoxAdults.CaretIndex = textBoxAdults.Text.Length;
                     }
                     else
                     {
@@ -156,20 +170,9 @@ namespace RygOgRejs.Gui
                         AdultsOK = true;
                         Appbizz.TempTransaction.Adults = Adults;
                         Appbizz.TempPriceDetails.CalculateAmounts(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations); //data moved to updated tempPriceDetails
-                        textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString();
+                        textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString("N2");
                         textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
                         textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
-                        if(Convert.ToDecimal(textBoxPrisForMoms.Text) < Convert.ToDecimal(textBoxIndbetalt.Text))
-                        {
-                            decimal fuu = Convert.ToDecimal(textBoxIndbetalt.Text) - Convert.ToDecimal(textBoxPrisForMoms.Text);
-                            textBoxRetur.Text = fuu.ToString();
-                        }
-                        else
-                        {
-                            decimal fuu = Convert.ToDecimal(textBoxIndbetalt.Text) - Convert.ToDecimal(textBoxPrisForMoms.Text);
-                            textBoxRetur.Text = fuu.ToString();
-
-                        }
                     }
                     else
                     {
@@ -201,7 +204,7 @@ namespace RygOgRejs.Gui
                         textBoxChildren.BorderThickness = new Thickness(2);
                         MessageBox.Show("må ikke indeholde bogstaver eller tegn");
                         textBoxChildren.Text = textBoxChildren.Text.Remove(textBoxChildren.Text.Length - 1);
-                        textBoxChildren.CaretIndex = textBoxChildren.Text.Length; //amazing
+                        textBoxChildren.CaretIndex = textBoxChildren.Text.Length;
                     }
                     else
                     {
@@ -255,7 +258,7 @@ namespace RygOgRejs.Gui
                         textBoxBagage.BorderThickness = new Thickness(2);
                         MessageBox.Show("må ikke indeholde bogstaver eller tegn");
                         textBoxBagage.Text = textBoxBagage.Text.Remove(textBoxBagage.Text.Length - 1);
-                        textBoxBagage.CaretIndex = textBoxBagage.Text.Length; //amazing
+                        textBoxBagage.CaretIndex = textBoxBagage.Text.Length;
                     }
                     else
                     {

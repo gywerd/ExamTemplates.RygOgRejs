@@ -33,8 +33,8 @@ namespace RygOgRejs.Gui
                     CAB.TempPriceDetails.AmountInclVat = CAB.TempTransaction.AmountInclVat;
                     //CAB.TempTransaction.PayerId = CAB.TempPayer.PayerId; obsolete code
                     CAB.CreateJourney();
-                        MessageBox.Show("Rejsen Blevet Oprettet");
-                        UC.Content = null;                    
+                    MessageBox.Show("Rejsen Blevet Oprettet");
+                    UC.Content = null;                    
                 }
                 else
                 {
@@ -83,7 +83,8 @@ namespace RygOgRejs.Gui
 
                 
         }
-        //thx to jack for his validation #LAZY
+
+
         private void textBoxLastName_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(textBoxLastName.Text))
@@ -130,7 +131,7 @@ namespace RygOgRejs.Gui
             }
         }
 
-        //thx to jack for his validation #LAZY
+
         private void textBoxFirstName_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (!string.IsNullOrEmpty(textBoxFirstName.Text))
@@ -145,7 +146,7 @@ namespace RygOgRejs.Gui
                         textBoxFirstName.BorderThickness = new Thickness(2);
                         MessageBox.Show("Fornavn må ikke indeholde ugyldige tegn eller tal.");
                         textBoxFirstName.Text = textBoxFirstName.Text.Remove(textBoxFirstName.Text.Length - 1);
-                        textBoxFirstName.CaretIndex = textBoxFirstName.Text.Length; //amazing
+                        textBoxFirstName.CaretIndex = textBoxFirstName.Text.Length;
                     }
                     if (textBoxFirstName.Text.Length > 20)
                     {
@@ -193,7 +194,7 @@ namespace RygOgRejs.Gui
                         textBoxAdults.BorderThickness = new Thickness(2);
                         MessageBox.Show("må ikke indeholde bogstaver eller tegn.");
                         textBoxAdults.Text = textBoxAdults.Text.Remove(textBoxAdults.Text.Length - 1);
-                        textBoxAdults.CaretIndex = textBoxAdults.Text.Length; //amazing
+                        textBoxAdults.CaretIndex = textBoxAdults.Text.Length;
                     }
                     if (textBoxAdults.Text.Length > 3)
                     {
@@ -247,7 +248,7 @@ namespace RygOgRejs.Gui
                         textBoxChildren.BorderThickness = new Thickness(2);
                         MessageBox.Show("må ikke indeholde ugyldige bogstaver eller tegn");
                         textBoxChildren.Text = textBoxChildren.Text.Remove(textBoxChildren.Text.Length - 1);
-                        textBoxChildren.CaretIndex = textBoxChildren.Text.Length; //amazing
+                        textBoxChildren.CaretIndex = textBoxChildren.Text.Length;
                     }
                     if (textBoxChildren.Text.Length > 3)
                     {
@@ -302,7 +303,7 @@ namespace RygOgRejs.Gui
                         textBoxBagage.BorderThickness = new Thickness(2);
                         MessageBox.Show("må ikke indeholde ugyldige bogstaver eller tegn");
                         textBoxBagage.Text = textBoxBagage.Text.Remove(textBoxBagage.Text.Length - 1);
-                        textBoxBagage.CaretIndex = textBoxBagage.Text.Length; //amazing
+                        textBoxBagage.CaretIndex = textBoxBagage.Text.Length;
                     }
                     if (textBoxBagage.Text.Length > 4)
                     {
@@ -378,7 +379,7 @@ namespace RygOgRejs.Gui
                         textBoxIndbetalt.BorderThickness = new Thickness(2);
                         MessageBox.Show("må ikke indeholde ugyldige bogstaver eller tegn");
                         textBoxIndbetalt.Text = textBoxIndbetalt.Text.Remove(textBoxIndbetalt.Text.Length - 1);
-                        textBoxIndbetalt.CaretIndex = textBoxIndbetalt.Text.Length; //amazing
+                        textBoxIndbetalt.CaretIndex = textBoxIndbetalt.Text.Length;
                     }
                     if (textBoxIndbetalt.Text.Length > 10)
                     {
