@@ -56,8 +56,9 @@ namespace RygOgRejs.Gui
                 textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
                 textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
                 textBoxIndbetalt.Text = Bizz.AmountInclVat.ToString();
+                TidligerBetalt = Convert.ToDecimal(textBoxTotalPris.Text) - Convert.ToDecimal(appbizz.TempTransaction.AmountInclVat);
             }
-            TidligerBetalt = Convert.ToDecimal(textBoxTotalPris.Text) - Convert.ToDecimal(appbizz.TempTransaction.AmountInclVat);
+           
         }
 
         private void btnClickRet(object sender, RoutedEventArgs e)
@@ -89,7 +90,6 @@ namespace RygOgRejs.Gui
                     try
                     {
                         Appbizz.EditJourney();
-                        MessageBox.Show("Rejsen blev opdateret.");
                         if (Convert.ToDecimal(textBoxRetur.Text) > 0)
                         {
                             MessageBox.Show($"Rejsen blev opdateret.\nKunder skal have {textBoxRetur.Text} tilbage ");
@@ -346,8 +346,11 @@ namespace RygOgRejs.Gui
 
         private void textBoxTotalPris_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
-            textBoxRetur.Text = (Convert.ToDecimal(textBoxTotalPris.Text) - TidligerBetalt).ToString();
+            if (textBoxTotalPris.Text.Contains(" kr"))
+            {
+                textBoxTotalPris.Text = textBoxTotalPris.Text.Remove((textBoxTotalPris.Text.Length - 3));
+            }
+            textBoxRetur.Text = (Convert.ToDecimal(textBoxTotalPris.Text) - TidligerBetalt).ToString() + "  kr";
         }
 
         private void textBoxIndbetalt_TextChanged(object sender, TextChangedEventArgs e)
