@@ -50,7 +50,7 @@ namespace RygOgRejs.Gui
             //}
             userControlCentre.Content = ucJourneys = new DataViewJourneys(Distanition, CRB, userControlRight, iOpret);
             //ucTransaction = new DataViewTransactions(CRB, userControlRight);
-            //macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces() where nic.OperationalStatus == OperationalStatus.Up select nic.GetPhysicalAddress().ToString()).FirstOrDefault();
+       
 
             //maybe change this 
            

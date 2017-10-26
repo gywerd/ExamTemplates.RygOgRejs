@@ -36,7 +36,7 @@ namespace RygOgRejs.IO.DataAccess.General
             connection.Open();
             SqlCommand command = new SqlCommand(sqlQuery, connection);
             command.ExecuteNonQuery();
-            connection.Close(); //not sure if needed but im doing it anyway
+            connection.Close();
         }
 
         //something will be added useless for now
@@ -59,7 +59,6 @@ namespace RygOgRejs.IO.DataAccess.General
 
         }
 
-        //static for life Keepo
         private static string GetConnectionString()
         {
             return @"Data Source=10.205.44.39,49172;Initial Catalog=RygOgRejs;Persist Security Info=True;User ID=Aspit;Password=Server2012";

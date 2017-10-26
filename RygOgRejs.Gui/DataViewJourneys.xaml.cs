@@ -40,7 +40,6 @@ namespace RygOgRejs.Gui
             dataGridJourneys.ItemsSource = locations.Select(Destination => new {Destination });
             
         }
-
         private void TextBoxFilterJourneys_TextChanged(object sender, TextChangedEventArgs e)
         {
 
@@ -49,7 +48,7 @@ namespace RygOgRejs.Gui
         private void dataGridJourneys_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
-            if (dataGridJourneys.SelectedItem != null) //this is weird
+            if (dataGridJourneys.SelectedItem != null)
             {
                 CAB.TempTransaction.IsFirstClass = false;
                 CAB.TempTransaction.Adults = 0;

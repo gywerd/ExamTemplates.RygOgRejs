@@ -49,7 +49,9 @@ namespace RygOgRejs.Gui
                 firstClassChecked.IsChecked = Bizz.IsFirstClass;
                 textBoxFirstName.Text = Bizz.FirstName;
                 textBoxLastName.Text = Bizz.LastName;
-                textBoxIndbetalt.Text = Bizz.AmountInclVat.ToString("N2");
+                textBoxIndbetalt.Text = Bizz.AmountInclVat.ToString();
+
+   
 
                 //for now change later
                 Appbizz.TempPriceDetails.CalculateAmounts(Appbizz.TempTransaction, Appbizz.Transactions, Appbizz.Destinations); //data moved to updated tempPriceDetails
@@ -87,7 +89,6 @@ namespace RygOgRejs.Gui
             }
             else
             {
-                MessageBox.Show("GetGud");
             }
             try
             {
@@ -149,7 +150,7 @@ namespace RygOgRejs.Gui
                         textBoxAdults.BorderThickness = new Thickness(2);
                         MessageBox.Show("må ikke indeholde bogstaver eller tegn");
                         textBoxAdults.Text = textBoxAdults.Text.Remove(textBoxAdults.Text.Length - 1);
-                        textBoxAdults.CaretIndex = textBoxAdults.Text.Length; //amazing
+                        textBoxAdults.CaretIndex = textBoxAdults.Text.Length;
                     }
                     else
                     {
@@ -172,18 +173,6 @@ namespace RygOgRejs.Gui
                         textBoxTotalPris.Text = Appbizz.TempPriceDetails.AmountInclVat.ToString("N2");
                         textBoxPrisUdenMoms.Text = Appbizz.TempPriceDetails.AmountExclVat.ToString();
                         textBoxPrisForMoms.Text = Appbizz.TempPriceDetails.VatOfAmount.ToString();
-                        if(Convert.ToDecimal(textBoxTotalPris.Text) < Convert.ToDecimal(textBoxIndbetalt.Text))
-                        {
-                            decimal fuu = Convert.ToDecimal(textBoxIndbetalt.Text) - Convert.ToDecimal(textBoxTotalPris.Text);
-                            textBoxRetur.Text = fuu.ToString();
-                        }
-                        else
-                        {
-
-                            decimal fuu = Convert.ToDecimal(textBoxTotalPris.Text) - Convert.ToDecimal(textBoxIndbetalt.Text);
-                            textBoxRetur.Text = fuu.ToString();
-
-                        }
                     }
                     else
                     {
@@ -215,7 +204,7 @@ namespace RygOgRejs.Gui
                         textBoxChildren.BorderThickness = new Thickness(2);
                         MessageBox.Show("må ikke indeholde bogstaver eller tegn");
                         textBoxChildren.Text = textBoxChildren.Text.Remove(textBoxChildren.Text.Length - 1);
-                        textBoxChildren.CaretIndex = textBoxChildren.Text.Length; //amazing
+                        textBoxChildren.CaretIndex = textBoxChildren.Text.Length;
                     }
                     else
                     {
@@ -269,7 +258,7 @@ namespace RygOgRejs.Gui
                         textBoxBagage.BorderThickness = new Thickness(2);
                         MessageBox.Show("må ikke indeholde bogstaver eller tegn");
                         textBoxBagage.Text = textBoxBagage.Text.Remove(textBoxBagage.Text.Length - 1);
-                        textBoxBagage.CaretIndex = textBoxBagage.Text.Length; //amazing
+                        textBoxBagage.CaretIndex = textBoxBagage.Text.Length;
                     }
                     else
                     {

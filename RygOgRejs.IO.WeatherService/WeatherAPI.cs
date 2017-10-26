@@ -37,7 +37,6 @@ namespace RygOgRejs.IO.WeatherService
         /// </summary>
         public async void GetCityNameAsync()
         {
-            //I would like to optimize this if you have any idea plz tell :P
             List<string> tempLoc = new List<string>();
             foreach (var di in CRB.DestinationList)
             {
@@ -50,11 +49,11 @@ namespace RygOgRejs.IO.WeatherService
                     foreach(string location in tempLoc)
                     {
                         string query = $"weather?q={location}&mode=json&appid={APP_ID}";
-                        HttpResponseMessage test = await client.GetAsync(query);
+                        HttpResponseMessage responseMessage = await client.GetAsync(query);
 
-                        string s = await test.Content.ReadAsStringAsync();
+                        string responseStream = await responseMessage.Content.ReadAsStringAsync();
 
-                        GettingWeatherData.Root weatherRoot = JsonConvert.DeserializeObject<GettingWeatherData.Root>(s);
+                        GettingWeatherData.Root weatherRoot = JsonConvert.DeserializeObject<GettingWeatherData.Root>(responseStream);
                         double temp = weatherRoot.Main.Temp - 273;
                         weather.Content = $"{location} Temperatur er lige nu {temp} °C";
                         await Task.Delay(11000);
