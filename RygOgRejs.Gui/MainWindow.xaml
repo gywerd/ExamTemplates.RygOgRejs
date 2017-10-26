@@ -141,7 +141,7 @@
                             <Label x:Name="labelTotalChildren"
                                    Grid.Column="1"
                                    Grid.Row="5"
-                                   Content="{Binding AmountofChildren}"
+                                   Content="{Binding AmountOfChildren}"
                                    HorizontalContentAlignment="Left" />
                             <Label x:Name="labelTotalSales"
                                    Grid.Column="1"
